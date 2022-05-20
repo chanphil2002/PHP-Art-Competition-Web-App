@@ -6,7 +6,7 @@
 
     $password="";
 
-    $database="virtualx_database";
+    $database="virtualx_competition";
 
 
 

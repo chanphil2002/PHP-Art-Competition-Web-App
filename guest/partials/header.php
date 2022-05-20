@@ -1,3 +1,4 @@
+<?php include ("../guest/partials/database.php");?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,14 +16,14 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Magra:wght@400;700&display=swap" rel="stylesheet">
   <!-- CSS Style -->
-  <link rel="stylesheet" href="../virtualx/partials/header.css">
+  <link rel="stylesheet" href="../guest/partials/header.css">
 
 </head>
 <body>
   <nav class="navbar navbar-dark bg-dark bg-opacity-50 bg-gradient fixed-top px-5">
     
     <a class="navbar-brand ml-5" href="    ">
-      <img src="../virtualx/partials/logo.png" alt="Virtual" width="200">
+      <img src="../guest/partials/logo.png" alt="Virtual" width="200">
     </a>
     <form action="     " method="POST" class="d-flex">
       <input class="form-control me-2 mr-sm-2 col-md-5 ml-5" type="search" name="search" placeholder="Interested in Anything?">
