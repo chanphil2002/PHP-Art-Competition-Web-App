@@ -1,4 +1,4 @@
-<?php include ("../admin/partials/database.php");?>
+<!-- <?php include ("../admin/partials/database.php");?> -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -49,27 +49,11 @@
             </ul>
           </div>
         </li>
-
-
-        
-
-
-
-
-
-
       </ul>
     </nav>
   </nav>
   
 <div class= "mt-5 mb-5 pt-5" ></div>
-
-<a class="btn btn-primary" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">
-  Link with href
-</a>
-<button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
-  Button with data-bs-target
-</button>
 
 <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
   <div class="offcanvas-header">
