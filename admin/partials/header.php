@@ -1,5 +1,4 @@
-<!-- <?php include ("../admin/partials/database.php");?> -->
-<!DOCTYPE html>
+<?php include ("../admin/partials/database.php");?>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
