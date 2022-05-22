@@ -1,0 +1,93 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap');
+
+* {
+  font-family: "Roboto", sans-serif;
+  font-weight: 500;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
+}
+
+html {
+  overflow-y : scroll;
+  background-color: #BDE6F1;
+  }
+
+.login-box li, button {
+    font-size: 16px;
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.login-box a{
+  color: #666;
+  font-weight: 600;
+  font-size: 13px;
+  margin-bottom: 3px;
+  font-family: 'Open Sans', sans-serif;
+}
+
+.login-box{
+    padding: 2em;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 10px 10px 15px rgba(0,0,0,0.05);
+  }
+  .login-box h1{
+    font-size: 2em;
+    text-align: center;
+    padding: 20px 0;
+    border-bottom: 1px solid silver;
+  }
+
+  .pass{
+    margin: -5px 0 20px 5px;
+    color: #a6a6a6;
+    cursor: pointer;
+  }
+  .pass:hover{
+    text-decoration: underline;
+  }
+
+/* Logo */
+.logo {
+    width: 250px;
+}
+
+/* Login CSS */
+
+button {
+    padding: 9px 25px;
+    /* background-color: #E63E6D; */
+    margin: 5px;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease 0s;
+    width: 200px;
+}
+
+button:not(.close):hover {
+  border-color: #15027e;
+  background-color: #160287;
+}
+
+.custom-container {
+    max-width: 700px;
+    width: 100%;
+    background: #ffffff;
+    padding: 25px 30px;
+    border-radius: 5px;
+
+}
+
+.inactiveLink {
+  pointer-events: none;
+  cursor: default;
+}
