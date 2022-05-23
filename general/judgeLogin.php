@@ -3,6 +3,26 @@
 
     session_start();
 
+    if (isset($_POST["submit"])){
+        // Get IC and password entered: 
+        $id = $_POST["judgeid"];
+        $pw = $_POST["password"];
+
+        $sql = "SELECT * FROM judge WHERE judgeIC = '$id' AND judgePassword = '$pw' LIMIT 1";
+        $result = mysqli_query($conn, $sql);
+
+        if (mysqli_num_rows($result) == 1){
+            // Account found, email and password matched: 
+            $accDetails = mysqli_fetch_assoc($result);
+            $_SESSION["user"] = $accDetails["judgeIC"];
+            $email = $accDetails["judgeEmail"];
+            header("Location:../judge/test.php?email=$email");
+            
+        }else{
+            // email and password not matched:
+            echo '<script>alert("Wrong Email or Password entered, please try again.")</script>';
+        }
+    }
     
 ?>
 
@@ -29,7 +49,6 @@
 
         <form method="POST" action="">
             <div class="txt_field">
-                <!-- <input name="userid" type="text" required> -->
                 <input type="text" name="judgeid" pattern="[0-9]{6}-[0-9]{2}-[0-9]{4}" required>
                 <span></span>
                 <label>Identity Card Number</label>

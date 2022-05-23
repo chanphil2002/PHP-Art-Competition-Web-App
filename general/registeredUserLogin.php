@@ -3,6 +3,25 @@
 
     session_start();
 
+    if (isset($_POST["submit"])){
+        // Get email and password entered: 
+        $id = $_POST["userEmail"];
+        $pw = $_POST["password"];
+
+        $sql = "SELECT * FROM user WHERE userEmail = '$id' AND userPassword = '$pw' LIMIT 1";
+        $result = mysqli_query($conn, $sql);
+
+        if (mysqli_num_rows($result) == 1){
+            // Account found, email and password matched: 
+            $accDetails = mysqli_fetch_assoc($result);
+            $_SESSION["user"] = $accDetails["userEmail"];
+            header("Location:../user/homepage.php?id=$id");
+            
+        }else{
+            // email and password not matched:
+            echo '<script>alert("Wrong Email or Password entered, please try again.")</script>';
+        }
+    }
     
 ?>
 
