@@ -1,6 +1,7 @@
 <?php include ("../organizer/partials/header.php");?>
 
-  <!-- Carousel -->
+
+  <!-- Carousel
   <div id="testimonials" class="carousel slide" data-ride="carousel" data-interval="2000" data-pause="hover">
     <ol class="carousel-indicators">
       <li data-target="#testimonials" data-slide-to="0" class="active"></li>
@@ -42,7 +43,7 @@
       <span class="sr-only">Next</span>
     </button>
   </div>
-
+ -->
 
   <?php 
     //Create SQL Query to Display Categories from Database
@@ -53,22 +54,37 @@
 
 
   <div class="album py-5 bg-light">
-    <h1 class="ml-5">Organizer's Competition</h1>
+    <div class="ms-5">
+      <h1>Organizer's Competition</h1>
+      <a class="btn btn-success" href="addcomp.php" role="button">Create Competition</a>
+      <?php 
+      if(isset($_SESSION['add']))
+      {
+          echo $_SESSION['add'];
+          unset($_SESSION['add']);
+      }
+      ?>
+    </div>
+    
+    
     <div class="container ">
       <div class="row">
         <?php while($row=mysqli_fetch_assoc($res)):
         
             $compID = $row['compID'];
             $compName = $row['compName'];
+            $category = $row['category'];
             $compPic = $row['compPic'];
+            $status = $row['status'];
         ?>
         <div class="col-md-4">
           <div class="card mb-4 shadow-sm">
-              
+          <span class="badge rounded-pill text-bg-success position-absolute top-0 end-0"><?php echo $status; ?></span>
             <svg class="bd-placeholder-img card-img-top" width="100%" height="0"  role="img" preserveAspectRatio="xMidYMid slice" focusable="false"><img src="../materials/image/<?php echo $compPic; ?>" alt="<?= $compID;?>"></svg>
 
             <div class="card-body">
               <h3 class="text-center card-text"><?php echo $compName; ?></h3>
+              <h5 class="text-center text-secondary"><?php echo $category; ?></h5>
               <div class="d-flex justify-content-center align-items-center">
                 <div class="btn-group">
                   <a class="align btn btn-outline-primary" href="details.php?compID=<?php echo $compID; ?>" role="button">View Details</a>

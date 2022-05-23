@@ -17,6 +17,10 @@
   <!-- CSS Style -->
   <link rel="stylesheet" href="../admin/partials/header.css">
 
+
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
+
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
 </head>
 <body>
   <nav class="navbar navbar-dark bg-dark bg-opacity-50 bg-gradient fixed-top px-5">
@@ -54,6 +58,21 @@
   
 <div class= "mt-5 mb-5 pt-5" ></div>
 
+<<<<<<< Updated upstream
+=======
+
+
+
+
+
+<a class="btn btn-primary" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">
+  Link with href
+</a>
+<button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
+  Button with data-bs-target
+</button>
+
+>>>>>>> Stashed changes
 <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
   <div class="offcanvas-header">
     <h5 class="offcanvas-title" id="offcanvasExampleLabel">Offcanvas</h5>

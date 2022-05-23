@@ -19,11 +19,23 @@
   <!-- CSS Style -->
   <link rel="stylesheet" href="../organizer/partials/header.css">
 
+  
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+
+
 </head>
 
 <body>
+<<<<<<< Updated upstream
   <nav class="navbar navbar-dark bg-dark bg-opacity-50 bg-gradient fixed-top px-5">
 
+=======
+  <nav class="navbar navbar-dark bg-secondary bg-gradient fixed-top px-5">
+    
+>>>>>>> Stashed changes
     <a class="navbar-brand ml-5" href="    ">
       <img src="../organizer/partials/logo.png" alt="Virtual" width="200">
     </a>
@@ -65,6 +77,7 @@
       </ul>
     </nav>
   </nav>
+<<<<<<< Updated upstream
 
   <div class="mt-5 mb-5 pt-5"></div>
 
@@ -89,6 +102,14 @@
       </div>
 
 
+=======
+
+
+
+<div class="mb-5"></div>
+
+    
+>>>>>>> Stashed changes
 
 
 
