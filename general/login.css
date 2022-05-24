@@ -43,6 +43,8 @@ body {
     background: white;
     border-radius: 10px;
     box-shadow: 10px 10px 15px rgba(0,0,0,0.05);
+    margin-top: 75px;
+    margin-bottom: 75px;
   }
   .login-box h1{
     font-size: 2em;
@@ -98,6 +100,50 @@ body {
   .txt_field input:focus ~ span::before,
   .txt_field input:valid ~ span::before{
     width: 100%;
+  }
+
+  .login-box select {
+    /* Reset Select */
+    appearance: none;
+    outline: 0;
+    border: 0;
+    box-shadow: none;
+    /* Personalize */
+    flex: 1;
+    padding: 0 1em;
+    color: #fff;
+    background-color: rgba(12, 203, 41, 0.7);
+    cursor: pointer;
+  }
+  /* Remove IE arrow */
+  .login-box select::-ms-expand {
+    display: none;
+  }
+  /* Custom Select wrapper */
+  .login-box .select {
+    position: relative;
+    display: flex;
+    width: 10em;
+    height: 3em;
+    margin-bottom: 0.1em;
+    border-radius: .25em;
+    overflow: hidden;
+  }
+  /* Arrow */
+  .login-box .select::after {
+    content: '\25BC';
+    color: #fff;
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 1em;
+    background-color: #E63E6D;
+    transition: .25s all ease;
+    pointer-events: none;
+  }
+  /* Transition */
+  .login-box .select:hover::after {
+    color: #a38599;
   }
 
 .collapse {

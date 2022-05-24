@@ -43,6 +43,7 @@
             <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton2">
               <li><a class="dropdown-item" href="#">My Profile</a></li>
               <li><a class="dropdown-item" href="#">Favourite</a></li>
+              <li><a class="dropdown-item" href="../logout.php">Log Out</a></li>
               <li><hr class="dropdown-divider"></li>
               <li><a class="dropdown-item text-danger" href="#">Log Out</a></li>
             </ul>
@@ -73,6 +74,12 @@
         <li><a class="dropdown-item" href="#">Something else here</a></li>
       </ul>
     </div>
+
+
+    
+
+
+
 
   </div>
 </div>
