@@ -60,17 +60,9 @@
             </ul>
           </div>
         </li>
-
-
-
-
-
-
-
-
-
       </ul>
     </nav>
+<<<<<<< Updated upstream
   </nav>
 <<<<<<< Updated upstream
 
@@ -112,3 +104,6 @@
 
     </div>
   </div>
+=======
+  </nav>
+>>>>>>> Stashed changes
