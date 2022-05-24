@@ -16,7 +16,6 @@
   <link href="https://fonts.googleapis.com/css2?family=Magra:wght@400;700&display=swap" rel="stylesheet">
   <!-- CSS Style -->
   <link rel="stylesheet" href="../admin/partials/header.css">
-
 </head>
 <body>
   <nav class="navbar navbar-dark bg-dark bg-opacity-50 bg-gradient fixed-top px-5">
@@ -36,7 +35,7 @@
         </li>
 
         <li class="nav-item">
-          <div class="dropdown">
+          
             <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
               <i class="fas fa-user-circle"></i>&nbsp; My Account
             </button>
@@ -73,13 +72,6 @@
         <li><a class="dropdown-item" href="#">Something else here</a></li>
       </ul>
     </div>
-
-
-    
-
-
-
-
   </div>
 </div>
 

@@ -1,3 +1,4 @@
+</div>
 <footer id="footer" class="pt-4 md-5 pt-md-5 border-top bg-dark bg-opacity-75 bg-gradient px-5 pb-3">
     <div class="row">
       <div class="col-6 col-md">

@@ -1,5 +1,5 @@
 <?php include ("../admin/partials/header.php");
-include ("partials/database.php");
+// include ("partials/database.php");
 
 session_start();
 
@@ -99,4 +99,4 @@ if (isset($_POST['submit'])) {
 	<script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script>
 </body>
 </html>
-<?php include ("../admin/partials/footer.php")?>;
+<?php include ("../admin/partials/footer.php")?>
