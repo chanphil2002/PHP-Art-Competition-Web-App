@@ -2,6 +2,51 @@
     include ("partials/database.php");
 
     session_start();
+
+    if (isset($_POST["submit"])){
+        $email = $_POST["userEmail"];
+        $username = $_POST["username"];
+        $pw = $_POST["password"];
+        $cpw = $_POST["cfmpassword"];
+        $phone = $_POST["phoneNum"];
+        $dob = $_POST["dob"];
+        $gender = $_POST["gender"];
+        
+        // Check if both password entered is the same:
+        if ($pw == $cpw){
+
+            // Check whether email registered: 
+            $sql = "SELECT * FROM user WHERE userEmail = $email LIMIT 1";
+            $result = mysqli_query($conn, $sql);
+
+            // if (mysqli_num_rows($result) == 0){
+
+            //     // Write into database: 
+            //     $sql = "INSERT INTO user (userEmail, username, userPassword, gender, DoB, phoneNum) VALUES ('$email', '$username', '$pw', '$gender', '$dob', '$phone')";
+            //     $result = mysqli_query($conn, $sql);
+                
+            //     if ($result){
+            //         echo"<script>
+            //         alert ('Registered successfully. Please proceed to login page.')
+            //         location = 'registeredUserLogin.php'
+            //         </script>";
+            //     }else {
+
+            //     // If something went wrong:
+            //     echo "<script> alert ('Oops, something went wrong, please try again.') </script>";
+            //     }
+
+            // }else {
+            
+            //     // Email registered:
+            //     echo "<script> alert ('Email entered is registered.) </script>";
+            // }
+
+        }else {
+            echo "<script> alert ('Please enter same password for \"Password\" and \"Confirm Password\" field.') </script>";
+        }
+    }
+
 ?>
 
 <!DOCTYPE html>
@@ -15,7 +60,7 @@
     <!-- Bootstrap -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <!-- Custom CSS -->
-    <link rel="stylesheet" type="text/css" href="login.css" />
+    <link rel="stylesheet" type="text/css" href="register.css"/>
 </head>
 
 <body>
@@ -45,20 +90,31 @@
                 <span></span>
                 <label>Confirm Password</label>
             </div>
+            <div class="txt_field">
+                <input name="phoneNum" type="text" pattern="[0-9]{3}-[0-9]{7}" required>
+                <span></span>
+                <label>Phone Number (xxx-xxxxxxx)</label>
+            </div>
+            <div class="date">
+                <input name="dob" type="date" required>
+                <span></span>
+                <label>Date of Birth</label>
+            </div>
             <div class="select">
-                <select name="user-type" required>
+                <select name="gender" required>
                     <option value="">Gender</option>
                     <option value="m">Male</option>
                     <option value="f">Female</option>
                 </select>
             </div>
-            <button class="btn btn-primary" type="submit" name="submit" value="login">Sign Up</button>
-            <br><br> 
+            <br>            
+            <button class="btn btn-primary" type="submit" name="submit" value="login" style="width:120px">Sign Up</button>
+            <br><br>
         </form>
 
         <div class="link">
             <div><a href="registeredUserLogin.php">User Login</a></div>
-            <!-- <div><a href="loginRole.php">Login as Admin/Organizer/Judge</a></div> -->
+            <div><a href="../guest/homepage.php">Continue as Guest</a></div>
         </div>
     </div>
 

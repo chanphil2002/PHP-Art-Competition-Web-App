@@ -42,7 +42,7 @@
             </button>
             <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton2">
               <li><a class="dropdown-item" href="../general/register.php">Sign Up</a></li>
-              <li><a class="dropdown-item" href="../general/registeredUserLogin.php">Login</a></li>
+              <li><a class="dropdown-item" href="../general/registeredUserLogin.php">Log In</a></li>
               <!-- <li><hr class="dropdown-divider"></li>
               <li><a class="dropdown-item text-danger" href="../general/logout.php">Log Out</a></li> -->
             </ul>
