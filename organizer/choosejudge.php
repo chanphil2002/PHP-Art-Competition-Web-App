@@ -1,10 +1,13 @@
 <?php include ("../organizer/partials/header.php");
 
+    ob_start();
+    $compID = $_SESSION['compID'];
+
 ?>
 
 <form action="" method="POST" enctype="multipart/form-data">
 <div class="mx-auto" >
-    <h1 class="pt-5 ms-5">Create Competition</h1>
+    <h1 class="pt-5 ms-5">Choose Judges <?php echo $compID; ?></h1>
 </div>
 
 <div class="row" >
@@ -12,13 +15,13 @@
 
         <div class="mb-3">
             <label for="stock">Organizer ID</label>
-            <input type="text" name="organizerID" class="form-control" id="search" placeholder="State the Organizer ID" required>
+            <input type="number" name="organizerID" class="form-control" id="organizerID" placeholder="State the Organizer ID" required>
         </div>
   
         <div class="mb-3">
             <label for="inlineFormInput">Competition Name</label>
             <div class="input-group">
-                <input type="text" name="compName" class="form-control" id="search" placeholder="What is the Competition Name?" required>
+                <input type="text" name="compName" class="form-control" id="inlineFormInput" placeholder="What is the Competition Name?" required>
             </div>
         </div>
 
@@ -52,7 +55,7 @@
 
         <div class="mb-3">
             <label for="stock">Public Vote</label>
-            <input type="number" name="publicVote" class="form-control" id="publicVote" placeholder="How many percentage for public vote?" required>
+            <input type="number" name="pulicVote" class="form-control" id="publicVote" placeholder="How many percentage for public vote?" required>
         </div>
 
         <div class="mb-3">
@@ -108,18 +111,11 @@
         
     });
 
-    $( function() {
-    $( "#search" ).autocomplete({
-    source: '../organizer/partials/search.php'  
-    });
-});
-
 </script>
 
 
 
 <?php
-    ob_start();
     if(isset($_POST['submit']))
     {
         $organizerID = $_POST['organizerID'];
@@ -165,21 +161,11 @@
 
         $res = mysqli_query($conn,$sql);
 
-        // $sql3 = "SELECT compID FROM competition WHERE compName = $compName";
-
         if($res == true)
         {   
-            
-            $sql3 = "SELECT compID FROM competition WHERE compName = '$compName' ORDER BY compID DESC LIMIT 1; ";
-            $res3 = mysqli_query($conn, $sql3);
-            $row3 = mysqli_fetch_assoc($res3);
-            $compID = $row3['compID'];
-            // echo "window.location.href = '../organizer/choosejudge.php?compID=$compID';";
-            $_SESSION['compID'] = $compID;
-            echo $_SESSION['compID'];
-            
-            header("location:" . SITEURL . "organizer/choosejudge.php");
-            
+            $details = mysqli_fetch_assoc($res);
+            $_SESSION["comp"] = $details["compID"];
+            header("Location:../organizer/choosejudge.php");
         }
 
     }

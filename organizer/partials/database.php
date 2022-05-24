@@ -1,4 +1,5 @@
 <?php
+    ob_start();
 
     $servername="localhost";
 
@@ -8,7 +9,7 @@
 
     $database="virtualx_competition";
 
-
+    define('SITEURL','http://localhost/Virtual-X/');
 
     $conn = mysqli_connect($servername, $username, $password, $database);
 

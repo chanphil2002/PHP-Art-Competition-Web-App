@@ -1,4 +1,6 @@
-<?php include("../organizer/partials/database.php"); ?>
+<?php include("../organizer/partials/database.php"); 
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 
