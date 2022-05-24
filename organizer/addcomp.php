@@ -21,18 +21,6 @@
         </div>
 
         <div class="mb-3">
-        <label for="exampleFormControlTextarea1">Competition Description</label>
-        <textarea class="form-control" name="description" id="exampleFormControlTextarea1" rows="3" 
-        placeholder="Tell more about the competition..." required></textarea>
-        </div>
-
-        <div class="mb-3">
-        <label for="exampleFormControlTextarea1">Competition Rules</label>
-        <textarea class="form-control" name="rules" id="exampleFormControlTextarea1" rows="3" 
-        placeholder="State the competition rules..." required></textarea>
-        </div>
-
-        <div class="mb-3">
             <label for="category">Category</label>
             <select class="form-control" id="exampleFormControlSelect1" name="category">
                 <option value = "2D">2D</option>
@@ -59,6 +47,22 @@
                 </span>
             </div>
         </div>
+
+        <div class="mb-3">
+        <label for="exampleFormControlTextarea1">Competition Description</label>
+        <textarea class="form-control" name="description" id="exampleFormControlTextarea1" rows="3" 
+        placeholder="Tell more about the competition..." required></textarea>
+        </div>
+
+        <div class="mb-3">
+        <label for="exampleFormControlTextarea1">Competition Rules and Regulations</label>
+        <textarea class="form-control" name="rules" id="exampleFormControlTextarea1" rows="3" 
+        placeholder="State the competition rules..." required></textarea>
+        </div>
+
+
+
+        
 
         <div class="mb-3">
             <label for="stock">Evaluation Days</label>

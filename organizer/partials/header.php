@@ -29,14 +29,9 @@
 </head>
 
 <body>
-<<<<<<< Updated upstream
-  <nav class="navbar navbar-dark bg-dark bg-opacity-50 bg-gradient fixed-top px-5">
-
-=======
   <nav class="navbar navbar-dark bg-secondary bg-gradient fixed-top px-5">
     
->>>>>>> Stashed changes
-    <a class="navbar-brand ml-5" href="    ">
+    <a class="navbar-brand ml-5" href="../organizer/orghome.php">
       <img src="../organizer/partials/logo.png" alt="Virtual" width="200">
     </a>
     <form action="     " method="POST" class="d-flex">
