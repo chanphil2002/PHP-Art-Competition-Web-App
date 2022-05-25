@@ -32,7 +32,7 @@
       <ul class="navbar-nav">
         
         <li class="nav-item">
-          <a class="btn btn-success px-4" href="     " role="button"><i class="fa-solid fa-right-to-bracket"></i>&nbsp; Log In</a>&nbsp;&nbsp;&nbsp;
+          <a class="btn btn-success px-4" href="../general/registeredUserLogin.php" role="button"><i class="fa-solid fa-right-to-bracket"></i>&nbsp; Log In</a>&nbsp;&nbsp;&nbsp;
         </li>
 
         <li class="nav-item">
@@ -43,7 +43,7 @@
             <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton2">
               <li><a class="dropdown-item" href="../general/register.php">User</a></li>
               <li><hr class="dropdown-divider"></li>
-              <li><a class="dropdown-item" href="../general/registeredUserLogin.php">Organizer</a></li>
+              <li><a class="dropdown-item" href="organizerRegister.php">Organizer</a></li>
             </ul>
           </div>
         </li>
