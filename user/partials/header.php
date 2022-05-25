@@ -1,4 +1,4 @@
-<?php include ("../admin/partials/database.php");?>
+<?php include ("../user/partials/database.php");?>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -15,14 +15,14 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Magra:wght@400;700&display=swap" rel="stylesheet">
   <!-- CSS Style -->
-  <link rel="stylesheet" href="../admin/partials/header.css">
+  <link rel="stylesheet" href="../user/partials/header.css">
 
 </head>
 <body>
-  <nav class="navbar navbar-dark bg-dark bg-opacity-50 bg-gradient fixed-top px-5">
+  <nav class="navbar navbar-dark bg-secondary bg-gradient fixed-top px-5">
     
     <a class="navbar-brand ml-5" href="    ">
-      <img src="../admin/partials/logo.png" alt="Virtual" width="200">
+      <img src="../user/partials/logo.png" alt="Virtual" width="200">
     </a>
     <form action="     " method="POST" class="d-flex">
       <input class="form-control me-2 mr-sm-2 col-md-5 ml-5" type="search" name="search" placeholder="Interested in Anything?">
@@ -53,33 +53,3 @@
   </nav>
   
 <div class= "mt-5 mb-5 pt-5" ></div>
-
-<div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
-  <div class="offcanvas-header">
-    <h5 class="offcanvas-title" id="offcanvasExampleLabel">Offcanvas</h5>
-    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-  </div>
-  <div class="offcanvas-body">
-    <div>
-      Some text as placeholder. In real life you can have the elements you have chosen. Like, text, images, lists, etc.
-    </div>
-    <div class="dropdown mt-3">
-      <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown">
-        Dropdown button
-      </button>
-      <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-        <li><a class="dropdown-item" href="#">Action</a></li>
-        <li><a class="dropdown-item" href="#">Another action</a></li>
-        <li><a class="dropdown-item" href="#">Something else here</a></li>
-      </ul>
-    </div>
-
-
-    
-
-
-
-
-  </div>
-</div>
-
