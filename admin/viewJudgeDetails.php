@@ -72,7 +72,7 @@
 		$newBio = $_POST["bio"];
 
 		//if no profile picture added
-		if($_FILES['profile_picture'] == ""){
+		if($_FILES['profile_picture']['name'] == ""){
 			$update = "UPDATE judge SET judgeName= '$newName', judgeEmail= '$newEmail', judgeBio= '$newBio' WHERE judgeIC = '$ic'";
 			$run_update = mysqli_query($conn, $update);
 
@@ -92,7 +92,7 @@
 			$run_update = mysqli_query($conn, $update);
 
 			if($run_update == true){
-				echo "<script>alert('Profile updated successfully Yeah!')
+				echo "<script>alert('Profile updated successfully.')
 				location = 'viewJudge.php' </script>";
 				move_uploaded_file($tmp_name, "judgeProfile/$newProfilePic");
 

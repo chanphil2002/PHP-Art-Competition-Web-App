@@ -11,6 +11,11 @@
     <link rel="stylesheet" href="addJudge.css" />
 </head>
 <body class="form-v7">
+<div>
+    <strong>
+		<center><h2>Competition Detail</h2></center>
+	</strong>
+</div>
 <div class="page-content">
 		<div class="form-v7-content">
 			<form class="form-detail" action="#" method="post" id="myform" enctype="multipart/form-data">

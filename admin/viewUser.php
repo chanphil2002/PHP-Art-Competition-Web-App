@@ -15,7 +15,7 @@
 <body>
     <div>
         <strong>
-            <center><h2>Judge</h2></center><br>
+            <center><h2>Users</h2></center><br>
         </strong>
     </div>
     <div class="body">
@@ -23,9 +23,11 @@
             <thead>
                 <tr>
                     <th>No</th>
-                    <th>IC</th>
-                    <th>Name</th>
+                    <th>Username</th>
                     <th>Email</th>
+                    <th>DoB</th>
+                    <th>Gender</th>
+                    <th>Phone Number</th>
                     <th>Action</th>
                 </tr>
             </thead>
@@ -33,23 +35,27 @@
                 <?php
                     $count = 1;
                     $sum = 0;
-                    $sql = "SELECT * FROM judge";
+                    $sql = "SELECT * FROM user";
                     $result = mysqli_query($conn, $sql); 
-                    while($row_judge = mysqli_fetch_assoc($result)){
-                        $ic = $row_judge['judgeIC'];
-                        $name = $row_judge['judgeName'];
-                        $email = $row_judge['judgeEmail'];
+                    while($row_user = mysqli_fetch_assoc($result)){
+                        $username = $row_user['username'];
+                        $email = $row_user['userEmail'];
+                        $dob = $row_user['DoB'];
+                        $gender = $row_user['gender'];
+                        $phone = $row_user['phoneNum'];
                         $sum = $sum + $count;
                 ?>
                 <tr>
                     <td data-label="No"><?php echo $sum?></td>
-                    <td data-label="IC"><?php echo $ic?></td>
-                    <td data-label="Name"><?php echo $name?></td>
-                    <td data-label="Email"><?php echo $email?></td>
+                    <td data-label="username"><?php echo $username?></td>
+                    <td data-label="email"><?php echo $email?></td>
+                    <td data-label="dob"><?php echo $dob?></td>
+                    <td data-label="gender"><?php echo $gender?></td>
+                    <td data-label="phone"><?php echo $phone?></td>
                     <td data-label="Action">
-                        <a href="viewJudgeDetails.php?selectedIC=<?php echo $ic?>"><i class="fa-solid fa-pen"></i></a>
+                        <a href="editUser.php?editEmail=<?php echo $email?>"><i class="fa-solid fa-pen"></i></a>
                         &nbsp;&nbsp;&nbsp;
-                        <a href="removeJudge.php?removeIC=<?php echo $ic?>"><i class='fas fa-trash-alt' style='color:red'></i></a>
+                        <a href="removeUser.php?removeEmail=<?php echo $email?>"><i class='fas fa-trash-alt' style='color:red'></i></a>
                     </td>
                 </tr>
                 <?php } ?>
