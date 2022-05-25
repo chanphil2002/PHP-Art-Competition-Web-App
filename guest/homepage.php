@@ -1,7 +1,6 @@
 <?php
     include ("partials/database.php");
     include ("partials/header.php");
-    include ("partials/footer.php");
 ?>
 
 <!DOCTYPE html>
@@ -15,4 +14,9 @@
 <body>
     
 </body>
+
+<?php
+    include ("partials/footer.php");
+?>
+
 </html>

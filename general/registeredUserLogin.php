@@ -15,6 +15,9 @@
             // Account found, email and password matched: 
             $accDetails = mysqli_fetch_assoc($result);
             $_SESSION["user"] = $accDetails["userEmail"];
+            unset($_SESSION["admin"]);
+            unset($_SESSION["organizer"]);
+            unset($_SESSION["judge"]);
             header("Location:../user/homepage.php?id=$id");
             
         }else{

@@ -10,19 +10,24 @@
 
         $sql1 = "SELECT * FROM admin WHERE adminEmail = '$id' AND adminPassword = '$pw' LIMIT 1";
         $sql2 = "SELECT * FROM organizer WHERE organizerEmail = '$id' AND organizerPassword = '$pw' LIMIT 1";
-
         $result1 = mysqli_query($conn, $sql1);
         $result2 = mysqli_query($conn, $sql2);
 
         if (mysqli_num_rows($result1) == 1){
             // Account found, email and password matched: 
             $accDetails = mysqli_fetch_assoc($result1);
-            $_SESSION["user"] = $accDetails["organizerEmail"];
+            $_SESSION["admin"] = $accDetails["adminEmail"];
+            unset($_SESSION["user"]);
+            unset($_SESSION["organizer"]);
+            unset($_SESSION["judge"]);
             header("Location:../admin/test.php");
             
         }elseif (mysqli_num_rows($result2) == 1){
             $accDetails = mysqli_fetch_assoc($result2);
-            $_SESSION["user"] = $accDetails["organizerEmail"];
+            $_SESSION["organizer"] = $accDetails["organizerEmail"];
+            unset($_SESSION["user"]);
+            unset($_SESSION["admin"]);
+            unset($_SESSION["judge"]);
             $orgID = $accDetails["organizerID"];
             header("Location:../organizer/orghome.php?id=$orgID");
 
