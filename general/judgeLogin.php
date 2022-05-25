@@ -14,7 +14,10 @@
         if (mysqli_num_rows($result) == 1){
             // Account found, email and password matched: 
             $accDetails = mysqli_fetch_assoc($result);
-            $_SESSION["user"] = $accDetails["judgeIC"];
+            $_SESSION["judge"] = $accDetails["judgeIC"];
+            unset($_SESSION["admin"]);
+            unset($_SESSION["organizer"]);
+            unset($_SESSION["user"]);
             $email = $accDetails["judgeEmail"];
             header("Location:../judge/test.php?email=$email");
             

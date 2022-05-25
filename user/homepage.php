@@ -1,7 +1,11 @@
 <?php
     include ("partials/database.php");
     include ("partials/header.php");
-    include ("partials/footer.php");
+
+    session_start();
+    if (!isset($_SESSION["user"])){
+        header("Location: ../general/registeredUserLogin.php");
+    }
 ?>
 
 <!DOCTYPE html>
@@ -13,6 +17,11 @@
     <title>Document</title>
 </head>
 <body>
-    
+
 </body>
+
+<?php
+    include ("partials/footer.php");
+?>
+
 </html>

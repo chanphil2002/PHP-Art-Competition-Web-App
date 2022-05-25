@@ -15,35 +15,47 @@
         // Check if both password entered is the same:
         if ($pw == $cpw){
 
-            // Check whether email registered: 
-            $sql = "SELECT * FROM user WHERE userEmail = $email LIMIT 1";
+            // Check whether email is registered before:
+            $sql = "SELECT * FROM user WHERE userEmail = '$email' LIMIT 1";
             $result = mysqli_query($conn, $sql);
 
-            // if (mysqli_num_rows($result) == 0){
+            if (mysqli_num_rows($result) == 0){
 
-            //     // Write into database: 
-            //     $sql = "INSERT INTO user (userEmail, username, userPassword, gender, DoB, phoneNum) VALUES ('$email', '$username', '$pw', '$gender', '$dob', '$phone')";
-            //     $result = mysqli_query($conn, $sql);
-                
-            //     if ($result){
-            //         echo"<script>
-            //         alert ('Registered successfully. Please proceed to login page.')
-            //         location = 'registeredUserLogin.php'
-            //         </script>";
-            //     }else {
+                // Email not yet registered:
+                $sql = "INSERT INTO user (userEmail, username, userPassword, gender, DoB, phoneNum) VALUES ('$email', '$username', '$pw', '$gender', '$dob', '$phone')";
+                $result = mysqli_query($conn, $sql);
 
-            //     // If something went wrong:
-            //     echo "<script> alert ('Oops, something went wrong, please try again.') </script>";
-            //     }
+                if ($result){
 
-            // }else {
-            
-            //     // Email registered:
-            //     echo "<script> alert ('Email entered is registered.) </script>";
-            // }
+                    // Success: 
+                    echo "<script>
+                    alert ('Account is registered successfully!')
+                    location = 'registeredUserLogin.php'
+                    </script>";
+                    
+                }else {
+
+                    // Fail:
+                    echo "<script>
+                    alert ('Oops! Something went wrong, please try again.')
+                    location = 'register.php'
+                    </script>";
+                }
+
+            }else {
+
+                // Email registered:
+                echo "<script>
+                alert ('Email entered is registered. Please proceed to login page.')
+                </script>";
+            }
 
         }else {
-            echo "<script> alert ('Please enter same password for \"Password\" and \"Confirm Password\" field.') </script>";
+
+            // Both password not same:
+            echo "<script>
+            alert ('Please insert same password in \"Password\" and \"Confirm Password\" field.')
+            </script>";
         }
     }
 
@@ -67,7 +79,7 @@
 <div class="login-box" align="center" style="margin-top: 75px; margin-bottom: 75px;">
         <img class="logo" align="center" src="partials/logo.png" alt="VirtualX_Logo">
         
-        <h1>Register</h1>
+        <h1>User Registration</h1>
 
         <form method="POST" action="">
             <div class="txt_field">
