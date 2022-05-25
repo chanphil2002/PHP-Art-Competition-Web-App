@@ -50,7 +50,6 @@
                         <a href="viewJudgeDetails.php?selectedIC=<?php echo $ic?>"><i class="fa-solid fa-eye"></i></a>
                         &nbsp;&nbsp;&nbsp;
                         <a href="removeJudge.php?removeIC=<?php echo $ic?>"><i class='fas fa-trash-alt' style='color:red'></i></a>
-              </button>
                     </td>
                 </tr>
                 <?php } ?>

@@ -16,12 +16,18 @@
 }
 
 .table th{
-	background-color: darkblue;
+	/* background-color: darkblue; */
+	background-color: rgb(176, 176, 176);
 	color:#ffffff;
 }
 
 .table tbody tr:nth-child(even){
 	background-color: #f5f5f5;
+}
+
+.nav {
+	margin-left: 10px;
+    padding-left: 100%;
 }
 
 /*responsive*/

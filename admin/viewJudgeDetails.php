@@ -71,7 +71,8 @@
 		$newEmail = $_POST['email'];
 		$newBio = $_POST["bio"];
 
-		if($_POST["profile_picture"] == ""){
+		//if no profile picture added
+		if($_FILES['profile_picture'] == ""){
 			$update = "UPDATE judge SET judgeName= '$newName', judgeEmail= '$newEmail', judgeBio= '$newBio' WHERE judgeIC = '$ic'";
 			$run_update = mysqli_query($conn, $update);
 
