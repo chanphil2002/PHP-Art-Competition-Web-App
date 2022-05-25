@@ -64,9 +64,8 @@ session_start();
         </li>
       </ul>
     </nav>
-<<<<<<< Updated upstream
+
   </nav>
-<<<<<<< Updated upstream
 
   <div class="mt-5 mb-5 pt-5"></div>
 
@@ -91,14 +90,6 @@ session_start();
       </div>
 
 
-=======
-
-
-
-<div class="mb-5"></div>
-
-    
->>>>>>> Stashed changes
 
 
 
@@ -106,6 +97,6 @@ session_start();
 
     </div>
   </div>
-=======
+
   </nav>
->>>>>>> Stashed changes
+
