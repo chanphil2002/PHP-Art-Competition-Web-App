@@ -48,7 +48,7 @@
 						}
                 ?>
 				<div class="form-row">
-					<span class="<?php echo $badge?>"><?php echo $statusDisplay?></span>;
+					<span class="<?php echo $badge?>"><?php echo $statusDisplay?></span>
 					<label for="name">COMPETITION NAME</label>
 					<input type="text" name="name" id="name" class="input-text" value= "<?php echo $name ?>" readonly>
 				</div>
@@ -89,11 +89,26 @@
 				?>
 				<div>
 					<center>
-						<button type="submit" name="reject" class="btn btn-danger">Reject</button></a>&nbsp;&nbsp;&nbsp;&nbsp;
-						<button type="submit" name="approve" class="btn btn-success">Approve</button></a>
+						<a href="pendingComp.php" class="btn btn-primary">Back</a>&nbsp;&nbsp;&nbsp;&nbsp;
+						<button type="submit" name="reject" class="btn btn-danger">Reject</button>&nbsp;&nbsp;&nbsp;&nbsp;
+						<button type="submit" name="approve" class="btn btn-success">Approve</button>
 					</center>
 				</div>
-				<?php }?>
+				<?php }else if($status == "Approved"){
+				?>
+				<div>
+					<center>
+						<a href="approvedComp.php" class="btn btn-primary">Back</a>
+					</center>
+				</div>
+				<?php }else {
+				?>
+				<div>
+					<center>
+						<a href="rejectedComp.php" class="btn btn-primary">Back</a>
+					</center>
+				</div>
+				<?php } ?>
 			</form>
 		</div>
 	</div>
