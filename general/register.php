@@ -85,36 +85,36 @@
             <div class="txt_field">
                 <input name="userEmail" type="email" required>
                 <span></span>
-                <label>Email</label>
+                <label>Email *</label>
             </div>
             <div class="txt_field">
                 <input name="username" type="text" required>
                 <span></span>
-                <label>Username</label>
+                <label>Username *</label>
             </div>
             <div class="txt_field">
                 <input name="password" type="password" required>
                 <span></span>
-                <label>Password</label>
+                <label>Password *</label>
             </div>
             <div class="txt_field">
                 <input name="cfmpassword" type="password" required>
                 <span></span>
-                <label>Confirm Password</label>
+                <label>Confirm Password *</label>
             </div>
             <div class="txt_field">
                 <input name="phoneNum" type="text" pattern="[0-9]{3}-[0-9]{7}" required>
                 <span></span>
-                <label>Phone Number (xxx-xxxxxxx)</label>
+                <label>Phone Number (xxx-xxxxxxx) *</label>
             </div>
             <div class="date">
                 <input name="dob" type="date" required>
                 <span></span>
-                <label>Date of Birth</label>
+                <label>Date of Birth *</label>
             </div>
             <div class="select">
                 <select name="gender" required>
-                    <option value="">Gender</option>
+                    <option value="">Gender *</option>
                     <option value="m">Male</option>
                     <option value="f">Female</option>
                 </select>

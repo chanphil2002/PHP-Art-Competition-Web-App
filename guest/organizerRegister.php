@@ -6,35 +6,37 @@ include ("partials/header.php");
 session_start();
 
 if (isset($_POST['submit'])) {
-	$ic = $_POST['ic'];
+	$email = $_POST['orgEmail'];
 	$name = $_POST['name'];
-	$email = $_POST['email'];
 	$password = $_POST['password'];
 	$confirm_pass = $_POST['confirm_pass'];
-	$bio = $_POST['bio'];
+	$desc = $_POST['desc'];
 	$profile_picture = $_FILES['profile_picture']['name'];
 	$tmp_name = $_FILES['profile_picture']['tmp_name'];
+	$verify_doc = $_FILES['verify_doc']['name'];
 
 
 	// double confirm password entered
 	if ($confirm_pass == $password){
 		// check whether the user account already exists
-		$sql = "SELECT * FROM judge WHERE judgeIC ='$ic'";
+		$sql = "SELECT * FROM organizer WHERE organizerEmail ='$email'";
 		$result = mysqli_query($conn, $sql);
 
 		// if user account not exixts
 		if (mysqli_num_rows($result) == 0) {
-			$upload = "INSERT INTO judge (judgeIC, judgeName, judgeEmail, judgePassword, judgeBio, judgeProfilePic) VALUES ('$ic', '$name', '$email', '$password', '$bio', '$profile_picture')";
+			$upload = "INSERT INTO organizer (organizerEmail, organizerPassword, organizerName, organizerDesc, organizerProfilePic, organizerVerifiedDoc, organizerStatus) VALUES ('$email', '$password', '$name', '$desc', '$profile_picture', '$verify_doc', 'pending')";
 			$run_upload = mysqli_query($conn, $upload);
 
 			if ($run_upload == true) {
-				echo "<script>alert('Account Successfully Created!')</script>";
-				move_uploaded_file($tmp_name, "judgeProfile/$profile_picture");
+				echo "<script>alert('Application submitted!')</script>";
+				move_uploaded_file($tmp_name, "../admin/orgProfile/$profile_picture");
+				$tmp_name = $_FILES['verify_doc']['tmp_name'];
+				move_uploaded_file($tmp_name, "../admin/orgVerification/$verify_doc");
 			} else {
 				echo "<script>alert('Oops. Something Went Wrong, Please Try Again.')</script>";
 			}
 		} else {
-			echo "<script>alert('User Already Exists.')</script>";
+			echo "<script>alert('Organizer account existed.')</script>";
 		}
 	} else {
 		echo "<script>alert('Password entered not matched. Please try again.')</script>";
@@ -60,16 +62,12 @@ if (isset($_POST['submit'])) {
 					<strong>
 						<h2 class="text-1">Organizer Account Application</h2>
 					</strong>
-					<br><br><br><br><br><label for="orgEmail">Email *</label>
-					<input type="email" name="orgEmail" placeholder="xxxxxx-xx-xxxx"  pattern="[0-9]{6}-[0-9]{2}-[0-9]{4}" id="ic" class="input-text" required>
+					<br><br><br><br><br><label for="orgEmail">EMAIL *</label>
+					<input type="email" name="orgEmail" id="orgEmail" class="input-text" required>
 				</div>
 				<div class="form-row">
 					<br><label for="name">NAME *</label>
 					<input type="text" name="name" id="name" class="input-text" required>
-				</div>
-                <div class="form-row">
-					<br><label for="email">EMAIL *</label>
-					<input type="email" name="email" placeholder="abc@gmail.com" id="email" class="input-text" required>
 				</div>
 				<div class="form-row">
 					<br><label for="password">PASSWORD *</label>
@@ -80,12 +78,17 @@ if (isset($_POST['submit'])) {
 					<input type="password" name="confirm_pass" id="confirm_pass" class="input-text" required>
 				</div>
 				<div class="form-row">
-					<br><label for="bio" class="form-label">BIO *</label>
-					<textarea class="form-control" name="bio" id="bio" rows="10" required></textarea>
+					<br><label for="desc" class="form-label">ORGANIZATION DESCRIPTION *</label>
+					<textarea class="form-control" name="desc" id="desc" rows="10" required></textarea>
 				</div>
 				<div class="form-row">
 					<br><br><label for="profile_picture">PROFILE PICTURE *</label><br>
 					<input type="file" name="profile_picture" id="profile_picture" accept="image/*" required>
+					<br>
+				</div>
+				<div class="form-row">
+					<br><br><label for="verify_doc">VERIFICATION DOCUMENT (.pdf) *</label><br>
+					<input type="file" name="verify_doc" id="verify_doc" accept=".pdf" required>
 					<br>
 					<br>
 					<br>
@@ -101,4 +104,4 @@ if (isset($_POST['submit'])) {
 	<script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script>
 </body>
 </html>
-<?php include ("../admin/partials/footer.php")?>
+<?php include ("partials/footer.php");?>
