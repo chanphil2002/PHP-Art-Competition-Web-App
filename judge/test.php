@@ -1,28 +1,152 @@
-<?php include ("../judge/partials/header.php");?>
+<?php include ("../judge/partials/header.php");
+if(isset($_POST['search']))
+{
+  $search = $_POST['search'];
+  $sql1 = "SELECT * FROM competition WHERE compName LIKE '%$search%' OR category LIKE '%$search%'";
+  $res1 = mysqli_query($conn,$sql1);
 
-<main role="main" class="container mt-5">
-  <div class="jumbotron text-justify">
-    <h1>Organic-X's Privacy Notice</h1>
-    <p class="lead">We collect personal information that you voluntarily provide to us when you register on the Website, express an interest in obtaining information about us or our products and Services, when you participate in activities on the Website or otherwise when you contact us.</u></h3>
-    <p class="lead">The personal information that we collect depends on the context of your interactions with us and the Website, the choices you make and the products and features you use. The personal information we collect may include the following:</p>
-    <ul>
-        <li><b>Personal Information Provided by You. </b>We may collect names; phone numbers; email addresses; mailing addresses; job titles; contact preferences; data collected from surveys; usernames; passwords; contact or authentication data; information you provide when using our products (e.g., business name, business email, business address, business fax, company website, etc.); number of unique views and total number of visitors when you deploy your cookie banner using our consent management solution; information in blog comments; financial information (e.g., last four digits of your debit or credit card number, billing history, billing address, card type, issuing bank, expiration date, card origin by country); profile photo; and other similar information.</li>
-        <li><b>Payment Data.</b> We may collect data necessary to process your payment if you make purchases, such as your payment instrument number (such as a credit card number), and the security code associated with your payment instrument. All payment data is stored by Stripe. </li>
-    </ul>
-    <h3><u>HOW DO WE USE YOUR INFORMATION?</u></h3>
-    <p class="lead">In Short:  We process your information for purposes based on legitimate business interests, the fulfillment of our contract with you, compliance with our legal obligations, and/or your consent.</p>
-    <p class='lead'>We use personal information collected via our Website for a variety of business purposes described below. We process your personal information for these purposes in reliance on our legitimate business interests, in order to enter into or perform a contract with you, with your consent, and/or for compliance with our legal obligations. We indicate the specific processing grounds we rely on next to each purpose listed below.</p>
-    <ul>
-        <li><b>To manage user accounts.</b> We may use your information for the purposes of managing our account and keeping it in working order.</li>
-        <li><b>To request feedback.</b> We may use your information to request feedback and to contact you about your use of our Services.</li>
-        <li><b>To protect our Services.</b> We may use your information as part of our efforts to keep our Services safe and secure (for example, for fraud monitoring and prevention).</li>
-        <li><b>To respond to legal requests and prevent harm.</b> If we receive a subpoena or other legal request, we may need to inspect the data we hold to determine how to respond.</li>
-        <li><b>To deliver and facilitate delivery of services to the user.</b> We may use your information to provide you with the requested service.</li>
-        <li><b>For other business purposes.</b> We may use your information for other business purposes, such as data analysis, identifying usage trends, determining the effectiveness of our promotional campaigns and to evaluate and improve our Website, Services, products, marketing and your experience. We may use and store this information in aggregated and anonymized form so that it is not associated with individual end users and does not include personal information. We will not use identifiable personal information without your consent.</li>
-    </ul>
+}
+else {
+  $sql1 = "SELECT * FROM competition";
+  $res1 = mysqli_query($conn,$sql1);
+}
+?>
 
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+  <link rel="stylesheet" href="judge.css">
+</head>
+
+<body>
+<div class="container mt-5">
+  <div class = "row" style = "margin-top: 10%">
+    <div class="col-12 col-competition-1">
+      <h3 class = "text-color-2">Search Result Displayed Based on 
+      <span class="text-color-3"><?php echo $search; ?></h3>
+    </div>
+    <div class="col-12 col-competition-1 text-md-end">
+      <div class="overflow-auto">
+      <span aria-label="Filter By" style="position:relative; box-sizing: border-box; ">
+        <label for="filter_dropdown"></label>
+        <select name="filter_dropdown" id="filter_dropdown">
+          <option>Filter By: All Competitions </option>
+          <option value = "Upcoming">Filter By: Upcoming Competition</option>
+          <option value = "On-Going">Filter By: Ongoing Competition</option>
+          <option value = "Pending">Filter By: Past Competition</option>
+        </select>
+
+      <span aria-label="Sort By" style="position:relative; box-sizing: border-box">
+        <label for="sort_dropdown"></label>
+        <select name="sort_dropdown" autocomplete= "off" id="sort_dropdown" onchange="switchSort()" aria-pressed:"false">
+          <option value="" selected = "selected" disabled selected> Sort By: Please Select </option>
+          <option value = "Competition Date"> Sort By: Competition Date</option>
+          <option value = "Registration Dateline">Sort By: Registration Dateline</option>
+          <option value = "Popularity">Sort By: Popularity</option>
+        </select>
+    </div>
   </div>
+  </div>
+  </div>
+  <main>
+    <div class="index-section-6" style="box-sizing:border-box; display: block; padding-top: 1rem!important; padding-bottom: 1rem!important">
+      <div class="container">
+        <div class="row" style="box-sizing:border-box">
+          <div style="flex: 0 0 auto; width: 50%">
+            <h3><span class="text-color-3">All</span>
+            Tournament</h3>
+          </div>
+        </div>
+      </div>
+      
+      <div class="container">
+
+        <!-- //   $compID = $row['compID'];
+        //   $compName = $row['compName'];
+        //   $category = $row['category'];
+        //   $compPic = $row['compPic'];
+        //   $status = $row['status']; -->
+
+          <table class = "table">
+              <thead>
+                  <tr>
+                      <th>Sr No.</th>
+                      <th>Username</th>
+                      <th>Date</th>
+                      <th>Title</th>
+                      <th>Imaage</th>
+          </tr>
+
+          </thead>
+          </tbody>
+
+          <?php
+
+          $query = "SELECT * FROM COMPETITION";
+          $r = mysqli_query($conn,$query);
+          while($row = mysqli_fetch_assoc($r)){
+              ?>
+          <tr>
+              <td><?php echo $row['compName']?></td>
+              <td><?php echo $row['compID']?></td>
+              <td><?php echo $row['category']?></td>
+              <td><?php echo $row['status']?></td>
+              <td><?php echo $row['rules']?></td>
+          </tr>
+          <?php
+
+          }?>
+        </div>
+        
+      </div>
+    </div>
+    
+
+    </div>
+
 </main>
+</body>
+</html>
 
 
-<?php include("../judge/partials/footer.php");?>
+    <!-- <?php include("../judge/partials/footer.php");?> -->
+
+<script type = "text/javascript">
+
+  $(document).ready(function(){
+    $("#filter_dropdown").on('change',function(){
+      var value = $(this).val();
+      // alert(value);
+
+      $.ajax({
+        url:"fetch.php",
+        type:"POST",
+        data:'request=' + value,
+        beforeSend:function(){
+          $(".container").html("<span>Working...</span>");
+        },
+        success:function(data){
+          $(".container").html(data);
+          alert(data);
+        }
+      });
+    });
+  });
+
+
+// function switchFilter() {
+//   var x = document.getElementById("filter_dropdown").value;
+//   document.getElementById("demo").innerHTML = "You selected: " + x;
+// }
+
+// function switchSort() {
+//   var x = document.getElementById("_dropdown").value;
+//   document.getElementById("demo").innerHTML = "You selected: " + x;
+// }
+</script>
