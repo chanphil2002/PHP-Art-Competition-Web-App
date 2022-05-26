@@ -1,4 +1,4 @@
-<?php include("../organizer/partials/database.php"); 
+<?php include("../organizer/partials/database.php");
 session_start();
 ?>
 <!DOCTYPE html>
@@ -21,18 +21,18 @@ session_start();
   <!-- CSS Style -->
   <link rel="stylesheet" href="../organizer/partials/header.css">
 
-  
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
 
 
 </head>
 
 <body>
   <nav class="navbar navbar-dark bg-secondary bg-gradient fixed-top px-5">
-    
+
     <a class="navbar-brand ml-5" href="../organizer/orghome.php">
       <img src="../organizer/partials/logo.png" alt="Virtual" width="200">
     </a>
@@ -64,7 +64,32 @@ session_start();
         </li>
       </ul>
     </nav>
-
   </nav>
+  <div class="mt-5 mb-5 pt-5">
+  </div>
 
-  <div class="mt-5 mb-5 pt-5"></div>
+  <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+    <div class="offcanvas-header">
+      <h5 class="offcanvas-title" id="offcanvasExampleLabel">Offcanvas</h5>
+      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+      <div>
+        Some text as placeholder. In real life you can have the elements you have chosen. Like, text, images, lists, etc.
+      </div>
+      <div class="dropdown mt-3">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown">
+          Dropdown button
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <li><a class="dropdown-item" href="#">Action</a></li>
+          <li><a class="dropdown-item" href="#">Another action</a></li>
+          <li><a class="dropdown-item" href="#">Something else here</a></li>
+        </ul>
+      </div>
+
+      <div class="mb-5"></div>
+
+    </div>
+  </div>
+  </nav>

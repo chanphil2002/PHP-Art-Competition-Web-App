@@ -1,4 +1,10 @@
-<?php include("../organizer/partials/header.php"); ?>
+<?php include("../organizer/partials/header.php");
+
+$sql = "SELECT compID,  judgeIC FROM comp_judge";
+$result = mysqli_query($conn, $sql);
+$row = mysqli_fetch_array($result);
+
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -32,7 +38,7 @@
             </div>
             <div class="row justify-content-center mb-2">
                 <?php
-                $query = "SELECT * FROM `tbl_service`";
+                $query = "SELECT * FROM ``";
                 $result = mysqli_query($conn, $query);
                 $check_faculty = mysqli_num_rows($result) > 0;
 
@@ -44,7 +50,7 @@
                                 <div class="service-img">
                                     <?php if ($row['image'] != NULL) {
                                     ?>
-                                        <img src="../img_upload/service_type/<?php echo $row["image"]; ?>" class="img-fluid" alt="No image">
+                                        <h1> <?php echo $row["judgeIC"]; ?></h1>
                                     <?php
                                     } else {
                                     ?>
