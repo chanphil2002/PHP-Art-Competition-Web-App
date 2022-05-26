@@ -1,104 +1,86 @@
 <?php include ("../organizer/partials/header.php");
 
-    ob_start();
+    
+ob_start();
     $compID = $_SESSION['compID'];
+    $sql1 = "SELECT * FROM comp_judge WHERE compID = '$compID'";
+    $sql2 = "SELECT * FROM judge";
+    $res2 = mysqli_query($conn, $sql2);
+
 
 ?>
 
-<form action="" method="POST" enctype="multipart/form-data">
 <div class="mx-auto" >
-    <h1 class="pt-5 ms-5">Choose Judges <?php echo $compID; ?></h1>
-</div>
-
-<div class="row" >
-    <div class="col-md-4 order-md-2 mb-4 mx-auto">
-
-        <div class="mb-3">
-            <label for="stock">Organizer ID</label>
-            <input type="number" name="organizerID" class="form-control" id="organizerID" placeholder="State the Organizer ID" required>
-        </div>
-  
-        <div class="mb-3">
-            <label for="inlineFormInput">Competition Name</label>
-            <div class="input-group">
-                <input type="text" name="compName" class="form-control" id="inlineFormInput" placeholder="What is the Competition Name?" required>
-            </div>
-        </div>
-
-        <div class="mb-3">
-            <label for="category">Category</label>
-            <select class="form-control" id="exampleFormControlSelect1" name="category">
-                <option value = "2D">2D</option>
-                <option value = "3D">3D</option>
-                <option value = "Paintings">Paintings</option>
-                <option value = "Photography">Photography</option>
-            </select>
-        </div>
-
-        <div class="mb-3">
-            <label for="date">Competition Release Date</label>
-            <div class="input-group date" id="datepicker">
-                <input type="text" name="releaseDate" id ="releaseDate" class="form-control" placeholder="Competition Release Date" readonly/>
-                <span class="input-group-append">
-                </span>
-            </div>
-        </div>
-
-        <div class="mb-3">
-            <label for="date">Competition Registration Deadline</label>
-            <div class="input-group date" id="datepicker2">
-                <input type="text" name="registrationDeadline" id ="registrationDeadline" class="form-control" placeholder="When is the Deadline?" readonly/>
-                <span class="input-group-append">
-                </span>
-            </div>
-        </div>
-
-        <div class="mb-3">
-            <label for="stock">Public Vote</label>
-            <input type="number" name="pulicVote" class="form-control" id="publicVote" placeholder="How many percentage for public vote?" required>
-        </div>
-
-        <div class="mb-3">
-            <label for="stock">Judge Score</label>
-            <input type="number" name="judgeScore" class="form-control" id="judgeScore" placeholder="How many percentage for judge score?" required>
-        </div>
-
-        <div class="mb-3">
-            <label for="price">Prize Pool</label>
-            <input type="float" name="prizePool" class="form-control" id="prizePool" placeholder="Enter Prize Pool..." required>
-        </div>
-
-        <div class="mb-3">
-        <label for="exampleFormControlTextarea1">Competition Description</label>
-        <textarea class="form-control" name="description" id="exampleFormControlTextarea1" rows="3" 
-        placeholder="Tell more about the competition..." required></textarea>
-        </div>
-
-        <div class="mb-3">
-        <label for="exampleFormControlTextarea1">Competition Rules and Regulations</label>
-        <textarea class="form-control" name="rules" id="exampleFormControlTextarea1" rows="3" 
-        placeholder="State the competition rules..." required></textarea>
-        </div>
-
-        <div class="mb-3">
-            <label for="price">Competition Poster</label>
-            <div class="input-group mb-3">
-                <input type="file" class="form-control" name="compPic" id="compPic" required>       
-            </div>
-        </div>
-
-        <div class="mb-3">
-            <label for="stock">Evaluation Days</label>
-            <input type="number" name="evaluationDays" class="form-control" id="evaluationDays" placeholder="How many days for evaluation?" required>
-        </div>
-
-
-        <hr class="mb-4">
-        <button class="btn btn-primary btn-lg btn-block mx-auto d-flex px-5" name="submit" type="submit">Continue</button>
+        <h2 class="pt-5 ms-5 text-center">Existing Judges</h2>
     </div>
+<div class="container my-5 d-flex justify-content-center">
+    
+    <?php while($row2 = mysqli_fetch_assoc($res2)):
+        $judgeIC = $row2['judgeIC'];
+        $judgeName = $row2['judgeName'];
+        $judgeEmail = $row2['judgeEmail'];
+        $judgeBio = $row2['judgeBio'];
+        $judgeProfilePic = $row2['judgeProfilePic'];
+        ?>
+
+        <div class="card p-3 me-5 col-md-6">
+
+            <div class="d-flex align-items-center">
+
+                <div class="image">
+            <img src="../materials/judgeProfilePic/<?php echo $judgeProfilePic; ?>" class="rounded" width="155" >
+            </div>
+
+            <div class="ms-3 w-100">
+                
+                <h3 class="mb-0 mt-0"><?php echo $judgeName; ?></h3>
+                <span class="text-secondary">Judge IC: <?php echo $judgeIC; ?></span>
+
+                <div class="p-2 mt-2 bg-secondary bg-info bg-opacity-25 d-flex justify-content-between rounded text-white stats">
+
+                <div class="d-flex flex-column text-dark">
+
+                        <span class="articles">Email: </span>
+                        <span class="number1"><?php echo $judgeEmail; ?></span>
+                        <br>
+
+                        <span class="articles">Bio: </span>
+                        <span class="number1"><?php echo $judgeBio; ?></span>
+                        
+                </div>
+
+                <!-- <div class="d-flex flex-column">
+
+                        <span class="articles">Bio: </span>
+                        <span class="number1"><?php echo $judgeBio; ?></span>
+                        
+                    </div> -->
+                    
+
+                </div>
+
+
+                <div class="button mt-2 d-flex flex-row align-items-center mt-4">
+
+                <button class="btn btn-sm btn-outline-info w-100">Appoint This Judge</button>
+
+                    
+                </div>
+
+
+            </div>
+
+                
+            </div>
+            
+        </div>
+    <?php endwhile; ?>
+        
 </div>
 
-</form>
+
+
+
 
 
 
