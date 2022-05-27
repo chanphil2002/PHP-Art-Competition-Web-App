@@ -26,65 +26,80 @@
             <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
             <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="1" aria-label="Slide 2"></button>
             <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="2" aria-label="Slide 3"></button>
-            <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="3" aria-label="Slide 4"></button>
-            <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="4" aria-label="Slide 5"></button>
         </div>
 
         <!-- Contents -->
-        <?php
-            // Latest Competition
-            $sql1 = "SELECT * FROM competition WHERE status='On-Going' ORDER BY releaseDate DESC LIMIT 1";
-            $res1 = mysqli_query($conn, $sql1);
-            $compDetails = mysqli_fetch_assoc($res1);
-            $name = $compDetails["compName"];
-            
-        ?>
-
         <div class="carousel-inner">
+
+            <?php
+                // Popular Competition
+                $sql1 = "SELECT * FROM competition WHERE status = 'On-Going' ORDER BY noOFEntries DESC LIMIT 1";
+                $res1 = mysqli_query($conn, $sql1);
+                $compDetails = mysqli_fetch_assoc($res1);
+                $name = $compDetails["compName"];
+                $pic = $compDetails["compPic"];
+            ?>
+
             <div class="carousel-item active" data-bs-interval="10000">
-                <center><img src="../materials/image/001.png" style="width:auto;height:360px;" class="" alt="..."></center>
+                <a href="">
+                <center><img src="../materials/image/<?php echo $pic?>" style="width:auto;height:360px;" class="" alt="..."></center>
+                </a>
                 <br><br><br><br><br><br>
                 <div class="carousel-caption d-none d-md-block">
-                    <h5 style="color:#08007f">First slide label</h5>
-                    <p>Some representative placeholder content for the first slide.</p>
+                    <div>
+                        <h5 style="color:black;display: inline-block"><?php echo $name?> &nbsp;</h5>
+                        <span class="badge rounded-pill position-absolute bg-danger" style="height:20px">Popular</span>
+                    </div>
+                    <a class="align btn btn-outline-primary" href="" role="button">View Details</a>
                 </div>
             </div>
+
+            <?php
+                // Upcoming Competition
+                $sql2 = "SELECT * FROM competition WHERE status='Upcoming' ORDER BY releaseDate ASC LIMIT 1";
+                $res2 = mysqli_query($conn, $sql2);
+                $compDetails = mysqli_fetch_assoc($res2);
+                $name = $compDetails["compName"];
+                $pic = $compDetails["compPic"];
+            ?>
 
             <div class="carousel-item" data-bs-interval="2000">
-                <center><img src="../materials/image/002.png" style="width:auto;height:360px;" class="" alt="..."></center>
+                <a href="">
+                <center><img src="../materials/image/<?php echo $pic?>" style="width:auto;height:360px;" class="" alt="..."></center>
+                </a>
                 <br><br><br><br><br><br>
                 <div class="carousel-caption d-none d-md-block">
-                    <h5 style="color:#08007f">Second slide label</h5>
-                    <p>Some representative placeholder content for the second slide.</p>
+                    <div>
+                        <h5 style="color:black;display: inline-block"><?php echo $name?> &nbsp;</h5>
+                        <span class="badge rounded-pill position-absolute bg-primary" style="height:20px">Upcoming</span>
+                    </div>
+                    <a class="align btn btn-outline-primary" href="" role="button">View Details</a>
                 </div>
             </div>
 
-            <div class="carousel-item">
-                <center><img src="../materials/image/003.png" style="width:auto;height:360px;" class="" alt="..."></center>
+            <?php
+                // New Competition
+                $sql3 = "SELECT * FROM competition WHERE status='On-Going' ORDER BY releaseDate DESC LIMIT 2";
+                $res3 = mysqli_query($conn, $sql3);
+                $compDetails = mysqli_fetch_assoc($res3);
+                $name = $compDetails["compName"];
+                $pic = $compDetails["compPic"];
+            ?>
+
+            <div class="carousel-item" data-bs-interval="2000">
+                <a href="">
+                <center><img src="../materials/image/<?php echo $pic ?>" style="width:auto;height:360px;" class="" alt="..."></center>
+                </a>
                 <br><br><br><br><br><br>
                 <div class="carousel-caption d-none d-md-block">
-                    <h5 style="color:#08007f">Third slide label</h5>
-                    <p>Some representative placeholder content for the third slide.</p>
+                    <div>
+                        <h5 style="color:black;display: inline-block"><?php echo $name?> &nbsp;</h5>
+                        <span class="badge rounded-pill position-absolute bg-success" style="height:20px">New</span>
+                    </div>
+                    <a class="align btn btn-outline-primary" href="" role="button">View Details</a>
                 </div>
             </div>
 
-            <div class="carousel-item">
-                <center><img src="../materials/image/004.png" style="width:auto;height:360px;" class="" alt="..."></center>
-                <br><br><br><br><br><br>
-                <div class="carousel-caption d-none d-md-block">
-                    <h5 style="color:#08007f">Forth slide label</h5>
-                    <p>Some representative placeholder content for the forth slide.</p>
-                </div>
-            </div>
-
-            <div class="carousel-item">
-                <center><img src="../materials/image/005.png" style="width:auto;height:360px;" class="" alt="..."></center>
-                <br><br><br><br><br><br>
-                <div class="carousel-caption d-none d-md-block">
-                    <h5 style="color:#08007f">Fifth slide label</h5>
-                    <p>Some representative placeholder content for the fifth slide.</p>
-                </div>
-            </div>
         </div>
 
         <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev">
@@ -98,7 +113,10 @@
         </button>
     </div>
     <br>
+    <hr>
 
+    <!-- Popular Competition -->
+    <h2 class="ml-5" >Most Popular Competition</h2>
 
 </body>
 
