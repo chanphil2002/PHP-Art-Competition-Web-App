@@ -19,7 +19,7 @@
             unset($_SESSION["organizer"]);
             unset($_SESSION["user"]);
             $email = $accDetails["judgeEmail"];
-            header("Location:../judge/test.php?email=$email");
+            header("Location:../judge/test.php");
             
         }else{
             // email and password not matched:

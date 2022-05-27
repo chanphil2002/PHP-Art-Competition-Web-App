@@ -29,7 +29,7 @@
             unset($_SESSION["admin"]);
             unset($_SESSION["judge"]);
             $orgID = $accDetails["organizerID"];
-            header("Location:../organizer/orghome.php?id=$orgID");
+            header("Location:../organizer/orghome.php");
 
         }else{
             // email and password not matched:

@@ -18,7 +18,7 @@
             unset($_SESSION["admin"]);
             unset($_SESSION["organizer"]);
             unset($_SESSION["judge"]);
-            header("Location:../user/homepage.php?id=$id");
+            header("Location:../user/homepage.php");
             
         }else{
             // email and password not matched:
