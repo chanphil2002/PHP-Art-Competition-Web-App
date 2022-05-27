@@ -28,6 +28,7 @@ if (isset($_POST['submit'])) {
 			if ($run_upload == true) {
 				echo "<script>alert('Account Successfully Created!')</script>";
 				move_uploaded_file($tmp_name, "judgeProfile/$profile_picture");
+				header("location:http://localhost/Virtual-X/organizer/selectedjudge.php");
 			} else {
 				echo "<script>alert('Oops. Something Went Wrong, Please Try Again.')</script>";
 			}

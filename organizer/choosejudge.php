@@ -11,145 +11,106 @@ ob_start();
 ?>
 
 <div class="mx-auto" >
-        <h2 class="pt-5 ms-5 text-center">Existing Judges</h2>
-    </div>
-<div class="container my-5 d-flex justify-content-center">
-    
-    <?php while($row2 = mysqli_fetch_assoc($res2)):
-        $judgeIC = $row2['judgeIC'];
-        $judgeName = $row2['judgeName'];
-        $judgeEmail = $row2['judgeEmail'];
-        $judgeBio = $row2['judgeBio'];
-        $judgeProfilePic = $row2['judgeProfilePic'];
-        ?>
+    <h2 class="pt-5 text-center"><b><u>Existing Judges</u></b></h2>
+</div>
 
-        <div class="card p-3 me-5 col-md-6">
+<h5 class="text-dark ms-5">Choose your desired judges:</h5>
+
+<div class="album ">
+<div class="container mb-5 d-flex justify-content-center">
+
+<div class="row">
+
+
+    
+<?php while($row2 = mysqli_fetch_assoc($res2)):
+    $judgeIC = $row2['judgeIC'];
+    $judgeName = $row2['judgeName'];
+    $judgeEmail = $row2['judgeEmail'];
+    $judgeBio = $row2['judgeBio'];
+    $judgeProfilePic = $row2['judgeProfilePic'];
+    ?>
+    <div class="col-md-6 ">
+        <div class="card mb-4 shadow-sm p-3">
 
             <div class="d-flex align-items-center">
 
                 <div class="image">
-            <img src="../materials/judgeProfilePic/<?php echo $judgeProfilePic; ?>" class="rounded" width="155" >
-            </div>
-
-            <div class="ms-3 w-100">
-                
-                <h3 class="mb-0 mt-0"><?php echo $judgeName; ?></h3>
-                <span class="text-secondary">Judge IC: <?php echo $judgeIC; ?></span>
-
-                <div class="p-2 mt-2 bg-secondary bg-info bg-opacity-25 d-flex justify-content-between rounded text-white stats">
-
-                <div class="d-flex flex-column text-dark">
-
-                        <span class="articles">Email: </span>
-                        <span class="number1"><?php echo $judgeEmail; ?></span>
-                        <br>
-
-                        <span class="articles">Bio: </span>
-                        <span class="number1"><?php echo $judgeBio; ?></span>
-                        
+                    <img src="../admin/judgeProfile/<?php echo $judgeProfilePic; ?>" class="rounded" width="155" >
                 </div>
-
-                <!-- <div class="d-flex flex-column">
-
-                        <span class="articles">Bio: </span>
-                        <span class="number1"><?php echo $judgeBio; ?></span>
-                        
-                    </div> -->
+                
+                <div class="ms-3 w-100">
+                    <h3 class="mb-0 mt-0"><?php echo $judgeName; ?></h3>
+                    <span class="text-secondary"> Judge IC: <?php echo $judgeIC; ?> </input></span>
                     
 
+                    <div class="p-2 mt-2 bg-secondary bg-info bg-opacity-25 d-flex justify-content-between rounded text-white stats">
+                        <div class="d-flex flex-column text-dark">
+                            <span class="articles">Email: </span>
+                            <span class="number1"><?php echo $judgeEmail; ?></span>
+
+                            <br>
+
+                            <span class="articles">Bio: </span>
+                            <span class="number1"><?php echo $judgeBio; ?></span>
+                        </div>
+                    </div>
+                    <form method="POST" action="" enctype="multipart/form-data">
+                        <input type="hidden" id='judgeIC' name='judgeIC' value= "<?php echo $judgeIC;?>">
+                        <input type="hidden" id='compID' name='compID' value= "<?php echo $compID;?>">
+                        <div class="button mt-2 d-flex flex-row align-items-center mt-4">
+                            <a href=""></a>
+                            <button class="btn btn-sm btn-outline-info w-100" name="submit" type="submit"> <b>Appoint This Judge</b> </button>  
+                        </div>
+                    </form>
                 </div>
 
-
-                <div class="button mt-2 d-flex flex-row align-items-center mt-4">
-
-                <button class="btn btn-sm btn-outline-info w-100">Appoint This Judge</button>
-
-                    
-                </div>
-
-
-            </div>
-
-                
             </div>
             
         </div>
-    <?php endwhile; ?>
+    
         
+
+        
+</div>
+<?php
+ob_start();
+
+if(isset($_POST['submit']))
+{
+    $judgeIC = $_REQUEST['judgeIC'];
+    $compID = $_REQUEST['compID'];
+
+    $sql = "INSERT INTO comp_judge(compID, judgeIC) VALUES ($compID, '$judgeIC')";
+
+    // $sql = "INSERT INTO comp_judge SET
+    //     compID = $compID,
+    //     judgeIC = '$judgeIC'";
+
+    $res = mysqli_query($conn,$sql);
+    // if ($res) {
+    //     echo "<script>alert('success');</script>";
+    // } else {
+    //     echo "<script>alert('wrong');</script>";
+    // }
+
+    if($res == true)
+    {   
+        $_SESSION['compID'] = $compID;
+        echo $_SESSION['compID'];
+        
+        header("location:" . SITEURL . "organizer/selectedjudge.php");
+    }
+
+}
+endwhile; ?>
+
+</div>
+
+</div>
 </div>
 
 
-
-
-
-
-
-<script type="text/javascript">
-    $(function() {
-        $('#datepicker, #datepicker2').datepicker({
-            dateFormat: 'yy-mm-dd',
-            minDate: 0
-        });
-        
-    });
-
-</script>
-
-
-
 <?php
-    if(isset($_POST['submit']))
-    {
-        $organizerID = $_POST['organizerID'];
-        $compName = $_POST['compName'];
-        $category = $_POST['category'];
-        $releaseDate = $_POST['releaseDate'];
-        $registrationDeadline = $_POST['registrationDeadline'];
-        $publicVote = $_POST['publicVote'];
-        $judgeScore = $_POST['judgeScore'];
-        $prizePool = $_POST['prizePool'];
-        $description = $_POST['description'];
-        $rules = $_POST['rules'];
-        $evaluationDays = $_POST['evaluationDays'];
-
-        if(isset($_FILES['compPic']['name']))
-        {
-            $compPic = $_FILES['compPic']['name'];
-            $image = explode('.', $compPic);
-            $ext = end($image);
-            $compPic = rand(000,999).".".$ext;
-            $source = $_FILES['compPic']['tmp_name'];
-            $destination = "../materials/image/".$compPic;
-            $upload = move_uploaded_file($source, $destination);
-        }
-        else{
-            $compPic="";
-        }
-
-        $sql = "INSERT INTO competition SET
-            compName = '$compName',
-            organizerID = $organizerID,
-            description = '$description',
-            rules = '$rules',
-            category = '$category',
-            status = 'Pending',
-            releaseDate = '$releaseDate',
-            registrationDeadline = '$registrationDeadline',
-            evaluationDays = $evaluationDays,
-            judgeScore = $judgeScore,
-            publicVote = $publicVote,
-            prizePool = $prizePool,
-            compPic = '$compPic'";
-
-        $res = mysqli_query($conn,$sql);
-
-        if($res == true)
-        {   
-            $details = mysqli_fetch_assoc($res);
-            $_SESSION["comp"] = $details["compID"];
-            header("Location:../organizer/choosejudge.php");
-        }
-
-    }
 include("../organizer/partials/footer.php");
 ?>

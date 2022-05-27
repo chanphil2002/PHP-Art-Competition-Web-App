@@ -178,7 +178,7 @@
             $_SESSION['compID'] = $compID;
             echo $_SESSION['compID'];
             
-            header("location:" . SITEURL . "organizer/choosejudge.php");
+            header("location:" . SITEURL . "organizer/selectedjudge.php");
             
         }
 
