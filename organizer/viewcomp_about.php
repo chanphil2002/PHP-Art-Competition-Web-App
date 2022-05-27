@@ -15,13 +15,13 @@
     <img src="../materials/image/test1.jpg" alt="Responsive image" height="300" style="background-size:cover">
     <ul class="nav nav-pills nav-fill p-2">
         <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="viewcomp_main.php">Main</a>
+            <a class="nav-link" aria-current="page" href="viewcomp_main.php">Main</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="viewcomp_rubric.php">Scoring Rubric</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="viewcomp_about.php">About</a>
+            <a class="nav-link active" href="viewcomp_about.php">About</a>
         </li>
     </ul>
 </body>

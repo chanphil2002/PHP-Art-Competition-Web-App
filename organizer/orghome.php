@@ -78,7 +78,7 @@
             $status = $row['status'];
         ?>
         <div class="col-md-4">
-          <div class="card mb-4 shadow-sm">
+          <div class="card mb-4 shadow-sm me-5">
           <span class="badge rounded-pill text-bg-success position-absolute top-0 end-0"><?php echo $status; ?></span>
             <svg class="bd-placeholder-img card-img-top" width="100%" height="0"  role="img" preserveAspectRatio="xMidYMid slice" focusable="false"><img src="../materials/image/<?php echo $compPic; ?>" alt="<?= $compID;?>"></svg>
 
