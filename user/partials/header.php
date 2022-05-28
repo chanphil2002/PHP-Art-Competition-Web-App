@@ -21,7 +21,7 @@
 <body>
   <nav class="navbar navbar-dark bg-secondary bg-gradient fixed-top px-5">
     
-    <a class="navbar-brand ml-5" href="    ">
+    <a class="navbar-brand ml-5" href="homepage.php">
       <img src="../user/partials/logo.png" alt="Virtual" width="200">
     </a>
     <form action="     " method="POST" class="d-flex">
@@ -32,7 +32,7 @@
       <ul class="navbar-nav">
         
         <li class="nav-item">
-          <a class="btn btn-info" href="     " role="button"><i class="fa-solid fa-trophy"></i>&nbsp; My Competition</a>&nbsp;&nbsp;&nbsp;
+          <a class="btn btn-info" href="allComp.php" role="button"><i class="fa-solid fa-trophy"></i>&nbsp; Competitions</a>&nbsp;&nbsp;&nbsp;
         </li>
 
         <li class="nav-item">
@@ -42,6 +42,7 @@
             </button>
             <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton2">
               <li><a class="dropdown-item" href="#">My Profile</a></li>
+              <li><a class="dropdown-item" href="#">My Competitions</a></li>
               <li><a class="dropdown-item" href="#">Favourite</a></li>
               <li><hr class="dropdown-divider"></li>
               <li><a class="dropdown-item text-danger" href="../general/logout.php">Log Out</a></li>
