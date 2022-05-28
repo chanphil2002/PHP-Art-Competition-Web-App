@@ -7,10 +7,15 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>View Judge Details</title>
+    <title>User Profile</title>
     <link rel="stylesheet" href="addJudge.css" />
 </head>
 <body class="form-v7">
+	<div>
+    <strong>
+        <center><h2>User Profile</h2></center>
+    </strong>
+</div>
 <div class="page-content">
 		<div class="form-v7-content">
 			<form class="form-detail" action="#" method="post" id="myform" enctype="multipart/form-data">
@@ -26,8 +31,17 @@
                         $dob = $row_user['DoB'];
                         $gender = $row_user['gender'];
                         $phone = $row_user['phoneNum'];
+						$img = $row_user["userProfilePic"];
+						$imgPath = ("../user/userProfilePic/$img");
 
                 ?>
+				<?php
+					if($img != ""){
+				?>
+				<center><div>
+                    <img src="../user/userProfilePic/<?php echo $img?>" style="width: 10rem;"><br><br><br>
+                </div></center>
+				<?php }?>
 				<div class="form-row">
 					<label for="username">USERNAME *</label>
 					<input type="text" name="username" id="username" class="input-text" value= "<?php echo $username ?>" required>
@@ -53,7 +67,7 @@
 				</div>
                 <?php }else {?>
                 <div class="form-row">
-					<label for="gender">GENDER *</label>
+					<br><label for="gender">GENDER *</label>
 					<select class="form-row" name="gender" id="gender" style="height: 25px; margin-top: 3%;" required>
 						<option value="">Choose Your Gender *&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</option>
 						<option value="M">Male</option>
@@ -62,7 +76,7 @@
 				</div>
                 <?php } ?>
                 <div class="form-row">
-					<br><label for="phone">PHONE NUMBER *</label>
+					<br><br><label for="phone">PHONE NUMBER *</label>
 					<input type="tel" name="phone" id="phone" class="input-text" value="<?php echo $phone ?>" required>
 				</div>
 				<div class="form-row">
@@ -74,7 +88,8 @@
 				</div>
                 <?php } ?>
 				<div>
-					<center><button type="submit" name="update" class="btn btn-primary">Update</button></a></center>
+					<center><a href="viewUser.php" class="btn btn-primary">Back</a>&nbsp;&nbsp;&nbsp;&nbsp;
+					<button type="submit" name="update" class="btn btn-success">Update</button></a></center>
 				</div>
     
 			</form>
@@ -113,7 +128,7 @@
 			if($run_update == true){
 				echo "<script>alert('Profile updated successfully.')
 				location = 'viewUser.php' </script>";
-				move_uploaded_file($tmp_name, "judgeProfile/$newProfilePic");
+				move_uploaded_file($tmp_name, "../user/userProfilePic/$newProfilePic");
 
 			}else {
 				echo "<script>alert('Oops! Something went wrong, please try again.')</script>";
