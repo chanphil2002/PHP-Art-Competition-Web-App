@@ -1,5 +1,28 @@
 <?php include("../organizer/partials/header.php"); ?>
 
+<?php
+if (isset($_GET['compID'])) {
+    $compID = $_GET['compID'];
+    $sql = "SELECT * FROM competition WHERE compID=$compID";
+    $res = mysqli_query($conn, $sql);
+} else {
+    echo "mistake";
+}
+while ($row = mysqli_fetch_assoc($res)) {
+    $compID = $row['compID'];
+    $compName = $row['compName'];
+    $organizerID = $row['organizerID'];
+    $description = $row['description'];
+    $rules = $row['rules'];
+    $category = $row['category'];
+    $status = $row['status'];
+    $releaseDate = $row['releaseDate'];
+    $registrationDeadline = $row['registrationDeadline'];
+    $evaluationDays = $row['evaluationDays'];
+    $compPic = $row['compPic'];
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -15,21 +38,25 @@
     <img src="../materials/image/test1.jpg" alt="Responsive image" height="300" style="background-size:cover">
     <ul class="nav nav-pills nav-fill p-2">
         <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="viewcomp_main.php">Main</a>
+            <a class="nav-link active" aria-current="page" href="viewcomp_main.php?compID=<?php echo $compID; ?>">Main</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="viewcomp_rubric.php">Scoring Rubric</a>
+            <a class="nav-link" href="viewspecific_entries.php?entryID=1&compID=<?php echo $compID ?>">View Entries</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="viewcomp_about.php">About</a>
+            <a class="nav-link" href="viewcomp_rubric.php?compID=<?php echo $compID; ?>">Scoring Rubric</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="viewcomp_about.php?compID=<?php echo $compID; ?>">About</a>
         </li>
     </ul>
+
 
     <div class="container">
         <div class="row">
             <div class="col-9">
                 <div>
-                    <h2 style="display: inline-block">Virtual Competition Arts 2022</h2>
+                    <h2 style="display: inline-block"><?php echo $compName ?></h2>
                     <span class="badge text-bg-success align-top even-larger-badge">Ongoing</span>
                 </div>
                 <h3>By Sunway, ARTS</h3>
@@ -120,10 +147,11 @@
                 </div>
             </div>
         </div>
-        <button type="button" class="btn btn-primary">Edit</button>
-        <button type="button" class="btn btn-danger">Delete</button>
-        <button type="button" class="btn btn-info">View Entries</button>
-        <button type="button" class="btn btn-info">View Feedback</button>
+        <a href=""><button type="button" class="btn btn-primary">Edit</button></a>
+        <a href=""><button type="button" class="btn btn-primary">Delete</button></a>
+        <a href="../organizer/viewspecific_entries.php?entryID=1">
+            <button type="button" class="btn btn-primary">View Entries</button></a>
+        <a href=""><button type="button" class="btn btn-primary">View Feedback</button></a>
     </div>
 
     <script src="https://kit.fontawesome.com/8deb7b58d3.js" crossorigin="anonymous"></script>

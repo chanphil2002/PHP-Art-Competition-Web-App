@@ -1,25 +1,24 @@
 <?php include("../organizer/partials/header.php"); ?>
 
 <?php
-if (isset($_GET['compID'])) {
+if (isset($_GET['entryID']) & isset($_GET['compID'])) {
+    $entryID = $_GET['entryID'];
     $compID = $_GET['compID'];
-    $sql = "SELECT competition.compID, organizer.organizerID, organizer.organizerName, organizer.organizerDesc,
-            organizer.organizerProfilePic 
-            FROM competition INNER JOIN organizer ON competition.compID = organizer.organizerID and compID='$compID'";
+    $sql = "SELECT * FROM entry WHERE entryID='$entryID'";
     $res = mysqli_query($conn, $sql);
 } else {
     echo "mistake";
 }
-
 while ($row = mysqli_fetch_assoc($res)) {
-    $compID = $row['compID'];
-    $organizerID = $row['organizerID'];
-    $organizerName = $row['organizerName'];
-    $organizerDesc = $row['organizerDesc'];
-    $organizerProfilePic = $row['organizerProfilePic'];
+    $entryID = $row['entryID'];
+    $entryFile = $row['entryFile'];
+    $title = $row['title'];
+    $userEmail = $row['userEmail'];
+    $vote = $row['vote'];
+    $score = $row['score'];
+    $totalScore = $row['totalScore'];
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -38,16 +37,17 @@ while ($row = mysqli_fetch_assoc($res)) {
             <a class="nav-link" aria-current="page" href="viewcomp_main.php?compID=<?php echo $compID; ?>">Main</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="viewspecific_entries.php?compID=<?php echo $compID; ?>">View Entries</a>
+            <a class="nav-link active" href="viewspecific_entries.php?compID=<?php echo $compID; ?>">View Entries</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="viewcomp_rubric.php?compID=<?php echo $compID; ?>">Scoring Rubric</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link active" href="viewcomp_about.php?compID=<?php echo $compID; ?>">About</a>
+            <a class="nav-link" href="viewcomp_about.php?compID=<?php echo $compID; ?>">About</a>
         </li>
     </ul>
 
+    <img src="../materials/image/<?php echo $entryFile ?>" alt="Responsive image" height="300" style="background-size:cover">
 
 
 </body>
