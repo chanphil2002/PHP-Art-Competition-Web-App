@@ -46,9 +46,8 @@ if (isset($_POST['submit2'])) {
                             Entries</h3>
                     </div>
 
-                    <div style="flex: 0 0 auto; width: 30%">
-                        <form action="../judge/new-entry2.php" method="POST" class="d-flex">
-
+                    <form action="../judge/new-entry2.php" method="POST" class="d-flex">
+                        <div style="flex: 0 0 auto; width: 30%">
                             <div class=" overflow-auto">
                                 <span aria-label="Filter By" style="position:relative; box-sizing: border-box; "></span>
                                 <label for="filter_dropdown"></label>
@@ -59,7 +58,7 @@ if (isset($_POST['submit2'])) {
                                 </select>
                                 <input type="submit" name="submit2" value="Search" class="btn btn-outline-dark my-2 my-sm-0" style="margin-left:20px">
                             </div>
-                    </div>
+                        </div>
                     </form>
                 </div>
             </div>
@@ -67,9 +66,9 @@ if (isset($_POST['submit2'])) {
             <div class="container">
                 <div class="row">
                     <?php
-                    $count = mysqli_num_rows($res);
+                    $count = mysqli_num_rows($res2);
                     if ($count > 0) {
-                        while ($row = mysqli_fetch_assoc($res)) {
+                        while ($row = mysqli_fetch_assoc($res2)) {
                             $entryID = $row['entryID'];
                             $entryFile = $row['entryFile'];
                             $title = $row['title'];
