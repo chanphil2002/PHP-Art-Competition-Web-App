@@ -28,7 +28,7 @@ if (isset($_GET['compID'])) {
             <a class="nav-link" aria-current="page" href="viewcomp_main.php?compID=<?php echo $compID; ?>">Main</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="viewspecific_entries.php?entryID=1&<?php echo $compID ?>">View Entries</a>
+            <a class="nav-link" href="viewentries.php.php?entryID=1&<?php echo $compID ?>">View Entries</a>
         </li>
         <li class="nav-item">
             <a class="nav-link active" href="viewcomp_rubric.php?compID=<?php echo $compID; ?>">Scoring Rubric</a>

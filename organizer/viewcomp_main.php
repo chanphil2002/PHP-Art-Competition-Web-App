@@ -41,7 +41,7 @@ while ($row = mysqli_fetch_assoc($res)) {
             <a class="nav-link active" aria-current="page" href="viewcomp_main.php?compID=<?php echo $compID; ?>">Main</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="viewspecific_entries.php?entryID=1&compID=<?php echo $compID ?>">View Entries</a>
+            <a class="nav-link" href="viewentries.php?compID=<?php echo $compID ?>">View Entries</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="viewcomp_rubric.php?compID=<?php echo $compID; ?>">Scoring Rubric</a>
@@ -149,7 +149,6 @@ while ($row = mysqli_fetch_assoc($res)) {
         </div>
         <a href=""><button type="button" class="btn btn-primary">Edit</button></a>
         <a href=""><button type="button" class="btn btn-primary">Delete</button></a>
-        <a href="../judge/new-entry.php?compID=<?php echo $compID; ?>"><button type="button" class="btn btn-primary">View Entries</button></a>
         <a href=""><button type="button" class="btn btn-primary">View Feedback</button></a>
     </div>
 
