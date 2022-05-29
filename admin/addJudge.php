@@ -52,6 +52,7 @@ if (isset($_POST['submit'])) {
 </head>
 
 <body class="form-v7">
+<a class="btn btn-outline-success ms-5 rounded-end rounded-5" href="../organizer/selectedjudge.php" role="button">&laquo; Back to Judges Allocation page </a>
 	<div class="page-content">
 		<div class="form-v7-content">
 			<form class="form-detail" action="#" method="post" id="myform" enctype="multipart/form-data">
