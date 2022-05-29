@@ -87,6 +87,8 @@ $res = mysqli_query($conn, $sql);
               <div class="d-flex justify-content-center align-items-center">
                 <div class="btn-group">
                   <a class="align btn btn-outline-primary" href="viewcomp_main.php?compID=<?php echo $compID; ?>" role="button">View Details</a>
+                  <a class="align btn btn-outline-primary" href="editcomp.php?compID=<?php echo $compID; ?>" role="button">Manage Details</a>
+                  <a class="align btn btn-outline-danger" href="deleteItem.php?compID=<?php echo $compID; ?>&compPic=<?php echo $compPic; ?>" role="button">Terminate Competition</a>
                 </div>
               </div>
             </div>

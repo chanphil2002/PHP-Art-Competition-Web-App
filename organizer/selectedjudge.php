@@ -3,8 +3,7 @@
     
 ob_start();
     $compID = $_SESSION['compID'];
-    $sql1 = "SELECT * FROM comp_judge WHERE compID = '$compID'";
-    $sql2 = "SELECT * FROM judge";
+    $sql2 = "SELECT C.*, J.* FROM comp_judge C INNER JOIN judge J ON C.judgeIC = J.judgeIC AND C.compID = '$compID'";
     $res2 = mysqli_query($conn, $sql2);
 
 
@@ -26,7 +25,7 @@ ob_start();
 
 <div class="album ">
 <div class="container mb-5 d-flex justify-content-center">
-<form method="POST" action="" enctype="multipart/form-data">
+
 <div class="row">
 
 
@@ -39,7 +38,7 @@ ob_start();
     $judgeProfilePic = $row2['judgeProfilePic'];
     ?>
     <div class="col-md-6 ">
-        <div class="card mb-4 shadow-sm p-3">
+        <div class="card mb-4 shadow-sm p-3" style="min-width: 30rem;">
 
             <div class="d-flex align-items-center">
 
@@ -49,8 +48,8 @@ ob_start();
                 
                 <div class="ms-3 w-100">
                     <h3 class="mb-0 mt-0"><?php echo $judgeName; ?></h3>
-                    <span class="text-secondary"><input type="hidden" id='judgeIC' name='judgeIC' value= "<?php echo $judgeIC;?>"> Judge IC: <?php echo $judgeIC; ?> </input></span>
-                    <input type="hidden" id='compID' name='compID' value= "<?php echo $compID;?>">
+                    <span class="text-secondary"> Judge IC: <?php echo $judgeIC; ?> </input></span>
+                    
 
                     <div class="p-2 mt-2 bg-secondary bg-info bg-opacity-25 d-flex justify-content-between rounded text-white stats">
                         <div class="d-flex flex-column text-dark">
@@ -63,11 +62,13 @@ ob_start();
                             <span class="number1"><?php echo $judgeBio; ?></span>
                         </div>
                     </div>
-
-                    <div class="button mt-2 d-flex flex-row align-items-center mt-4">
-                        <a href=""></a>
-                        <button class="btn btn-sm btn-outline-danger w-100" name="submit" type="submit">Remove Judge</button>  
-                    </div>
+                    <form method="POST" action="" enctype="multipart/form-data">
+                        <input type="hidden" id='judgeIC' name='judgeIC' value= "<?php echo $judgeIC;?>">
+                        <input type="hidden" id='compID' name='compID' value= "<?php echo $compID;?>">
+                        <div class="button mt-2 d-flex flex-row align-items-center mt-4">
+                            <button class="btn btn-sm btn-outline-danger w-100" name="remove" type="submit">Remove This Judge</button>  
+                        </div>
+                    </form>
                 </div>
 
             </div>
@@ -78,27 +79,34 @@ ob_start();
 
         
 </div>
-<?php endwhile; ?>
+
+
+<?php
+
+endwhile; ?>
 
 </div>
-</form>
+
 </div>
+
 </div>
+
+<div class="d-grid gap-2 d-md-flex justify-content-md-end me-5">
+    <a class="btn btn-lg btn-outline-info ms-5 mb-3 rounded-start rounded-5 me-5 px-5 text-black py-2" 
+    href="selectedcriteria.php?compID=<?php echo $compID; ?>" role="button"><b>Continue &raquo;</b></a>
+</div>
+
 
 
 <?php
     ob_start();
 
-    if(isset($_POST['submit']))
+    if(isset($_POST['remove']))
     {
         $judgeIC = $_POST['judgeIC'];
         $compID = $_POST['compID'];
 
-        $sql = "INSERT INTO comp_judge(compID, judgeIC) VALUES ($compID, '$judgeIC')";
-
-        // $sql = "INSERT INTO comp_judge SET
-        //     compID = $compID,
-        //     judgeIC = '$judgeIC'";
+        $sql = "DELETE FROM comp_judge WHERE compID = $compID AND judgeIC = '$judgeIC'";
 
         $res = mysqli_query($conn,$sql);
         // if ($res) {
@@ -112,7 +120,7 @@ ob_start();
             $_SESSION['compID'] = $compID;
             echo $_SESSION['compID'];
             
-            header("location:" . SITEURL . "organizer/choosejudge.php");
+            header("location:" . SITEURL . "organizer/selectedjudge.php");
         }
 
     }

@@ -98,11 +98,16 @@
 
 .col-competition-1 {
     flex: 0 0 auto;
-    width: 50%;
+    width: 40%;
+}
+
+.col-competition-2 {
+    flex: 0 0 auto;
+    width: 30%;
 }
 
 
 /* .col-12 {
     flex: 0 0 auto;
-    width: 50%;
+    width: 33.3333333333%;
 } */

@@ -3,19 +3,25 @@
     
 ob_start();
     $compID = $_SESSION['compID'];
-    $sql1 = "SELECT * FROM comp_judge WHERE compID = '$compID'";
-    $sql2 = "SELECT * FROM judge WHERE judgeIC != '(SELECT judgeIC FROM comp_judge WHERE compID = $compID)'";
+    $sql2 = "SELECT C.*, J.* FROM comp_judge C INNER JOIN judge J ON C.judgeIC = J.judgeIC AND C.compID = '$compID'";
     $res2 = mysqli_query($conn, $sql2);
 
 
 ?>
 
 <div class="mx-auto" >
-<a class="btn btn-outline-success ms-5 rounded-end rounded-5" href="selectedjudge.php" role="button">&laquo; Back to Judges Allocation page </a>
-    <h2 class="text-center"><b><u>Existing Judges</u></b></h2>
+    <h2 class=" text-center"><b>Judges Modification</b></h2>
+    <h5 class="text-center text-dark">Competition ID: <?php echo $compID;?></h5>
+    <br>
+    <h5 class="ms-5 text-dark">REPLACE the existing judges with other available judges or ADD a new judge for your competition:</h5>
 </div>
+<div class='d-flex'>
+<a class="btn btn-success btn-lg mx-auto px-5" href="choosejudge.php" role="button"><i class="fa-solid fa-user-graduate me-2"></i>Choose Judges</a>
 
-<h5 class="text-dark ms-5">Choose your desired judges:</h5>
+</div>
+<a class="btn btn-outline-primary ms-5 mb-2" href="../admin/addJudge.php" role="button"><i class="fa-solid fa-user-plus me-2"></i>Add New Judge</a>
+
+
 
 <div class="album ">
 <div class="container mb-5 d-flex justify-content-center">
@@ -25,16 +31,14 @@ ob_start();
 
     
 <?php while($row2 = mysqli_fetch_assoc($res2)):
-
     $judgeIC = $row2['judgeIC'];
     $judgeName = $row2['judgeName'];
     $judgeEmail = $row2['judgeEmail'];
     $judgeBio = $row2['judgeBio'];
     $judgeProfilePic = $row2['judgeProfilePic'];
-   
     ?>
     <div class="col-md-6 ">
-        <div class="card mb-4 shadow-sm p-3">
+        <div class="card mb-4 shadow-sm p-3" style="min-width: 30rem;">
 
             <div class="d-flex align-items-center">
 
@@ -62,8 +66,7 @@ ob_start();
                         <input type="hidden" id='judgeIC' name='judgeIC' value= "<?php echo $judgeIC;?>">
                         <input type="hidden" id='compID' name='compID' value= "<?php echo $compID;?>">
                         <div class="button mt-2 d-flex flex-row align-items-center mt-4">
-                            <a href=""></a>
-                            <button class="btn btn-sm btn-outline-info w-100" name="submit" type="submit"> <b>Appoint This Judge</b> </button>  
+                            <button class="btn btn-sm btn-outline-danger w-100" name="remove" type="submit">Remove This Judge</button>  
                         </div>
                     </form>
                 </div>
@@ -79,43 +82,47 @@ ob_start();
 
 
 <?php
-ob_start();
 
-if(isset($_POST['submit']))
-{
-    $judgeIC = $_REQUEST['judgeIC'];
-    $compID = $_REQUEST['compID'];
-
-    $sql = "INSERT INTO comp_judge(compID, judgeIC) VALUES ($compID, '$judgeIC')";
-
-    // $sql = "INSERT INTO comp_judge SET
-    //     compID = $compID,
-    //     judgeIC = '$judgeIC'";
-
-    $res = mysqli_query($conn,$sql);
-    // if ($res) {
-    //     echo "<script>alert('success');</script>";
-    // } else {
-    //     echo "<script>alert('wrong');</script>";
-    // }
-
-    if($res == true)
-    {   
-        $_SESSION['compID'] = $compID;
-        echo $_SESSION['compID'];
-        
-        header("location:" . SITEURL . "organizer/selectedjudge.php");
-    }
-
-}
 endwhile; ?>
 
 </div>
 
 </div>
+
+</div>
+
+<div class="d-grid gap-2 d-md-flex justify-content-md-end me-5">
+    <a class="btn btn-lg btn-outline-info ms-5 mb-3 rounded-start rounded-5 me-5 px-5 text-black py-2" 
+    href="selectedcriteria.php?compID=<?php echo $compID; ?>" role="button"><b>Continue &raquo;</b></a>
 </div>
 
 
+
 <?php
+    ob_start();
+
+    if(isset($_POST['remove']))
+    {
+        $judgeIC = $_POST['judgeIC'];
+        $compID = $_POST['compID'];
+
+        $sql = "DELETE FROM comp_judge WHERE compID = $compID AND judgeIC = '$judgeIC'";
+
+        $res = mysqli_query($conn,$sql);
+        // if ($res) {
+        //     echo "<script>alert('success');</script>";
+        // } else {
+        //     echo "<script>alert('wrong');</script>";
+        // }
+
+        if($res == true)
+        {   
+            $_SESSION['compID'] = $compID;
+            echo $_SESSION['compID'];
+            
+            header("location:" . SITEURL . "organizer/editselectedjudge.php");
+        }
+
+    }
 include("../organizer/partials/footer.php");
 ?>
