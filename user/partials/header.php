@@ -26,7 +26,7 @@
     <a class="navbar-brand ml-5" href="homepage.php">
       <img src="../user/partials/logo.png" alt="Virtual" width="200">
     </a>
-    <form action="../judge/judge.php" method="POST" class="d-flex">
+    <form action="search.php" method="POST" class="d-flex">
       <input class="form-control me-2 mr-sm-2 col-md-5 ml-5" type="search" name="search" placeholder="Interested in Anything?">
       <input type="submit" name="submit" value="Search" class="btn btn-outline-light my-2 my-sm-0">
     </form>
@@ -44,7 +44,7 @@
             </button>
             <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton2">
               <li><a class="dropdown-item" href="#">My Profile</a></li>
-              <li><a class="dropdown-item" href="joinComp.php">My Competitions</a></li>
+              <li><a class="dropdown-item" href="#">My Competitions</a></li>
               <li><a class="dropdown-item" href="#">Favourite</a></li>
               <li>
                 <hr class="dropdown-divider">

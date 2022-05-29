@@ -41,7 +41,7 @@
             move_uploaded_file($tmp_name, "../materials/image/$entry");
             echo "<script>
             alert ('Entry Submitted Successfully!')
-            location = 'homepage.php' 
+            location = 'viewEntries.php?compID=$comp'
             </script>";
         }else{
             echo "<script>alert ('Oops, something went wrong! Please submit your entry again.')</script>";

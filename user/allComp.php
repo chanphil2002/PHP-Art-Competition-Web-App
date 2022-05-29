@@ -153,6 +153,7 @@
         <div class="row">
             <?php
                 while ($compDetails = mysqli_fetch_assoc($res)){
+                    $comp = $compDetails["compID"];
                     $pic = $compDetails["compPic"];
                     $name = $compDetails["compName"];
                     $org = $compDetails["organizerName"];
@@ -162,7 +163,7 @@
 
             <div class="col-md-4 margincon1">
                 <div class="card border-1 grid-list">
-                    <a href="" class="stretched-link">
+                    <a href="compDetails.php?compID=<?php echo $comp; ?>" class="stretched-link">
                         <?php if ($status == "Upcoming"){ ?>
                                 <span class="badge rounded-pill position-absolute bg-danger end-0" style="height:20px">Upcoming</span>
                         <?php } elseif ($status == "Past"){ ?>

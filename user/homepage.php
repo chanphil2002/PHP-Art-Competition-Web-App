@@ -46,10 +46,11 @@ if (!isset($_SESSION["user"])) {
             $compDetails = mysqli_fetch_assoc($res1);
             $name = $compDetails["compName"];
             $pic = $compDetails["compPic"];
+            $id = $compDetails["compID"];
             ?>
 
             <div class="carousel-item active" data-bs-interval="2000">
-                <a href="">
+                <a href="compDetails.php?compID=<?php echo $id; ?>">
                     <center><img src="../materials/image/<?php echo $pic ?>" style="width:auto;height:360px;" class="" alt="..."></center>
                 </a>
                 <br><br><br><br><br><br>
@@ -58,7 +59,7 @@ if (!isset($_SESSION["user"])) {
                         <h5 style="color:black;display: inline-block"><?php echo $name ?> &nbsp;</h5>
                         <span class="badge rounded-pill position-absolute bg-danger" style="height:20px">Popular</span>
                     </div>
-                    <a class="align btn btn-outline-primary" href="" role="button">View Details</a>
+                    <a class="align btn btn-outline-primary" href="compDetails.php?compID=<?php echo $id; ?>" role="button">View Details</a>
                 </div>
             </div>
 
@@ -70,10 +71,11 @@ if (!isset($_SESSION["user"])) {
             while ($compDetails = mysqli_fetch_assoc($res2)) {
                 $name = $compDetails["compName"];
                 $pic = $compDetails["compPic"];
+                $id = $compDetails["compID"];
             ?>
 
                 <div class="carousel-item" data-bs-interval="2000">
-                    <a href="">
+                    <a href="compDetails.php?compID=<?php echo $id; ?>">
                         <center><img src="../materials/image/<?php echo $pic ?>" style="width:auto;height:360px;" class="" alt="..."></center>
                     </a>
                     <br><br><br><br><br><br>
@@ -82,7 +84,7 @@ if (!isset($_SESSION["user"])) {
                             <h5 style="color:black;display: inline-block"><?php echo $name ?> &nbsp;</h5>
                             <span class="badge rounded-pill position-absolute bg-success" style="height:20px">New</span>
                         </div>
-                        <a class="align btn btn-outline-primary" href="" role="button">View Details</a>
+                        <a class="align btn btn-outline-primary" href="compDetails.php?compID=<?php echo $id; ?>" role="button">View Details</a>
                     </div>
                 </div>
 
@@ -96,10 +98,11 @@ if (!isset($_SESSION["user"])) {
             while ($compDetails = mysqli_fetch_assoc($res3)) {
                 $name = $compDetails["compName"];
                 $pic = $compDetails["compPic"];
+                $id = $compDetails["compID"];
             ?>
 
                 <div class="carousel-item" data-bs-interval="2000">
-                    <a href="">
+                    <a href="compDetails.php?compID=<?php echo $id; ?>">
                         <center><img src="../materials/image/<?php echo $pic ?>" style="width:auto;height:360px;" class="" alt="..."></center>
                     </a>
                     <br><br><br><br><br><br>
@@ -108,7 +111,7 @@ if (!isset($_SESSION["user"])) {
                             <h5 style="color:black;display: inline-block"><?php echo $name ?> &nbsp;</h5>
                             <span class="badge rounded-pill position-absolute bg-primary" style="height:20px">Upcoming</span>
                         </div>
-                        <a class="align btn btn-outline-primary" href="" role="button">View Details</a>
+                        <a class="align btn btn-outline-primary" href="compDetails.php?compID=<?php echo $id; ?>" role="button">View Details</a>
                     </div>
                 </div>
 
@@ -143,11 +146,12 @@ if (!isset($_SESSION["user"])) {
                 $pic = $compDetails["compPic"];
                 $name = $compDetails["compName"];
                 $category = $compDetails["category"];
+                $id = $compDetails["compID"];
             ?>
 
                 <div class="col-md-4 margincon1">
                     <div class="card border-1 grid-list">
-                        <a href="" class="stretched-link">
+                        <a href="compDetails.php?compID=<?php echo $id; ?>" class="stretched-link">
                             <img class="card-img-top lazy" src="../materials/image/<?php echo $pic; ?>">
                         </a>
                         <div class="card-body description text-truncate text-color-2">
@@ -182,11 +186,12 @@ if (!isset($_SESSION["user"])) {
                 $name = $compDetails["compName"];
                 $status = $compDetails["status"];
                 $orgName = $compDetails["organizerName"];
+                $id = $compDetails["compID"];
             ?>
 
                 <div class="col-md-4 margincon1">
                     <div class="card border-1 grid-list">
-                        <a href="" class="stretched-link">
+                        <a href="compDetails.php?compID=<?php echo $id; ?>" class="stretched-link">
                             <?php if ($status == "Upcoming") { ?>
                                 <span class="badge rounded-pill position-absolute bg-danger end-0" style="height:20px">Upcoming</span>
                             <?php } elseif ($status == "Past") { ?>
@@ -226,11 +231,12 @@ if (!isset($_SESSION["user"])) {
                 $name = $compDetails["compName"];
                 $status = $compDetails["status"];
                 $orgName = $compDetails["organizerName"];
+                $id = $compDetails["compID"];
             ?>
 
                 <div class="col-md-4 margincon1">
                     <div class="card border-1 grid-list">
-                        <a href="" class="stretched-link">
+                        <a href="compDetails.php?compID=<?php echo $id; ?>" class="stretched-link">
                             <?php if ($status == "Upcoming") { ?>
                                 <span class="badge rounded-pill position-absolute bg-danger end-0" style="height:20px">Upcoming</span>
                             <?php } elseif ($status == "Past") { ?>
@@ -270,11 +276,12 @@ if (!isset($_SESSION["user"])) {
                 $name = $compDetails["compName"];
                 $status = $compDetails["status"];
                 $orgName = $compDetails["organizerName"];
+                $id = $compDetails["compID"];
             ?>
 
                 <div class="col-md-4 margincon1">
                     <div class="card border-1 grid-list">
-                        <a href="" class="stretched-link">
+                        <a href="compDetails.php?compID=<?php echo $id; ?>" class="stretched-link">
                             <?php if ($status == "Upcoming") { ?>
                                 <span class="badge rounded-pill position-absolute bg-danger end-0" style="height:20px">Upcoming</span>
                             <?php } elseif ($status == "Past") { ?>
@@ -314,11 +321,12 @@ if (!isset($_SESSION["user"])) {
                 $name = $compDetails["compName"];
                 $status = $compDetails["status"];
                 $orgName = $compDetails["organizerName"];
+                $id = $compDetails["compID"];
             ?>
 
                 <div class="col-md-4 margincon1">
                     <div class="card border-1 grid-list">
-                        <a href="" class="stretched-link">
+                        <a href="compDetails.php?compID=<?php echo $id; ?>" class="stretched-link">
                             <?php if ($status == "Upcoming") { ?>
                                 <span class="badge rounded-pill position-absolute bg-danger end-0" style="height:20px">Upcoming</span>
                             <?php } elseif ($status == "Past") { ?>
