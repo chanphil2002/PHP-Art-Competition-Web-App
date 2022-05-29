@@ -149,8 +149,7 @@ while ($row = mysqli_fetch_assoc($res)) {
         </div>
         <a href=""><button type="button" class="btn btn-primary">Edit</button></a>
         <a href=""><button type="button" class="btn btn-primary">Delete</button></a>
-        <a href="../organizer/viewspecific_entries.php?entryID=1">
-            <button type="button" class="btn btn-primary">View Entries</button></a>
+        <a href="../judge/new-entry.php?compID=<?php echo $compID; ?>"><button type="button" class="btn btn-primary">View Entries</button></a>
         <a href=""><button type="button" class="btn btn-primary">View Feedback</button></a>
     </div>
 
