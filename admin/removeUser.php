@@ -8,12 +8,12 @@
     if (isset($_GET['removeEmail'])) {
         $removeEmail = $_GET['removeEmail'];
         
-        // $sql = "SELECT * FROM user WHERE userEmail = '$removeEmail'";
-        // $result = mysqli_query($conn, $sql);
-        // $userInfo = mysqli_fetch_assoc($result);
-        // $img = $userInfo["judgeProfilePic"];
-        // $imgPath = ("judgeProfile/$img");
-        // unlink($imgPath);
+        $sql = "SELECT * FROM user WHERE userEmail = '$removeEmail'";
+        $result = mysqli_query($conn, $sql);
+        $userInfo = mysqli_fetch_assoc($result);
+        $img = $userInfo["userProfilePic"];
+        $imgPath = ("../user/userProfilePic/$img");
+        unlink($imgPath);
 
         $delete = "DELETE FROM user WHERE userEmail ='$removeEmail'";
         $run_delete = mysqli_query($conn,$delete);

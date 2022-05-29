@@ -47,20 +47,24 @@ while ($row = mysqli_fetch_assoc($res)) {
         </li>
     </ul>
 
-    <div class="card mb-3" style="">
-        <div class="row g-0">
-            <div class="col-md-4">
-                <img src="../materials/image/<?php echo $entryFile ?>" class="img-fluid rounded-start" alt="...">
-            </div>
-            <div class="col-md-8">
-                <div class="card-body">
-                    <h5 class="card-title"><?php echo $title ?></h5>
-                    <p class="card-text">Judge</p>
-                    <p class="card-text"><small class="text-muted">By <?php echo $userEmail ?></small></p>
+    <div class="container pb-5">
+        <a class="btn btn-outline-success rounded-end rounded-5 mb-4" href="viewentries.php?compID=<?php echo $compID ?>" role="button">&laquo; Back to View All Entries </a>
+        <div class="card mb-3">
+            <div class="row g-0">
+                <div class="col-md-7">
+                    <img src="../materials/image/<?php echo $entryFile ?>" class="img-fluid rounded-start" alt="...">
+                </div>
+                <div class="col-md-5">
+                    <div class="card-body">
+                        <h5 class="card-title"><?php echo $title ?></h5>
+                        <p class="card-text">Judge</p>
+                        <p class="card-text"><small class="text-muted">By <?php echo $userEmail ?></small></p>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+
 
 </body>
 

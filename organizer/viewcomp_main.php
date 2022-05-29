@@ -40,7 +40,7 @@ while ($row = mysqli_fetch_assoc($res)) {
 
 <body>
     <img src="../materials/image/test1.jpg" alt="Responsive image" height="300" style="background-size:cover">
-    <ul class="nav nav-pills nav-fill p-2">
+    <ul class="nav nav-pills nav-fill p-2 bg-light">
         <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="viewcomp_main.php?compID=<?php echo $compID; ?>">Main</a>
         </li>
@@ -56,14 +56,14 @@ while ($row = mysqli_fetch_assoc($res)) {
     </ul>
 
 
-    <div class="container">
+    <div class="container pb-5">
         <div class="row">
             <div class="col-9">
                 <div>
-                    <h2 style="display: inline-block"><?php echo $compName ?></h2>
-                    <span class="badge text-bg-success align-top even-larger-badge">Ongoing</span>
+                    <h2 class="mr-2" style="display: inline-block"><?php echo $compName ?></h2>
+                    <span class="ml-2 badge text-bg-success align-top even-larger-badge">Ongoing</span>
                 </div>
-                <h3>By <?php echo $organizerName ?>, <?php echo $category ?> Category</h3>
+                <h3 class="text-muted"><small class="text-muted">By <?php echo $organizerName ?></small>, <?php echo $category ?> Category</h3>
 
                 <div class=" row">
                     <div class="col-sm-4">
@@ -117,10 +117,8 @@ while ($row = mysqli_fetch_assoc($res)) {
                 <img src="../materials/image/download.jpg" alt="">
             </div>
         </div>
-    </div>
-    <hr>
-    <div class="justify-content-center">
-        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Add Announcement</button>
+        <hr>
+        <button class="btn btn-success btn-lg mx-auto px-5" data-bs-toggle="modal" data-bs-target="#exampleModal">Make Announcement</button>
         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -147,10 +145,11 @@ while ($row = mysqli_fetch_assoc($res)) {
                 </div>
             </div>
         </div>
-        <a href=""><button type="button" class="btn btn-primary">Edit</button></a>
-        <a href=""><button type="button" class="btn btn-primary">Delete</button></a>
-        <a href=""><button type="button" class="btn btn-primary">View Feedback</button></a>
+        <a href="editcomp.php?compID=<?php echo $compID; ?>"><button type="button" class="btn btn-primary btn-lg mx-auto px-5">Edit</button></a>
+        <a href=""><button type="button" class="btn btn-danger btn-lg mx-auto px-5">Delete</button></a>
+        <a href=""><button type="button" class="btn btn-secondary btn-lg mx-auto px-5">View Feedback</button></a>
     </div>
+
 
     <script src="https://kit.fontawesome.com/8deb7b58d3.js" crossorigin="anonymous"></script>
 </body>

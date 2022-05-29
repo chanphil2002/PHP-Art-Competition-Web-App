@@ -25,6 +25,7 @@ if (isset($_POST['submit2'])) {
         $res2 = mysqli_query($conn, $sql2);
     } else {
         $sql2 = "SELECT * FROM entry";
+        $res2 = mysqli_query($conn, $sql2);
     }
 }
 ?>
@@ -46,19 +47,19 @@ if (isset($_POST['submit2'])) {
                             Entries</h3>
                     </div>
 
-                    <form action="../judge/new-entry2.php" method="POST" class="d-flex">
-                        <div style="flex: 0 0 auto; width: 30%">
+                    <div style="flex: 0 0 auto; width: 30%">
+                        <form action="../judge/new-entry2.php?compID=<?php echo $compID ?>" method="POST" class="d-flex">
                             <div class=" overflow-auto">
                                 <span aria-label="Filter By" style="position:relative; box-sizing: border-box; "></span>
                                 <label for="filter_dropdown"></label>
                                 <select name="filter_dropdown" id="filter_dropdown">
-                                    <option>Filter By: All Entries </option>
+                                    <option value=" ">Filter By: All Entries </option>
                                     <option value="Scored">Filter By: Scored Entries</option>
                                     <option value="Unscored">Filter By: Unscored Entries</option>
                                 </select>
                                 <input type="submit" name="submit2" value="Search" class="btn btn-outline-dark my-2 my-sm-0" style="margin-left:20px">
                             </div>
-                        </div>
+                    </div>
                     </form>
                 </div>
             </div>
