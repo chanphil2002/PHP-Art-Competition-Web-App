@@ -1,11 +1,12 @@
-<?php include ("../user/partials/database.php");?>
+<?php include("../user/partials/database.php"); ?>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Virtual-X</title>
-  
+
   <!-- Bootstrap -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
   <!-- Font Awesome -->
@@ -18,21 +19,22 @@
   <link rel="stylesheet" href="../user/partials/header.css">
 
 </head>
+
 <body>
   <nav class="navbar navbar-dark bg-secondary bg-gradient fixed-top px-5">
-    
-    <a class="navbar-brand ml-5" href="homepage.php">
+
+    <a class="navbar-brand ml-5" href="    ">
       <img src="../user/partials/logo.png" alt="Virtual" width="200">
     </a>
-    <form action="     " method="POST" class="d-flex">
+    <form action="../judge/judge.php" method="POST" class="d-flex">
       <input class="form-control me-2 mr-sm-2 col-md-5 ml-5" type="search" name="search" placeholder="Interested in Anything?">
       <input type="submit" name="submit" value="Search" class="btn btn-outline-light my-2 my-sm-0">
     </form>
     <nav class="navbar navbar-expand-xl">
       <ul class="navbar-nav">
-        
+
         <li class="nav-item">
-          <a class="btn btn-info" href="allComp.php" role="button"><i class="fa-solid fa-trophy"></i>&nbsp; Competitions</a>&nbsp;&nbsp;&nbsp;
+          <a class="btn btn-info" href="     " role="button"><i class="fa-solid fa-trophy"></i>&nbsp; My Competition</a>&nbsp;&nbsp;&nbsp;
         </li>
 
         <li class="nav-item">
@@ -42,9 +44,10 @@
             </button>
             <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton2">
               <li><a class="dropdown-item" href="#">My Profile</a></li>
-              <li><a class="dropdown-item" href="#">My Competitions</a></li>
               <li><a class="dropdown-item" href="#">Favourite</a></li>
-              <li><hr class="dropdown-divider"></li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
               <li><a class="dropdown-item text-danger" href="../general/logout.php">Log Out</a></li>
             </ul>
           </div>
@@ -52,5 +55,5 @@
       </ul>
     </nav>
   </nav>
-  
-<div class= "mt-5 mb-5 pt-5" ></div>
+
+  <div class="mt-5 mb-5 pt-5"></div>
