@@ -47,7 +47,7 @@ if (isset($_POST['submit2'])) {
                     </div>
 
                     <div style="flex: 0 0 auto; width: 30%">
-                        <form action="../judge/new-entry2.php" method="POST" class="d-flex">
+                        <form action="../judge/new-entry2.php?compID=<?php echo $compID ?>" method="POST" class="d-flex">
 
                             <div class=" overflow-auto">
                                 <span aria-label="Filter By" style="position:relative; box-sizing: border-box; "></span>
