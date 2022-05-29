@@ -3,7 +3,7 @@
 <?php
 if (isset($_GET['compID'])) {
     $compID = $_GET['compID'];
-    $sql = "SELECT * FROM competition WHERE compID=$compID";
+    $sql = "SELECT C.*, O.organizerName FROM competition C INNER JOIN organizer O ON C.compID=$compID";
     $res = mysqli_query($conn, $sql);
 } else {
     echo "mistake";
@@ -12,6 +12,7 @@ while ($row = mysqli_fetch_assoc($res)) {
     $compID = $row['compID'];
     $compName = $row['compName'];
     $organizerID = $row['organizerID'];
+    $organizerName = $row['organizerName'];
     $description = $row['description'];
     $rules = $row['rules'];
     $category = $row['category'];
@@ -19,6 +20,9 @@ while ($row = mysqli_fetch_assoc($res)) {
     $releaseDate = $row['releaseDate'];
     $registrationDeadline = $row['registrationDeadline'];
     $evaluationDays = $row['evaluationDays'];
+    $judgeScore = $row['judgeScore'];
+    $publicVote = $row['publicVote'];
+    $prizePool = $row['prizePool'];
     $compPic = $row['compPic'];
 }
 ?>
@@ -59,14 +63,14 @@ while ($row = mysqli_fetch_assoc($res)) {
                     <h2 style="display: inline-block"><?php echo $compName ?></h2>
                     <span class="badge text-bg-success align-top even-larger-badge">Ongoing</span>
                 </div>
-                <h3>By Sunway, ARTS</h3>
+                <h3>By <?php echo $organizerName ?>, <?php echo $category ?> Category</h3>
 
                 <div class=" row">
                     <div class="col-sm-4">
                         <div class="card" style="height: 14rem;">
                             <div class="card-body">
                                 <h3 class="card-title" style="color:black">Competition Date</h3>
-                                <h2>September 2021</h2>
+                                <h2><?php echo $releaseDate; ?> - <?php echo $registrationDeadline; ?></h2>
                             </div>
                         </div>
                     </div>
@@ -74,8 +78,8 @@ while ($row = mysqli_fetch_assoc($res)) {
                         <div class="card" style="height: 14rem;">
                             <div class="card-body">
                                 <h3 class="card-title" style="color:black">Scoring Format</h3>
-                                <h2><u>50%</u> Public Vote</h2>
-                                <h2><u>50%</u> Judge</h2>
+                                <h2><u><?php echo $publicVote; ?> </u> Public Vote</h2>
+                                <h2><u><?php echo $judgeScore; ?></u> Judge</h2>
                             </div>
                         </div>
                     </div>
@@ -83,7 +87,7 @@ while ($row = mysqli_fetch_assoc($res)) {
                         <div class="card" style="height: 14rem;">
                             <div class="card-body">
                                 <h3 class="card-title" style="color:black">Total Prize Pool</h3>
-                                <h2>RM5000</h2>
+                                <h2><?php echo $prizePool; ?></h2>
                             </div>
                         </div>
                     </div>
@@ -92,21 +96,17 @@ while ($row = mysqli_fetch_assoc($res)) {
                     <h2>
                         Description
                     </h2>
-                    <ul>
-                        <li>No cheating.</li>
-                        <li>Only NFT Related Content.</li>
-                        <li>All the best.</li>
-                    </ul>
+                    <h3>
+                        <?php echo $description; ?>
+                    </h3>
                 </div>
                 <div>
                     <h2>
                         Rules and Regulation
                     </h2>
-                    <ul>
-                        <li>No cheating.</li>
-                        <li>Only NFT Related Content.</li>
-                        <li>All the best.</li>
-                    </ul>
+                    <h3>
+                        <?php echo $rules; ?>
+                    </h3>
                 </div>
             </div>
             <div class="col-3">
