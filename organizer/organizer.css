@@ -29,5 +29,10 @@ body {
     width: 100%;
     object-fit: cover;
     height: 15vw;
-    width: 20vw;
+}
+
+.card-img-left {
+    width: 100%;
+    object-fit: cover;
+    height: 30vw;
 }

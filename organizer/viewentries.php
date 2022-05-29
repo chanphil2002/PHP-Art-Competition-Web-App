@@ -21,7 +21,6 @@ while ($row1 = mysqli_fetch_assoc($res1)) {
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="organizer.css">
-    <link rel="stylesheet" href="../judge/judge.css">
 </head>
 
 <body>
@@ -69,7 +68,7 @@ while ($row1 = mysqli_fetch_assoc($res1)) {
 
                     ?>
 
-                            <div class="col-md-4 margincon1 d-flex align-items-stretch" style="margin-top: 2%">
+                            <div class="col-md-4 margincon1" style="margin-top: 2%">
                                 <div class=" card border-1 grid-list">
                                     <a href="../organizer/viewspecific_entry.php?entryID=<?php echo $entryID; ?>&compID=<?php echo $compID; ?>" class="stretched-link">
                                         <span class="badge rounded-pill text-bg-success position-absolute top-0 end-0"><?php echo $entryID; ?></span>

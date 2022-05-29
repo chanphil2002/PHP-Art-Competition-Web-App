@@ -52,12 +52,11 @@ while ($row = mysqli_fetch_assoc($res)) {
         <div class="card mb-3">
             <div class="row g-0">
                 <div class="col-md-7">
-                    <img src="../materials/image/<?php echo $entryFile ?>" class="img-fluid rounded-start" alt="...">
+                    <img class="card-img-left" src="../materials/image/<?php echo $entryFile ?>" class="img-fluid rounded-start" alt="...">
                 </div>
                 <div class="col-md-5">
                     <div class="card-body">
-                        <h5 class="card-title"><?php echo $title ?></h5>
-                        <p class="card-text">Judge</p>
+                        <h5 class="card-title" style="color:black"><?php echo $title ?></h5>
                         <p class="card-text"><small class="text-muted">By <?php echo $userEmail ?></small></p>
                     </div>
                 </div>
