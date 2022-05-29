@@ -1,4 +1,6 @@
-<?php include("../judge/partials/database.php"); ?>
+<?php include("../judge/partials/database.php");
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 

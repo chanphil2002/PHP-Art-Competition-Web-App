@@ -84,7 +84,7 @@ if (isset($_POST['submit2'])) {
 
                             <div class="col-md-4 margincon1" style="margin-top: 2%">
                                 <div class=" card border-1 grid-list">
-                                    <a href="../organizer/viewspecific_entries.php?compID=<?php echo $compID; ?>" class="stretched-link">
+                                    <a href="../organizer/viewspecific_entry.php?compID=<?php echo $compID; ?>" class="stretched-link">
                                         <span class="badge rounded-pill text-bg-success position-absolute top-0 end-0"><?php echo $entryID; ?></span>
                                         <img class="card-img-top lazy" src="../materials/image/<?php echo $entryFile; ?>">
                                     </a>

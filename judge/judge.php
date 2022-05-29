@@ -15,9 +15,6 @@ if (isset($_POST['search'])) {
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://cdn.js.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
   <link rel="stylesheet" href="judge.css">
 </head>
 
@@ -92,7 +89,7 @@ if (isset($_POST['search'])) {
 
               <div class="col-md-4 margincon1">
                 <div class="card border-1 grid-list">
-                  <a href="../admin/test.php" class="stretched-link">
+                  <a href="viewcompmain.php?compID=<?php echo $compID; ?>" class="stretched-link">
                     <span class="badge rounded-pill text-bg-success position-absolute top-0 end-0"><?php echo $status; ?></span>
                     <img class="card-img-top lazy" src="../materials/image/<?php echo $compPic; ?>">
                   </a>
@@ -121,37 +118,3 @@ if (isset($_POST['search'])) {
 
 
 <?php include("../judge/partials/footer.php"); ?>
-
-<!-- <script type="text/javascript">
-  $(document).ready(function() {
-    $("#filter_dropdown").on('change', function() {
-      var value = $(this).val();
-
-      // alert(value);
-      // alert(search);
-
-      $.ajax({
-        url: "fetch.php",
-        type: "POST",
-        data: 'request=' + value + '&search=' + search + '&res1=' + res1,
-        beforeSend: function() {
-          $(".container").html("<span>Working...</span>");
-        },
-        success: function(data) {
-          $(".container").html(data);
-        }
-      });
-    });
-  });
-
-
-  function switchFilter() {
-    var x = document.getElementById("filter_dropdown").value;
-    document.getElementById("demo").innerHTML = "You selected: " + x;
-  }
-
-  function switchSort() {
-    var x = document.getElementById("_dropdown").value;
-    document.getElementById("demo").innerHTML = "You selected: " + x;
-  }
-</script> -->

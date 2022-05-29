@@ -108,7 +108,7 @@ if (isset($_POST['submit2'])) {
                     if ($count > 0) {
                         while ($row1 = mysqli_fetch_assoc($res1)) {
 
-                            $compID1 = $row1['compID'];
+                            $compID = $row1['compID'];
                             $compName1 = $row1['compName'];
                             $category1 = $row1['category'];
                             $compPic1 = $row1['compPic'];
@@ -117,7 +117,7 @@ if (isset($_POST['submit2'])) {
 
                             <div class="col-md-4 margincon1">
                                 <div class="card border-1 grid-list">
-                                    <a href="../admin/test.php" class="stretched-link">
+                                    <a href="viewcompmain.php?compID=<?php echo $compID; ?>" class="stretched-link">
                                         <span class="badge rounded-pill text-bg-success position-absolute top-0 end-0"><?php echo $status1; ?></span>
                                         <img class="card-img-top lazy" src="../materials/image/<?php echo $compPic1; ?>">
                                     </a>
