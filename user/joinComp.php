@@ -25,27 +25,26 @@
         $entryNum = $compDetails["noOfEntries"];
     }
 
-    if (isset($_POST["submit"])){
-        $entry = $_FILES["entry"]["name"];
-        $tmp_name = $_FILES["entry"]["tmp_name"]
-        $name = $_POST["name"];
-        $compID = $comp;
-        $user = $userEmail;
-        $phoneNum = $_POST["phone"];
-        $submitDate = .date(Y-m-d);
+    if (isset($_POST['submit'])){
+        $email = $_POST['email'];
+        $username = $_POST['username'];
+        $phone = $_POST['phone'];
+        $title = $_POST['entryName'];
+        $entry = $_FILES['entry']['name'];
+	    $tmp_name = $_FILES['entry']['tmp_name'];
+        $date = date("Y-m-d");
 
-        $sql3 = "INSERT INTO entry (entryFile, title, compID, userEmail, phoneNum, submitDate) VALUES ($entry, $name, $compID, $user, $phoneNum, $submitDate)";
+        $sql3 = "INSERT INTO entry (entryFile, title, compId, userEmail, phoneNum, submitDate) VALUES ('$entry', '$title', '$comp', '$userEmail', '$phone', '$date')";
         $res3 = mysqli_query($conn, $sql3);
 
-        if ($res3 == true){
+        if ($res3){
             move_uploaded_file($tmp_name, "../materials/image/$entry");
-            $newEntryNum = $entryNum+1;
-            $sql4 = "UPDATE competition SET noOfEntries = '$newEntryNum' WHERE compID = '$compID'";
-            $res5 = mysqli_query($conn, $sql5);
-            echo "<script>alert ('Entry submitted successfully!')</script>";
-            header("Location: #");
+            echo "<script>
+            alert ('Entry Submitted Successfully!')
+            location = 'homepage.php' 
+            </script>";
         }else{
-            echo "<script>alert ('Oops, entry not submitted. Submit your entry again later.')</script>";
+            echo "<script>alert ('Oops, something went wrong! Please submit your entry again.')</script>";
         }
     }
 
@@ -82,8 +81,8 @@
 					<input type="text" name="phone" id="phone" class="input-text" value="<?php echo $phone; ?>" required>
 				</div>
                 <div class="form-row">
-					<br><label for="name">ENTRY'S TITLE *</label>
-					<input type="text" name="name" id="name" class="input-text" required>
+					<br><label for="entryName">ENTRY'S TITLE *</label>
+					<input type="text" name="entryName" id="entryName" class="input-text" required>
 				</div>
 				<div class="form-row">
 					<br><br><label for="entry">ENTRY FILE *</label><br>
