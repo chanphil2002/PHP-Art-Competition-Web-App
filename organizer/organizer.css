@@ -36,3 +36,12 @@ body {
     object-fit: cover;
     height: 30vw;
 }
+
+.img {
+    transition: opacity var(--transition-base-timing) var(--transition-base-easing);
+    background-position: 50%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-color: var(--color-dark-gray);
+    opacity: 1;
+}

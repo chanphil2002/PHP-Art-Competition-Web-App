@@ -31,7 +31,7 @@ session_start();
 </head>
 
 <body>
-  <nav class="navbar navbar-dark bg-secondary bg-gradient fixed-top px-5">
+  <nav class="navbar navbar-dark bg-secondary bg-gradient sticky-top px-5">
 
     <a class="navbar-brand ml-5" href="../organizer/orghome.php">
       <img src="../organizer/partials/logo.png" alt="Virtual" width="200">
@@ -65,8 +65,6 @@ session_start();
       </ul>
     </nav>
   </nav>
-  <div class="mt-5 mb-5 pt-5">
-  </div>
 
   <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
     <div class="offcanvas-header">
@@ -88,7 +86,6 @@ session_start();
         </ul>
       </div>
 
-      <div class="mb-5"></div>
 
     </div>
   </div>

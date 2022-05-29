@@ -32,7 +32,7 @@ while ($row = mysqli_fetch_assoc($res)) {
 </head>
 
 <body>
-    <img src="../materials/image/test1.jpg" alt="Responsive image" height="300" style="background-size:cover">
+    <img class="img" src="../materials/image/nft_poster.jpg" alt="Responsive image" height="300" width="100%" style="object-fit: cover;">
     <ul class="nav nav-pills nav-fill p-2 bg-light">
         <li class="nav-item">
             <a class="nav-link" aria-current="page" href="viewcomp_main.php?compID=<?php echo $compID; ?>">Main</a>
