@@ -4,14 +4,15 @@
 ob_start();
     $compID = $_SESSION['compID'];
     $sql1 = "SELECT * FROM comp_judge WHERE compID = '$compID'";
-    $sql2 = "SELECT * FROM judge";
+    $sql2 = "SELECT * FROM judge WHERE judgeIC != '(SELECT judgeIC FROM comp_judge WHERE compID = $compID)'";
     $res2 = mysqli_query($conn, $sql2);
 
 
 ?>
 
 <div class="mx-auto" >
-    <h2 class="pt-5 text-center"><b><u>Existing Judges</u></b></h2>
+<a class="btn btn-outline-success ms-5 rounded-end rounded-5" href="selectedjudge.php" role="button">&laquo; Back to Judges Allocation page </a>
+    <h2 class="text-center"><b><u>Existing Judges</u></b></h2>
 </div>
 
 <h5 class="text-dark ms-5">Choose your desired judges:</h5>
@@ -24,11 +25,13 @@ ob_start();
 
     
 <?php while($row2 = mysqli_fetch_assoc($res2)):
+
     $judgeIC = $row2['judgeIC'];
     $judgeName = $row2['judgeName'];
     $judgeEmail = $row2['judgeEmail'];
     $judgeBio = $row2['judgeBio'];
     $judgeProfilePic = $row2['judgeProfilePic'];
+   
     ?>
     <div class="col-md-6 ">
         <div class="card mb-4 shadow-sm p-3">
@@ -73,6 +76,8 @@ ob_start();
 
         
 </div>
+
+
 <?php
 ob_start();
 

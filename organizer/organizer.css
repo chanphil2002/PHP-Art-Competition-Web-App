@@ -1,7 +1,19 @@
+.center {
+    text-align: center;
+}
+
+.text-color-3 {
+    color: #0800F7;
+}
+
 .badge.even-larger-badge {
     font-size: 1.1em;
 }
 
 body {
     overflow: scroll;
+}
+
+.nav-item {
+    padding: 2rem;
 }

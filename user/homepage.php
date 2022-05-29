@@ -166,7 +166,7 @@
     <!-- 2D Digital Arts -->
     <div>
         <h2 class="ml-5" style="margin-left: 15px; display:inline-block">2D Digital Arts</h2>
-        <a href="" style="color:darkblue; margin-left: 900px">See more&nbsp;<i class="fa-solid fa-angle-right"></i></a>
+        <a href="allComp.php?category=2D" style="color:darkblue; margin-left: 900px">See more&nbsp;<i class="fa-solid fa-angle-right"></i></a>
     </div>
     
 
@@ -210,7 +210,7 @@
     <!-- 3D Digital Arts -->
     <div>
         <h2 class="ml-5" style="margin-left: 15px; display:inline-block">3D Digital Arts</h2>
-        <a href="" style="color:darkblue; margin-left: 900px">See more&nbsp;<i class="fa-solid fa-angle-right"></i></a>
+        <a href="allComp.php?category=3D" style="color:darkblue; margin-left: 900px">See more&nbsp;<i class="fa-solid fa-angle-right"></i></a>
     </div>
     
 
@@ -254,7 +254,7 @@
     <!-- Paintings -->
     <div>
         <h2 class="ml-5" style="margin-left: 15px; display:inline-block">Visual Art - Paintings</h2>
-        <a href="" style="color:darkblue; margin-left: 800px">See more&nbsp;<i class="fa-solid fa-angle-right"></i></a>
+        <a href="allComp.php?category=Paintings" style="color:darkblue; margin-left: 800px">See more&nbsp;<i class="fa-solid fa-angle-right"></i></a>
     </div>
     
 
@@ -298,7 +298,7 @@
     <!-- Photography -->
     <div>
         <h2 class="ml-5" style="margin-left: 15px; display:inline-block">Visual Art - Photography</h2>
-        <a href="" style="color:darkblue; margin-left: 750px">See more&nbsp;<i class="fa-solid fa-angle-right"></i></a>
+        <a href="allComp.php?category=Photography" style="color:darkblue; margin-left: 750px">See more&nbsp;<i class="fa-solid fa-angle-right"></i></a>
     </div>
     
 

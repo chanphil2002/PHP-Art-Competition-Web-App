@@ -108,15 +108,15 @@
                 <label>Phone Number (xxx-xxxxxxx) *</label>
             </div>
             <div class="date">
-                <input name="dob" type="date" required>
+                <input name="dob" type="date" max="<?php echo date("Y-m-d"); ?>" required>
                 <span></span>
                 <label>Date of Birth *</label>
             </div>
             <div class="select">
                 <select name="gender" required>
                     <option value="">Gender *</option>
-                    <option value="m">Male</option>
-                    <option value="f">Female</option>
+                    <option value="M">Male</option>
+                    <option value="F">Female</option>
                 </select>
             </div>
             <br>            

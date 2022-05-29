@@ -4,7 +4,7 @@
 if (isset($_GET['compID'])) {
     $compID = $_GET['compID'];
     $sql = "SELECT comp_judge.compID, comp_judge.judgeIC, judge.judgeName, judge.judgeBio, judge.judgeProfilePic 
-            FROM comp_judge INNER JOIN Judge ON comp_judge.judgeIC = judge.judgeIC AND compID='$compID'";
+            FROM comp_judge INNER JOIN Judge ON comp_judge.judgeIC = judge.judgeIC and compID='$compID'";
     $res = mysqli_query($conn, $sql);
 } else {
     echo "mistake";
@@ -28,7 +28,7 @@ if (isset($_GET['compID'])) {
             <a class="nav-link" aria-current="page" href="viewcomp_main.php?compID=<?php echo $compID; ?>">Main</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="viewentries.php?compID=<?php echo $compID; ?>">View Entries</a>
+            <a class="nav-link" href="viewentries.php.php?entryID=1&<?php echo $compID ?>">View Entries</a>
         </li>
         <li class="nav-item">
             <a class="nav-link active" href="viewcomp_rubric.php?compID=<?php echo $compID; ?>">Scoring Rubric</a>
