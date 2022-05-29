@@ -31,10 +31,10 @@ if (isset($_GET['compID'])) {
             <a class="nav-link" href="viewentries.php?compID=<?php echo $compID; ?>">View Entries</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link active" href="viewcomprubric.php?compID=<?php echo $compID; ?>">Scoring Rubric</a>
+            <a class="nav-link active" href="viewcomp_rubric.php?compID=<?php echo $compID; ?>">Scoring Rubric</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="viewcompabout.php?compID=<?php echo $compID; ?>">About</a>
+            <a class="nav-link" href="viewcomp_about.php?compID=<?php echo $compID; ?>">About</a>
         </li>
     </ul>
 
