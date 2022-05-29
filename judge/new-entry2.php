@@ -55,11 +55,11 @@ if (isset($_POST['submit2'])) {
         </li>
     </ul>
     <main>
-        <div class=" index-section-6" style="box-sizing:border-box; margin-top: 6%; display: block; padding-top: 1rem!important; padding-bottom: 1rem!important">
+        <div class=" index-section-6" style="box-sizing:border-box; display: block; padding-top: 1rem!important; padding-bottom: 1rem!important">
             <div class="container">
                 <div class="row" style="box-sizing:border-box">
                     <div style="flex: 0 0 auto; width: 70%">
-                        <h3 class="center"><span class="text-color-3"><?php echo $compName ?>'s</span>
+                        <h3><span class="text-color-3"><?php echo $compName ?>'s</span>
                             Entries</h3>
                     </div>
 

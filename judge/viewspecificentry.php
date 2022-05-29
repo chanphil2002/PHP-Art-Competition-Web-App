@@ -58,7 +58,51 @@ while ($row = mysqli_fetch_assoc($res)) {
                     <div class="card-body">
                         <h5 class="card-title" style="color:black"><?php echo $title ?></h5>
                         <p class="card-text"><small class="text-muted">By <?php echo $userEmail ?></small></p>
-                        <a class="btn btn-outline-dark rounded-end mb-4" href="scoring-form.php?compID=<?php echo $compID ?>" role="button"> Scoring Form </a>
+                        --------------------------------------------------------------
+                        <h3 class="card-text">Scoring Form</small></h2>
+
+                            <form action=" " method="POST" class="d-flex">
+
+                                <div class="col-md-4 order-md-2 mb-4">
+
+                                    <div class="mb-3">
+                                        <label for="crit1">Criteria 1</label>
+                                        <input type="text" name="crit1" class="form-control" id="crit1" placeholder="" required>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="crit2">Criteria 2</label>
+                                        <div class="input-group">
+                                            <input type="text" name="crit2" class="form-control" id="crit2" placeholder="" required>
+                                        </div>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="crit3">Criteria 3</label>
+                                        <input type="text" name="crit3" class="form-control" id="crit3" placeholder="" required>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="crit4">Criteria 4</label>
+                                        <div class="input-group date" id="crit4">
+                                            <input type="text" name="crit4" id="crit4" class="form-control" placeholder="" />
+                                        </div>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="crit5">Criteria 5</label>
+                                        <div class="input-group date" id="crit5">
+                                            <input type="text" name="crit5" id="crit5" class="form-control" placeholder="" />
+                                        </div>
+                                    </div>
+
+
+                                    <hr class="mb-4">
+                                    <button class="btn btn-primary btn-lg btn-block mx-auto d-flex px-5" name="submit" type="submit">Save</button>
+                                </div>
+
+
+                            </form>
                     </div>
                 </div>
             </div>
