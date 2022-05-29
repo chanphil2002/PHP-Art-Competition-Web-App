@@ -115,8 +115,8 @@
             <div class="select">
                 <select name="gender" required>
                     <option value="">Gender *</option>
-                    <option value="m">Male</option>
-                    <option value="f">Female</option>
+                    <option value="M">Male</option>
+                    <option value="F">Female</option>
                 </select>
             </div>
             <br>            
