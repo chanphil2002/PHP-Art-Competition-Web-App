@@ -1,4 +1,4 @@
-<?php include("../organizer/partials/header.php"); ?>
+<?php include("../judge/partials/header.php"); ?>
 
 <?php
 if (isset($_GET['compID'])) {
@@ -17,7 +17,7 @@ if (isset($_GET['compID'])) {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="organizer.css" rel="stylesheet">
+    <link href="../organizer/organizer.css" rel="stylesheet">
     <title>Document</title>
 </head>
 
@@ -25,10 +25,10 @@ if (isset($_GET['compID'])) {
     <img src="../materials/image/test1.jpg" alt="Responsive image" height="300" style="background-size:cover">
     <ul class="nav nav-pills nav-fill p-2 bg-light">
         <li class="nav-item">
-            <a class="nav-link" aria-current="page" href="viewcomp_main.php?compID=<?php echo $compID; ?>">Main</a>
+            <a class="nav-link" aria-current="page" href="viewcompmain.php?compID=<?php echo $compID; ?>">Main</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="viewentries.php?compID=<?php echo $compID; ?>">View Entries</a>
+            <a class="nav-link" href="new-entry.php?compID=<?php echo $compID; ?>">View Entries</a>
         </li>
         <li class="nav-item">
             <a class="nav-link active" href="viewcomprubric.php?compID=<?php echo $compID; ?>">Scoring Rubric</a>

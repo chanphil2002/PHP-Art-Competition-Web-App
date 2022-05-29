@@ -5,3 +5,7 @@
 .text-color-3 {
     color: #0800F7;
 }
+
+.label select {
+    font-size: 100px;
+}

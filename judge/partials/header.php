@@ -20,13 +20,12 @@ session_start();
   <link href="https://fonts.googleapis.com/css2?family=Magra:wght@400;700&display=swap" rel="stylesheet">
   <!-- CSS Style -->
   <link rel="stylesheet" href="../judge/partials/header.css">
-
 </head>
 
 <body>
-  <nav class="navbar navbar-dark bg-secondary bg-gradient fixed-top px-5">
+  <nav class="navbar navbar-dark bg-secondary bg-gradient sticky-top px-5">
 
-    <a class="navbar-brand ml-5" href="    ">
+    <a class="navbar-brand ml-5" href="../judge/judge.php">
       <img src="../judge/partials/logo.png" alt="Virtual" width="200">
     </a>
     <form action="../judge/judge.php" method="POST" class="d-flex">
@@ -109,4 +108,3 @@ session_start();
   </div>
 </div>
  -->
-  >>>>>>> Stashed changes

@@ -24,9 +24,9 @@ session_start();
 </head>
 
 <body>
-  <nav class="navbar navbar-dark bg-secondary bg-gradient fixed-top px-5">
+  <nav class="navbar navbar-dark bg-secondary bg-gradient sticky-top px-5">
 
-    <a class="navbar-brand ml-5" href="    ">
+    <a class="navbar-brand ml-5" href="../judge/judge.php">
       <img src="../judge/partials/logo.png" alt="Virtual" width="200">
     </a>
     <form action="../judge/judge2.php" method="POST" class="d-flex">
@@ -109,4 +109,3 @@ session_start();
   </div>
 </div>
  -->
-  >>>>>>> Stashed changes

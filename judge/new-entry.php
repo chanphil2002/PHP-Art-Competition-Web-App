@@ -34,15 +34,31 @@ if (isset($_POST['submit2'])) {
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="new-entry.css">
+    <link rel="stylesheet" href="../organizer/organizer.css">
 </head>
 
 <body>
+    <img src="../materials/image/test1.jpg" alt="Responsive image" height="300" style="background-size:cover">
+    <ul class="nav nav-pills nav-fill p-2 bg-light">
+        <li class="nav-item">
+            <a class="nav-link" aria-current="page" href="viewcompmain.php?compID=<?php echo $compID; ?>">Main</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link active" href="new-entry.php?compID=<?php echo $compID; ?>">View Entries</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="viewcomprubric.php?compID=<?php echo $compID; ?>">Scoring Rubric</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="viewcompabout.php?compID=<?php echo $compID; ?>">About</a>
+        </li>
+    </ul>
     <main>
-        <div class=" index-section-6" style="box-sizing:border-box; margin-top: 6%; display: block; padding-top: 1rem!important; padding-bottom: 1rem!important">
+        <div class=" index-section-6" style="box-sizing:border-box; display: block; padding-top: 1rem!important; padding-bottom: 1rem!important">
             <div class="container">
                 <div class="row" style="box-sizing:border-box">
                     <div style="flex: 0 0 auto; width: 70%">
-                        <h3 class="center"><span class="text-color-3"><?php echo $compName ?>'s</span>
+                        <h3><span class="text-color-3"><?php echo $compName ?>'s</span>
                             Entries</h3>
                     </div>
 
@@ -84,7 +100,7 @@ if (isset($_POST['submit2'])) {
 
                             <div class="col-md-4 margincon1" style="margin-top: 2%">
                                 <div class=" card border-1 grid-list">
-                                    <a href="../organizer/viewspecific_entry.php?entryID=<?php echo $entryID; ?>&compID=<?php echo $compID; ?>" class="stretched-link">
+                                    <a href="viewspecificentry.php?entryID=<?php echo $entryID; ?>&compID=<?php echo $compID; ?>" class="stretched-link">
                                         <span class="badge rounded-pill text-bg-success position-absolute top-0 end-0"><?php echo $entryID; ?></span>
                                         <img class="card-img-top lazy" src="../materials/image/<?php echo $entryFile; ?>">
                                     </a>
