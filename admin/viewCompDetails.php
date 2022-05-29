@@ -35,6 +35,11 @@
 						$releaseDate = $compInfo['releaseDate'];
                         $regisDeadline = $compInfo['registrationDeadline'];
                         $evaluation = $compInfo['evaluationDays'];
+						$judgeScore = $compInfo['judgeScore'];
+						$publicVote = $compInfo['publicVote'];
+						$prizePool = $compInfo['prizePool'];
+						$compPic = $compInfo['compPic'];
+						$receipt = $compInfo['receipt'];
 
                         $sql2 = "SELECT organizerName FROM organizer WHERE organizerID = $organizerID";
                         $result2 = mysqli_query($conn, $sql2);
@@ -80,6 +85,10 @@
                 <div class="form-row">
 					<label for="regisDeadline">REGISTRATION DEADLINE</label>
 					<input type="date" name="regisDeadline" id="regisDeadline" class="input-text" value= "<?php echo $regisDeadline ?>" readonly>
+				</div>
+				<div class="form-row">
+					<label for="evaluation">Evaluation Day</label>
+					<input type="number" name="evaluation" id="evaluation" class="input-text" value= "<?php echo $evaluation ?>" readonly>
 				</div>
 				<!-- <div class="form-row">
 					<br><br><label for="profile_picture">PROFILE PICTURE *</label><br>
