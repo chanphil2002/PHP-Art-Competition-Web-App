@@ -46,7 +46,7 @@ if(isset($_GET['compID']))
         <div class="mb-3">
             <label for="category">Category</label>
             <select class="form-control" id="exampleFormControlSelect1" name="category">
-                <option value = "<?php echo $category;?>"></option>
+                <option value = "<?php echo $category;?>"><?php echo $category;?></option>
                 <option value = "2D">2D</option>
                 <option value = "3D">3D</option>
                 <option value = "Paintings">Paintings</option>
@@ -124,7 +124,7 @@ if(isset($_GET['compID']))
 
 
         <hr class="mb-4">
-        <button class="btn btn-primary btn-lg btn-block mx-auto d-flex px-5" name="submit" type="submit">Continue</button>
+        <button class="btn btn-primary btn-lg btn-block mx-auto d-flex px-5" name="submit" type="submit">Update Changes</button>
     </div>
 </div>
 
@@ -213,11 +213,8 @@ if(isset($_GET['compID']))
 
         if($res == true)
         {   
-
-            $_SESSION['compID'] = $compID;
-            echo $_SESSION['compID'];
             
-            header("location:" . SITEURL . "organizer/selectedjudge.php");
+            header("location:" . SITEURL . "organizer/orghome.php");
             
         }
 
