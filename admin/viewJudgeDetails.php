@@ -7,10 +7,15 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>View Judge Details</title>
+    <title>Judge Profile</title>
     <link rel="stylesheet" href="addJudge.css" />
 </head>
 <body class="form-v7">
+<div>
+    <strong>
+        <center><h2>Judge Profile</h2></center>
+    </strong>
+</div>
 <div class="page-content">
 		<div class="form-v7-content">
 			<form class="form-detail" action="#" method="post" id="myform" enctype="multipart/form-data">
@@ -26,11 +31,11 @@
                         $password = $judgeInfo['judgePassword'];
                         $bio = $judgeInfo['judgeBio'];
 						$img = $judgeInfo["judgeProfilePic"];
-						$imgPath = ("judgeProfile/$img");
+						$imgPath = ("../judge/judgeProfile/$img");
 
                 ?>
                 <center><div>
-                    <img src="judgeProfile/<?php echo $img?>" style="width: 10rem;"><br><br><br>
+                    <img src="../judge/judgeProfile/<?php echo $img?>" style="width: 10rem;"><br><br><br>
                 </div></center>
 				<div class="form-row">
 					<label for="ic">IDENTITY CARD NUMBER *</label>
@@ -57,7 +62,8 @@
 				</div>
                 <?php } ?>
 				<div>
-					<center><button type="submit" name="submit" class="btn btn-primary">Update</button></a></center>
+					<center><a href="viewJudge.php" class="btn btn-primary">Back</a>&nbsp;&nbsp;&nbsp;&nbsp;
+					<button type="submit" name="submit" class="btn btn-success">Update</button></a></center>
 				</div>
     
 			</form>
@@ -94,7 +100,7 @@
 			if($run_update == true){
 				echo "<script>alert('Profile updated successfully.')
 				location = 'viewJudge.php' </script>";
-				move_uploaded_file($tmp_name, "judgeProfile/$newProfilePic");
+				move_uploaded_file($tmp_name, "../judge/judgeProfile/$newProfilePic");
 
 			}else {
 				echo "<script>alert('Oops! Something went wrong, please try again.')</script>";

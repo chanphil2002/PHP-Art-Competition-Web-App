@@ -21,6 +21,7 @@ while ($row1 = mysqli_fetch_assoc($res1)) {
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="organizer.css">
+    <link rel="stylesheet" href="../judge/judge.css">
 </head>
 
 <body>

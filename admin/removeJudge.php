@@ -12,7 +12,7 @@
         $result = mysqli_query($conn, $sql);
         $judgeInfo = mysqli_fetch_assoc($result);
         $img = $judgeInfo["judgeProfilePic"];
-        $imgPath = ("judgeProfile/$img");
+        $imgPath = ("../judge/judgeProfile/$img");
         unlink($imgPath);
 
         $delete = "DELETE FROM judge WHERE judgeIC ='$removeIC'";
