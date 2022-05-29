@@ -75,8 +75,30 @@ $res = mysqli_query($conn, $sql);
         $category = $row['category'];
         $compPic = $row['compPic'];
         $status = $row['status'];
+        $registrationDeadline = $row['registrationDeadline'];
       ?>
-        <div class="col-md-4">
+        <div class="col-md-4 margincon1 mb-4">
+                <div class="card border-1 grid-list">
+                  <a href="../organizer/viewcomp_main.php" class="stretched-link">
+                    <span class="badge rounded-pill text-bg-success position-absolute top-0 end-0"><?php echo $status; ?></span>
+                    <img class="card-img-top lazy" src="../materials/image/<?php echo $compPic; ?>">
+                  </a>
+                  <div class="card-body description text-truncate text-color-2">
+                  <?php echo $registrationDeadline; ?> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Category: <?php echo $category; ?>
+                  <h3 class="card-text"><?php echo $compName; ?></h3>
+                  </div>
+                </div>
+              </div>
+      <?php endwhile; ?>
+    </div>
+  </div>
+</div>
+
+
+<?php include("../organizer/partials/footer.php"); ?>
+
+<!-- 
+<div class="col-md-4">
           <div class="card mb-4 shadow-sm me-5">
             <span class="badge rounded-pill text-bg-success position-absolute top-0 end-0"><?php echo $status; ?></span>
             <svg class="bd-placeholder-img card-img-top" width="100%" height="0" role="img" preserveAspectRatio="xMidYMid slice" focusable="false"><img src="../materials/image/<?php echo $compPic; ?>" alt="<?= $compID; ?>"></svg>
@@ -93,11 +115,4 @@ $res = mysqli_query($conn, $sql);
               </div>
             </div>
           </div>
-        </div>
-      <?php endwhile; ?>
-    </div>
-  </div>
-</div>
-
-
-<?php include("../organizer/partials/footer.php"); ?>
+        </div> -->

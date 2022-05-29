@@ -56,4 +56,35 @@ body{
 
 
 
+    .margincon1 {
+      margin-bottom: 0.5rem !important;
+      margin-top: 0.5rem !important;
+  }
+  
+  .border-1 {
+      border-width: 1px !important;
+  }
+  
+  .card {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+      word-wrap: break-word;
+      background-color: #fff;
+      background-clip: border-box;
+      border: 1px solid rgba(0, 0, 0, .125);
+      border-radius: 0.25rem;
+  }
+  
+  .card-img-top {
+      border-top-left-radius: calc(0.25rem - 1px);
+      border-top-right-radius: calc(0.25rem - 1px);
+      width: 100%;
+      object-fit: cover;
+      height: 15vw;
+  }
+
+
+
 
