@@ -21,7 +21,7 @@
 </head>
 
 <body>
-  <nav class="navbar navbar-dark bg-secondary bg-gradient fixed-top px-5">
+  <nav class="navbar navbar-dark bg-secondary bg-gradient sticky-top px-5">
 
     <a class="navbar-brand ml-5" href="homepage.php">
       <img src="../user/partials/logo.png" alt="Virtual" width="200">
@@ -56,5 +56,3 @@
       </ul>
     </nav>
   </nav>
-
-  <div class="mt-5 mb-5 pt-5"></div>

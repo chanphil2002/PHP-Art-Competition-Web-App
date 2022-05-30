@@ -3,7 +3,7 @@
 if (isset($_GET['compID'])) {
     $compID = $_GET['compID'];
     $sql = "SELECT * FROM entry WHERE compID=$compID";
-    $sql1 = "SELECT compName FROM competition WHERE compID=$compID";
+    $sql1 = "SELECT compName, compPic FROM competition WHERE compID=$compID";
     $res = mysqli_query($conn, $sql);
     $res1 = mysqli_query($conn, $sql1);
 } else {
@@ -12,6 +12,7 @@ if (isset($_GET['compID'])) {
 
 while ($row1 = mysqli_fetch_assoc($res1)) {
     $compName = $row1['compName'];
+    $compPic = $row1['compPic'];
 }
 
 ?>
@@ -24,7 +25,7 @@ while ($row1 = mysqli_fetch_assoc($res1)) {
 </head>
 
 <body>
-    <img class="img" src="../materials/image/nft_poster.jpg" alt="Responsive image" height="300" width="100%" style="object-fit: cover;">
+    <img class="img" src="../materials/image/<?php echo $compPic; ?>" alt="Responsive image" height="300" width="100%" style="object-fit: cover;">
     <ul class="nav nav-pills nav-fill p-2 bg-light">
         <li class="nav-item">
             <a class="nav-link" aria-current="page" href="viewcomp_main.php?compID=<?php echo $compID; ?>">Main</a>

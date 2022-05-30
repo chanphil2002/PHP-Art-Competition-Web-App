@@ -39,7 +39,7 @@ while ($row = mysqli_fetch_assoc($res)) {
 </head>
 
 <body>
-    <img class="img" src="../materials/image/nft_poster.jpg" alt="Responsive image" height="300" width="100%" style="object-fit: cover;">
+    <img class="img" src="../materials/image/<?php echo $compPic; ?>" alt="Responsive image" height="300" width="100%" style="object-fit: cover;">
     <ul class="nav nav-pills nav-fill p-2 bg-light">
         <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="viewcomp_main.php?compID=<?php echo $compID; ?>">Main</a>
@@ -63,14 +63,14 @@ while ($row = mysqli_fetch_assoc($res)) {
                     <h2 class="mr-2" style="display: inline-block"><?php echo $compName ?></h2>
                     <span class="ml-2 badge text-bg-success align-top even-larger-badge">Ongoing</span>
                 </div>
-                <h3 class="text-muted"><small class="text-muted">By <?php echo $organizerName ?></small>, <?php echo $category ?> Category</h3>
+                <h3 class="text-muted"><small class="text-muted">By <?php echo $organizerName ?>, <?php echo $category ?> Category</small></h3>
 
                 <div class=" row">
                     <div class="col-sm-4">
                         <div class="card" style="height: 14rem;">
                             <div class="card-body">
                                 <h3 class="card-title" style="color:black">Competition Date</h3>
-                                <h2><?php echo $releaseDate; ?> - <?php echo $registrationDeadline; ?></h2>
+                                <h3><?php echo $releaseDate; ?> - <?php echo $registrationDeadline; ?></h3>
                             </div>
                         </div>
                     </div>
@@ -78,8 +78,8 @@ while ($row = mysqli_fetch_assoc($res)) {
                         <div class="card" style="height: 14rem;">
                             <div class="card-body">
                                 <h3 class="card-title" style="color:black">Scoring Format</h3>
-                                <h2><u><?php echo $publicVote; ?> </u> Public Vote</h2>
-                                <h2><u><?php echo $judgeScore; ?></u> Judge</h2>
+                                <h3><u><?php echo $publicVote; ?> </u> Public Vote</h3>
+                                <h3><u><?php echo $judgeScore; ?></u> Judge</h3>
                             </div>
                         </div>
                     </div>
@@ -87,7 +87,7 @@ while ($row = mysqli_fetch_assoc($res)) {
                         <div class="card" style="height: 14rem;">
                             <div class="card-body">
                                 <h3 class="card-title" style="color:black">Total Prize Pool</h3>
-                                <h2><?php echo $prizePool; ?></h2>
+                                <h3><?php echo $prizePool; ?></h3>
                             </div>
                         </div>
                     </div>

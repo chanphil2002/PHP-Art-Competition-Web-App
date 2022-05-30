@@ -6,10 +6,6 @@
     color: #0800F7;
 }
 
-.badge.even-larger-badge {
-    font-size: 1.1em;
-}
-
 body {
     overflow: scroll;
 }
@@ -19,7 +15,7 @@ body {
 }
 
 .nav-link {
-    padding: 0.7em;
+    padding: 0.3em;
     font-size: large;
 }
 

@@ -213,8 +213,9 @@ if(isset($_GET['compID']))
 
         if($res == true)
         {   
-            
-            header("location:" . SITEURL . "organizer/orghome.php");
+            $_SESSION['compID'] = $compID;
+            echo $_SESSION['compID'];
+            header("location:" . SITEURL . "organizer/selectedjudge.php");
             
         }
 
