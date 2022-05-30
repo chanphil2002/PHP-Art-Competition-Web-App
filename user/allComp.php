@@ -9,10 +9,10 @@
 
     if (isset($_GET["category"])){
         $category = $_GET["category"];
-        $sql = "SELECT * FROM competition C INNER JOIN organizer O ON C.organizerID = O.organizerID WHERE category = '$category'";
+        $sql = "SELECT * FROM competition C INNER JOIN organizer O ON C.organizerID = O.organizerID WHERE category = '$category' AND status != 'Pending' ";
         $res = mysqli_query($conn, $sql);
     }else{
-        $sql = "SELECT * FROM competition C INNER JOIN organizer O ON C.organizerID = O.organizerID";
+        $sql = "SELECT * FROM competition C INNER JOIN organizer O ON C.organizerID = O.organizerID WHERE status != 'Pending' ";
         $res = mysqli_query($conn, $sql);
     }
 ?>

@@ -33,12 +33,15 @@
         $entry = $_FILES['entry']['name'];
 	    $tmp_name = $_FILES['entry']['tmp_name'];
         $date = date("Y-m-d");
+        $newEntryNum = $entryNum + 1;
 
         $sql3 = "INSERT INTO entry (entryFile, title, compId, userEmail, phoneNum, submitDate) VALUES ('$entry', '$title', '$comp', '$userEmail', '$phone', '$date')";
         $res3 = mysqli_query($conn, $sql3);
 
         if ($res3){
             move_uploaded_file($tmp_name, "../materials/image/$entry");
+            $sql4 = "UPDATE competition SET noOfEntries = $newEntryNum WHERE compID = '$comp' ";
+            $res4 = mysqli_query($conn, $sql4);
             echo "<script>
             alert ('Entry Submitted Successfully!')
             location = 'viewEntries.php?compID=$comp'

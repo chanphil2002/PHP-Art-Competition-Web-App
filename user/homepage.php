@@ -43,10 +43,12 @@ if (!isset($_SESSION["user"])) {
             // Popular Competition
             $sql1 = "SELECT * FROM competition WHERE status = 'On-Going' ORDER BY noOFEntries DESC LIMIT 1";
             $res1 = mysqli_query($conn, $sql1);
-            $compDetails = mysqli_fetch_assoc($res1);
-            $name = $compDetails["compName"];
-            $pic = $compDetails["compPic"];
-            $id = $compDetails["compID"];
+            
+            while ($compDetails = mysqli_fetch_assoc($res1)){
+                $name = $compDetails["compName"];
+                $pic = $compDetails["compPic"];
+                $id = $compDetails["compID"];
+            
             ?>
 
             <div class="carousel-item active" data-bs-interval="2000">
@@ -62,6 +64,8 @@ if (!isset($_SESSION["user"])) {
                     <a class="align btn btn-outline-primary" href="compDetails.php?compID=<?php echo $id; ?>" role="button">View Details</a>
                 </div>
             </div>
+
+            <?php } ?>
 
             <?php
             // Upcoming Competition
@@ -134,19 +138,24 @@ if (!isset($_SESSION["user"])) {
     <hr>
 
     <!-- Popular Competition -->
-    <h2 class="ml-5" style="margin-left: 15px;">Most Popular Competition</h2>
 
     <div class="container" style="max-width: 1320px">
         <div class="row">
             <?php
-            $sql4 = "SELECT * FROM competition WHERE status = 'On-Going' ORDER BY noOFEntries DESC LIMIT 3";
+            $sql4 = "SELECT * FROM competition WHERE status = 'On-Going' AND noOfEntries > 0 ORDER BY noOFEntries DESC LIMIT 3";
             $res4 = mysqli_query($conn, $sql4);
 
-            while ($compDetails = mysqli_fetch_assoc($res4)) {
-                $pic = $compDetails["compPic"];
-                $name = $compDetails["compName"];
-                $category = $compDetails["category"];
-                $id = $compDetails["compID"];
+            $row = mysqli_num_rows($res4);
+            if ($row != 0){
+            ?>
+                <h2 class="ml-5" style="margin-left: 15px;">Most Popular Competition</h2>
+            
+            <?php
+                while ($compDetails = mysqli_fetch_assoc($res4)) {
+                    $pic = $compDetails["compPic"];
+                    $name = $compDetails["compName"];
+                    $category = $compDetails["category"];
+                    $id = $compDetails["compID"];
             ?>
 
                 <div class="col-md-4 margincon1">
@@ -163,7 +172,7 @@ if (!isset($_SESSION["user"])) {
                     </div>
                 </div>
 
-            <?php } ?>
+            <?php }} ?>
         </div>
     </div>
     <br>
@@ -178,15 +187,20 @@ if (!isset($_SESSION["user"])) {
     <div class="container" style="max-width: 1320px">
         <div class="row">
             <?php
-            $sql4 = "SELECT * FROM competition C INNER JOIN organizer O ON C.organizerID = O.organizerID WHERE category = '2D' AND status != 'Pending' LIMIT 3";
-            $res4 = mysqli_query($conn, $sql4);
+            $sql5 = "SELECT * FROM competition C INNER JOIN organizer O ON C.organizerID = O.organizerID WHERE category = '2D' AND status != 'Pending' LIMIT 3";
+            $res5 = mysqli_query($conn, $sql5);
 
-            while ($compDetails = mysqli_fetch_assoc($res4)) {
-                $pic = $compDetails["compPic"];
-                $name = $compDetails["compName"];
-                $status = $compDetails["status"];
-                $orgName = $compDetails["organizerName"];
-                $id = $compDetails["compID"];
+            $row = mysqli_num_rows($res5);
+            if ($row == 0){
+                echo "<h3 class='text-primary'>Currently No Related Competition.</h3>";
+            }else{
+
+                while ($compDetails = mysqli_fetch_assoc($res5)) {
+                    $pic = $compDetails["compPic"];
+                    $name = $compDetails["compName"];
+                    $status = $compDetails["status"];
+                    $orgName = $compDetails["organizerName"];
+                    $id = $compDetails["compID"];
             ?>
 
                 <div class="col-md-4 margincon1">
@@ -208,7 +222,7 @@ if (!isset($_SESSION["user"])) {
                     </div>
                 </div>
 
-            <?php } ?>
+            <?php }} ?>
         </div>
     </div>
     <br>
@@ -223,15 +237,20 @@ if (!isset($_SESSION["user"])) {
     <div class="container" style="max-width: 1320px">
         <div class="row">
             <?php
-            $sql5 = "SELECT * FROM competition C INNER JOIN organizer O ON C.organizerID = O.organizerID WHERE category = '3D' AND status != 'Pending' LIMIT 3";
-            $res5 = mysqli_query($conn, $sql5);
+            $sql6 = "SELECT * FROM competition C INNER JOIN organizer O ON C.organizerID = O.organizerID WHERE category = '3D' AND status != 'Pending' LIMIT 3";
+            $res6 = mysqli_query($conn, $sql6);
 
-            while ($compDetails = mysqli_fetch_assoc($res5)) {
-                $pic = $compDetails["compPic"];
-                $name = $compDetails["compName"];
-                $status = $compDetails["status"];
-                $orgName = $compDetails["organizerName"];
-                $id = $compDetails["compID"];
+            $row = mysqli_num_rows($res6);
+            if ($row == 0){
+                echo "<h3 class='text-primary'>Currently No Related Competition.</h3>";
+            }else{
+
+                while ($compDetails = mysqli_fetch_assoc($res6)) {
+                    $pic = $compDetails["compPic"];
+                    $name = $compDetails["compName"];
+                    $status = $compDetails["status"];
+                    $orgName = $compDetails["organizerName"];
+                    $id = $compDetails["compID"];
             ?>
 
                 <div class="col-md-4 margincon1">
@@ -253,7 +272,7 @@ if (!isset($_SESSION["user"])) {
                     </div>
                 </div>
 
-            <?php } ?>
+            <?php }} ?>
         </div>
     </div>
     <br>
@@ -268,15 +287,20 @@ if (!isset($_SESSION["user"])) {
     <div class="container" style="max-width: 1320px">
         <div class="row">
             <?php
-            $sql6 = "SELECT * FROM competition C INNER JOIN organizer O ON C.organizerID = O.organizerID WHERE category = 'Paintings' AND status != 'Pending' LIMIT 3";
-            $res6 = mysqli_query($conn, $sql6);
+            $sql7 = "SELECT * FROM competition C INNER JOIN organizer O ON C.organizerID = O.organizerID WHERE category = 'Paintings' AND status != 'Pending' LIMIT 3";
+            $res7 = mysqli_query($conn, $sql7);
 
-            while ($compDetails = mysqli_fetch_assoc($res6)) {
-                $pic = $compDetails["compPic"];
-                $name = $compDetails["compName"];
-                $status = $compDetails["status"];
-                $orgName = $compDetails["organizerName"];
-                $id = $compDetails["compID"];
+            $row = mysqli_num_rows($res7);
+            if ($row == 0){
+                echo "<h3 class='text-primary'>Currently No Related Competition.</h3>";
+            }else{
+
+                while ($compDetails = mysqli_fetch_assoc($res7)) {
+                    $pic = $compDetails["compPic"];
+                    $name = $compDetails["compName"];
+                    $status = $compDetails["status"];
+                    $orgName = $compDetails["organizerName"];
+                    $id = $compDetails["compID"];
             ?>
 
                 <div class="col-md-4 margincon1">
@@ -298,7 +322,7 @@ if (!isset($_SESSION["user"])) {
                     </div>
                 </div>
 
-            <?php } ?>
+            <?php }} ?>
         </div>
     </div>
     <br>
@@ -313,15 +337,20 @@ if (!isset($_SESSION["user"])) {
     <div class="container" style="max-width: 1320px">
         <div class="row">
             <?php
-            $sql7 = "SELECT * FROM competition C INNER JOIN organizer O ON C.organizerID = O.organizerID WHERE category = 'Photography' AND status != 'Pending' LIMIT 3";
-            $res7 = mysqli_query($conn, $sql7);
+            $sql8 = "SELECT * FROM competition C INNER JOIN organizer O ON C.organizerID = O.organizerID WHERE category = 'Photography' AND status != 'Pending' LIMIT 3";
+            $res8 = mysqli_query($conn, $sql8);
 
-            while ($compDetails = mysqli_fetch_assoc($res7)) {
-                $pic = $compDetails["compPic"];
-                $name = $compDetails["compName"];
-                $status = $compDetails["status"];
-                $orgName = $compDetails["organizerName"];
-                $id = $compDetails["compID"];
+            $row = mysqli_num_rows($res8);
+            if ($row == 0){
+                echo "<h3 class='text-primary'>Currently No Related Competition.</h3>";
+            }else{
+
+                while ($compDetails = mysqli_fetch_assoc($res8)) {
+                    $pic = $compDetails["compPic"];
+                    $name = $compDetails["compName"];
+                    $status = $compDetails["status"];
+                    $orgName = $compDetails["organizerName"];
+                    $id = $compDetails["compID"];
             ?>
 
                 <div class="col-md-4 margincon1">
@@ -343,7 +372,7 @@ if (!isset($_SESSION["user"])) {
                     </div>
                 </div>
 
-            <?php } ?>
+            <?php }} ?>
         </div>
     </div>
     <br>

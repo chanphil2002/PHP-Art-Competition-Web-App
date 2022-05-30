@@ -116,14 +116,19 @@ while ($row = mysqli_fetch_assoc($res)) {
                 </div>
             </div>
             <div class="col-3">
-                <a href="joinComp.php?competition=<?php echo $compID; ?>" style="text-decoration: none"><h3>&#128101; Join</h3></a>
-                <!-- <h3>&#128147; Bookmark</h3> -->
+                <?php
+                    if ($status == "On-Going"){
+                ?>
+                        <a href="joinComp.php?competition=<?php echo $compID; ?>" style="text-decoration: none"><h3>&#128101; Join</h3></a>
+                <?php } ?>
+                
+                <h3>&#128147; Bookmark</h3>
                 <?php
                     if ($status == 'Past'){
                 ?>
                         <hr>
                         <h2><u>Winner</u></h2>
-                        <img src="../materials/image/download.jpg" alt="">
+                        <a href=""><img src="../materials/image/download.jpg" alt=""></a>
                 <?php } ?>                
             </div>
         </div>
