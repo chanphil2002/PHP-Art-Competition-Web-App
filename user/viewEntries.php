@@ -5,7 +5,7 @@
 if (isset($_GET['compID'])) {
     $compID = $_GET['compID'];
     $sql = "SELECT * FROM entry WHERE compID=$compID";
-    $sql1 = "SELECT compName FROM competition WHERE compID=$compID";
+    $sql1 = "SELECT * FROM competition WHERE compID=$compID";
     $res = mysqli_query($conn, $sql);
     $res1 = mysqli_query($conn, $sql1);
 } else {
@@ -14,6 +14,7 @@ if (isset($_GET['compID'])) {
 
 while ($row1 = mysqli_fetch_assoc($res1)) {
     $compName = $row1['compName'];
+    $status = $row1['status'];
 }
 
 ?>
@@ -74,11 +75,24 @@ while ($row1 = mysqli_fetch_assoc($res1)) {
                                 <div class=" card border-1 grid-list">
                                     <a href="entry.php?entryID=<?php echo $entryID; ?>&compID=<?php echo $compID; ?>" class="stretched-link">
                                         <span class="badge rounded-pill text-bg-success position-absolute top-0 end-0"><?php echo $entryID; ?></span>
-                                        <img class="card-img-top lazy" src="../materials/image/<?php echo $entryFile; ?>">
+                                        <img class="card-img-top lazy" src="../materials/entries/<?php echo $entryFile; ?>">
                                     </a>
                                     <div class="card-body description text-truncate text-color-2">
                                         <?php echo $submitDate ?> / <?php echo $userEmail; ?>
-                                        <div class="title text-truncate"><?php echo $title; ?></div>
+                                        <div class="title text-truncate">
+                                            <h3><?php echo $title; ?> </h3>
+                                            <?php if ($status == "On-Going"){ ?>
+                                                    <div class="text-success">Current Vote: <?php echo $vote; ?></div>
+                                            <?php }elseif ($status == "Past"){ ?>
+                                                    <div class="text-success">
+                                                        Vote: <?php echo $vote; ?><br>
+                                                        Judge's score: <?php echo $score; ?>/100
+                                                    </div>
+                                                    <div class="text-danger">
+                                                        Total Score: <?php echo $totalScore; ?>
+                                                    </div>
+                                            <?php } ?>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

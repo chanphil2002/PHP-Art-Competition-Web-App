@@ -29,9 +29,9 @@ if (isset($_POST['submit'])) {
 
 			if ($run_upload == true) {
 				echo "<script>alert('Application submitted!')</script>";
-				move_uploaded_file($tmp_name, "../admin/orgProfile/$profile_picture");
+				move_uploaded_file($tmp_name, "../materials/organizerPic/$profile_picture");
 				$tmp_name = $_FILES['verify_doc']['tmp_name'];
-				move_uploaded_file($tmp_name, "../admin/orgVerification/$verify_doc");
+				move_uploaded_file($tmp_name, "../materials/organizerDoc/$verify_doc");
 			} else {
 				echo "<script>alert('Oops. Something Went Wrong, Please Try Again.')</script>";
 			}

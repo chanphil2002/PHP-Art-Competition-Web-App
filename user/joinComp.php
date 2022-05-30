@@ -39,7 +39,7 @@
         $res3 = mysqli_query($conn, $sql3);
 
         if ($res3){
-            move_uploaded_file($tmp_name, "../materials/image/$entry");
+            move_uploaded_file($tmp_name, "../materials/entries/$entry");
             $sql4 = "UPDATE competition SET noOfEntries = $newEntryNum WHERE compID = '$comp' ";
             $res4 = mysqli_query($conn, $sql4);
             echo "<script>
@@ -57,49 +57,51 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<title>Organizer Account Application</title>
+	<title>Entry Submission Form</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 	<link rel="stylesheet" href="../admin/addJudge.css" />
 	<meta name="robots" content="noindex, follow">
 </head>
 
 <body class="form-v7">
-	<div class="page-content">
-		<div class="form-v7-content">
-			<form class="form-detail" action="#" method="post" id="myform" enctype="multipart/form-data">
-            <center><image src="../materials/image/<?php echo $compPic; ?>" style="width:120px;height:auto;" class="" alt="..."></center><br>
-				<div class="form-row">
-					<strong><h2 class="text-1"><?php echo $compName; ?></h2></strong>
-					<br><br><br><br><br>
 
-                    <label for="Email">EMAIL *</label>
-					<input type="email" name="email" id="email" class="input-text" value="<?php echo $userEmail; ?>" readonly required>
-				</div>
-				<div class="form-row">
-					<br><label for="username">USERNAME *</label>
-					<input type="text" name="username" id="username" class="input-text" value="<?php echo $username; ?>" readonly required>
-				</div>
-                <div class="form-row">
-					<br><label for="phone">PHONE NUMBER (xxx-xxxxxxx) *</label>
-					<input type="text" name="phone" id="phone" class="input-text" value="<?php echo $phone; ?>" required>
-				</div>
-                <div class="form-row">
-					<br><label for="entryName">ENTRY'S TITLE *</label>
-					<input type="text" name="entryName" id="entryName" class="input-text" required>
-				</div>
-				<div class="form-row">
-					<br><br><label for="entry">ENTRY FILE *</label><br>
-					<input type="file" name="entry" id="entry" accept="image/*" required>
-					<br>
-					<br>
-					<br>
-				</div>
-				<div>
-					<center><button type="submit" name="submit" class="btn btn-primary">Submit</button></a></center>
-				</div>
-			</form>
-		</div>
-	</div>
+	        <div class="page-content">
+		        <div class="form-v7-content">
+			        <form class="form-detail" action="#" method="post" id="myform" enctype="multipart/form-data">
+                    <center><image src="../materials/image/<?php echo $compPic; ?>" style="width:120px;height:auto;" class="" alt="..."></center><br>
+				        <div class="form-row">
+					        <strong><h2 class="text-1"><?php echo $compName; ?></h2></strong>
+					        <br><br><br><br><br>
+
+                            <label for="Email">EMAIL *</label>
+					        <input type="email" name="email" id="email" class="input-text" value="<?php echo $userEmail; ?>" readonly required>
+				        </div>
+				        <div class="form-row">
+					        <br><label for="username">USERNAME *</label>
+					        <input type="text" name="username" id="username" class="input-text" value="<?php echo $username; ?>" readonly required>
+				        </div>
+                        <div class="form-row">
+					        <br><label for="phone">PHONE NUMBER (xxx-xxxxxxx) *</label>
+					        <input type="text" name="phone" id="phone" class="input-text" value="<?php echo $phone; ?>" required>
+				        </div>
+                        <div class="form-row">
+					        <br><label for="entryName">ENTRY'S TITLE *</label>
+					        <input type="text" name="entryName" id="entryName" class="input-text" required>
+				        </div>
+				        <div class="form-row">
+					        <br><br><label for="entry">ENTRY FILE *</label><br>
+					        <input type="file" name="entry" id="entry" accept="image/*" required>
+					        <br>
+					        <br>
+					        <br>
+				        </div>
+				        <div>
+					        <center><button type="submit" name="submit" class="btn btn-primary">Submit</button></a></center>
+				        </div>
+			        </form>
+		        </div>
+	        </div>
+
 	<script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script>

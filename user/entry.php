@@ -1,6 +1,8 @@
 <?php 
     include("partials/header.php"); 
     include("partials/database.php");
+
+    session_start();
 ?>
 
 <?php
@@ -55,12 +57,34 @@ while ($row = mysqli_fetch_assoc($res)) {
         <div class="card mb-3">
             <div class="row g-0">
                 <div class="col-md-7">
-                    <img class="card-img-left" src="../materials/image/<?php echo $entryFile ?>" class="img-fluid rounded-start" alt="..." style="height:auto; width:540px">
+                    <img class="card-img-left" src="../materials/entries/<?php echo $entryFile ?>" class="img-fluid rounded-start" alt="..." style="height:auto; width:540px">
                 </div>
                 <div class="col-md-5">
                     <div class="card-body">
                         <h5 class="card-title" style="color:black"><?php echo $title ?></h5>
                         <p class="card-text"><small class="text-muted">By <?php echo $userEmail ?></small></p>
+                        <br>
+
+                        <?php
+                            $sql3 = "SELECT * FROM competition WHERE compID = '$compID' ";
+                            $res3 = mysqli_query($conn, $sql3);
+                            while ($compDetails = mysqli_fetch_assoc($res3)){
+                                $status = $compDetails["status"];
+                            }
+                            if ($status == "On-Going"){
+
+                                $sql2 = "SELECT * FROM votehistory WHERE userEmail = '$_SESSION[user]' AND entryID = '$entryID' ";
+                                $res2 = mysqli_query($conn, $sql2);
+
+                                if (mysqli_num_rows($res2) == 0){
+                        ?>
+                                    <a href="vote.php?entryID=<?php echo $entryID; ?>&compID=<?php echo $compID;?>" style="text-decoration: none">
+                                    <h3>&#128147; Vote for It </h3></a>
+
+                        <?php   }else{ ?>
+                                    <h3>&#128147; Voted </h3>
+                        <?php }} ?>
+
                     </div>
                 </div>
             </div>
