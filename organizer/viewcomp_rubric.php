@@ -5,6 +5,8 @@ if (isset($_GET['compID'])) {
     $compID = $_GET['compID'];
     $sql = "SELECT comp_judge.compID, comp_judge.judgeIC, judge.judgeName, judge.judgeBio, judge.judgeProfilePic 
             FROM comp_judge INNER JOIN Judge ON comp_judge.judgeIC = judge.judgeIC AND compID='$compID'";
+    $sql2 = "SELECT * from comp_criteria WHERE compID = '$compID'";
+    $res2 = mysqli_query($conn, $sql2);
     $res = mysqli_query($conn, $sql);
 } else {
     echo "mistake";
@@ -22,7 +24,7 @@ if (isset($_GET['compID'])) {
 </head>
 
 <body>
-    <img src="../materials/image/test1.jpg" alt="Responsive image" height="300" style="background-size:cover">
+    <img class="img" src="../materials/image/nft_poster.jpg" alt="Responsive image" height="300" width="100%" style="object-fit: cover;">
     <ul class="nav nav-pills nav-fill p-2 bg-light">
         <li class="nav-item">
             <a class="nav-link" aria-current="page" href="viewcomp_main.php?compID=<?php echo $compID; ?>">Main</a>
@@ -46,50 +48,57 @@ if (isset($_GET['compID'])) {
 
             <div class="container my-5 d-flex justify-content-center">
 
-                <?php while ($row = mysqli_fetch_assoc($res)) :
-                    $compID = $row['compID'];
-                    $judgeName = $row['judgeName'];
-                    $judgeBio = $row['judgeBio'];
-                    $judgeProfilePic = $row['judgeProfilePic'];
+                <?php
+                $count = mysqli_num_rows($res);
+                if ($count > 0) {
+                    while ($row = mysqli_fetch_assoc($res)) {
+                        $compID = $row['compID'];
+                        $judgeName = $row['judgeName'];
+                        $judgeBio = $row['judgeBio'];
+                        $judgeProfilePic = $row['judgeProfilePic'];
                 ?>
 
-                    <div class="card p-3 me-5 col-md-6">
+                        <div class="card p-3 me-5 col-md-6">
 
-                        <div class="d-flex align-items-center">
+                            <div class="d-flex align-items-center">
 
-                            <div class="image">
-                                <img src="../materials/judgeProfilePic/<?php echo $judgeProfilePic; ?>" class="rounded" width="155">
-                            </div>
-
-                            <div class="ms-3 w-100">
-
-                                <h3 class="mb-0 mt-0"><?php echo $judgeName; ?></h3>
-
-                                <div class="p-2 mt-2 bg-secondary bg-info bg-opacity-25 d-flex justify-content-between rounded text-white stats">
-
-                                    <div class="d-flex flex-column text-dark">
-                                        <span class="articles">Bio: </span>
-                                        <span class="number1"><?php echo $judgeBio; ?></span>
-
-                                    </div>
-
-
+                                <div class="image">
+                                    <img src="../materials/<?php echo $judgeProfilePic; ?>" width="155">
                                 </div>
 
-                            </div>
-                        </div>
+                                <div class="ms-3 w-100">
 
-                    </div>
-                <?php endwhile; ?>
+                                    <h3 class="mb-0 mt-0"><?php echo $judgeName; ?></h3>
+
+                                    <div class="p-2 mt-2 bg-secondary bg-info bg-opacity-25 d-flex justify-content-between rounded text-white stats">
+
+                                        <div class="d-flex flex-column text-dark">
+                                            <span class="articles">Bio: </span>
+                                            <span class="number1"><?php echo $judgeBio; ?></span>
+
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                <?php }
+                } else {
+                    echo "<h2 class='text-danger'>No Result Found!</h2>";
+                } ?>
 
             </div>
         </div>
-        <h1>Scoring Criteria</h1>
-        <h1>Performance</h1>
-        <h1>Creativity</h1>
-        <h1>Skills and Techniques</h1>
-    </div>
+        <h2>Criterias:</h2>
+        <?php while ($row2 = mysqli_fetch_assoc($res2)) :
+            $criteria = $row2['criteria'];
+            $description = $row2['description'];
+        ?>
 
+            <h3><strong><?php echo $criteria ?></strong> - <?php echo $description ?></h3>
+        <?php endwhile; ?>
+    </div>
 </body>
 
 </html>

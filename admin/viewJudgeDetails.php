@@ -35,7 +35,7 @@
 
                 ?>
                 <center><div>
-                    <img src="../judge/judgeProfile/<?php echo $img?>" style="width: 10rem;"><br><br><br>
+                    <img src="../admin/judgeProfile/<?php echo $img?>" style="width: 10rem;"><br><br><br>
                 </div></center>
 				<div class="form-row">
 					<label for="ic">IDENTITY CARD NUMBER *</label>

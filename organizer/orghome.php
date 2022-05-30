@@ -78,17 +78,17 @@ $res = mysqli_query($conn, $sql);
         $registrationDeadline = $row['registrationDeadline'];
       ?>
         <div class="col-md-4 margincon1 mb-4">
-                <div class="card border-1 grid-list">
-                  <a href="../organizer/viewcomp_main.php" class="stretched-link">
-                    <span class="badge rounded-pill text-bg-success position-absolute top-0 end-0"><?php echo $status; ?></span>
-                    <img class="card-img-top lazy" src="../materials/image/<?php echo $compPic; ?>">
-                  </a>
-                  <div class="card-body description text-truncate text-color-2">
-                  <?php echo $registrationDeadline; ?> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Category: <?php echo $category; ?>
-                  <h3 class="card-text"><?php echo $compName; ?></h3>
-                  </div>
-                </div>
-              </div>
+          <div class="card border-1 grid-list">
+            <a href="../organizer/viewcomp_main.php?compID= <?php echo $compID; ?>" class="stretched-link">
+              <span class="badge rounded-pill text-bg-success position-absolute top-0 end-0"><?php echo $status; ?></span>
+              <img class="card-img-top lazy" src="../materials/image/<?php echo $compPic; ?>">
+            </a>
+            <div class="card-body description text-truncate text-color-2">
+              <?php echo $registrationDeadline; ?> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Category: <?php echo $category; ?>
+              <h3 class="card-text"><?php echo $compName; ?></h3>
+            </div>
+          </div>
+        </div>
       <?php endwhile; ?>
     </div>
   </div>

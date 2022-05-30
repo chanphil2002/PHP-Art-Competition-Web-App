@@ -20,7 +20,7 @@ if (isset($_POST['search'])) {
 
 <body>
   <div class="container mt-5">
-    <div class="row" style="margin-top: 10%">
+    <div class="row" style="margin-top: 2%">
       <div class="col-12 col-competition-1">
         <h3 class="text-color-2">Search Result Displayed Based on
           <span class="text-color-3">

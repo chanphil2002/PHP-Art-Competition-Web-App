@@ -57,6 +57,9 @@
 							$statusDisplay = "Rejected";
 						}
                 ?>
+				<center><div>
+                    <img src="../materials/image/<?php echo $compPic ?>" style="width: 10rem;"><br><br><br>
+                </div></center>
 				<div class="form-row">
 					<span class="<?php echo $badge?>"><?php echo $statusDisplay?></span>
 					<label for="name">COMPETITION NAME</label>
@@ -87,16 +90,27 @@
 					<input type="date" name="regisDeadline" id="regisDeadline" class="input-text" value= "<?php echo $regisDeadline ?>" readonly>
 				</div>
 				<div class="form-row">
-					<label for="evaluation">Evaluation Day</label>
+					<label for="evaluation">EVALUATION DAY</label>
 					<input type="number" name="evaluation" id="evaluation" class="input-text" value= "<?php echo $evaluation ?>" readonly>
 				</div>
-				<!-- <div class="form-row">
-					<br><br><label for="profile_picture">PROFILE PICTURE *</label><br>
-					<input type="file" name="profile_picture" id="profile_picture" accept="image/*">
-					<br>
-					<br>
-					<br>
-				</div> -->
+				<div class="form-row">
+					<label for="judgeScore">JUDGE SCORE (%)</label>
+					<input type="number" name="judgeScore" id="judgeScore" class="input-text" value= "<?php echo $judgeScore ?>" readonly>
+				</div>
+				<div class="form-row">
+					<label for="vote">PUBLIC VOTE (%)</label>
+					<input type="number" name="vote" id="vote" class="input-text" value= "<?php echo $publicVote ?>" readonly>
+				</div>
+				<div class="form-row">
+					<br><label for="prize" class="form-label">PRIZE POOL</label>
+					<textarea class="form-control" name="prize" id="prize" rows="30" readonly><?php echo $prizePool ?></textarea><br><br>
+				</div>
+				<!-- <br><p>PAYMENT RECEIPT</p>
+				<center>
+        			<iframe src="../organizer/receipt/<?php echo $receipt ?>" 
+                	width="600" height="500">
+        			</iframe><br><br><br><br>
+    			</center> -->
                 <?php } ?>
 				<?php
 					if($status == "Pending"){
