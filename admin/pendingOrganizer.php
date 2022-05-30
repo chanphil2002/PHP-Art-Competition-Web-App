@@ -47,7 +47,7 @@
                 <?php
                     $count = 1;
                     $sum = 0;
-                    $sql = "SELECT * FROM organizer WHERE organizerStatus = 'Pending'";
+                    $sql = "SELECT * FROM organizer WHERE organizerStatus = 'pending'";
                     $result = mysqli_query($conn, $sql); 
                     while($row_organizer = mysqli_fetch_assoc($result)){
                         $id = $row_organizer['organizerID'];

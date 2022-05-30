@@ -31,16 +31,16 @@
 						$email = $organizerInfo['organizerEmail'];
                         $desc = $organizerInfo['organizerDesc'];
 						$profilePic = $organizerInfo['organizerProfilePic'];
-						$picPath = ("../organizer/organizerProfilePic/$profilePic");
+						$picPath = ("../materials/organizerPic/$profilePic");
 						$doc = $organizerInfo['organizerVerifiedDoc'];
-						$docPath = ("../organizer/verifiedDoc/$doc");
+						$docPath = ("../materials/organizerDoc/$doc");
 						$status = $organizerInfo['organizerStatus'];
 
-						if ($status == 'Approved'){
+						if ($status == 'approved'){
 							$badge = "badge text-bg-success position-absolute top-0 end-0 larger-badge";
 							$statusDisplay = "Approved";
 							$edit = "required";
-						}else if($status == 'Pending') {
+						}else if($status == 'pending') {
 							$badge = "badge text-bg-warning position-absolute top-0 end-0";
 							$statusDisplay = "Pending";
 							$edit = "readonly";
@@ -49,19 +49,9 @@
 							$statusDisplay = "Rejected";
 							$edit ="readonly";
 						}
-
-						$sql2 = "SELECT * FROM comp_judge WHERE compID = '$organizerID'";
-						$result2 = mysqli_query($conn, $sql2);
-                        $compJudge = mysqli_fetch_assoc($result2);
-						$judgeAssigned = $compJudge['judgeIC'];
-
-						$sql3 = "SELECT * FROM judge WHERE judgeIC = '$judgeAssigned' AND status = 'Pending'";
-						$result3 = mysqli_query($conn, $sql3);
-                        $judgeInfo = mysqli_fetch_assoc($result3);
-						$judgeName = $judgeInfo['judgeName'];
                 ?>
 				<center><div>
-                    <img src="../organizer/organizerProfilePic/<?php echo $profilePic?>" style="width: 10rem;"><br><br><br>
+                    <img src="../materials/organizerPic/<?php echo $profilePic?>" style="width: 10rem;"><br><br><br>
                 </div></center>
 				<div class="form-row">
 					<span class="<?php echo $badge?>"><?php echo $statusDisplay?></span>
@@ -82,13 +72,13 @@
 				</div>
 				<br><p>ORGANIZER VERIFIED DOCUMENT</p>
 				<center>
-        			<iframe src="../organizer/verifiedDoc/<?php echo $doc?>" 
+        			<iframe src="../materials/organizerDoc/<?php echo $doc?>" 
                 	width="600" height="500">
         			</iframe><br><br><br><br>
     			</center>
                 <?php } ?>
 				<?php
-					if($status == "Pending"){
+					if($status == "pending"){
 				?>
 				<div>
 					<center>
@@ -97,15 +87,15 @@
 						<button type="submit" name="approve" class="btn btn-success">Approve</button>
 					</center>
 				</div>
-				<?php }else if($status == "Approved"){
+				<?php }else if($status == "approved"){
 				?>
 				<div class="form-row">
 					<br><br><label for="profile_picture">NEW PROFILE PICTURE *</label><br>
-					<input type="file" name="profile_picture" id="profile_picture" accept="image/*">
+					<input type="file" name="profile_picture" id="profile_picture" accept="image/*" multiple>
 				</div>
 				<div class="form-row">
 					<br><br><label for="verifiedDoc">NEW VERIFIED DOCUMENT *</label><br>
-					<input type="file" name="verifiedDoc" id="verifiedDoc" accept="application/pdf">
+					<input type="file" name="verifiedDoc" id="verifiedDoc" accept="application/pdf" multiple>
 					<br>
 					<br>
 					<br>
@@ -132,7 +122,7 @@
 <?php 
 	if (isset($_POST["approve"])){
 
-		$update = "UPDATE organizer SET organizerStatus = 'Approved' WHERE organizerID = '$organizerID'";
+		$update = "UPDATE organizer SET organizerStatus = 'approved' WHERE organizerID = '$organizerID'";
 		$run_update = mysqli_query($conn, $update);
 
 		if($run_update == true){
@@ -143,7 +133,7 @@
 			echo "<script>alert('Oops! Something went wrong, please try again.')</script>";
 		}
 	} else if (isset($_POST["reject"])){
-		$update = "UPDATE organizer SET organizerStatus = 'Rejected' WHERE organizerID = '$organizerID'";
+		$update = "UPDATE organizer SET organizerStatus = 'rejected' WHERE organizerID = '$organizerID'";
 		$run_update = mysqli_query($conn, $update);
 
 		if($run_update == true){
@@ -179,7 +169,7 @@
 			if($run_update == true){
 				echo "<script>alert('Profile updated successfully.')
 				location = 'approvedOrganizer.php' </script>";
-				move_uploaded_file($tmp_name, "../organizer/OrganizerProfilePic/$newProfilePic");
+				move_uploaded_file($tmp_name, "../materials/organizerPic/$newProfilePic");
 
 			}else {
 				echo "<script>alert('Oops! Something went wrong, please try again.')</script>";
@@ -195,7 +185,7 @@
 			if($run_update == true){
 				echo "<script>alert('Profile updated successfully.')
 				location = 'approvedOrganizer.php' </script>";
-				move_uploaded_file($tmp_name, "../organizer/verifiedDoc/$newDoc");
+				move_uploaded_file($tmp_name, "../materials/organizerDoc/$newDoc");
 
 			}else {
 				echo "<script>alert('Oops! Something went wrong, please try again.')</script>";
@@ -204,23 +194,30 @@
 			$newProfilePic = $_FILES['profile_picture']['name'];
 			$tmp_name = $_FILES['profile_picture']['tmp_name'];
 
-			
-			$newDoc = $_FILES['verifiedDoc']['name'];
-			$tmp_name = $_FILES['verifiedDoc']['tmp_name'];
-
-			$update = "UPDATE organizer SET organizerEmail = '$newEmail', organizerName = '$newName', organizerDesc = '$newDesc', organizerProfilePic = '$newProfilePic', organizerVerifiedDoc = '$newDoc' WHERE organizerID = '$organizerID'";
+			$update = "UPDATE organizer SET organizerEmail = '$newEmail', organizerName = '$newName', organizerDesc = '$newDesc', organizerProfilePic = '$newProfilePic' WHERE organizerID = '$organizerID'";
 			$run_update = mysqli_query($conn, $update);
 
 			if($run_update == true){
-				echo "<script>alert('Profile updated successfully.')
-				 </script>";
 				unlink($picPath);
-				move_uploaded_file($tmp_name, "../organizer/organizerProfilePic/$newProfilePic");
-				unlink($docPath);
-				move_uploaded_file($tmp_name, "../organizer/verifiedDoc/$newDoc");
+				move_uploaded_file($tmp_name, "../materials/organizerPic/$newProfilePic");
+			}
 
-			}else {
-				echo "<script>alert('Oops! Something went wrong, please try again.')</script>";
+			if($_FILES['profile_picture']['name'] != ""){
+				$newDoc = $_FILES['verifiedDoc']['name'];
+				$tmp_name = $_FILES['verifiedDoc']['tmp_name'];
+
+				$update2 = "UPDATE organizer SET organizerVerifiedDoc = '$newDoc' WHERE organizerID = '$organizerID'";
+				$run_update2 = mysqli_query($conn, $update2);
+
+				if($run_update == true){
+					unlink($docPath);
+					move_uploaded_file($tmp_name, "../materials/organizerDoc/$newDoc");
+					echo "<script>alert('Profile updated successfully.')
+					location = 'approvedOrganizer.php'
+					</script>";
+				}else {
+					echo "<script>alert('Oops! Something went wrong, please try again.')</script>";
+				}
 			}
 		}
 	}

@@ -20,7 +20,7 @@
             unset($_SESSION["user"]);
             unset($_SESSION["organizer"]);
             unset($_SESSION["judge"]);
-            header("Location:../admin/test.php");
+            header("Location:../admin/pendingComp.php");
             
         }elseif (mysqli_num_rows($result2) == 1){
             $accDetails = mysqli_fetch_assoc($result2);

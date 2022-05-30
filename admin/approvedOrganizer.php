@@ -67,6 +67,9 @@
                     <td data-label="status"><?php echo $status?></td>
                     <td data-label="Action">
                         <a href="viewOrganizerDetails.php?selectedOrganizer= <?php echo $id?>"><i class="fa-solid fa-eye"></i></a>
+                        &nbsp;&nbsp;&nbsp;
+                        <a href="approvedOrganizer.php?removeID=<?php echo $id?>"><i class='fas fa-trash-alt' style='color:red'></i></a>
+                    </td>
                     </td>
                 </tr>
                 <?php } ?>
@@ -76,3 +79,20 @@
 </body>
 </html>
 <?php include ("../admin/partials/footer.php")?>
+<?php
+    if(isset($_GET["removeID"])){
+        $removeID = $_GET['removeID'];
+
+        $delete = "DELETE FROM organizer WHERE organizerID = '$removeID'";
+        $run_delete = mysqli_query($conn,$delete);
+        if($run_delete == true) {
+            echo "<script>alert('The organizer has been removed successfully!')
+            location = 'approvedOrganizer.php'</script>";
+
+        }else {
+            echo "<script>alert('Failed, Please Try Again.')
+            location = 'approvedOrganizer.php'</script>";
+    }
+
+    }
+?>
