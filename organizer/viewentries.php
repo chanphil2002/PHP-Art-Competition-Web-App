@@ -72,7 +72,7 @@ while ($row1 = mysqli_fetch_assoc($res1)) {
                                 <div class=" card border-1 grid-list">
                                     <a href="../organizer/viewspecific_entry.php?entryID=<?php echo $entryID; ?>&compID=<?php echo $compID; ?>" class="stretched-link">
                                         <span class="badge rounded-pill text-bg-success position-absolute top-0 end-0"><?php echo $entryID; ?></span>
-                                        <img class="card-img-top lazy" src="../materials/image/<?php echo $entryFile; ?>">
+                                        <img class="card-img-top lazy" src="../materials/entries/<?php echo $entryFile; ?>">
                                     </a>
                                     <div class="card-body description text-truncate text-color-2">
                                         <?php echo $submitDate ?> / <?php echo $userEmail; ?>

@@ -52,7 +52,7 @@ while ($row = mysqli_fetch_assoc($res)) {
         <div class="card mb-3">
             <div class="row g-0">
                 <div class="col-md-7">
-                    <img class="card-img-left" src="../materials/image/<?php echo $entryFile ?>" class="img-fluid rounded-start" alt="...">
+                    <img class="card-img-left" src="../materials/entries/<?php echo $entryFile ?>" class="img-fluid rounded-start" alt="...">
                 </div>
                 <div class="col-md-5">
                     <div class="card-body">
