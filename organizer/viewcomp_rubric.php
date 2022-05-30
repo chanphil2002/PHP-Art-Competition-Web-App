@@ -69,7 +69,7 @@ while ($row = mysqli_fetch_assoc($res3)) {
                             <div class="d-flex align-items-center">
 
                                 <div class="image">
-                                    <img src="../materials/<?php echo $judgeProfilePic; ?>" width="155">
+                                    <img src="../admin/judgeProfile/<?php echo $judgeProfilePic; ?>" width="155">
                                 </div>
 
                                 <div class="ms-3 w-100">
