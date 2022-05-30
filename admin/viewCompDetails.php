@@ -58,7 +58,7 @@
 						}
                 ?>
 				<center><div>
-                    <img src="../organizer/compPic/<?php echo $compPic?>" style="width: 10rem;"><br><br><br>
+                    <img src="../materials/image/<?php echo $compPic ?>" style="width: 10rem;"><br><br><br>
                 </div></center>
 				<div class="form-row">
 					<span class="<?php echo $badge?>"><?php echo $statusDisplay?></span>
@@ -103,14 +103,14 @@
 				</div>
 				<div class="form-row">
 					<br><label for="prize" class="form-label">PRIZE POOL</label>
-					<textarea class="form-control" name="prize" id="prize" rows="30" readonly><?php echo $prizePool ?></textarea>
+					<textarea class="form-control" name="prize" id="prize" rows="30" readonly><?php echo $prizePool ?></textarea><br><br>
 				</div>
-				<br><p>ORGANIZER VERIFIED DOCUMENT</p>
+				<!-- <br><p>PAYMENT RECEIPT</p>
 				<center>
-        			<iframe src="../organizer/receipt/<?php echo $receipt?>" 
+        			<iframe src="../organizer/receipt/<?php echo $receipt ?>" 
                 	width="600" height="500">
         			</iframe><br><br><br><br>
-    			</center>
+    			</center> -->
                 <?php } ?>
 				<?php
 					if($status == "Pending"){

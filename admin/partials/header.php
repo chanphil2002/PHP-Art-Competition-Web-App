@@ -29,19 +29,15 @@
     </form>
     <nav class="navbar navbar-expand-xl">
       <ul class="navbar-nav">
-        
-        <li class="nav-item">
-          <a class="btn btn-info" href="     " role="button"><i class="fa-solid fa-trophy"></i>&nbsp; My Competition</a>&nbsp;&nbsp;&nbsp;
-        </li>
-
         <li class="nav-item">
           
             <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
-              <i class="fas fa-user-circle"></i>&nbsp; My Account
+              <i class="fas fa-user-circle"></i>&nbsp; Action
             </button>
             <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton2">
-              <li><a class="dropdown-item" href="#">My Profile</a></li>
-              <li><a class="dropdown-item" href="#">Favourite</a></li>
+              <li><a class="dropdown-item" href="../admin/pendingOrganizer.php">Manage Organizer</a></li>
+              <li><a class="dropdown-item" href="../admin/pendingComp.php">Manage Competition</a></li>
+              <li><a class="dropdown-item" href="../admin/viewJudge.php">Manage Judge</a></li>
               <li><hr class="dropdown-divider"></li>
               <li><a class="dropdown-item text-danger" href="#">Log Out</a></li>
             </ul>
