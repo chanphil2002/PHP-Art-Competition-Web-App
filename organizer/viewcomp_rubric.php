@@ -6,10 +6,16 @@ if (isset($_GET['compID'])) {
     $sql = "SELECT comp_judge.compID, comp_judge.judgeIC, judge.judgeName, judge.judgeBio, judge.judgeProfilePic 
             FROM comp_judge INNER JOIN Judge ON comp_judge.judgeIC = judge.judgeIC AND compID='$compID'";
     $sql2 = "SELECT * from comp_criteria WHERE compID = '$compID'";
-    $res2 = mysqli_query($conn, $sql2);
+    $sql3 = "SELECT * from competition WHERE compID = '$compID'";
     $res = mysqli_query($conn, $sql);
+    $res2 = mysqli_query($conn, $sql2);
+    $res3 = mysqli_query($conn, $sql3);
 } else {
     echo "mistake";
+}
+while ($row = mysqli_fetch_assoc($res3)) {
+    $compID = $row['compID'];
+    $compPic = $row['compPic'];
 }
 ?>
 <!DOCTYPE html>
@@ -24,7 +30,7 @@ if (isset($_GET['compID'])) {
 </head>
 
 <body>
-    <img class="img" src="../materials/image/nft_poster.jpg" alt="Responsive image" height="300" width="100%" style="object-fit: cover;">
+    <img class="img" src="../materials/image/<?php echo $compPic; ?>" alt="Responsive image" height="300" width="100%" style="object-fit: cover;">
     <ul class="nav nav-pills nav-fill p-2 bg-light">
         <li class="nav-item">
             <a class="nav-link" aria-current="page" href="viewcomp_main.php?compID=<?php echo $compID; ?>">Main</a>

@@ -1,4 +1,4 @@
-<?php include ("../admin/partials/header.php");
+<?php include("../admin/partials/header.php");
 // include ("partials/database.php");
 
 session_start();
@@ -15,7 +15,7 @@ if (isset($_POST['submit'])) {
 
 
 	// double confirm password entered
-	if ($confirm_pass == $password){
+	if ($confirm_pass == $password) {
 		// check whether the user account already exists
 		$sql = "SELECT * FROM judge WHERE judgeIC ='$ic'";
 		$result = mysqli_query($conn, $sql);
@@ -27,12 +27,7 @@ if (isset($_POST['submit'])) {
 
 			if ($run_upload == true) {
 				echo "<script>alert('Account Successfully Created!')</script>";
-<<<<<<< Updated upstream
-				move_uploaded_file($tmp_name, "judgeProfile/$profile_picture");
-				header("location:http://localhost/Virtual-X/organizer/selectedjudge.php");
-=======
 				move_uploaded_file($tmp_name, "../judge/judgeProfile/$profile_picture");
->>>>>>> Stashed changes
 			} else {
 				echo "<script>alert('Oops. Something Went Wrong, Please Try Again.')</script>";
 			}
@@ -47,6 +42,7 @@ if (isset($_POST['submit'])) {
 
 <!DOCTYPE html>
 <html>
+
 <head>
 	<meta charset="utf-8">
 	<title>Judge Registration Page</title>
@@ -56,7 +52,7 @@ if (isset($_POST['submit'])) {
 </head>
 
 <body class="form-v7">
-<a class="btn btn-outline-success ms-5 rounded-end rounded-5" href="../organizer/selectedjudge.php" role="button">&laquo; Back to Judges Allocation page </a>
+	<a class="btn btn-outline-success ms-5 rounded-end rounded-5" href="../organizer/selectedjudge.php" role="button">&laquo; Back to Judges Allocation page </a>
 	<div class="page-content">
 		<div class="form-v7-content">
 			<form class="form-detail" action="#" method="post" id="myform" enctype="multipart/form-data">
@@ -65,13 +61,13 @@ if (isset($_POST['submit'])) {
 						<h2 class="text-1">Judge Registration Page</h2>
 					</strong>
 					<br><br><br><br><br><label for="ic">IDENTITY CARD NUMBER *</label>
-					<input type="text" name="ic" placeholder="xxxxxx-xx-xxxx"  pattern="[0-9]{6}-[0-9]{2}-[0-9]{4}" id="ic" class="input-text" required>
+					<input type="text" name="ic" placeholder="xxxxxx-xx-xxxx" pattern="[0-9]{6}-[0-9]{2}-[0-9]{4}" id="ic" class="input-text" required>
 				</div>
 				<div class="form-row">
 					<br><label for="name">NAME *</label>
 					<input type="text" name="name" id="name" class="input-text" required>
 				</div>
-                <div class="form-row">
+				<div class="form-row">
 					<br><label for="email">EMAIL *</label>
 					<input type="email" name="email" placeholder="abc@gmail.com" id="email" class="input-text" required>
 				</div>
@@ -104,5 +100,6 @@ if (isset($_POST['submit'])) {
 	<script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script>
 </body>
+
 </html>
-<?php include ("../admin/partials/footer.php")?>
+<?php include("../admin/partials/footer.php") ?>

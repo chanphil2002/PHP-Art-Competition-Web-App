@@ -58,7 +58,7 @@ session_start();
               <li>
                 <hr class="dropdown-divider">
               </li>
-              <li><a class="dropdown-item text-danger" href="#">Log Out</a></li>
+              <li><a class="dropdown-item text-danger" href="../general/logout.php">Log Out</a></li>
             </ul>
           </div>
         </li>
@@ -66,7 +66,7 @@ session_start();
     </nav>
   </nav>
 
-  <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+  <!-- <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
     <div class="offcanvas-header">
       <h5 class="offcanvas-title" id="offcanvasExampleLabel">Offcanvas</h5>
       <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
@@ -88,5 +88,5 @@ session_start();
 
 
     </div>
-  </div>
+  </div> -->
   </nav>
