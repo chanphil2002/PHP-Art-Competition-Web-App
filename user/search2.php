@@ -1,6 +1,6 @@
-<?php     
-    include ("partials/database.php");
-    include ("partials/header.php");
+<?php
+include("partials/database.php");
+include("partials/header.php");
 
 if (isset($_POST['submit2'])) {
     $search = $_POST['search'];
@@ -47,7 +47,7 @@ if (isset($_POST['submit2'])) {
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="judge.css">
+    <link rel="stylesheet" href="../judge/judge.css">
 </head>
 
 <body>
