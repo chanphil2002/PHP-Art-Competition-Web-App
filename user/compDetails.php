@@ -1,6 +1,7 @@
-<?php
-include("partials/header.php");
-include("partials/database.php");
+<?php 
+    include("partials/header.php"); 
+    include("partials/database.php");
+    session_start();
 ?>
 
 <?php
@@ -93,7 +94,7 @@ while ($row = mysqli_fetch_assoc($res)) {
                         <div class="card" style="height: 14rem;">
                             <div class="card-body">
                                 <h3 class="card-title" style="color:black">Total Prize Pool</h3>
-                                <h2><?php echo 'RM ' . $prizePool; ?></h2>
+                                <h2><?php echo 'RM '. $prizePool; ?></h2>
                             </div>
                         </div>
                     </div>
@@ -116,17 +117,36 @@ while ($row = mysqli_fetch_assoc($res)) {
                 </div>
             </div>
             <div class="col-3">
-                <a href="joinComp.php?competition=<?php echo $compID; ?>" style="text-decoration: none">
-                    <h3>&#128101; Join</h3>
-                </a>
-                <!-- <h3>&#128147; Bookmark</h3> -->
                 <?php
-                if ($status == 'Past') {
+                    $sql3 = "SELECT * FROM entry WHERE compID = '$compID' AND userEmail = '$_SESSION[user]' ";
+                    $res3 = mysqli_query($conn, $sql3);
+                    if (mysqli_num_rows($res3) != 0){
                 ?>
-                    <hr>
-                    <h2><u>Winner</u></h2>
-                    <img src="../materials/image/download.jpg" alt="">
-                <?php } ?>
+                    <a href="myComp.php" style="text-decoration: none"><h3>&#128101; My Entry</h3></a>
+                <?php }else{
+                    if ($status == "On-Going"){
+                ?>
+                        <a href="joinComp.php?competition=<?php echo $compID; ?>" style="text-decoration: none"><h3>&#128101; Join</h3></a>
+                <?php }} ?>
+                
+                <a href="bookmark.php?compID=<?php echo $compID; ?>" style="text-decoration: none"><h3>🔖 Bookmark</h3></a>
+                
+                <?php
+                    if ($status == 'Past'){
+                ?>
+                        <hr>
+                        <h2><u>Winner</u></h2>
+                        <?php
+                            $sql2 = "SELECT * FROM entry WHERE compID = '$compID' ORDER BY totalScore DESC LIMIT 1";
+                            $run2 = mysqli_query($conn, $sql2);
+                            while ($win = mysqli_fetch_assoc($run2)){
+                                $entryID = $win["entryID"];
+                                $entry = $win["entryFile"];
+                                $title = $win["title"];
+                            }
+                        ?>
+                        <a href="../user/entry.php?entryID=<?php echo $entryID; ?>&compID=<?php echo $compID; ?>"><img src="../materials/entries/<?php echo $entry; ?>" alt="<?php echo $title; ?>" style="width: 300px; height: auto"></a>
+                <?php } ?>                
             </div>
         </div>
     </div>

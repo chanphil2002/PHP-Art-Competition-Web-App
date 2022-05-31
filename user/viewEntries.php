@@ -1,6 +1,7 @@
 <?php
 include("partials/header.php");
 include("partials/database.php");
+session_start();
 
 if (isset($_GET['compID'])) {
     $compID = $_GET['compID'];
@@ -15,6 +16,7 @@ if (isset($_GET['compID'])) {
 while ($row1 = mysqli_fetch_assoc($res1)) {
     $compName = $row1['compName'];
     $status = $row1['status'];
+    $compPic = $row1['compPic'];
 }
 
 ?>

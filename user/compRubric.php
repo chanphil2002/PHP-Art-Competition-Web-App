@@ -1,6 +1,7 @@
 <?php
-include("partials/header.php");
-include("partials/database.php");
+    include("partials/header.php");
+    include("partials/database.php");
+    session_start();
 ?>
 
 <?php
@@ -12,6 +13,11 @@ if (isset($_GET['compID'])) {
 } else {
     echo "mistake";
 }
+
+$picQuery = "SELECT * FROM competition WHERE compID = '$compID' ";
+$run = mysqli_query($conn, $picQuery);
+$row = mysqli_fetch_assoc($run);
+$compPic = $row["compPic"];
 ?>
 <!DOCTYPE html>
 <html lang="en">

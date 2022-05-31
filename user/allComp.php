@@ -38,6 +38,7 @@
 </head>
 
 <body>
+    <br><br>
 
     <?php
         if (isset($_GET["category"])){

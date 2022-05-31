@@ -1,12 +1,13 @@
 <?php
-include("partials/header.php");
-include("partials/database.php");
+    include("partials/header.php");
+    include("partials/database.php");
+    session_start();
 ?>
 
 <?php
 if (isset($_GET['compID'])) {
     $compID = $_GET['compID'];
-    $sql = "SELECT competition.compID, organizer.organizerID, organizer.organizerName, organizer.organizerDesc,
+    $sql = "SELECT competition.compID, competition.compPic, organizer.organizerID, organizer.organizerName, organizer.organizerDesc,
             organizer.organizerProfilePic 
             FROM competition INNER JOIN organizer ON competition.compID = organizer.organizerID and compID='$compID'";
     $res = mysqli_query($conn, $sql);
@@ -20,6 +21,7 @@ while ($row = mysqli_fetch_assoc($res)) {
     $organizerName = $row['organizerName'];
     $organizerDesc = $row['organizerDesc'];
     $organizerProfilePic = $row['organizerProfilePic'];
+    $compPic = $row['compPic'];
 }
 ?>
 
