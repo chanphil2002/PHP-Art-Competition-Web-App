@@ -37,7 +37,7 @@
 				</div>
                 <div>
 					<center>
-                    <br><br><a href="viewCompDetails.php?selecredComp=<?php echo $compID?>" class="btn btn-primary">Back</a>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <br><br><a href="viewCompDetails.php?selectedComp=<?php echo $compID?>" class="btn btn-primary">Back</a>&nbsp;&nbsp;&nbsp;&nbsp;
                     <button type="submit" name="submit" class="btn btn-success">Submit</button></a>
 					</center>
 				</div>
