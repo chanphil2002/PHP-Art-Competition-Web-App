@@ -8,6 +8,8 @@ if (isset($_GET['entryID']) & isset($_GET['compID'])) {
     $res = mysqli_query($conn, $sql);
     $sql1 = "SELECT * FROM comp_criteria WHERE compID='$compID'";
     $res1 = mysqli_query($conn, $sql1);
+    $sql4 = "SELECT * from score_criteria WHERE compID='$compID' AND entryID='$entryID'";
+    $res4 = mysqli_query($conn, $sql4);
 } else {
     echo "mistake";
 }
@@ -21,20 +23,42 @@ while ($row = mysqli_fetch_assoc($res)) {
     $totalScore = $row['totalScore'];
 }
 
+// while ($row3 = mysqli_fetch_assoc($res4)) {
+//     $cri0 = $row3['cri0'];
+//     $cri1 = $row3['cri1'];
+//     $cri2 = $row3['cri2'];
+//     $cri3 = $row3['cri3'];
+//     $cri4 = $row3['cri4'];
+// }
+
 
 if (isset($_POST['submit'])) {
     $count = mysqli_num_rows($res1);
     $i = 0;
     $total = 0;
+    $sql2 = "INSERT INTO score_criteria (compID, entryID) VALUES ('$compID', '$entryID')";
+    $res2 = mysqli_query($conn, $sql2);
     while ($count > 0) {
         // echo "<script>alert('crit.$i');</script>";
-        $crit = $_POST["crit.$i"];
+        $crit = $_POST["crit$i"];
+        $sql5 = "UPDATE score_criteria SET cri$i = '$crit'";
+        $res5 = mysqli_query($conn, $sql5);
         $total = $total + $crit;
         $i++;
         $count--;
     }
+    while ($row3 = mysqli_fetch_assoc($res4)) {
+        $cri0 = $row3['cri0'];
+        $cri1 = $row3['cri1'];
+        $cri2 = $row3['cri2'];
+        $cri3 = $row3['cri3'];
+        $cri4 = $row3['cri4'];
+    }
     $count = mysqli_num_rows($res1);
     $avg = $total / $count;
+    $sql3 = "UPDATE entry SET score = $avg WHERE compID = '$compID'";
+    $res3 = mysqli_query($conn, $sql3);
+    header("location:../judge/viewspecificentry.php?entryID=$entryID&compID=$compID");
 }
 
 // while ($row1 = mysqli_fetch_assoc($res1)) {
@@ -100,7 +124,7 @@ if (isset($_POST['submit'])) {
                         <h3 class="card-text">Scoring Form</small></h2>
 
 
-                            <form action=" " method="POST" class="d-flex">
+                            <form action="" method="POST" class="d-flex">
                                 <div class="col-md-4 order-md-2 mb-4">
                                     <?php
                                     $i = 0;
@@ -111,48 +135,16 @@ if (isset($_POST['submit'])) {
                                         <div class="mb-3">
                                             <form action=" " method="POST" class="d-flex">
                                                 <label for="crit"><?php echo $criteria; ?> Score</label>
-                                                <input type="text" name="crit.<?php echo $i; ?>" class="form-control" id="crit.<?php echo $i; ?>" value="" required <?php $i++; ?>>
+                                                <input type="text" name="crit<?php echo $i; ?>" class="form-control" id="crit.<?php echo $i; ?>" value='<?php while ($row3 = mysqli_fetch_assoc($res4)) {
+                                                                                                                                                            echo $row3["cri$i"];
+                                                                                                                                                        } ?>' required <?php $i++; ?>>
                                         </div>
-
-                                        <!-- <div class="mb-3">
-                                        <label for="crit2">Criteria 2</label>
-                                        <div class="input-group">
-                                            <input type="text" name="crit2" class="form-control" id="crit2" placeholder="" required>
-                                        </div>
-                                    </div>
-
-                                    <div class="mb-3">
-                                        <label for="crit3">Criteria 3</label>
-                                        <input type="text" name="crit3" class="form-control" id="crit3" placeholder="" required>
-                                    </div>
-
-                                    <div class="mb-3">
-                                        <label for="crit4">Criteria 4</label>
-                                        <div class="input-group date" id="crit4">
-                                            <input type="text" name="crit4" id="crit4" class="form-control" placeholder="" />
-                                        </div>
-                                    </div>
-
-                                    <div class="mb-3">
-                                        <label for="crit5">Criteria 5</label>
-                                        <div class="input-group date" id="crit5">
-                                            <input type="text" name="crit5" id="crit5" class="form-control" placeholder="" />
-                                        </div>
-                                    </div>
-
-                                    <div class="mb-3">
-                                        <label for="crit5">Total Score</label>
-                                        <div class="input-group date" id="total">
-                                            <input type="text" name="total" id="total" class="form-control" value="<?php echo $total; ?>" readonly />
-                                        </div>
-                                    </div> -->
-
                                     <?php }
                                     ?>
 
                                     <div class="mb-3">
                                         <label for="total">Total Score</label>
-                                        <input type="text" name="total" class="form-control" id="total" value="" readonly>
+                                        <input type="text" name="total" class="form-control" id="total" value="<?php echo $score ?>" readonly>
                                     </div>
 
                                     <hr class="mb-4">

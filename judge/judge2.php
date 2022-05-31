@@ -14,7 +14,7 @@ if (isset($_POST['submit2'])) {
         $sql1 = "SELECT * FROM competition WHERE (compName LIKE '%$search%' OR category LIKE '%$search%') AND status LIKE '%$filter%'";
         $res1 = mysqli_query($conn, $sql1);
         // echo "<script>alert('$filter');</script>";
-        // echo "<script>alert('$search');</script>";
+        echo "<script>alert('$search');</script>";
         // $sort = $_POST['sort_dropdown'];
     }
 }
