@@ -31,7 +31,7 @@
                         $password = $judgeInfo['judgePassword'];
                         $bio = $judgeInfo['judgeBio'];
 						$img = $judgeInfo["judgeProfilePic"];
-						$imgPath = ("../judge/judgeProfile/$img");
+						$imgPath = ("../materials/judgeProfile/$img");
 
                 ?>
                 <center><div>
@@ -65,7 +65,62 @@
 					<center><a href="viewJudge.php" class="btn btn-primary">Back</a>&nbsp;&nbsp;&nbsp;&nbsp;
 					<button type="submit" name="submit" class="btn btn-success">Update</button></a></center>
 				</div>
-    
+
+			</form>
+		</div>
+	</div>
+</body>
+</html>
+<div class="page-content">
+		<div class="form-v7-content">
+			<form class="form-detail" action="#" method="post" id="myform" enctype="multipart/form-data">
+                <?php
+                    if (isset($_GET['viewIC'])){
+                        $ic = $_GET['viewIC'];
+
+                        $sql = "SELECT * FROM judge WHERE judgeIC = '$ic'";
+                        $result = mysqli_query($conn, $sql);
+                        $judgeInfo = mysqli_fetch_assoc($result);
+                        $name = $judgeInfo['judgeName'];
+                        $email = $judgeInfo['judgeEmail'];
+                        $password = $judgeInfo['judgePassword'];
+                        $bio = $judgeInfo['judgeBio'];
+						$img = $judgeInfo["judgeProfilePic"];
+						$imgPath = ("../materials/judgeProfile/$img");
+
+                ?>
+                <center><div>
+                    <img src="../materials/judgeProfile/<?php echo $img?>" style="width: 10rem;"><br><br><br>
+                </div></center>
+				<div class="form-row">
+					<label for="ic">IDENTITY CARD NUMBER *</label>
+					<input type="text" name="ic" placeholder="xxxxxx-xx-xxxx"  pattern="[0-9]{6}-[0-9]{2}-[0-9]{4}" id="ic" class="input-text" value= "<?php echo $ic ?>" readonly>
+				</div>
+                <div class="form-row">
+					<br><label for="name">NAME *</label>
+					<input type="text" name="name" id="name" class="input-text" value="<?php echo $name ?>" required>
+				</div>
+                <div class="form-row">
+					<br><label for="email">EMAIL *</label>
+					<input type="email" name="email" placeholder="abc@gmail.com" id="email" class="input-text" value="<?php echo $email ?>" required>
+				</div>
+				<div class="form-row">
+					<br><label for="bio" class="form-label">BIO *</label>
+					<textarea class="form-control" name="bio" id="bio" rows="20" required><?php echo $bio ?></textarea>
+				</div>
+				<div class="form-row">
+					<br><br><label for="profile_picture">PROFILE PICTURE *</label><br>
+					<input type="file" name="profile_picture" id="profile_picture" accept="image/*">
+					<br>
+					<br>
+					<br>
+				</div>
+                <?php } ?>
+				<div>
+					<center><a href="viewCompDetails.php?<?php echo $_SESSION['id']?>" class="btn btn-primary">Back</a>&nbsp;&nbsp;&nbsp;&nbsp;
+					<button type="submit" name="submit" class="btn btn-success">Update</button></a></center>
+				</div>
+
 			</form>
 		</div>
 	</div>
@@ -100,7 +155,7 @@
 			if($run_update == true){
 				echo "<script>alert('Profile updated successfully.')
 				location = 'viewJudge.php' </script>";
-				move_uploaded_file($tmp_name, "../judge/judgeProfile/$newProfilePic");
+				move_uploaded_file($tmp_name, "../materials/judgeProfile/$newProfilePic");
 
 			}else {
 				echo "<script>alert('Oops! Something went wrong, please try again.')</script>";

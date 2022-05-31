@@ -73,7 +73,7 @@
 				<br><p>ORGANIZER VERIFIED DOCUMENT</p>
 				<center>
         			<iframe src="../materials/organizerDoc/<?php echo $doc?>" 
-                	width="600" height="500">
+                	width="600" height="500" id="target">
         			</iframe><br><br><br><br>
     			</center>
                 <?php } ?>
@@ -91,13 +91,11 @@
 				?>
 				<div class="form-row">
 					<br><br><label for="profile_picture">NEW PROFILE PICTURE *</label><br>
-					<input type="file" name="profile_picture" id="profile_picture" accept="image/*" multiple>
+					<input type="file" name="profile_picture" id="profile_picture" accept="image/*">
 				</div>
 				<div class="form-row">
 					<br><br><label for="verifiedDoc">NEW VERIFIED DOCUMENT *</label><br>
-					<input type="file" name="verifiedDoc" id="verifiedDoc" accept="application/pdf" multiple>
-					<br>
-					<br>
+					<input type="file" name="verifiedDoc" id="verifiedDoc" accept="application/pdf, image/*">
 					<br>
 				</div>
 				<div>

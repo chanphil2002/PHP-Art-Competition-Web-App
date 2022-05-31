@@ -49,7 +49,7 @@
                     <td data-label="Action">
                         <a href="viewJudgeDetails.php?selectedIC=<?php echo $ic?>"><i class="fa-solid fa-pen"></i></a>
                         &nbsp;&nbsp;&nbsp;
-                        <a href="removeJudge.php?removeIC=<?php echo $ic?>"><i class='fas fa-trash-alt' style='color:red'></i></a>
+                        <a href="viewJudge.php?removeIC=<?php echo $ic?>"><i class='fas fa-trash-alt' style='color:red'></i></a>
                     </td>
                 </tr>
                 <?php } ?>
@@ -58,4 +58,26 @@
     </div>
 </body>
 </html>
-<?php include ("../admin/partials/footer.php")?>
+<?php
+    if (isset($_GET['removeIC'])) {
+        $removeIC = $_GET['removeIC'];
+        
+        $sql = "SELECT * FROM judge WHERE judgeIC= '$removeIC'";
+        $result = mysqli_query($conn, $sql);
+        $judgeInfo = mysqli_fetch_assoc($result);
+        $img = $judgeInfo["judgeProfilePic"];
+        $imgPath = ("../judge/judgeProfile/$img");
+        unlink($imgPath);
+
+        $delete = "DELETE FROM judge WHERE judgeIC ='$removeIC'";
+        $run_delete = mysqli_query($conn,$delete);
+        if($run_delete === true) {
+            echo "<script>alert('The judge has been removed successfully!')
+            location = 'viewJudge.php'</script>";
+
+        }else {
+            echo "<script>alert('Failed, Please Try Again.')
+            location = 'viewJudge.php'</script>";
+    }
+}       
+?>

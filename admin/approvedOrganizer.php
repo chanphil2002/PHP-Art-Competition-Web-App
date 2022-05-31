@@ -93,6 +93,5 @@
             echo "<script>alert('Failed, Please Try Again.')
             location = 'approvedOrganizer.php'</script>";
     }
-
-    }
+}
 ?>

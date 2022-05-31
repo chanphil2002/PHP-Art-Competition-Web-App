@@ -22,13 +22,19 @@ if (isset($_POST['submit'])) {
 
 		// if user account not exixts
 		if (mysqli_num_rows($result) == 0) {
-			$upload = "INSERT INTO judge (judgeIC, judgeName, judgeEmail, judgePassword, judgeBio, judgeProfilePic) VALUES ('$ic', '$name', '$email', '$password', '$bio', '$profile_picture')";
+			$upload = "INSERT INTO judge (judgeIC, judgeName, judgeEmail, judgePassword, judgeBio, judgeProfilePic, status) VALUES ('$ic', '$name', '$email', '$password', '$bio', '$profile_picture', 'Pending')";
 			$run_upload = mysqli_query($conn, $upload);
 
 			if ($run_upload == true) {
 				echo "<script>alert('Account Successfully Created!')</script>";
+<<<<<<< Updated upstream
 				move_uploaded_file($tmp_name, "../judge/judgeProfile/$profile_picture");
 				header("location:" . SITEURL . "organizer/selectedcriteria.php");
+=======
+				move_uploaded_file($tmp_name, "judgeProfile/$profile_picture");
+				header("location:http://localhost/Virtual-X/organizer/selectedjudge.php");
+				move_uploaded_file($tmp_name, "../materials/judgeProfile/$profile_picture");
+>>>>>>> Stashed changes
 			} else {
 				echo "<script>alert('Oops. Something Went Wrong, Please Try Again.')</script>";
 			}
