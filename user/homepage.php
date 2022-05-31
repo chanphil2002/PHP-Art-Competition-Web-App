@@ -24,6 +24,7 @@ if (!isset($_SESSION["user"])) {
 </head>
 
 <body>
+    <br><br>
     <!-- Carousel -->
     <div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel">
 
@@ -53,7 +54,7 @@ if (!isset($_SESSION["user"])) {
 
             <div class="carousel-item active" data-bs-interval="2000">
                 <a href="compDetails.php?compID=<?php echo $id; ?>">
-                    <center><img src="../materials/image/<?php echo $pic ?>" style="width:auto;height:360px;" class="" alt="..."></center>
+                    <center><img src="../materials/compPic/<?php echo $pic ?>" style="width:auto;height:360px;" class="" alt="..."></center>
                 </a>
                 <br><br><br><br><br><br>
                 <div class="carousel-caption d-none d-md-block">
@@ -80,7 +81,7 @@ if (!isset($_SESSION["user"])) {
 
                 <div class="carousel-item" data-bs-interval="2000">
                     <a href="compDetails.php?compID=<?php echo $id; ?>">
-                        <center><img src="../materials/image/<?php echo $pic ?>" style="width:auto;height:360px;" class="" alt="..."></center>
+                        <center><img src="../materials/compPic/<?php echo $pic ?>" style="width:auto;height:360px;" class="" alt="..."></center>
                     </a>
                     <br><br><br><br><br><br>
                     <div class="carousel-caption d-none d-md-block">
@@ -107,7 +108,7 @@ if (!isset($_SESSION["user"])) {
 
                 <div class="carousel-item" data-bs-interval="2000">
                     <a href="compDetails.php?compID=<?php echo $id; ?>">
-                        <center><img src="../materials/image/<?php echo $pic ?>" style="width:auto;height:360px;" class="" alt="..."></center>
+                        <center><img src="../materials/compPic/<?php echo $pic ?>" style="width:auto;height:360px;" class="" alt="..."></center>
                     </a>
                     <br><br><br><br><br><br>
                     <div class="carousel-caption d-none d-md-block">
@@ -161,7 +162,7 @@ if (!isset($_SESSION["user"])) {
                 <div class="col-md-4 margincon1">
                     <div class="card border-1 grid-list">
                         <a href="compDetails.php?compID=<?php echo $id; ?>" class="stretched-link">
-                            <img class="card-img-top lazy" src="../materials/image/<?php echo $pic; ?>">
+                            <img class="card-img-top lazy" src="../materials/compPic/<?php echo $pic; ?>">
                         </a>
                         <div class="card-body description text-truncate text-color-2">
                             <?php echo $category; ?>
@@ -211,7 +212,7 @@ if (!isset($_SESSION["user"])) {
                             <?php } elseif ($status == "Past") { ?>
                                 <span class="badge rounded-pill position-absolute bg-dark end-0" style="height:20px">Past</span>
                             <?php } ?>
-                            <img class="card-img-top lazy" src="../materials/image/<?php echo $pic; ?>">
+                            <img class="card-img-top lazy" src="../materials/compPic/<?php echo $pic; ?>">
                         </a>
                         <div class="card-body description text-truncate text-color-2" style="display:inline-block">
                             <?php echo $orgName; ?>
@@ -261,7 +262,7 @@ if (!isset($_SESSION["user"])) {
                             <?php } elseif ($status == "Past") { ?>
                                 <span class="badge rounded-pill position-absolute bg-dark end-0" style="height:20px">Past</span>
                             <?php } ?>
-                            <img class="card-img-top lazy" src="../materials/image/<?php echo $pic; ?>">
+                            <img class="card-img-top lazy" src="../materials/compPic/<?php echo $pic; ?>">
                         </a>
                         <div class="card-body description text-truncate text-color-2" style="display:inline-block">
                             <?php echo $orgName; ?>
@@ -311,7 +312,7 @@ if (!isset($_SESSION["user"])) {
                             <?php } elseif ($status == "Past") { ?>
                                 <span class="badge rounded-pill position-absolute bg-dark end-0" style="height:20px">Past</span>
                             <?php } ?>
-                            <img class="card-img-top lazy" src="../materials/image/<?php echo $pic; ?>">
+                            <img class="card-img-top lazy" src="../materials/compPic/<?php echo $pic; ?>">
                         </a>
                         <div class="card-body description text-truncate text-color-2" style="display:inline-block">
                             <?php echo $orgName; ?>
@@ -361,7 +362,7 @@ if (!isset($_SESSION["user"])) {
                             <?php } elseif ($status == "Past") { ?>
                                 <span class="badge rounded-pill position-absolute bg-dark end-0" style="height:20px">Past</span>
                             <?php } ?>
-                            <img class="card-img-top lazy" src="../materials/image/<?php echo $pic; ?>">
+                            <img class="card-img-top lazy" src="../materials/compPic/<?php echo $pic; ?>">
                         </a>
                         <div class="card-body description text-truncate text-color-2" style="display:inline-block">
                             <?php echo $orgName; ?>

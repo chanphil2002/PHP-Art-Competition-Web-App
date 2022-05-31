@@ -1,16 +1,17 @@
 <?php
 include("partials/database.php");
 include("partials/header.php");
+session_start();
 
 if (isset($_POST['submit2'])) {
     $search = $_POST['search'];
     $filter = $_POST['filter_dropdown'];
 
     if ($filter == " ") {
-        $sql1 = "SELECT * FROM competition WHERE (compName LIKE '%$search%' OR category LIKE '%$search%')";
+        $sql1 = "SELECT * FROM competition WHERE (compName LIKE '%$search%' OR category LIKE '%$search%') ";
         $res1 = mysqli_query($conn, $sql1);
     } else if ($search == " ") {
-        $sql1 = "SELECT * FROM competition WHERE STATUS LIKE '%filter%'";
+        $sql1 = "SELECT * FROM competition WHERE STATUS LIKE '%filter%' ";
         $res1 = mysqli_query($conn, $sql1);
     } else {
         $sql1 = "SELECT * FROM competition WHERE (compName LIKE '%$search%' OR category LIKE '%$search%') AND status LIKE '%$filter%'";
@@ -121,7 +122,7 @@ if (isset($_POST['submit2'])) {
                                 <div class="card border-1 grid-list">
                                     <a href="compDetails.php?compID=<?php echo $compID; ?>" class="stretched-link">
                                         <span class="badge rounded-pill text-bg-success position-absolute top-0 end-0"><?php echo $status1; ?></span>
-                                        <img class="card-img-top lazy" src="../materials/image/<?php echo $compPic1; ?>">
+                                        <img class="card-img-top lazy" src="../materials/compPic/<?php echo $compPic1; ?>">
                                     </a>
                                     <div class="card-body description text-truncate text-color-2">
                                         23 May 2022 / <?php echo $category1; ?>

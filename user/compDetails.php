@@ -2,6 +2,9 @@
     include("partials/header.php"); 
     include("partials/database.php");
     session_start();
+    if (!isset($_SESSION["user"])){
+        header("Location: ../general/registeredUserLogin.php");
+    }
 ?>
 
 <?php
@@ -45,7 +48,7 @@ while ($row = mysqli_fetch_assoc($res)) {
 
 <body>
 
-    <img class="img" src="../materials/image/<?php echo $compPic; ?>" alt="Responsive image" height="300" width="100%" style="object-fit: cover;">
+    <img class="img" src="../materials/compPic/<?php echo $compPic; ?>" alt="Responsive image" height="300" width="100%" style="object-fit: cover;">
     <ul class="nav nav-pills nav-fill p-2 bg-light">
         <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="viewcomp_main.php?compID=<?php echo $compID; ?>">Main</a>

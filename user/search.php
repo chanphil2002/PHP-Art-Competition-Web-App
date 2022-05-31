@@ -4,8 +4,12 @@
 
     if (isset($_POST['search'])) {
         $search = $_POST['search'];
-        $sql1 = "SELECT * FROM competition WHERE compName LIKE '%$search%' OR category LIKE '%$search%'";
-        $res1 = mysqli_query($conn, $sql1);
+        $sql = "SELECT * FROM competition WHERE compName LIKE '%$search%' OR category LIKE '%$search%'";
+        $res = mysqli_query($conn, $sql);
+        while ($row = mysqli_fetch_assoc($res)){
+          $sql1 = "SELECT * FROM competition WHERE status != 'Pending' ";
+          $res1 = mysqli_query($conn, $sql1);
+        }
     } else {
         $sql1 = "SELECT * FROM competition";
         $res1 = mysqli_query($conn, $sql1);
@@ -94,7 +98,7 @@
                 <div class="card border-1 grid-list">
                   <a href="compDetails.php?compID=<?php echo $compID; ?>" class="stretched-link">
                     <span class="badge rounded-pill text-bg-success position-absolute top-0 end-0"><?php echo $status; ?></span>
-                    <img class="card-img-top lazy" src="../materials/image/<?php echo $compPic; ?>">
+                    <img class="card-img-top lazy" src="../materials/compPic/<?php echo $compPic; ?>">
                   </a>
                   <div class="card-body description text-truncate text-color-2">
                     23 May 2022 / <?php echo $category; ?>

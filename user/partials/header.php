@@ -44,7 +44,7 @@
             </button>
             <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton2">
               <li><a class="dropdown-item" href="#">My Profile</a></li>
-              <li><a class="dropdown-item" href="#">My Competitions</a></li>
+              <li><a class="dropdown-item" href="myComp.php">My Competitions</a></li>
               <li><a class="dropdown-item" href="bookmarkList.php">Favourite</a></li>
               <li>
                 <hr class="dropdown-divider">
