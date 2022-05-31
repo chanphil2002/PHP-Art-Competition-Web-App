@@ -44,7 +44,7 @@ if(isset($_GET['compID']))
             $ext = end($image);
             $receipt = rand(000,999).".".$ext;
             $source = $_FILES['receipt']['tmp_name'];
-            $destination = "../organizer/receipt/".$receipt;
+            $destination = "../materials/compReceipt/".$receipt;
             $upload = move_uploaded_file($source, $destination);
         }
         else{

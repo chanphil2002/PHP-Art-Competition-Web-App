@@ -56,8 +56,8 @@ if(isset($_GET['compID']))
 
         <div class="mb-3">
             <label for="date">Competition Release Date</label>
-            <div class="input-group date" id="datepicker">
-                <input type="text" name="releaseDate" id ="releaseDate" value="<?php echo $releaseDate;?>" class="form-control" placeholder="Competition Release Date" readonly/>
+            <div class="input-group date">
+                <input type="date" name="releaseDate" id ="releaseDate" min="<?php echo date("Y-m-d"); ?>" value="<?php echo $releaseDate;?>" class="form-control" placeholder="Competition Release Date" required/>
                 <span class="input-group-append">
                 </span>
             </div>
@@ -65,8 +65,8 @@ if(isset($_GET['compID']))
 
         <div class="mb-3">
             <label for="date">Competition Registration Deadline</label>
-            <div class="input-group date" id="datepicker2">
-                <input type="text" name="registrationDeadline" id ="registrationDeadline" value="<?php echo $registrationDeadline;?>" class="form-control" placeholder="When is the Deadline?" readonly/>
+            <div class="input-group date">
+                <input type="date" name="registrationDeadline" id ="registrationDeadline" min="<?php echo date("Y-m-d"); ?>" value="<?php echo $registrationDeadline;?>" class="form-control" placeholder="When is the Deadline?" required/>
                 <span class="input-group-append">
                 </span>
             </div>
@@ -109,7 +109,7 @@ if(isset($_GET['compID']))
                 else
                 {
                     ?>
-                    <img src="../materials/image/<?php echo $currentcompPic; ?>" width="50%">
+                    <img src="../materials/compPic/<?php echo $currentcompPic; ?>" width="50%">
                     <?php
                 }?>
             <div class="input-group mb-3">
@@ -129,26 +129,6 @@ if(isset($_GET['compID']))
 </div>
 
 </form>
-
-
-
-<script type="text/javascript">
-    $(function() {
-        $('#datepicker, #datepicker2').datepicker({
-            dateFormat: 'yy-mm-dd',
-            minDate: 0
-        });
-        
-    });
-
-    $( function() {
-    $( "#search" ).autocomplete({
-    source: '../organizer/partials/search.php'  
-    });
-});
-
-</script>
-
 
 
 <?php
@@ -176,11 +156,11 @@ if(isset($_GET['compID']))
                 $ext = end($image);
                 $compPic = rand(000,999).".".$ext;
                 $source = $_FILES['compPic']['tmp_name'];
-                $destination = "../materials/image/".$compPic;
+                $destination = "../materials/compPic/".$compPic;
                 $upload = move_uploaded_file($source, $destination);
                 if($currentcompPic != "")
                 {
-                    $deletecompPic = "../materials/image/".$currentcompPic;
+                    $deletecompPic = "../materials/compPic/".$currentcompPic;
                     $delete = unlink($deletecompPic);
                 }
             }

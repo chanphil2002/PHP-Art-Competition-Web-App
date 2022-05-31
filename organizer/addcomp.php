@@ -34,8 +34,8 @@
 
         <div class="mb-3">
             <label for="date">Competition Release Date</label>
-            <div class="input-group date" id="datepicker">
-                <input type="text" name="releaseDate" id ="releaseDate" class="form-control" placeholder="Competition Release Date" readonly/>
+            <div class="input-group date" >
+                <input type="date" name="releaseDate" id ="releaseDate" min="<?php echo date("Y-m-d"); ?>" class="form-control" placeholder="Competition Release Date" required/>
                 <span class="input-group-append">
                 </span>
             </div>
@@ -43,12 +43,20 @@
 
         <div class="mb-3">
             <label for="date">Competition Registration Deadline</label>
+            <div class="input-group date">
+                <input type="date" name="registrationDeadline" id ="registrationDeadline" min="<?php echo date("Y-m-d"); ?>"  class="form-control" placeholder="When is the Deadline?" required/>
+                <span class="input-group-append">
+                </span>
+            </div>
+        </div>
+        <!-- <div class="mb-3">
+            <label for="date">Competition Registration Deadline</label>
             <div class="input-group date" id="datepicker2">
                 <input type="text" name="registrationDeadline" id ="registrationDeadline" class="form-control" placeholder="When is the Deadline?" readonly/>
                 <span class="input-group-append">
                 </span>
             </div>
-        </div>
+        </div> -->
 
         <div class="mb-3">
             <label for="stock">Public Vote</label>
@@ -141,7 +149,7 @@
             $ext = end($image);
             $compPic = rand(000,999).".".$ext;
             $source = $_FILES['compPic']['tmp_name'];
-            $destination = "../materials/image/".$compPic;
+            $destination = "../materials/compPic/".$compPic;
             $upload = move_uploaded_file($source, $destination);
         }
         else{

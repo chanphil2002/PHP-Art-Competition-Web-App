@@ -43,7 +43,7 @@ ob_start();
             <div class="d-flex align-items-center">
 
                 <div class="image">
-                    <img src="../admin/judgeProfile/<?php echo $judgeProfilePic; ?>" class="rounded" width="155" >
+                    <img src="../materials/judgeProfilePic/<?php echo $judgeProfilePic; ?>" class="rounded" width="155" >
                 </div>
                 
                 <div class="ms-3 w-100">

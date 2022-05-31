@@ -27,14 +27,8 @@ if (isset($_POST['submit'])) {
 
 			if ($run_upload == true) {
 				echo "<script>alert('Account Successfully Created!')</script>";
-<<<<<<< Updated upstream
-				move_uploaded_file($tmp_name, "../judge/judgeProfile/$profile_picture");
-				header("location:" . SITEURL . "organizer/selectedcriteria.php");
-=======
-				move_uploaded_file($tmp_name, "judgeProfile/$profile_picture");
 				header("location:http://localhost/Virtual-X/organizer/selectedjudge.php");
-				move_uploaded_file($tmp_name, "../materials/judgeProfile/$profile_picture");
->>>>>>> Stashed changes
+				move_uploaded_file($tmp_name, "../materials/judgeProfilePic/$profile_picture");
 			} else {
 				echo "<script>alert('Oops. Something Went Wrong, Please Try Again.')</script>";
 			}
