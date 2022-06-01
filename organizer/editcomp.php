@@ -90,13 +90,13 @@ if(isset($_GET['compID']))
         <div class="mb-3">
         <label for="exampleFormControlTextarea1">Competition Description</label>
         <textarea class="form-control" name="description" id="exampleFormControlTextarea1" rows="3" 
-        placeholder="Tell more about the competition..." required><?php echo $description;?>"</textarea>
+        placeholder="Tell more about the competition..." required><?php echo $description;?></textarea>
         </div>
 
         <div class="mb-3">
         <label for="exampleFormControlTextarea1">Competition Rules and Regulations</label>
         <textarea class="form-control" name="rules" id="exampleFormControlTextarea1" rows="3" 
-        placeholder="State the competition rules..." required><?php echo $rules;?>"</textarea>
+        placeholder="State the competition rules..." required><?php echo $rules;?></textarea>
         </div>
 
         <div class="mb-3">
