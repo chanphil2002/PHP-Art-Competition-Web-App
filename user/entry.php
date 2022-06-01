@@ -9,7 +9,7 @@ session_start();
 if (isset($_GET['entryID']) & isset($_GET['compID'])) {
     $entryID = $_GET['entryID'];
     $compID = $_GET['compID'];
-    $sql = "SELECT * FROM entry WHERE entryID='$entryID'";
+    $sql = "SELECT * FROM entry E INNER JOIN user U ON E.userEmail = U.userEmail WHERE entryID='$entryID'";
     $res = mysqli_query($conn, $sql);
 } else {
     echo "mistake";
@@ -18,7 +18,7 @@ while ($row = mysqli_fetch_assoc($res)) {
     $entryID = $row['entryID'];
     $entryFile = $row['entryFile'];
     $title = $row['title'];
-    $userEmail = $row['userEmail'];
+    $username = $row['username'];
     $vote = $row['vote'];
     $score = $row['score'];
     $totalScore = $row['totalScore'];
@@ -36,7 +36,7 @@ while ($row = mysqli_fetch_assoc($res)) {
 </head>
 
 <body>
-    <img class="img" src="../materials/image/<?php echo $compPic; ?>" alt="Responsive image" height="300" width="100%" style="object-fit: cover;">
+    <!-- <img class="img" src="../materials/compPic/<?php echo $compPic; ?>" alt="Responsive image" height="300" width="100%" style="object-fit: cover;"> -->
     <ul class="nav nav-pills nav-fill p-2">
         <li class="nav-item">
             <a class="nav-link" aria-current="page" href="compDetails.php?compID=<?php echo $compID; ?>">Main</a>
@@ -62,7 +62,7 @@ while ($row = mysqli_fetch_assoc($res)) {
                 <div class="col-md-5">
                     <div class="card-body">
                         <h5 class="card-title" style="color:black"><?php echo $title ?></h5>
-                        <p class="card-text"><small class="text-muted">By <?php echo $userEmail ?></small></p>
+                        <p class="card-text"><small class="text-muted">By <a href=""><?php echo $username; ?></a></small></p>
                         <br>
 
                         <?php

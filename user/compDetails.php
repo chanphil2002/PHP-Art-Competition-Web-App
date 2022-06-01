@@ -51,7 +51,7 @@ while ($row = mysqli_fetch_assoc($res)) {
     <img class="img" src="../materials/compPic/<?php echo $compPic; ?>" alt="Responsive image" height="300" width="100%" style="object-fit: cover;">
     <ul class="nav nav-pills nav-fill p-2 bg-light">
         <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="viewcomp_main.php?compID=<?php echo $compID; ?>">Main</a>
+            <a class="nav-link active" aria-current="page" href="compDetails.php?compID=<?php echo $compID; ?>">Main</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="viewEntries.php?compID=<?php echo $compID ?>">View Entries</a>
