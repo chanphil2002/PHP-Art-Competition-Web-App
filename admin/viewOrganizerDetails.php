@@ -13,7 +13,7 @@
 <body class="form-v7">
 <div>
     <strong>
-		<center><h2>Organizer Detail</h2></center>
+		<br><center><h2>Organizer Detail</h2></center>
 	</strong>
 </div>
 <div class="page-content">

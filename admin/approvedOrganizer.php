@@ -15,7 +15,7 @@
 <body>
     <div>
         <strong>
-            <center><h2>Organizer Application List</h2></center><br>
+            <br><center><h2>Organizer Application List</h2></center><br>
         </strong>
     </div>
     <div>
@@ -83,7 +83,7 @@
     if(isset($_GET["removeID"])){
         $removeID = $_GET['removeID'];
 
-        $delete = "DELETE FROM organizer WHERE organizerID = '$removeID'";
+        $delete = "UPDATE organizer SET organizerStatus = 'Terminated' WHERE organizerID = '$removeID'";
         $run_delete = mysqli_query($conn,$delete);
         if($run_delete == true) {
             echo "<script>alert('The organizer has been removed successfully!')

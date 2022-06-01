@@ -32,14 +32,14 @@
                         $gender = $row_user['gender'];
                         $phone = $row_user['phoneNum'];
 						$img = $row_user["userProfilePic"];
-						$imgPath = ("../user/userProfilePic/$img");
+						$imgPath = ("../materials/userPic/$img");
 
                 ?>
 				<?php
 					if($img != ""){
 				?>
 				<center><div>
-                    <img src="../user/userProfilePic/<?php echo $img?>" style="width: 10rem;"><br><br><br>
+					<br><img src="../materials/userPic/<?php echo $img?>" style="width: 10rem;"><br><br><br>
                 </div></center>
 				<?php }?>
 				<div class="form-row">
@@ -118,7 +118,6 @@
 				echo "<script>alert('Oops! Something went wrong, please try again.')</script>";
 			}
 		}else{
-        	unlink($imgPath);
 			$newProfilePic = $_FILES['profile_picture']['name'];
 			$tmp_name = $_FILES['profile_picture']['tmp_name'];
 
@@ -128,7 +127,8 @@
 			if($run_update == true){
 				echo "<script>alert('Profile updated successfully.')
 				location = 'viewUser.php' </script>";
-				move_uploaded_file($tmp_name, "../user/userProfilePic/$newProfilePic");
+				unlink($imgPath);
+				move_uploaded_file($tmp_name, "../materials/userPic/$newProfilePic");
 
 			}else {
 				echo "<script>alert('Oops! Something went wrong, please try again.')</script>";

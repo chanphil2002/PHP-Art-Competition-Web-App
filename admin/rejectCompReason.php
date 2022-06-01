@@ -13,7 +13,7 @@
 <body class="form-v7">
 	<div>
     <strong>
-        <center><h2>Reason of Rejection</h2></center>
+        <br><center><h2>Reason of Rejection</h2></center>
     </strong>
 </div>
 <div class="page-content">
@@ -23,13 +23,11 @@
                     if (isset($_GET['selectedComp'])){
                         $compID = $_GET['selectedComp'];
 
-                        echo $compID;
-
                         $sql = "SELECT * FROM competition WHERE compID = '$compID'";
                         $result = mysqli_query($conn, $sql);
                         $row_comp = mysqli_fetch_assoc($result);
                         $status = $row_comp['status'];
-                        $reason = $row_comp['reason'];
+                        $reason = $row_comp['rejectedComment'];
                 ?>
                 <div class="form-row">
 					<br><label for="reason" class="form-label">Reason of Rejection</label>
@@ -48,10 +46,15 @@
 <?php 
     if (isset($_POST["submit"])){
         $reason = $_POST['reason'];
-		$update = "UPDATE competition SET status= 'Rejected', reason = '$reason' WHERE compID = '$compID'";
+		$update = "UPDATE competition SET status= 'Rejected', rejectedComment = '$reason' WHERE compID = '$compID'";
 		$run_update = mysqli_query($conn, $update);
 
-		if($run_update == true){
+        $select = "SELECT judgeIC FROM comp_judge WHERE compID = '$compID'";
+        $result = mysqli_query($conn, $select);
+        $judgeAssigned = mysqli_fetch_assoc($result);
+        $judgeIC = $judgeAssigned['judgeIC'];
+
+		if($run_update == true && $run_delete == true){
 			echo "<script>alert('The competition has been rejected.')
 			location = 'rejectedComp.php' </script>";
 

@@ -13,7 +13,7 @@
 <body class="form-v7">
 <div>
     <strong>
-		<center><h2>Competition Detail</h2></center>
+		<br><center><h2>Competition Detail</h2></center>
 	</strong>
 </div>
 <div class="page-content">
@@ -117,7 +117,6 @@
 				<P>JUDGE ASSIGNED</p>
 				<div class="row row-cols-1 row-cols-md-2 g-4">
 				<?php
-					// $sql4 = "SELECT * FROM comp_judge INNER JOIN judge WHERE compID = '$compID'";
 					$sql4 = "SELECT judgeIC FROM comp_judge WHERE compID = '$compID'";
 					$result4 = mysqli_query($conn, $sql4);
 					if (mysqli_num_rows($result4) == 0){
@@ -132,17 +131,22 @@
 					$judgeName = $info['judgeName'];
 					$judgeEmail = $info['judgeEmail'];
 					$judgePic = $info['judgeProfilePic'];
-					$path = ("../materials/judgeProfile/$judgePic");
+					$judgeBio = $info['judgeBio'];
+					$path = ("../materials/judgeProfilePic/$judgePic");
 
+					if (isset($_POST["approve"])){
+						$createJudge = "UPDATE judge SET status='Approved' WHERE judgeIC = '$judgeIC'";
+						$run_create = mysqli_query($conn, $createJudge);
+					} 
 				?>
 				<div class="col">
 					<div class="card">
-					<img src="../materials/judgeProfile/<?php echo $judgePic?>" class="card-img-top">
+					<img src="../materials/judgeProfilePic/<?php echo $judgePic?>" class="card-img-top">
 					<div class="card-body">
 						<h5 class="card-title" style="color: black;"><?php echo $judgeName?></h5>
 						<p class="card-text">IC: <?php echo $judgeIC ?> </p>
 						<p class="card-text">Email: <?php echo $judgeEmail ?> </p>
-						<a href="viewJudgeDetails.php?viewIC=<?php echo $judgeIC?>"><button type="button" class="btn btn-link" style='float:right;'>View More</button></a>
+						<p class="card-text">Bio: <?php echo $judgeBio ?> </p>
 					</div>
 					</div>
 				</div>
@@ -205,9 +209,20 @@
 		$update = "UPDATE competition SET status= 'Approved' WHERE compID = '$compID'";
 		$run_update = mysqli_query($conn, $update);
 
-		if($run_update == true){
+		if($run_update == true && $run_create == true){
 			echo "<script>alert('The competition has been approved.')
 			location = 'approvedComp.php' </script>";
+
+		}else {
+			echo "<script>alert('Oops! Something went wrong, please try again.')</script>";
+		}
+	} else if (isset($_POST["reject"])){
+		$update = "UPDATE competition SET status= 'Rejected' WHERE compID = '$compID'";
+		$run_update = mysqli_query($conn, $update);
+
+		if($run_update == true && $deleteJudge == true){
+			echo "<script>alert('The competition has been rejected.')
+			location = 'rejectCompReason.php?selectedComp=<?php echo $compID?>' </script>";
 
 		}else {
 			echo "<script>alert('Oops! Something went wrong, please try again.')</script>";

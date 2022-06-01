@@ -8,7 +8,7 @@
         $id = $_POST["judgeid"];
         $pw = $_POST["password"];
 
-        $sql = "SELECT * FROM judge WHERE judgeIC = '$id' AND judgePassword = '$pw' LIMIT 1";
+        $sql = "SELECT * FROM judge WHERE judgeIC = '$id' AND judgePassword = '$pw' AND status != 'Pending' LIMIT 1";
         $result = mysqli_query($conn, $sql);
 
         if (mysqli_num_rows($result) == 1){

@@ -15,7 +15,7 @@
 <body>
     <div>
         <strong>
-            <center><h2>Competition Application List</h2></center><br>
+            <br><center><h2>Competition Application List</h2></center><br>
         </strong>
     </div>
     <div>
