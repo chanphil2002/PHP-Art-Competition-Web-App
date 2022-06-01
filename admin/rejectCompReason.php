@@ -49,12 +49,7 @@
 		$update = "UPDATE competition SET status= 'Rejected', rejectedComment = '$reason' WHERE compID = '$compID'";
 		$run_update = mysqli_query($conn, $update);
 
-        $select = "SELECT judgeIC FROM comp_judge WHERE compID = '$compID'";
-        $result = mysqli_query($conn, $select);
-        $judgeAssigned = mysqli_fetch_assoc($result);
-        $judgeIC = $judgeAssigned['judgeIC'];
-
-		if($run_update == true && $run_delete == true){
+		if($run_update == true){
 			echo "<script>alert('The competition has been rejected.')
 			location = 'rejectedComp.php' </script>";
 

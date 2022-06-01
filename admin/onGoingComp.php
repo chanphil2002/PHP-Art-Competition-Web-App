@@ -26,13 +26,13 @@ session_start();
     <div>
         <ul class="nav nav-tabs">
             <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="pendingComp.php">Pending</a>
+                <a class="nav-link" aria-current="page" href="pendingComp.php">Pending</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="approvedComp.php">Upcoming</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="onGoingComp.php">On-going</a>
+                <a class="nav-link active" href="onGoingComp.php">On-going</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="passComp.php">Pass</a>
@@ -59,7 +59,7 @@ session_start();
                 <?php
                 $count = 1;
                 $sum = 0;
-                $sql = "SELECT * FROM competition WHERE status = 'Pending'";
+                $sql = "SELECT * FROM competition WHERE status = 'On-Going'";
                 $result = mysqli_query($conn, $sql);
                 while ($row_comp = mysqli_fetch_assoc($result)) {
                     $id = $row_comp['compID'];
