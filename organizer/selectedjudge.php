@@ -19,7 +19,7 @@ ob_start();
 <a class="btn btn-success btn-lg mx-auto px-5" href="choosejudge.php" role="button"><i class="fa-solid fa-user-graduate me-2"></i>Choose Judges</a>
 
 </div>
-<a class="btn btn-outline-primary ms-5 mb-2" href="../admin/addJudge.php" role="button"><i class="fa-solid fa-user-plus me-2"></i>Add New Judge</a>
+<a class="btn btn-outline-primary ms-5 mb-2" href="../organizer/newjudge.php" role="button"><i class="fa-solid fa-user-plus me-2"></i>Add New Judge</a>
 
 
 

@@ -97,6 +97,12 @@
             <input type="number" name="evaluationDays" class="form-control" id="evaluationDays" placeholder="How many days for evaluation?" required>
         </div>
 
+        <div class="mb-3">
+            <label for="price">Payment Receipt</label>
+            <div class="input-group mb-3">
+                <input type="file" class="form-control" name="receipt" id="receipt" required>       
+            </div>
+        </div>
 
         <hr class="mb-4">
         <button class="btn btn-primary btn-lg btn-block mx-auto d-flex px-5" name="submit" type="submit">Continue</button>
@@ -156,6 +162,20 @@
             $compPic="";
         }
 
+        if(isset($_FILES['receipt']['name']))
+        {
+            $receipt = $_FILES['receipt']['name'];
+            $image1 = explode('.', $receipt);
+            $ext1 = end($image1);
+            $receipt = rand(000,999).".".$ext1;
+            $source1 = $_FILES['receipt']['tmp_name'];
+            $destination1 = "../materials/compReceipt/".$receipt;
+            $upload1 = move_uploaded_file($source1, $destination1);
+        }
+        else{
+            $receipt="";
+        }
+
         $sql = "INSERT INTO competition SET
             compName = '$compName',
             organizerID = $organizerID,
@@ -169,7 +189,8 @@
             judgeScore = $judgeScore,
             publicVote = $publicVote,
             prizePool = $prizePool,
-            compPic = '$compPic'";
+            compPic = '$compPic',
+            receipt = '$receipt'";
 
         $res = mysqli_query($conn,$sql);
 

@@ -148,6 +148,7 @@ while ($row = mysqli_fetch_assoc($res)) {
         <a href="editcomp.php?compID=<?php echo $compID; ?>"><button type="button" class="btn btn-primary btn-lg mx-auto px-5">Edit</button></a>
         <a href=""><button type="button" class="btn btn-danger btn-lg mx-auto px-5">Delete</button></a>
         <a href=""><button type="button" class="btn btn-secondary btn-lg mx-auto px-5">View Feedback</button></a>
+        <a href="addcert.php?compID=<?php echo $compID; ?>" type="button" class="btn btn-warning btn-lg mx-auto px-5">Submit Certificate</button></a>
     </div>
 
 

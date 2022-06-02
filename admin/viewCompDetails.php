@@ -128,7 +128,7 @@ session_start();
 					</div>
 					<div class="form-row">
 						<br><label for="prize" class="form-label">PRIZE POOL</label>
-						<textarea class="form-control" name="prize" id="prize" rows="30" <?php echo $update ?>><?php echo $prizePool ?></textarea><br><br>
+						<input type="text" name="prize" id="prize" class="input-text" value="<?php echo $prizePool ?>" <?php echo $update ?>>
 					</div>
 					<P>JUDGE ASSIGNED</p>
 					<div class="row row-cols-1 row-cols-md-2 g-4">

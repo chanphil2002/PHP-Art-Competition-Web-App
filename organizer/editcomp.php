@@ -24,8 +24,8 @@ if(isset($_GET['compID']))
 
 <form action="" method="POST" enctype="multipart/form-data">
     <div class="mx-auto">
-        <a class="btn btn-outline-success ms-5 rounded-end rounded-5" href="selectedjudge.php" role="button">&laquo;
-            Back to Judges Allocation page </a>
+        <a class="btn btn-outline-success ms-5 rounded-end rounded-5 mt-2" href="viewcomp_main.php?compID=<?php echo $compID;?>" role="button">&laquo;
+            Back to Competition Details page </a>
         <h1 class="pt-5 ms-5 text-center mb-4">Edit Competition</h1>
     </div>
 
@@ -101,7 +101,6 @@ if(isset($_GET['compID']))
                 <label for="exampleFormControlTextarea1">Competition Description</label>
                 <textarea class="form-control" name="description" id="exampleFormControlTextarea1" rows="3"
                     placeholder="Tell more about the competition..." required><?php echo $description;?></textarea>
-                placeholder="Tell more about the competition..." required><?php echo $description;?></textarea>
             </div>
 
             <div class="mb-3">
