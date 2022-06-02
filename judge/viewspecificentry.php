@@ -10,6 +10,11 @@ if (isset($_GET['entryID']) & isset($_GET['compID'])) {
     $res1 = mysqli_query($conn, $sql1);
     $sql4 = "SELECT * from score_criteria WHERE compID='$compID' AND entryID='$entryID'";
     $res4 = mysqli_query($conn, $sql4);
+    $sql5 = "SELECT compPic FROM competition WHERE compID='$compID'";
+    $res5 = mysqli_query($conn, $sql5);
+    while ($row8 = mysqli_fetch_assoc($res5)) {
+        $compPic = $row8['compPic'];
+    }
 } else {
     echo "mistake";
 }
@@ -93,7 +98,7 @@ if (isset($_POST['submit'])) {
 </head>
 
 <body>
-    <img src="../materials/image/test1.jpg" alt="Responsive image" height="300" style="background-size:cover">
+    <img src="../materials/compPic/<?php echo $compPic; ?>" alt="Responsive image" height="300" style="background-size:cover">
     <ul class="nav nav-pills nav-fill p-2 bg-light">
         <li class="nav-item">
             <a class="nav-link" aria-current="page" href="viewcompmain.php?compID=<?php echo $compID; ?>">Main</a>
@@ -114,7 +119,7 @@ if (isset($_POST['submit'])) {
         <div class="card mb-3">
             <div class="row g-0">
                 <div class="col-md-7">
-                    <img class="card-img-left" src="../materials/image/<?php echo $entryFile ?>" class="img-fluid rounded-start" alt="...">
+                    <img class="card-img-left" src="../materials/entries/<?php echo $entryFile; ?>" class="img-fluid rounded-start" alt="...">
                 </div>
                 <div class="col-md-5">
                     <div class="card-body">

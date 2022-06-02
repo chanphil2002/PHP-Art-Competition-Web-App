@@ -6,9 +6,16 @@ if (isset($_GET['compID'])) {
     $sql = "SELECT comp_judge.compID, comp_judge.judgeIC, judge.judgeName, judge.judgeBio, judge.judgeProfilePic 
             FROM comp_judge INNER JOIN Judge ON comp_judge.judgeIC = judge.judgeIC AND compID='$compID'";
     $res = mysqli_query($conn, $sql);
+    $sql2 = "SELECT compPic FROM competition WHERE compID='$compID'";
+    $res2 = mysqli_query($conn, $sql2);
+    while ($result = mysqli_fetch_assoc($res2)) {
+        $compPic = $result['compPic'];
+    }
 } else {
     echo "mistake";
 }
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -22,7 +29,7 @@ if (isset($_GET['compID'])) {
 </head>
 
 <body>
-    <img src="../materials/image/test1.jpg" alt="Responsive image" height="300" style="background-size:cover">
+    <img src="../materials/compPic/<?php echo $compPic; ?>" alt="Responsive image" height="300" style="background-size:cover">
     <ul class="nav nav-pills nav-fill p-2 bg-light">
         <li class="nav-item">
             <a class="nav-link" aria-current="page" href="viewcompmain.php?compID=<?php echo $compID; ?>">Main</a>

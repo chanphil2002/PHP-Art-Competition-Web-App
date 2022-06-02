@@ -39,7 +39,7 @@ if (isset($_POST['submit2'])) {
 </head>
 
 <body>
-    <img src="../materials/image/test1.jpg" alt="Responsive image" height="300" style="background-size:cover">
+    <img src="../materials/compPic/<?php echo $compPic; ?>" alt="Responsive image" height="300" style="background-size:cover">
     <ul class="nav nav-pills nav-fill p-2 bg-light">
         <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="viewcompmain.php?compID=<?php echo $compID; ?>">Main</a>

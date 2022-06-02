@@ -3,7 +3,7 @@ include("partials/header.php");
 include("partials/database.php");
 
 session_start();
-if (!isset($_SESSION["user"])){
+if (!isset($_SESSION["user"])) {
     header("Location: ../general/registeredUserLogin.php");
 }
 ?>
@@ -14,6 +14,11 @@ if (isset($_GET['entryID']) & isset($_GET['compID'])) {
     $compID = $_GET['compID'];
     $sql = "SELECT * FROM entry E INNER JOIN user U ON E.userEmail = U.userEmail WHERE entryID='$entryID'";
     $res = mysqli_query($conn, $sql);
+    $sql8 = "SELECT compPic FROM competition WHERE compID='$compID'";
+    $result8 = mysqli_query($conn, $sql8);
+    while ($row8 = mysqli_fetch_assoc($result8)) {
+        $compPic = $row8['compPic'];
+    }
 } else {
     header("Location: homepage.php");
 }
@@ -66,20 +71,20 @@ while ($row = mysqli_fetch_assoc($res)) {
                 <div class="col-md-5">
                     <div class="card-body">
                         <h5 class="card-title" style="color:black"><?php echo $title ?></h5>
-                        <p class="card-text"><small class="text-muted">By 
-                            <?php if ($userEmail == $_SESSION["user"]){ ?>
+                        <p class="card-text"><small class="text-muted">By
+                                <?php if ($userEmail == $_SESSION["user"]) { ?>
                                     <a href="myComp.php">
-                            <?php } else{ 
+                                    <?php } else {
                                     $get = "SELECT * FROM user WHERE userEmail = '$userEmail' ";
                                     $run = mysqli_query($conn, $get);
-                                    while ($view = mysqli_fetch_assoc($run)){
+                                    while ($view = mysqli_fetch_assoc($run)) {
                                         $viewUsername = $view["username"];
                                     } ?>
-                                    <a href="userComp.php?username=<?php echo $viewUsername; ?>">
-                            <?php }
-                                echo $username; 
-                            ?>
-                        </a></small></p>
+                                        <a href="userComp.php?username=<?php echo $viewUsername; ?>">
+                                        <?php }
+                                    echo $username;
+                                        ?>
+                                        </a></small></p>
                         <br>
 
                         <?php

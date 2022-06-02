@@ -5,11 +5,11 @@ if (isset($_POST['submit2'])) {
     $filter = $_POST['filter_dropdown'];
     $sort = $_POST['sort_dropdown'];
 
-    if ($filter == " " && $sort == " ") {
-        $sql1 = "SELECT * FROM competition WHERE (compName LIKE '%$search%' OR category LIKE '%$search%')";
+    if ($filter == " ") {
+        $sql1 = "SELECT * FROM competition WHERE (compName LIKE '%$search%' OR category LIKE '%$search%') AND status <> 'Pending'";
         $res1 = mysqli_query($conn, $sql1);
     } else if ($search == " ") {
-        $sql1 = "SELECT * FROM competition WHERE STATUS LIKE '%filter%'";
+        $sql1 = "SELECT * FROM competition WHERE STATUS LIKE '%filter%' AND status <> 'Pending' ";
         $res1 = mysqli_query($conn, $sql1);
     } else {
         $sql1 = "SELECT * FROM competition WHERE (compName LIKE '%$search%' OR category LIKE '%$search%') AND status LIKE '%$filter%'";
@@ -17,6 +17,18 @@ if (isset($_POST['submit2'])) {
         // echo "<script>alert('$filter');</script>";
         // echo "<script>alert('$search');</script>";
         // $sort = $_POST['sort_dropdown'];
+    }
+
+    if ($sort == "RegistrationDeadline") {
+        $result1 = mysqli_fetch_assoc($res1);
+        $sql2 = "SELECT * FROM $result1 ORDER BY registrationDeadline";
+        $res2 = mysqli_query($conn, $sql2);
+    } else if ($sort == "ReleaseDate") {
+        $result1 = mysqli_fetch_assoc($res1);
+        $sql2 = "SELECT * FROM $result1 ORDER BY releaseDate";
+        $res2 = mysqli_query($conn, $sql2);
+    } else {
+        $res2 = $res1;
     }
 }
 
@@ -77,7 +89,7 @@ if (isset($_POST['submit2'])) {
                     <label for="sort_dropdown"></label>
                     <select name="sort_dropdown" id="sort_dropdown">
                         <option value=" "> Sort By: Please Select </option>
-                        <option value="Competition Date"> Sort By: Competition Date</option>
+                        <option value="ReleaseDate"> Sort By: Release Date</option>
                         <option value="Registration Dateline">Sort By: Registration Dateline</option>
                         <option value="Popularity">Sort By: Popularity</option>
                     </select>
@@ -105,9 +117,9 @@ if (isset($_POST['submit2'])) {
 
                 <div class="row">
                     <?php
-                    $count = mysqli_num_rows($res1);
+                    $count = mysqli_num_rows($res2);
                     if ($count > 0) {
-                        while ($row1 = mysqli_fetch_assoc($res1)) {
+                        while ($row1 = mysqli_fetch_assoc($res2)) {
 
                             $compID = $row1['compID'];
                             $compName1 = $row1['compName'];
@@ -120,7 +132,7 @@ if (isset($_POST['submit2'])) {
                                 <div class="card border-1 grid-list">
                                     <a href="viewcompmain.php?compID=<?php echo $compID; ?>" class="stretched-link">
                                         <span class="badge rounded-pill text-bg-success position-absolute top-0 end-0"><?php echo $status1; ?></span>
-                                        <img class="card-img-top lazy" src="../materials/image/<?php echo $compPic1; ?>">
+                                        <img class="card-img-top lazy" src="../materials/compPic/<?php echo $compPic1; ?>">
                                     </a>
                                     <div class="card-  description text-truncate text-color-2">
                                         23 May 2022 / <?php echo $category1; ?>

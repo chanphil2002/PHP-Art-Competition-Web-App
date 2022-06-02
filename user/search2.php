@@ -14,7 +14,7 @@ if (isset($_POST['submit2'])) {
         $sql1 = "SELECT * FROM competition WHERE STATUS LIKE '%filter%'  AND status <> 'Pending'";
         $res1 = mysqli_query($conn, $sql1);
     } else {
-        $sql1 = "SELECT * FROM competition WHERE (compName LIKE '%$search%' OR category LIKE '%$search%') AND status LIKE '%$filter%' AND status <> 'Pending'";
+        $sql1 = "SELECT * FROM competition WHERE (compName LIKE '%$search%' OR category LIKE '%$search%') AND status LIKE '%$filter%'";
         $res1 = mysqli_query($conn, $sql1);
         // echo "<script>alert('$filter');</script>";
         // echo "<script>alert('$search');</script>";
@@ -70,9 +70,9 @@ if (isset($_POST['submit2'])) {
                     <label for="filter_dropdown"></label>
                     <select name="filter_dropdown" id="filter_dropdown">
                         <option <?php if ($_POST['filter_dropdown'] == ' ') { ?>selected="true" <?php }; ?> value=" ">Filter By: All Competitions </option>
-                        <option value="Upcoming">Filter By: Upcoming Competition</option>
-                        <option value="On-Going">Filter By: Ongoing Competition</option>
-                        <option value="Pending">Filter By: Past Competition</option>
+                        <option <?php if ($_POST['filter_dropdown'] == 'Upcoming') { ?>selected="true" <?php }; ?>value="Upcoming">Filter By: Upcoming Competition</option>
+                        <option <?php if ($_POST['filter_dropdown'] == 'On-Going') { ?>selected="true" <?php }; ?>value="On-Going">Filter By: Ongoing Competition</option>
+                        <option <?php if ($_POST['filter_dropdown'] == 'Pending') { ?>selected="true" <?php }; ?>value="Pending">Filter By: Past Competition</option>
                     </select>
 
                     <!-- <span aria-label="Sort By" style="position:relative; box-sizing: border-box"></span>
