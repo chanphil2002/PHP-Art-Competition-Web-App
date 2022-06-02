@@ -102,6 +102,10 @@ while ($row = mysqli_fetch_assoc($res)) {
                             <?php   } else { ?>
                                 <h3>&#128147; Voted </h3>
                         <?php }
+                        }elseif ($status == "Past") {
+                            if ($userEmail == $_SESSION["user"]){ ?>
+                                Get My E-certificate <a href="ecert.php?compID=<?php echo $compID; ?>">Here</a>
+                        <?php }
                         } ?>
 
                     </div>

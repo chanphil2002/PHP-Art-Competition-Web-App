@@ -179,7 +179,7 @@ if (!isset($_SESSION["user"])) {
     <br>
 
     <!-- 2D Digital Arts -->
-    <div>
+    <div class="container" style="max-width: 1320px">
         <h2 class="ml-5" style="margin-left: 15px; display:inline-block">2D Digital Arts</h2>
         <a href="allComp.php?category=2D" style="color:darkblue; margin-left: 900px">See more&nbsp;<i class="fa-solid fa-angle-right"></i></a>
     </div>
