@@ -3,6 +3,9 @@ include("partials/header.php");
 include("partials/database.php");
 
 session_start();
+if (!isset($_SESSION["user"])){
+    header("Location: ../general/registeredUserLogin.php");
+}
 ?>
 
 <?php
@@ -12,12 +15,13 @@ if (isset($_GET['entryID']) & isset($_GET['compID'])) {
     $sql = "SELECT * FROM entry E INNER JOIN user U ON E.userEmail = U.userEmail WHERE entryID='$entryID'";
     $res = mysqli_query($conn, $sql);
 } else {
-    echo "mistake";
+    header("Location: homepage.php");
 }
 while ($row = mysqli_fetch_assoc($res)) {
     $entryID = $row['entryID'];
     $entryFile = $row['entryFile'];
     $title = $row['title'];
+    $userEmail = $row['userEmail'];
     $username = $row['username'];
     $vote = $row['vote'];
     $score = $row['score'];
@@ -62,7 +66,20 @@ while ($row = mysqli_fetch_assoc($res)) {
                 <div class="col-md-5">
                     <div class="card-body">
                         <h5 class="card-title" style="color:black"><?php echo $title ?></h5>
-                        <p class="card-text"><small class="text-muted">By <a href=""><?php echo $username; ?></a></small></p>
+                        <p class="card-text"><small class="text-muted">By 
+                            <?php if ($userEmail == $_SESSION["user"]){ ?>
+                                    <a href="myComp.php">
+                            <?php } else{ 
+                                    $get = "SELECT * FROM user WHERE userEmail = '$userEmail' ";
+                                    $run = mysqli_query($conn, $get);
+                                    while ($view = mysqli_fetch_assoc($run)){
+                                        $viewUsername = $view["username"];
+                                    } ?>
+                                    <a href="userComp.php?username=<?php echo $viewUsername; ?>">
+                            <?php }
+                                echo $username; 
+                            ?>
+                        </a></small></p>
                         <br>
 
                         <?php

@@ -68,7 +68,7 @@
 	        <div class="page-content">
 		        <div class="form-v7-content">
 			        <form class="form-detail" action="#" method="post" id="myform" enctype="multipart/form-data">
-                    <center><image src="../materials/image/<?php echo $compPic; ?>" style="width:120px;height:auto;" class="" alt="..."></center><br>
+                    <center><image src="../materials/compPic/<?php echo $compPic; ?>" style="width:120px;height:auto;" class="" alt="..."></center><br>
 				        <div class="form-row">
 					        <strong><h2 class="text-1"><?php echo $compName; ?></h2></strong>
 					        <br><br><br><br><br>
