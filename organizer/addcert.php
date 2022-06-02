@@ -8,22 +8,22 @@ if(isset($_GET['compID']))
 
 <form action="" method="POST" enctype="multipart/form-data">
 <div class="mx-auto" >
-    <h1 class="pt-5 ms-5">Payment</h1>
+    <h1 class="pt-5 ms-5">Competition Certificate</h1>
 </div>
 
 <div class="row" >
     <div class="col-md-4 order-md-2 mb-4 mx-auto">
 
     <div class="mb-3">
-            <label for="price">Payment Receipt</label>
+            <label for="price">Upload Certificate for participants:</label>
             <div class="input-group mb-3">
-                <input type="file" class="form-control" name="receipt" id="receipt" required>       
+                <input type="file" class="form-control" name="compCert" id="compCert" required>       
             </div>
         </div>
 
         <hr class="mb-4">
         <input type="hidden" id='compID' name='compID' value= "<?php echo $compID;?>">
-        <button class="btn btn-primary btn-lg btn-block mx-auto d-flex px-5" name="submit" type="submit">Submit Request</button>
+        <button class="btn btn-primary btn-lg btn-block mx-auto d-flex px-5" name="submit" type="submit">Submit Certificate</button>
     </div>
 </div>
 
@@ -35,31 +35,32 @@ if(isset($_GET['compID']))
     if(isset($_POST['submit']))
     {
         $compID = $_POST['compID'];
-        $receipt = $_POST['receipt'];
 
-        if(isset($_FILES['receipt']['name']))
+        if(isset($_FILES['compCert']['name']))
         {
-            $receipt = $_FILES['receipt']['name'];
-            $image = explode('.', $receipt);
+            $compCert = $_FILES['compCert']['name'];
+            $image = explode('.', $compCert);
             $ext = end($image);
-            $receipt = rand(000,999).".".$ext;
-            $source = $_FILES['receipt']['tmp_name'];
-            $destination = "../materials/compReceipt/".$receipt;
+            $compCert = rand(000,999).".".$ext;
+            $source = $_FILES['compCert']['tmp_name'];
+            $destination = "../materials/compCert/".$compCert;
             $upload = move_uploaded_file($source, $destination);
         }
         else{
-            $receipt="";
+            $compCert="";
         }
 
         $sql = "UPDATE competition SET
-            receipt = '$receipt'
+            compCert = '$compCert'
             WHERE compID = $compID";
 
         $res = mysqli_query($conn,$sql);
 
         if($res == true)
         {   
-            header("location:" . SITEURL . "organizer/orghome.php");
+            $_SESSION['compID'] = $compID;
+            echo $_SESSION['compID'];
+            header("location:" . SITEURL . "organizer/viewcomp_main.php?compID=".$compID);
             
         }
 
