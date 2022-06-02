@@ -29,11 +29,15 @@
 
     <link rel="stylesheet" href="../admin/addJudge.css" />
 </head>
-<body class="form-v7">
+<body>
     <br>
-    <div class="page-content">
-		        <div class="form-v7-content">
-        <?php echo $name; ?>
+    <center>
+        <h2 style="color:darkblue"><?php echo $name; ?></h2>
+        <br>
+		<iframe src="../materials/compCert/<?php echo $cert ?>" width="800" height="100%">
+		</iframe><br><br>
+        <a href="myComp.php"><button type="button" class="btn btn-success">Back to My Competitions</button></a>
+	</center>
     <br>
 </body>
 </html>

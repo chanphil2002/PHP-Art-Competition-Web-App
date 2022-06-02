@@ -40,7 +40,7 @@ while ($row = mysqli_fetch_assoc($res)) {
 </head>
 
 <body>
-    <!-- <img class="img" src="../materials/compPic/<?php echo $compPic; ?>" alt="Responsive image" height="300" width="100%" style="object-fit: cover;"> -->
+    <img class="img" src="../materials/compPic/<?php echo $compPic; ?>" alt="Responsive image" height="300" width="100%" style="object-fit: cover;">
     <ul class="nav nav-pills nav-fill p-2">
         <li class="nav-item">
             <a class="nav-link" aria-current="page" href="compDetails.php?compID=<?php echo $compID; ?>">Main</a>
@@ -52,7 +52,7 @@ while ($row = mysqli_fetch_assoc($res)) {
             <a class="nav-link" href="compRubric.php?compID=<?php echo $compID; ?>">Scoring Rubric</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="conpAbout.php?compID=<?php echo $compID; ?>">About</a>
+            <a class="nav-link" href="compAbout.php?compID=<?php echo $compID; ?>">About</a>
         </li>
     </ul>
 
