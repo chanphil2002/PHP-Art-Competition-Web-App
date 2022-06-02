@@ -7,7 +7,7 @@ if (isset($_GET['entryID']) & isset($_GET['compID'])) {
     $sql = "SELECT * FROM entry WHERE entryID='$entryID'";
     $res = mysqli_query($conn, $sql);
 } else {
-    echo "mistake";
+    header("Location: ../organizer/orghome.php");
 }
 while ($row = mysqli_fetch_assoc($res)) {
     $entryID = $row['entryID'];

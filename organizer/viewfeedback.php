@@ -7,7 +7,7 @@ if (isset($_GET['compID'])) {
             FROM comp_judge INNER JOIN Judge ON comp_judge.judgeIC = judge.judgeIC and compID='$compID'";
     $res = mysqli_query($conn, $sql);
 } else {
-    echo "mistake";
+    header("Location: ../organizer/orghome.php");
 }
 ?>
 <!DOCTYPE html>

@@ -2,10 +2,13 @@
 
     
 ob_start();
+if (!isset($_SESSION["compID"])){
+    header("Location: ../organizer/orghome.php");
+}else{
     $compID = $_SESSION['compID'];
     $sql2 = "SELECT C.*, J.* FROM comp_judge C INNER JOIN judge J ON C.judgeIC = J.judgeIC AND C.compID = '$compID'";
     $res2 = mysqli_query($conn, $sql2);
-
+}
 
 ?>
 

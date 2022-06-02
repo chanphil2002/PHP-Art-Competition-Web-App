@@ -2,11 +2,14 @@
 
     
 ob_start();
+if (!isset($_SESSION["compID"])){
+    header("Location: ../organizer/orghome.php");
+}else{
     $compID = $_SESSION['compID'];
     $sql2 = "SELECT * FROM comp_criteria WHERE compID = '$compID'";
     $res2 = mysqli_query($conn, $sql2);
 
-
+}
 ?>
 
 <div class="mx-auto" >
@@ -64,6 +67,7 @@ ob_start();
 <div class="d-grid gap-2 d-md-flex justify-content-md-center">
     <a class="btn btn-lg btn-info ms-5 mb-3 rounded-5 me-5 px-5 text-black py-2" 
     href="viewcomp_main.php?compID=<?php echo $compID;?>" role="button"><b>CONFIRM</b></a>
+    
 </div>
 
 

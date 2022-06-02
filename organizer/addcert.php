@@ -3,7 +3,9 @@
 if(isset($_GET['compID']))
     {
         $compID = $_GET['compID'];
-    }
+}else {
+    header("Location: ../organizer/orghome.php");
+}
 ?>
 
 <form action="" method="POST" enctype="multipart/form-data">
@@ -15,9 +17,9 @@ if(isset($_GET['compID']))
     <div class="col-md-4 order-md-2 mb-4 mx-auto">
 
     <div class="mb-3">
-            <label for="price">Upload Certificate for participants:</label>
+            <label for="price">Upload Certificate for participants (in PDF):</label>
             <div class="input-group mb-3">
-                <input type="file" class="form-control" name="compCert" id="compCert" required>       
+                <input type="file" class="form-control" name="compCert" accept=".pdf" id="compCert" required>       
             </div>
         </div>
 
@@ -59,8 +61,8 @@ if(isset($_GET['compID']))
         if($res == true)
         {   
             $_SESSION['compID'] = $compID;
-            echo $_SESSION['compID'];
             header("location:" . SITEURL . "organizer/viewcomp_main.php?compID=".$compID);
+            // echo '<script>alert("Certificate Submitted!")</script>';
             
         }
 

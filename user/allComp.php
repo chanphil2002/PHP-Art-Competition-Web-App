@@ -4,11 +4,11 @@
 
     session_start();
     if (!isset($_SESSION["user"])){
-        header("Location: ../general/registeredUserLogin.php");
+ header("Location: ../general/registeredUserLogin.php");
     }
 
     if (isset($_GET["category"])){
-        $category = $_GET["category"];
+          $category = $_GET["category"];
         $sql = "SELECT * FROM competition C INNER JOIN organizer O ON C.organizerID = O.organizerID WHERE category = '$category' AND status != 'Pending' ";
         $res = mysqli_query($conn, $sql);
     }elseif(isset($_GET["Participated"])){

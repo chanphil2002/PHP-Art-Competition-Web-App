@@ -1,61 +1,29 @@
-<?php include("../organizer/partials/header.php"); ?>
+<?php include("../organizer/partials/header.php"); 
 
 
-<!-- Carousel
-  <div id="testimonials" class="carousel slide" data-ride="carousel" data-interval="2000" data-pause="hover">
-    <ol class="carousel-indicators">
-      <li data-target="#testimonials" data-slide-to="0" class="active"></li>
-      <li data-target="#testimonials" data-slide-to="1"></li>
-      <li data-target="#testimonials" data-slide-to="2"></li>
-    </ol>
-    <div class="carousel-inner">
-      <div class="carousel-item active">
-        <img src="photo/carousel003.jpg" class="" style="width:640px;height:360px" alt="" >
-        <div class="carousel-caption d-none d-md-block">
-          <h3>Brown Rice</h3>
-          <p>Providing high nutrients with low calories.</p>
-          <a class="align btn btn-outline-success" href="details.php?ProID=3" role="button">View Details</a>
-        </div>
-      </div>
-      <div class="carousel-item">
-        <img src="photo/carousel008.jpg" class="" style="width:640px;height:360px" alt="...">
-        <div class="carousel-caption d-none d-md-block">
-          <h3>Organic Baby Noodle</h3>
-          <p>Containing Wheat Flour and vegetable powder.</p>
-          <a class="align btn btn-outline-success" href="details.php?ProID=8" role="button">View Details</a>
-        </div>
-      </div>
-      <div class="carousel-item">
-        <img src="photo/carousel013.jpg" class="" style="width:640px;height:360px" alt="...">
-        <div class="carousel-caption d-none d-md-block">
-          <h3>Organic Regular Rolled Oat</h3>
-          <p>An absolute whole grain that boosts our morning. It's completely a natural without any preservatives, coloring whatsoever.</p>
-          <a class="align btn btn-outline-success" href="details.php?ProID=13" role="button">View Details</a>
-        </div>
-      </div>
-    </div>
-    <button class="carousel-control-prev" type="button" data-target="#testimonials" data-slide="prev">
-      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-      <span class="sr-only">Previous</span>
-    </button>
-    <button class="carousel-control-next" type="button" data-target="#testimonials" data-slide="next">
-      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-      <span class="sr-only">Next</span>
-    </button>
-  </div>
- -->
+  if (!isset($_SESSION["organizer"])){
+      header("Location: ../general/otherRoleLogin.php");
+  }
+?>
+
 
 <?php
+$organizerEmail = $_SESSION['organizer'];
+$request = "SELECT * FROM organizer WHERE organizerEmail = '$organizerEmail'";
+$result = mysqli_query($conn, $request);
+$display = mysqli_fetch_assoc($result);
+$organizerID = $display['organizerID'];
+$organizerName = $display['organizerName'];
 //Create SQL Query to Display Categories from Database
-$sql = "SELECT * FROM competition";
+$sql = "SELECT * FROM competition WHERE organizerID = $organizerID";
 //Execute the Query
 $res = mysqli_query($conn, $sql);
 ?>
 
 
-<div class="album py-5 bg-light">
+<div class="album py-5">
   <div class="ms-5">
-    <h1>Organizer's Competition</h1>
+    <h1><?php echo $organizerName;?>'s Competition</h1>
     <a class="btn btn-success" href="addcomp.php" role="button">Create Competition</a>
     <?php
     if (isset($_SESSION['add'])) {
@@ -78,7 +46,7 @@ $res = mysqli_query($conn, $sql);
         $registrationDeadline = $row['registrationDeadline'];
       ?>
         <div class="col-md-4 margincon1 mb-4">
-          <div class="card border-1 grid-list">
+          <div class="card border-1 grid-list ">
             <a href="../organizer/viewcomp_main.php?compID= <?php echo $compID; ?>" class="stretched-link">
               <span class="badge rounded-pill text-bg-success position-absolute top-0 end-0"><?php echo $status; ?></span>
               <img class="card-img-top lazy" src="../materials/compPic/<?php echo $compPic; ?>">
