@@ -26,15 +26,15 @@
     <a class="navbar-brand ml-5" href="homepage.php">
       <img src="../user/partials/logo.png" alt="Virtual" width="200">
     </a>
-    <form action="search.php" method="POST" class="d-flex">
+    <!-- <form action="search.php" method="POST" class="d-flex">
       <input class="form-control me-2 mr-sm-2 col-md-5 ml-5" type="search" name="search" placeholder="Interested in Anything?">
       <input type="submit" name="submit" value="Search" class="btn btn-outline-light my-2 my-sm-0">
-    </form>
+    </form> -->
     <nav class="navbar navbar-expand-xl">
       <ul class="navbar-nav">
 
         <li class="nav-item">
-          <a class="btn btn-info" href="allComp.php" role="button"><i class="fa-solid fa-trophy"></i>&nbsp; Competitions</a>&nbsp;&nbsp;&nbsp;
+          <a class="btn btn-info" href="pendingComp.php" role="button"><i class="fa-solid fa-trophy"></i>&nbsp; Manage Competitions</a>&nbsp;&nbsp;&nbsp;
         </li>
 
         <li class="nav-item">
@@ -54,5 +54,8 @@
           </div>
         </li>
       </ul>
+      <li class="nav-item">
+        <a class="btn btn-info" href="pendingComp.php" role="button"><i class="fa-solid fa-trophy"></i>&nbsp; Manage Competitions</a>&nbsp;&nbsp;&nbsp;
+      </li>
     </nav>
   </nav>

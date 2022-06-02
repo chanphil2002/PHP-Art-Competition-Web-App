@@ -185,6 +185,7 @@ session_start();
 					<?php }
 					} ?>
 					</div>
+					<!-- display button according to competition status -->
 					<div class="form-row">
 						<?php
 						if ($status == "Pending") {
