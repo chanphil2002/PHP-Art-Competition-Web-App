@@ -229,7 +229,7 @@ if (!isset($_SESSION["user"])) {
     <br>
 
     <!-- 3D Digital Arts -->
-    <div>
+    <div class="container" style="max-width: 1320px">
         <h2 class="ml-5" style="margin-left: 15px; display:inline-block">3D Digital Arts</h2>
         <a href="allComp.php?category=3D" style="color:darkblue; margin-left: 900px">See more&nbsp;<i class="fa-solid fa-angle-right"></i></a>
     </div>
@@ -279,7 +279,7 @@ if (!isset($_SESSION["user"])) {
     <br>
 
     <!-- Paintings -->
-    <div>
+    <div class="container" style="max-width: 1320px">
         <h2 class="ml-5" style="margin-left: 15px; display:inline-block">Visual Art - Paintings</h2>
         <a href="allComp.php?category=Paintings" style="color:darkblue; margin-left: 800px">See more&nbsp;<i class="fa-solid fa-angle-right"></i></a>
     </div>
@@ -329,7 +329,7 @@ if (!isset($_SESSION["user"])) {
     <br>
 
     <!-- Photography -->
-    <div>
+    <div class="container" style="max-width: 1320px">
         <h2 class="ml-5" style="margin-left: 15px; display:inline-block">Visual Art - Photography</h2>
         <a href="allComp.php?category=Photography" style="color:darkblue; margin-left: 750px">See more&nbsp;<i class="fa-solid fa-angle-right"></i></a>
     </div>
