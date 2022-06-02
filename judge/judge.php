@@ -31,7 +31,7 @@ if (isset($_POST['search'])) {
         <form action="../judge/judge2.php" method="POST" class="d-flex">
           <input class="form-control me-2 mr-sm-2 col-md-5 ml-5" type="search" name="search" value="<?php echo $search ?>">
       </div>
-      <div class="col-12 col-competition-2">
+      <div class="col-12 col-competition-3">
         <div class="overflow-auto">
           <span aria-label="Filter By" style="position:relative; box-sizing: border-box; "></span>
           <label for="filter_dropdown"></label>
@@ -46,14 +46,14 @@ if (isset($_POST['search'])) {
             document.getElementById('filter_dropdown').value = "<?php echo $_GET['filter_dropdown']; ?>";
           </script>
 
-          <!-- <span aria-label="Sort By" style="position:relative; box-sizing: border-box"></span>
-                        <label for="sort_dropdown"></label>
-                        <select name="sort_dropdown" id="sort_dropdown">
-                            <option> Sort By: Please Select </option>
-                            <option value="Competition Date"> Sort By: Competition Date</option>
-                            <option value="Registration Dateline">Sort By: Registration Dateline</option>
-                            <option value="Popularity">Sort By: Popularity</option>
-                        </select> -->
+          <span aria-label="Sort By" style="position:relative; box-sizing: border-box"></span>
+          <label for="sort_dropdown"></label>
+          <select name="sort_dropdown" id="sort_dropdown">
+            <option> Sort By: Please Select </option>
+            <option value="Competition Date"> Sort By: Competition Date</option>
+            <option value="Registration Dateline">Sort By: Registration Dateline</option>
+            <option value="Popularity">Sort By: Popularity</option>
+          </select>
           <input type="submit" name="submit2" value="Search" class="btn btn-outline-dark my-2 my-sm-0" style="margin-left:20px">
 
 

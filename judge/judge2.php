@@ -3,8 +3,9 @@
 if (isset($_POST['submit2'])) {
     $search = $_POST['search'];
     $filter = $_POST['filter_dropdown'];
+    $sort = $_POST['sort_dropdown'];
 
-    if ($filter == " ") {
+    if ($filter == " " && $sort == " ") {
         $sql1 = "SELECT * FROM competition WHERE (compName LIKE '%$search%' OR category LIKE '%$search%')";
         $res1 = mysqli_query($conn, $sql1);
     } else if ($search == " ") {
@@ -14,7 +15,7 @@ if (isset($_POST['submit2'])) {
         $sql1 = "SELECT * FROM competition WHERE (compName LIKE '%$search%' OR category LIKE '%$search%') AND status LIKE '%$filter%'";
         $res1 = mysqli_query($conn, $sql1);
         // echo "<script>alert('$filter');</script>";
-        echo "<script>alert('$search');</script>";
+        // echo "<script>alert('$search');</script>";
         // $sort = $_POST['sort_dropdown'];
     }
 }
@@ -61,25 +62,25 @@ if (isset($_POST['submit2'])) {
                 <form action="../judge/judge2.php" method="POST" class="d-flex">
                     <input class="form-control me-2 mr-sm-2 col-md-5 ml-5" type="search" name="search" value="<?php echo $search ?>">
             </div>
-            <div class="col-12 col-competition-2">
+            <div class="col-12 col-competition-3">
                 <div class="overflow-auto">
                     <span aria-label="Filter By" style="position:relative; box-sizing: border-box; "></span>
                     <label for="filter_dropdown"></label>
                     <select name="filter_dropdown" id="filter_dropdown">
                         <option <?php if ($_POST['filter_dropdown'] == ' ') { ?>selected="true" <?php }; ?> value=" ">Filter By: All Competitions </option>
-                        <option value="Upcoming">Filter By: Upcoming Competition</option>
-                        <option value="On-Going">Filter By: Ongoing Competition</option>
-                        <option value="Pending">Filter By: Past Competition</option>
+                        <option <?php if ($_POST['filter_dropdown'] == 'Upcoming') { ?>selected="true" <?php }; ?>id="Upcoming" value="Upcoming">Filter By: Upcoming Competition</option>
+                        <option <?php if ($_POST['filter_dropdown'] == 'On-Going') { ?>selected="true" <?php }; ?>id="On-Going" value="On-Going">Filter By: Ongoing Competition</option>
+                        <option <?php if ($_POST['filter_dropdown'] == 'Pending') { ?>selected="true" <?php }; ?>id="Pending" value="Pending">Filter By: Past Competition</option>
                     </select>
 
-                    <!-- <span aria-label="Sort By" style="position:relative; box-sizing: border-box"></span>
-                        <label for="sort_dropdown"></label>
-                        <select name="sort_dropdown" id="sort_dropdown">
-                            <option> Sort By: Please Select </option>
-                            <option value="Competition Date"> Sort By: Competition Date</option>
-                            <option value="Registration Dateline">Sort By: Registration Dateline</option>
-                            <option value="Popularity">Sort By: Popularity</option>
-                        </select> -->
+                    <span aria-label="Sort By" style="position:relative; box-sizing: border-box"></span>
+                    <label for="sort_dropdown"></label>
+                    <select name="sort_dropdown" id="sort_dropdown">
+                        <option value=" "> Sort By: Please Select </option>
+                        <option value="Competition Date"> Sort By: Competition Date</option>
+                        <option value="Registration Dateline">Sort By: Registration Dateline</option>
+                        <option value="Popularity">Sort By: Popularity</option>
+                    </select>
                     <input type="submit" name="submit2" value="Search" class="btn btn-outline-dark my-2 my-sm-0" style="margin-left:20px">
 
 
@@ -121,7 +122,7 @@ if (isset($_POST['submit2'])) {
                                         <span class="badge rounded-pill text-bg-success position-absolute top-0 end-0"><?php echo $status1; ?></span>
                                         <img class="card-img-top lazy" src="../materials/image/<?php echo $compPic1; ?>">
                                     </a>
-                                    <div class="card-body description text-truncate text-color-2">
+                                    <div class="card-  description text-truncate text-color-2">
                                         23 May 2022 / <?php echo $category1; ?>
                                         <div class="title text-truncate"><?php echo $compName1; ?></div>
                                     </div>
@@ -147,13 +148,21 @@ if (isset($_POST['submit2'])) {
 
 <?php include("../judge/partials/footer.php"); ?>
 
-<!-- <script>
-    window.onload = function() {
-        var selItem = sessionStorage.getItem("SelItem");
-        $('#sort-item').val(selItem);
+<!-- <script type="text/javascript">
+    document.getElementById('filer_dropdown').onchange = function() {
+        localStorage.setItem('selectedtem', document.getElementById('filter_dropdown').value);
+    };
+
+    if (localStorage.getItem('selectedtem')) {
+        document.getElementById(localStorage.getItem('selectedtem')).selected = true;
     }
-    $('#sort-item').change(function() {
-        var selVal = $(this).val();
-        sessionStorage.setItem("SelItem", selVal);
-    });
 </script> -->
+
+<script>
+    $('#filter_dropdown').change(function(event) {
+        var selectedcategory = $(this).children("option:selected").val();
+        sessionStorage.setItem("itemName", selectedcategory);
+    });
+
+    $('select').find('option[value=' + sessionStorage.getItem('itemName') + ']').attr('selected', 'selected');
+</script>

@@ -8,13 +8,13 @@ if (isset($_POST['submit2'])) {
     $filter = $_POST['filter_dropdown'];
 
     if ($filter == " ") {
-        $sql1 = "SELECT * FROM competition WHERE (compName LIKE '%$search%' OR category LIKE '%$search%') ";
+        $sql1 = "SELECT * FROM competition WHERE (compName LIKE '%$search%' OR category LIKE '%$search%')  AND status <> 'Pending'";
         $res1 = mysqli_query($conn, $sql1);
     } else if ($search == " ") {
-        $sql1 = "SELECT * FROM competition WHERE STATUS LIKE '%filter%' ";
+        $sql1 = "SELECT * FROM competition WHERE STATUS LIKE '%filter%'  AND status <> 'Pending'";
         $res1 = mysqli_query($conn, $sql1);
     } else {
-        $sql1 = "SELECT * FROM competition WHERE (compName LIKE '%$search%' OR category LIKE '%$search%') AND status LIKE '%$filter%'";
+        $sql1 = "SELECT * FROM competition WHERE (compName LIKE '%$search%' OR category LIKE '%$search%') AND status LIKE '%$filter%' AND status <> 'Pending'";
         $res1 = mysqli_query($conn, $sql1);
         // echo "<script>alert('$filter');</script>";
         // echo "<script>alert('$search');</script>";
