@@ -42,6 +42,7 @@ while ($row = mysqli_fetch_assoc($res)) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="organizer.css" rel="stylesheet">
     <title>Document</title>
+
 </head>
 
 <body>
@@ -70,6 +71,9 @@ while ($row = mysqli_fetch_assoc($res)) {
                 </div>
                 <div class="col-md-5">
                     <div class="card-body">
+                        <a href="report.php?entryID=<?php echo $entryID; ?>" style="text-decoration: none"><p style="text-align:right; margin-right:10px"><small class="text-muted">
+                            🚩Report Plagiarism
+                        </small></p></a><br>
                         <h5 class="card-title" style="color:black"><?php echo $title ?></h5>
                         <p class="card-text"><small class="text-muted">By
                                 <?php if ($userEmail == $_SESSION["user"]) { ?>
@@ -118,6 +122,7 @@ while ($row = mysqli_fetch_assoc($res)) {
             </div>
         </div>
     </div>
+    <script src="https://kit.fontawesome.com/8deb7b58d3.js" crossorigin="anonymous"></script>
 </body>
 
 </html>
