@@ -65,10 +65,37 @@ if (!isset($_SESSION["compID"])){
 
 
 <div class="d-grid gap-2 d-md-flex justify-content-md-center">
-    <a class="btn btn-lg btn-info ms-5 mb-3 rounded-5 me-5 px-5 text-black py-2" 
-    href="viewcomp_main.php?compID=<?php echo $compID;?>" role="button"><b>CONFIRM</b></a>
-    
+    <!-- <a class="btn btn-lg btn-info ms-5 mb-3 rounded-5 me-5 px-5 text-black py-2" 
+    href="viewcomp_main.php?compID=<?php echo $compID;?>" role="button"><b>CONFIRM</b></a> -->
+    <button type="button" class="btn btn-lg btn-info ms-5 mb-3 rounded-5 me-5 px-5 text-black py-2" 
+    data-bs-toggle="modal" data-bs-target="#exampleModal">CONFIRM</button>
 </div>
+
+
+
+
+<!-- Button trigger modal -->
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title text-dark" id="exampleModalLabel">Competition Details Confirmation</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+          Are you sure with the competition details above? You may still edit the details until the Competition's Release Date.
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <a type="button" class="btn btn-primary" href="viewcomp_main.php?compID=<?php echo $compID;?>">Save changes</a>
+      </div>
+    </div>
+  </div>
+</div>
+
 
 
 <?php
