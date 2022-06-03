@@ -1,4 +1,5 @@
-<?php include("../organizer/partials/header.php"); ?>
+<?php include("../organizer/partials/header.php"); 
+?>
 
 <?php
 if (isset($_GET['compID'])) {
@@ -6,7 +7,8 @@ if (isset($_GET['compID'])) {
     $sql = "SELECT C.*, O.organizerName FROM competition C INNER JOIN organizer O ON C.compID=$compID";
     $res = mysqli_query($conn, $sql);
 } else {
-    echo "mistake";
+    // echo "mistake";
+    header("Location: ../organizer/orghome.php");
 }
 while ($row = mysqli_fetch_assoc($res)) {
     $compID = $row['compID'];
@@ -118,8 +120,78 @@ while ($row = mysqli_fetch_assoc($res)) {
             </div>
         </div>
         <hr>
-        <button class="btn btn-success btn-lg mx-auto px-5" data-bs-toggle="modal" data-bs-target="#exampleModal">Make Announcement</button>
-        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+
+        <!-- <button class="btn btn-success btn-lg mx-auto px-5" data-bs-toggle="modal" data-bs-target="#exampleModal">Make Announcement</button>
+        <a href="editcomp.php?compID=<?php echo $compID; ?>"><button type="button" class="btn btn-primary btn-lg mx-auto px-5">Edit</button></a>
+        <a href=""><button type="button" class="btn btn-danger btn-lg mx-auto px-5">Delete</button></a>
+        <a href=""><button type="button" class="btn btn-secondary btn-lg mx-auto px-5">View Feedback</button></a>
+        <a href="addcert.php?compID=<?php echo $compID; ?>" type="button" class="btn btn-warning btn-lg mx-auto px-5">Submit Certificate</button></a> -->
+    </div>
+
+
+
+    <div class="form-row">
+        <?php
+        if ($status == "Pending") {
+        ?>
+            <div>
+                <center>
+                <a href="editcomp.php?compID=<?php echo $compID; ?>"><button type="button" class="btn btn-primary btn-lg mx-auto px-5">Edit</button></a>
+                <a href=""><button type="button" class="btn btn-danger btn-lg mx-auto px-5">Terminate Competition</button></a>
+                </center>
+            </div>
+        <?php } else if ($status == "Upcoming") {
+        ?>
+            <div>
+                <center>
+                <button class="btn btn-success btn-lg mx-auto px-5" data-bs-toggle="modal" data-bs-target="#exampleModal">Make Announcement</button>
+                <a href="editcomp.php?compID=<?php echo $compID; ?>"><button type="button" class="btn btn-primary btn-lg mx-auto px-5">Edit</button></a>
+                <a href=""><button type="button" class="btn btn-danger btn-lg mx-auto px-5">Terminate Competition</button></a>
+                <a href=""><button type="button" class="btn btn-secondary btn-lg mx-auto px-5">View Feedback</button></a>
+                </center>
+            </div>
+        <?php } else if ($status == "On-Going") {
+        ?>
+            <div>
+                <center>
+                    <button class="btn btn-success btn-lg mx-auto px-5" data-bs-toggle="modal" data-bs-target="#exampleModal">Make Announcement</button>
+                    <a href=""><button type="button" class="btn btn-secondary btn-lg mx-auto px-5">View Feedback</button></a>
+                </center>
+            </div>
+        <?php } else if ($status == "Past") {
+        ?>
+            <div>
+                <center>
+                    <button class="btn btn-success btn-lg mx-auto px-5" data-bs-toggle="modal" data-bs-target="#exampleModal">Make Announcement</button>
+                    <a href=""><button type="button" class="btn btn-secondary btn-lg mx-auto px-5">View Feedback</button></a>
+                    <a href="addcert.php?compID=<?php echo $compID; ?>" type="button" class="btn btn-warning btn-lg mx-auto px-5">Submit Certificate</button></a>
+                </center>
+            </div>
+        <?php } else if ($status == "Terminated") {
+        ?>
+            <div>
+                <center>
+                    <h2 class="text-danger"><u>No Actions allowed.</u></h2>
+                </center>
+            </div>
+        <?php }else {
+        ?>
+            <div>
+                <center>
+                    <a href="orghome.php" class="btn btn-primary">Back to Home</a>
+                    <a href="addcomp.php" class="btn btn-primary">Resubmit Competition</a>
+                </center>
+            </div>
+        <?php } ?>
+    </div>
+
+
+
+
+<!-- Make Announcement Modal -->
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -145,10 +217,8 @@ while ($row = mysqli_fetch_assoc($res)) {
                 </div>
             </div>
         </div>
-        <a href="editcomp.php?compID=<?php echo $compID; ?>"><button type="button" class="btn btn-primary btn-lg mx-auto px-5">Edit</button></a>
-        <a href=""><button type="button" class="btn btn-danger btn-lg mx-auto px-5">Delete</button></a>
-        <a href=""><button type="button" class="btn btn-secondary btn-lg mx-auto px-5">View Feedback</button></a>
-    </div>
+
+
 
 
     <script src="https://kit.fontawesome.com/8deb7b58d3.js" crossorigin="anonymous"></script>

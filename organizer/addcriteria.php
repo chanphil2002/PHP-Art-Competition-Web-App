@@ -3,6 +3,8 @@
 if(isset($_GET['compID']))
     {
         $compID = $_GET['compID'];
+    }else {
+        header("Location: ../organizer/orghome.php");
     }
 ?>
 
@@ -54,9 +56,9 @@ if(isset($_GET['compID']))
         if($res == true)
         {   
             $_SESSION['compID'] = $compID;
-            echo $_SESSION['compID'];
-            
+            // echo '<script>alert("Criteria Added Successfully!")</script>';
             header("location:" . SITEURL . "organizer/selectedcriteria.php");
+            
             
         }
 

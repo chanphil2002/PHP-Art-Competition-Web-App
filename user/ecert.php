@@ -30,7 +30,7 @@
     <link rel="stylesheet" href="../admin/addJudge.css" />
 </head>
 <body>
-    <br>
+    <br><br>
     <center>
         <h2 style="color:darkblue"><?php echo $name; ?></h2>
         <br>
@@ -38,6 +38,7 @@
 		</iframe><br><br>
         <a href="myComp.php"><button type="button" class="btn btn-success">Back to My Competitions</button></a>
 	</center>
-    <br>
+    <br><br>
 </body>
 </html>
+<?php include ("partials/footer.php"); ?>

@@ -2,12 +2,14 @@
 
     
 ob_start();
+if (!isset($_SESSION["compID"])){
+    header("Location: ../organizer/orghome.php");
+}else{
     $compID = $_SESSION['compID'];
     $sql1 = "SELECT * FROM comp_judge WHERE compID = '$compID'";
     $sql2 = "SELECT * FROM judge WHERE judgeIC != '(SELECT judgeIC FROM comp_judge WHERE compID = $compID)'";
     $res2 = mysqli_query($conn, $sql2);
-
-
+}
 ?>
 
 <div class="mx-auto" >

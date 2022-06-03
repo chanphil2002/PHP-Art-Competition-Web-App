@@ -45,7 +45,7 @@
               <i class="fas fa-user-circle"></i>&nbsp; My Account
             </button>
             <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton2">
-              <li><a class="dropdown-item" href="#">My Profile</a></li>
+              <li><a class="dropdown-item" href="myProfile.php">My Profile</a></li>
               <li><a class="dropdown-item" href="myComp.php">My Competitions</a></li>
               <li><a class="dropdown-item" href="bookmarkList.php">Favourite</a></li>
               <li>
