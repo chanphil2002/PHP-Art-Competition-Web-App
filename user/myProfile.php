@@ -61,20 +61,27 @@
 					<br><label for="userEmail">EMAIL *</label>
 					<input type="text" name="userEmail" id="userEmail" class="input-text" value="<?php echo $userEmail; ?>" readonly required>
 				</div>
-                <div class="select">
+                <!-- <div class="select">
                     <select name="gender" value="<?php echo $g; ?>" required>
                         <option value="">Gender *</option>
                         <option value="M">Male</option>
                         <option value="F">Female</option>
                     </select>
-                </div>
+                </div> -->
+                <div class="form-row" style="width: 100%">
+                    <br><label for="dob">DATE OF BIRTH *</label>
+                    <input name="dob" type="date" max="<?php echo date("Y-m-d"); ?>" value="<?php echo $dob; ?>" required>
+                </div><br>
                 <div class="form-row">
-					<br><label for="username">USERNAME *</label>
-					<input type="text" name="username" id="username" class="input-text" value="<?php echo $username; ?>" readonly required>
+					<br><label for="username">PHONE NUMBER *</label>
+					<input type="text" name="phone" id="phone" class="input-text" value="<?php echo $phone; ?>" required>
 				</div>
                 <div class="form-row">
-					<br><label for="username">USERNAME *</label>
-					<input type="text" name="username" id="username" class="input-text" value="<?php echo $username; ?>" readonly required>
+                    <br><br><label for="profilePic">PROFILE PICTURE *</label><br>
+					<input type="file" name="profile" id="profile" accept="image/*" profilePic; ?>" required>
+					<br>
+					<br>
+					<br>
 				</div>
             </form>
         </div>
