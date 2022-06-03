@@ -1,9 +1,9 @@
-body {
+/* body {
     overflow: scroll;
     font-family: 'Poppins', sans-serif;
-}
+} */
 
-h2 {
+/* h2 {
     font-family: 'Poppins', sans-serif;
     font-weight: 500;
 }
@@ -13,9 +13,9 @@ h5 {
     font-family: 'Poppins', sans-serif;
     font-weight: 300;
     color: #1F2022;
-}
+} */
 
-span {
+/* span {
     font-family: 'Poppins', sans-serif;
     font-weight: 500;
 }
@@ -23,7 +23,7 @@ span {
 button {
     font-family: 'Poppins', sans-serif;
     font-weight: 600;
-}
+} */
 
 .nav {
     margin-bottom: 2rem;

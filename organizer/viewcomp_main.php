@@ -359,5 +359,6 @@ if (isset($_POST['submit'])) {
         header("location:" . SITEURL . "organizer/viewcomp_main.php?compID=$compID");
     }
 }
-include("../organizer/partials/footer.php");
 ?>
+
+<?php include("../organizer/partials/footer.php"); ?>

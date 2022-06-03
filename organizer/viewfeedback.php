@@ -6,6 +6,7 @@ if (isset($_GET['compID'])) {
     $sql = "SELECT * FROM feedback WHERE compID=$compID";
     $sql1 = "SELECT * from competition WHERE compID = '$compID'";
     $res = mysqli_query($conn, $sql);
+    $res2 = mysqli_query($conn, $sql);
     $res1 = mysqli_query($conn, $sql1);
 } else {
     header("Location: ../organizer/orghome.php");
@@ -36,7 +37,7 @@ while ($row = mysqli_fetch_assoc($res1)) {
             <a class="nav-link" aria-current="page" href="viewcomp_main.php?compID=<?php echo $compID; ?>">Main</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="viewentries.php.php?entryID=1&<?php echo $compID ?>">View Entries</a>
+            <a class="nav-link" href="viewentries.php?compID=<?php echo $compID ?>">View Entries</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="viewcomp_rubric.php?compID=<?php echo $compID; ?>">Scoring Rubric</a>
@@ -72,7 +73,7 @@ while ($row = mysqli_fetch_assoc($res1)) {
                                 <div class='card'>
                                     <div class='card-body'>
                                     <h3 style='word-wrap: break-word; font-weight: bold;'>
-                                    <span class='badge bg-secondary'> $feedbackType </span> $userEmail 
+                                    <span class='badge bg-secondary'> Feedback </span> $userEmail 
                                     <h3>$description</h3>
                                     <form action='' method='POST'>
                                     <input type='hidden' name='feedbackID' value='$feedbackID'>
@@ -88,7 +89,7 @@ while ($row = mysqli_fetch_assoc($res1)) {
                                 <div class='card'>
                                     <div class='card-body'>
                                     <h3 style='word-wrap: break-word; font-weight: bold;'>
-                                    <span class='badge bg-danger'> $feedbackType Report Case ID - $entryID </span> $userEmail
+                                    <span class='badge bg-danger'> Entry Report Case ID - $entryID </span> $userEmail
                                     <h3>$description</h3>
                                     <form action='' method='POST'>
                                     <input type='hidden' name='feedbackID' value='$feedbackID'>
@@ -98,11 +99,45 @@ while ($row = mysqli_fetch_assoc($res1)) {
                                     </div>
                                 </div>
                                 ";
-                            } else {
-                                echo "<h3 class='text-primary'>You have no incoming feedbacks.</h3>";
-                                break;
                             }
                         }
+                        while ($row1 = mysqli_fetch_assoc($res2)) {
+                            $feedbackID = $row1['feedbackID'];
+                            $feedbackType = $row1['feedbackType'];
+                            $description = $row1['description'];
+                            $entryID = $row1['entryID'];
+                            $userEmail = $row1['userEmail'];
+                            $organizerID = $row1['organizerID'];
+                            $status = $row1['status'];
+
+                            if ($feedbackType == 'Organizer' && $status != 'unresolved') {
+                                echo
+                                "
+                                <div class='card'>
+                                    <div class='card-body bg-success'>
+                                    <h3 class='text-white' style='word-wrap: break-word; font-weight: bold;'>
+                                    <span class='badge bg-secondary'> Feedback </span> $userEmail 
+                                    <h3 class='text-white'>$description </h3> 
+                                    </h3>
+                                    </div>
+                                </div>
+                                ";
+                            } else if ($feedbackType == 'Entry' && $status != 'unresolved') {
+                                echo
+                                "
+                                <div class='card'>
+                                    <div class='card-body bg-success'>
+                                    <h3 class='text-white' style='word-wrap: break-word; font-weight: bold;'>
+                                    <span class='badge bg-danger'> Entry Report Case ID - $entryID </span> $userEmail
+                                    <h3 class='text-white'>$description </h3> 
+                                    </h3>
+                                    </div>
+                                </div>
+                                ";
+                            }
+                        }
+                    } else {
+                        echo "<h2 class='text-primary'>Currently there are no feedbacks.</h2>";
                     }
                     ?>
 
