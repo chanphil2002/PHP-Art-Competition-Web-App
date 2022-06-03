@@ -161,18 +161,19 @@ while ($row1 = mysqli_fetch_assoc($res1)) {
         ?>
             <div>
                 <center>
-                    <a href="editcomp.php?compID=<?php echo $compID; ?>"><button type="button" class="btn btn-primary btn-lg mx-auto px-5">Edit</button></a>
-                    <a href=""><button type="button" class="btn btn-danger btn-lg mx-auto px-5">Terminate Competition</button></a>
+                <a href="editcomp.php?compID=<?php echo $compID; ?>"><button type="button" class="btn btn-primary btn-lg mx-auto px-5">Edit</button></a>
+                <button type="button" class="btn btn-danger btn-lg mx-auto px-5" data-bs-toggle="modal" data-bs-target="#terminateModal">Terminate Competition</button>
                 </center>
             </div>
         <?php } else if ($status == "Upcoming") {
         ?>
             <div>
                 <center>
-                    <button class="btn btn-success btn-lg mx-auto px-5" data-bs-toggle="modal" data-bs-target="#exampleModal">Make Announcement</button>
-                    <a href="editcomp.php?compID=<?php echo $compID; ?>"><button type="button" class="btn btn-primary btn-lg mx-auto px-5">Edit</button></a>
-                    <a href=""><button type="button" class="btn btn-danger btn-lg mx-auto px-5">Terminate Competition</button></a>
-                    <a href=""><button type="button" class="btn btn-secondary btn-lg mx-auto px-5">View Feedback</button></a>
+                <button class="btn btn-success btn-lg mx-auto px-5" data-bs-toggle="modal" data-bs-target="#exampleModal">Make Announcement</button>
+                <a href="editcomp.php?compID=<?php echo $compID; ?>"><button type="button" class="btn btn-primary btn-lg mx-auto px-5">Edit</button></a>
+                <button type="button" class="btn btn-danger btn-lg mx-auto px-5" data-bs-toggle="modal" data-bs-target="#terminateModal">Terminate Competition</button>
+                <!-- <a href=""><button type="button" class="btn btn-danger btn-lg mx-auto px-5">Terminate Competition</button></a> -->
+                <a href=""><button type="button" class="btn btn-secondary btn-lg mx-auto px-5">View Feedback</button></a>
                 </center>
             </div>
         <?php } else if ($status == "On-Going") {
@@ -237,11 +238,6 @@ while ($row1 = mysqli_fetch_assoc($res1)) {
             </div>
         </div>
     </div>
-
-    <a href="editcomp.php?compID=<?php echo $compID; ?>"><button type="button" class="btn btn-primary btn-lg mx-auto px-5">Edit</button></a>
-    <a href=""><button type="button" class="btn btn-danger btn-lg mx-auto px-5">Delete</button></a>
-
-    <button class="btn btn-secondary btn-lg mx-auto px-5" data-bs-toggle="modal" data-bs-target="#exampleModal2">View Announcement</button>
     <div class="modal fade bd-example-modal-lg" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-scrollable">
             <div class="modal-content">
@@ -260,11 +256,7 @@ while ($row1 = mysqli_fetch_assoc($res1)) {
             </div>
         </div>
     </div>
-    <<<<<<< HEAD </div>
-        =======
-
-
-        >>>>>>> 87f3d883cc810834b0aaf7de69e2be2e2b9e6c9c
+        
 
 
         <script src="https://kit.fontawesome.com/8deb7b58d3.js" crossorigin="anonymous"></script>
@@ -280,6 +272,30 @@ while ($row1 = mysqli_fetch_assoc($res1)) {
                 document.write(str);
             }
         </script>
+<!-- Terminate Competition Modal -->
+<div class="modal fade" id="terminateModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title text-dark" id="exampleModalLabel">Terminate Competition</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Are you sure you want to <b class='text-danger'>TERMINATE</b> this competition? This action cannot be undone.
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-danger">Terminate</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+    <script src="https://kit.fontawesome.com/8deb7b58d3.js" crossorigin="anonymous"></script>
 </body>
 
 </html>

@@ -99,42 +99,9 @@
             <hr class="mb-4">
             <button class="btn btn-primary btn-lg btn-block mx-auto d-flex px-5" name="submit" type="submit">Continue</button>
         </div>
-        <<<<<<< HEAD=======<div class="mb-3">
-            <label for="stock">Evaluation Days</label>
-            <input type="number" name="evaluationDays" class="form-control" id="evaluationDays" placeholder="How many days for evaluation?" required>
-    </div>
-
-    <div class="mb-3">
-        <label for="price">Payment Receipt</label>
-        <div class="input-group mb-3">
-            <input type="file" class="form-control" name="receipt" id="receipt" required>
-        </div>
-    </div>
-
-    <hr class="mb-4">
-    <button class="btn btn-primary btn-lg btn-block mx-auto d-flex px-5" name="submit" type="submit">Continue</button>
-    >>>>>>> 87f3d883cc810834b0aaf7de69e2be2e2b9e6c9c
     </div>
 
 </form>
-
-
-
-<script type="text/javascript">
-    $(function() {
-        $('#datepicker, #datepicker2').datepicker({
-            dateFormat: 'yy-mm-dd',
-            minDate: 0
-        });
-
-    });
-
-    $(function() {
-        $("#search").autocomplete({
-            source: '../organizer/partials/search.php'
-        });
-    });
-</script>
 
 
 
@@ -198,6 +165,8 @@ if (isset($_POST['submit'])) {
     // $sql3 = "SELECT compID FROM competition WHERE compName = $compName";
 
     if ($res == true) {
+
+        
 
         $sql3 = "SELECT compID FROM competition WHERE compName = '$compName' ORDER BY compID DESC LIMIT 1; ";
         $res3 = mysqli_query($conn, $sql3);

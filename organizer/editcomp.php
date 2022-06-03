@@ -19,7 +19,6 @@ if(isset($_GET['compID']))
         $currentcompPic = $row['compPic'];
         $evaluationDays = $row['evaluationDays'];
 } else {
-    // echo "mistake";
     header("Location: ../organizer/orghome.php");
 }
 
