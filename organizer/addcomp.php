@@ -1,5 +1,12 @@
 <?php include("../organizer/partials/header.php");
 
+if(isset($_GET['organizerID']))
+    {
+        $organizerID = $_GET['organizerID'];
+    } else {
+        header("Location: ../organizer/orghome.php");
+    }
+    
 ?>
 
 <form action="" method="POST" enctype="multipart/form-data">
@@ -9,11 +16,6 @@
 
     <div class="row">
         <div class="col-md-4 order-md-2 mb-4 mx-auto">
-
-            <div class="mb-3">
-                <label for="stock">Organizer ID</label>
-                <input type="text" name="organizerID" class="form-control" id="search" placeholder="State the Organizer ID" required>
-            </div>
 
             <div class="mb-3">
                 <label for="inlineFormInput">Competition Name</label>
@@ -97,6 +99,7 @@
 
 
             <hr class="mb-4">
+            <input type="hidden" id='organizerID' name='organizerID' value= "<?php echo $organizerID;?>">
             <button class="btn btn-primary btn-lg btn-block mx-auto d-flex px-5" name="submit" type="submit">Continue</button>
         </div>
     </div>
