@@ -1,6 +1,8 @@
 <?php include("../admin/partials/header.php");
 
-session_start();
+if (!isset($_SESSION["admin"])){
+    header("Location: ../general/otherRoleLogin.php");
+};
 ?>
 
 <!DOCTYPE html>
@@ -36,6 +38,9 @@ session_start();
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="passComp.php">Pass</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="terminatedComp.php">Terminated</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link active" href="rejectedComp.php">Rejected</a>

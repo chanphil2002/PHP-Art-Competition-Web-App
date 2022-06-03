@@ -1,4 +1,6 @@
-<?php include("../admin/partials/database.php"); ?>
+<?php include("../admin/partials/database.php"); 
+session_start();
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -54,7 +56,7 @@
                             <i class="fa-solid fa-magnifying-glass"></i>&nbsp;Search
                         </button>
                         <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton2">
-                            <li><a class="dropdown-item" href="pendingOrganizer.php">Competition</a></li>
+                            <li><a class="dropdown-item" href="searchComp.php">Competition</a></li>
                             <li><a class="dropdown-item" href="searchUser.php">User</a></li>
                         </ul>
                     </div>

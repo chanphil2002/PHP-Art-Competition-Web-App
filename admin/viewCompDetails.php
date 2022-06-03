@@ -1,5 +1,7 @@
 <?php include("../admin/partials/header.php");
-session_start();
+if (!isset($_SESSION["admin"])){
+    header("Location: ../general/otherRoleLogin.php");
+};
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -48,6 +50,7 @@ session_start();
 					$receiptPath = ("../materials/compReceipt/$receipt");
 					$compPic = $compInfo['compPic'];
 					$picPath = ("../materials/compPic/$compPic");
+					$reason = $compInfo['rejectedComment'];
 
 					$sql2 = "SELECT organizerName FROM organizer WHERE organizerID = $organizerID";
 					$result2 = mysqli_query($conn, $sql2);
@@ -69,6 +72,10 @@ session_start();
 					} else if ($status == 'Pass') {
 						$badge = "badge text-bg-secondary position-absolute top-0 end-0";
 						$statusDisplay = "Pass";
+						$update = "readonly";
+					} else if ($status == 'Terminated') {
+						$badge = "badge text-bg-secondary position-absolute top-0 end-0";
+						$statusDisplay = "Terminated";
 						$update = "readonly";
 					} else {
 						$badge = "badge text-bg-danger position-absolute top-0 end-0";
@@ -228,11 +235,22 @@ session_start();
 									<a href="passComp.php" class="btn btn-primary">Back</a>
 								</center>
 							</div>
+						<?php } else if ($status == "Rejected") {
+						?>
+							<div class="form-row">
+								<br><label for="reason" class="form-label">REASON OF REJECTION</label>
+								<textarea class="form-control" name="reason" id="reason" rows="10" readonly ><?php echo $reason ?></textarea>
+							</div><br><br>
+							<div>
+								<center>
+									<a href="rejectedComp.php" class="btn btn-primary">Back</a>
+								</center>
+							</div>
 						<?php } else {
 						?>
 							<div>
 								<center>
-									<a href="rejectedComp.php" class="btn btn-primary">Back</a>
+									<a href="terminatedComp.php" class="btn btn-primary">Back</a>
 								</center>
 							</div>
 						<?php } ?>

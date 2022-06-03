@@ -1,6 +1,7 @@
 <?php include ("../admin/partials/header.php");
-
-    session_start();
+if (!isset($_SESSION["admin"])){
+    header("Location: ../general/otherRoleLogin.php");
+}
 ?>
 
 <!DOCTYPE html>
