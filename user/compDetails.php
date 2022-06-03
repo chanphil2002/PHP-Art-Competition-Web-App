@@ -124,8 +124,11 @@ while ($row = mysqli_fetch_assoc($res)) {
                 $sql3 = "SELECT * FROM entry WHERE compID = '$compID' AND userEmail = '$_SESSION[user]' ";
                 $res3 = mysqli_query($conn, $sql3);
                 if (mysqli_num_rows($res3) != 0) {
+                    while ($entryDetails = mysqli_fetch_assoc($res3)){
+                        $myEntry = $entryDetails["entryID"];
+                    }
                 ?>
-                    <a href="myComp.php" style="text-decoration: none">
+                    <a href="entry.php?entryID=<?php echo $myEntry; ?>&compID=<?php echo $compID; ?>" style="text-decoration: none">
                         <h3>&#128101; My Entry</h3>
                     </a>
                     <?php } else {
@@ -139,6 +142,9 @@ while ($row = mysqli_fetch_assoc($res)) {
 
                 <a href="bookmark.php?compID=<?php echo $compID; ?>" style="text-decoration: none">
                     <h3>🔖 Bookmark</h3>
+                </a>
+                <a href="feedback.php?org&compID=<?php echo $compID; ?>" style="text-decoration: none">
+                    <h3>📩 Feedback</h3>
                 </a>
 
                 <?php
