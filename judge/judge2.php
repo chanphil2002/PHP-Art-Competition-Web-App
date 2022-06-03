@@ -6,29 +6,28 @@ if (isset($_POST['submit2'])) {
     $sort = $_POST['sort_dropdown'];
 
     if ($filter == " ") {
-        $sql1 = "SELECT * FROM competition WHERE (compName LIKE '%$search%' OR category LIKE '%$search%') AND status <> 'Pending'";
+        $sql1 = "CREATE TEMPORARY TABLE temp SELECT * FROM competition WHERE (compName LIKE '%$search%' OR category LIKE '%$search%') AND status <> 'Pending'";
         $res1 = mysqli_query($conn, $sql1);
     } else if ($search == " ") {
-        $sql1 = "SELECT * FROM competition WHERE STATUS LIKE '%filter%' AND status <> 'Pending' ";
+        $sql1 = "CREATE TEMPORARY TABLE temp SELECT * FROM competition WHERE STATUS LIKE '%filter%' AND status <> 'Pending' ";
         $res1 = mysqli_query($conn, $sql1);
     } else {
-        $sql1 = "SELECT * FROM competition WHERE (compName LIKE '%$search%' OR category LIKE '%$search%') AND status LIKE '%$filter%'";
+        $sql1 = "CREATE TEMPORARY TABLE temp AS SELECT * FROM competition WHERE (compName LIKE '%$search%' OR category LIKE '%$search%') AND status LIKE '%$filter%'";
         $res1 = mysqli_query($conn, $sql1);
         // echo "<script>alert('$filter');</script>";
         // echo "<script>alert('$search');</script>";
         // $sort = $_POST['sort_dropdown'];
     }
 
-    if ($sort == "RegistrationDeadline") {
-        $result1 = mysqli_fetch_assoc($res1);
-        $sql2 = "SELECT * FROM $result1 ORDER BY registrationDeadline";
+    if ($sort == "RegistrationDateline") {
+        $sql2 = "SELECT * FROM temp ORDER BY registrationDeadline";
         $res2 = mysqli_query($conn, $sql2);
     } else if ($sort == "ReleaseDate") {
-        $result1 = mysqli_fetch_assoc($res1);
-        $sql2 = "SELECT * FROM $result1 ORDER BY releaseDate";
+        $sql2 = "SELECT * FROM temp ORDER BY releaseDate";
         $res2 = mysqli_query($conn, $sql2);
     } else {
-        $res2 = $res1;
+        $sql2 = "SELECT * FROM temp";
+        $res2 = mysqli_query($conn, $sql2);
     }
 }
 
@@ -88,10 +87,10 @@ if (isset($_POST['submit2'])) {
                     <span aria-label="Sort By" style="position:relative; box-sizing: border-box"></span>
                     <label for="sort_dropdown"></label>
                     <select name="sort_dropdown" id="sort_dropdown">
-                        <option value=" "> Sort By: Please Select </option>
-                        <option value="ReleaseDate"> Sort By: Release Date</option>
-                        <option value="Registration Dateline">Sort By: Registration Dateline</option>
-                        <option value="Popularity">Sort By: Popularity</option>
+                        <option <?php if ($_POST['sort_dropdown'] == ' ') { ?>selected="true" <?php }; ?>value=" "> Sort By: Please Select </option>
+                        <option <?php if ($_POST['sort_dropdown'] == 'ReleaseDate') { ?>selected="true" <?php }; ?>value="ReleaseDate"> Sort By: Release Date</option>
+                        <option <?php if ($_POST['sort_dropdown'] == 'RegistrationDateline') { ?>selected="true" <?php }; ?>value="RegistrationDateline">Sort By: Registration Dateline</option>
+                        <option <?php if ($_POST['sort_dropdown'] == 'Popularity') { ?>selected="true" <?php }; ?>value="Popularity">Sort By: Popularity</option>
                     </select>
                     <input type="submit" name="submit2" value="Search" class="btn btn-outline-dark my-2 my-sm-0" style="margin-left:20px">
 
