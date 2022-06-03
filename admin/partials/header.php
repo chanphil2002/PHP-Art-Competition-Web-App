@@ -44,12 +44,11 @@
                             <li><a class="dropdown-item" href="pendingOrganizer.php">Organizer</a></li>
                             <li><a class="dropdown-item" href="viewJudge.php">Judge</a></li>
                             <li><a class="dropdown-item" href="viewUser.php">User</a></li>
-                            <li><a class="dropdown-item" href="viewUser.php">Search User</a></li>
                         </ul>
                     </div>
                 </li>
                 &nbsp;&nbsp;&nbsp;
-                <li class="nav-item">
+                <li class="nav-item"> 
                     <div class="dropdown">
                         <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
                             <i class="fa-solid fa-magnifying-glass"></i>&nbsp;Search

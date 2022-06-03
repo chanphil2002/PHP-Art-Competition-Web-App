@@ -49,27 +49,31 @@
                     $sum = 0;
                     $sql = "SELECT * FROM organizer WHERE organizerStatus = 'pending'";
                     $result = mysqli_query($conn, $sql); 
-                    while($row_organizer = mysqli_fetch_assoc($result)){
-                        $id = $row_organizer['organizerID'];
-                        $email = $row_organizer['organizerEmail'];
-                        $name = $row_organizer['organizerName'];
-                        $desc = $row_organizer['organizerDesc'];
-                        $profilePic = $row_organizer['organizerProfilePic'];
-                        $doc = $row_organizer['organizerVerifiedDoc'];
-                        $status = $row_organizer['organizerStatus'];
-                        $sum = $sum + $count;
-                ?>
-                <tr>
-                    <td data-label="no"><?php echo $sum?></td>
-                    <td data-label="id"><?php echo $id?></htd>
-                    <td data-label="name"><?php echo $name?></td>
-                    <td data-label="email"><?php echo $email?></td>
-                    <td data-label="status"><?php echo $status?></td>
-                    <td data-label="Action">
-                        <a href="viewOrganizerDetails.php?selectedOrganizer=<?php echo $id?>"><i class="fa-solid fa-eye"></i></a>
-                    </td>
-                </tr>
-                <?php } ?>
+                    if (mysqli_num_rows($result) == 0){
+                        echo "<h3>Currently No Related Record.</h3>"; 
+    
+                    } else {
+                        while($row_organizer = mysqli_fetch_assoc($result)){
+                            $id = $row_organizer['organizerID'];
+                            $email = $row_organizer['organizerEmail'];
+                            $name = $row_organizer['organizerName'];
+                            $desc = $row_organizer['organizerDesc'];
+                            $profilePic = $row_organizer['organizerProfilePic'];
+                            $doc = $row_organizer['organizerVerifiedDoc'];
+                            $status = $row_organizer['organizerStatus'];
+                            $sum = $sum + $count;
+                    ?>
+                    <tr>
+                        <td data-label="no"><?php echo $sum?></td>
+                        <td data-label="id"><?php echo $id?></htd>
+                        <td data-label="name"><?php echo $name?></td>
+                        <td data-label="email"><?php echo $email?></td>
+                        <td data-label="status"><?php echo $status?></td>
+                        <td data-label="Action">
+                            <a href="viewOrganizerDetails.php?selectedOrganizer=<?php echo $id?>"><i class="fa-solid fa-eye"></i></a>
+                        </td>
+                    </tr>
+                <?php }} ?>
             </tbody>
         </table>
     </div>
