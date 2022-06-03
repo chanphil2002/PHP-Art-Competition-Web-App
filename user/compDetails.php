@@ -2,6 +2,9 @@
 include("partials/header.php");
 include("partials/database.php");
 session_start();
+if (!isset($_SESSION["user"])){
+    header("Location: ../general/registeredUserLogin.php");
+}
 ?>
 
 <?php
@@ -162,3 +165,4 @@ while ($row = mysqli_fetch_assoc($res)) {
     <script src="https://kit.fontawesome.com/8deb7b58d3.js" crossorigin="anonymous"></script>
 </body>
 </html>
+<?php include("partials/footer.php"); ?>
