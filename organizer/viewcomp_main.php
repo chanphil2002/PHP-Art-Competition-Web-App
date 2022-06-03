@@ -159,188 +159,146 @@ while ($row1 = mysqli_fetch_assoc($res1)) {
             </div>
         </div>
         <hr>
-        <button class="btn btn-success btn-lg mx-auto px-5" data-bs-toggle="modal" data-bs-target="#exampleModal">Make Announcement</button>
-        <div class="modal fade bd-example-modal-lg" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
+        <div class="form-row">
+            <?php
+            if ($status == "Pending") {
+            ?>
+                <div>
+                    <a href="editcomp.php?compID=<?php echo $compID; ?>"><button type="button" class="btn btn-primary btn-lg mx-auto px-5">Edit</button></a>
+                    <button type="button" class="btn btn-danger btn-lg mx-auto px-5" data-bs-toggle="modal" data-bs-target="#terminateModal">Terminate Competition</button>
+                </div>
+            <?php } else if ($status == "Upcoming") {
+            ?>
+                <div>
+                    <button class="btn btn-success btn-lg mx-auto px-5" data-bs-toggle="modal" data-bs-target="#makeModal">Make Announcement</button>
+                    <button class="btn btn-primary btn-lg mx-auto px-5" data-bs-toggle="modal" data-bs-target="#viewModal">View Announcement</button>
+                    <a href="editcomp.php?compID=<?php echo $compID; ?>"><button type="button" class="btn btn-primary btn-lg mx-auto px-5">Edit</button></a>
+                    <button type="button" class="btn btn-danger btn-lg mx-auto px-5" data-bs-toggle="modal" data-bs-target="#terminateModal">Terminate Competition</button>
+                    <!-- <a href=""><button type="button" class="btn btn-danger btn-lg mx-auto px-5">Terminate Competition</button></a> -->
+                </div>
+            <?php } else if ($status == "On-Going") {
+            ?>
+                <div>
+                    <button class="btn btn-success btn-lg mx-auto px-5" data-bs-toggle="modal" data-bs-target="#makeModal">Make Announcement</button>
+                    <button class="btn btn-primary btn-lg mx-auto px-5" data-bs-toggle="modal" data-bs-target="#viewModal">View Announcement</button>
+                </div>
+            <?php } else if ($status == "Past") {
+            ?>
+                <div>
+                    <button class="btn btn-success btn-lg mx-auto px-5" data-bs-toggle="modal" data-bs-target="#makeModal">Make Announcement</button>
+                    <button class="btn btn-primary btn-lg mx-auto px-5" data-bs-toggle="modal" data-bs-target="#viewModal">View Announcement</button>
+                    <a href="addcert.php?compID=<?php echo $compID; ?>" type="button" class="btn btn-warning btn-lg mx-auto px-5">Submit Certificate</button></a>
+                </div>
+            <?php } else if ($status == "Terminated") {
+            ?>
+                <div>
+                    <h2 class="text-danger"><u>No Actions allowed.</u></h2>
+                </div>
+            <?php } else {
+            ?>
+                <div>
+                    <a href="orghome.php" class="btn btn-primary">Back to Home</a>
+                    <a href="addcomp.php" class="btn btn-primary">Resubmit Competition</a>
+                </div>
+            <?php } ?>
+        </div>
+    </div>
+
+
+    <script src="https://kit.fontawesome.com/8deb7b58d3.js" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.3/dist/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <script type="text/javascript">
+        function divide() {
+            var txt;
+            txt = document.getElementById('a').value;
+            var text = txt.split(".");
+            var str = text.join('.</br>');
+            document.write(str);
+        }
+    </script>
+    <script src="https://kit.fontawesome.com/8deb7b58d3.js" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.3/dist/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <script type="text/javascript">
+        function divide() {
+            var txt;
+            txt = document.getElementById('a').value;
+            var text = txt.split(".");
+            var str = text.join('.</br>');
+            document.write(str);
+        }
+    </script>
+    <script src="https://kit.fontawesome.com/8deb7b58d3.js" crossorigin="anonymous"></script>\
+
+    <!-- Make Announcement Modal -->
+
+    <div class="modal fade bd-example-modal-lg" id="makeModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form action="" method="POST">
+                    <div class="modal-header">
+                        <h5 class="modal-title" style="color: black;" id="exampleModalLabel">Make Announcement</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <label for="message-text" class="col-form-label">Description</label>
+                            <textarea class="form-control" name="announcement" id="message-text" rows="6" onclick="divide()"><?php echo $announcement ?></textarea>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button name="submit" type="submit" class="btn btn-primary">Save changes</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- View Announcement Modal -->
+
+    <div class="modal fade bd-example-modal-lg" id="viewModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title" style="color: black; font-weight: bold;" id="exampleModalLabel">New Announcement</h3>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <h3 style="white-space: pre-wrap;"><?php echo $announcement ?></h3>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Terminate Competition Modal -->
+    <div class="modal fade" id="terminateModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title text-dark" id="exampleModalLabel">Terminate Competition</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Are you sure you want to <b class='text-danger'>TERMINATE</b> this competition? This action cannot be undone.
+                </div>
+                <div class="modal-footer">
                     <form action="" method="POST">
-                        <div class="modal-header">
-                            <h5 class="modal-title" style="color: black;" id="exampleModalLabel">Make Announcement</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <div class="mb-3">
-                                <label for="message-text" class="col-form-label">Description</label>
-                                <textarea class="form-control" name="announcement" id="message-text" rows="6" onclick="divide()"><?php echo $announcement ?></textarea>
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button name="submit" type="submit" class="btn btn-primary">Save changes</button>
-                        </div>
+                        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
+                        <button name="terminate" type="submit" class="btn btn-danger">Terminate</button>
                     </form>
                 </div>
             </div>
         </div>
-
-        <a href="editcomp.php?compID=<?php echo $compID; ?>"><button type="button" class="btn btn-primary btn-lg mx-auto px-5">Edit</button></a>
-        <a href=""><button type="button" class="btn btn-danger btn-lg mx-auto px-5">Delete</button></a>
-
-        <button class="btn btn-secondary btn-lg mx-auto px-5" data-bs-toggle="modal" data-bs-target="#exampleModal2">View Announcement</button>
-        <div class="modal fade bd-example-modal-lg" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-scrollable">
-                <div class="modal-content">
-
-
-                    <div class="form-row">
-                        <?php
-                        if ($status == "Pending") {
-                        ?>
-                            <div>
-                                <center>
-                                    <a href="editcomp.php?compID=<?php echo $compID; ?>"><button type="button" class="btn btn-primary btn-lg mx-auto px-5">Edit</button></a>
-                                    <button type="button" class="btn btn-danger btn-lg mx-auto px-5" data-bs-toggle="modal" data-bs-target="#terminateModal">Terminate Competition</button>
-                                </center>
-                            </div>
-                        <?php } else if ($status == "Upcoming") {
-                        ?>
-                            <div>
-                                <center>
-                                    <button class="btn btn-success btn-lg mx-auto px-5" data-bs-toggle="modal" data-bs-target="#exampleModal">Make Announcement</button>
-                                    <a href="editcomp.php?compID=<?php echo $compID; ?>"><button type="button" class="btn btn-primary btn-lg mx-auto px-5">Edit</button></a>
-                                    <button type="button" class="btn btn-danger btn-lg mx-auto px-5" data-bs-toggle="modal" data-bs-target="#terminateModal">Terminate Competition</button>
-                                    <!-- <a href=""><button type="button" class="btn btn-danger btn-lg mx-auto px-5">Terminate Competition</button></a> -->
-                                    <a href=""><button type="button" class="btn btn-secondary btn-lg mx-auto px-5">View Feedback</button></a>
-                                </center>
-                            </div>
-                        <?php } else if ($status == "On-Going") {
-                        ?>
-                            <div>
-                                <center>
-                                    <button class="btn btn-success btn-lg mx-auto px-5" data-bs-toggle="modal" data-bs-target="#exampleModal">Make Announcement</button>
-                                    <a href=""><button type="button" class="btn btn-secondary btn-lg mx-auto px-5">View Feedback</button></a>
-                                </center>
-                            </div>
-                        <?php } else if ($status == "Past") {
-                        ?>
-                            <div>
-                                <center>
-                                    <button class="btn btn-success btn-lg mx-auto px-5" data-bs-toggle="modal" data-bs-target="#exampleModal">Make Announcement</button>
-                                    <a href=""><button type="button" class="btn btn-secondary btn-lg mx-auto px-5">View Feedback</button></a>
-                                    <a href="addcert.php?compID=<?php echo $compID; ?>" type="button" class="btn btn-warning btn-lg mx-auto px-5">Submit Certificate</button></a>
-                                </center>
-                            </div>
-                        <?php } else if ($status == "Terminated") {
-                        ?>
-                            <div>
-                                <center>
-                                    <h2 class="text-danger"><u>No Actions allowed.</u></h2>
-                                </center>
-                            </div>
-                        <?php } else {
-                        ?>
-                            <div>
-                                <center>
-                                    <a href="orghome.php" class="btn btn-primary">Back to Home</a>
-                                    <a href="addcomp.php" class="btn btn-primary">Resubmit Competition</a>
-                                </center>
-                            </div>
-                        <?php } ?>
-                    </div>
-
-
-
-
-                    <!-- Make Announcement Modal -->
-
-                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <form action="" method="POST">
-                                    <div class="modal-header">
-                                        <h3 class="modal-title" style="color: black; font-weight: bold;" id="exampleModalLabel">New Announcement</h3>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <div class="mb-3">
-                                            <h3 style="white-space: pre-wrap;"><?php echo $announcement ?></h3>
-                                        </div>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                    </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <script src="https://kit.fontawesome.com/8deb7b58d3.js" crossorigin="anonymous"></script>
-                <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-                <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.3/dist/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-                <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-                <script type="text/javascript">
-                    function divide() {
-                        var txt;
-                        txt = document.getElementById('a').value;
-                        var text = txt.split(".");
-                        var str = text.join('.</br>');
-                        document.write(str);
-                    }
-                </script>
-
-                <div class="modal fade bd-example-modal-lg" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-scrollable">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h3 class="modal-title" style="color: black; font-weight: bold;" id="exampleModalLabel">New Announcement</h3>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                <div class="mb-3">
-                                    <h3 style="white-space: pre-wrap;"><?php echo $announcement ?></h3>
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-
-
-                <script src="https://kit.fontawesome.com/8deb7b58d3.js" crossorigin="anonymous"></script>
-                <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-                <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.3/dist/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-                <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-                <script type="text/javascript">
-                    function divide() {
-                        var txt;
-                        txt = document.getElementById('a').value;
-                        var text = txt.split(".");
-                        var str = text.join('.</br>');
-                        document.write(str);
-                    }
-                </script>
-                <!-- Terminate Competition Modal -->
-                <div class="modal fade" id="terminateModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title text-dark" id="exampleModalLabel">Terminate Competition</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                Are you sure you want to <b class='text-danger'>TERMINATE</b> this competition? This action cannot be undone.
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
-                                <button type="button" class="btn btn-danger">Terminate</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <script src="https://kit.fontawesome.com/8deb7b58d3.js" crossorigin="anonymous"></script>
+    </div>
 </body>
 
 </html>
@@ -352,6 +310,16 @@ if (isset($_POST['submit'])) {
 
     $sql = "UPDATE competition SET
             announcement = '$announcement' WHERE compID = $compID";
+
+    $res = mysqli_query($conn, $sql);
+
+    if ($res == true) {
+        header("location:" . SITEURL . "organizer/viewcomp_main.php?compID=$compID");
+    }
+} else if (isset($_POST['terminate'])) {
+
+    $sql = "UPDATE competition SET
+            status = 'Terminated' WHERE compID = $compID";
 
     $res = mysqli_query($conn, $sql);
 
