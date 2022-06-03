@@ -29,6 +29,7 @@ while ($row = mysqli_fetch_assoc($res)) {
     $prizePool = $row['prizePool'];
     $compPic = $row['compPic'];
     $announcement = $row['announcement'];
+    $rejectedComment = $row['rejectedComment'];
 }
 while ($row1 = mysqli_fetch_assoc($res1)) {
     $joinCount = $row1['COUNT(compID)'];
@@ -174,7 +175,6 @@ while ($row1 = mysqli_fetch_assoc($res1)) {
                     <button class="btn btn-primary btn-lg mx-auto px-5" data-bs-toggle="modal" data-bs-target="#viewModal">View Announcement</button>
                     <a href="editcomp.php?compID=<?php echo $compID; ?>"><button type="button" class="btn btn-primary btn-lg mx-auto px-5">Edit</button></a>
                     <button type="button" class="btn btn-danger btn-lg mx-auto px-5" data-bs-toggle="modal" data-bs-target="#terminateModal">Terminate Competition</button>
-                    <!-- <a href=""><button type="button" class="btn btn-danger btn-lg mx-auto px-5">Terminate Competition</button></a> -->
                 </div>
             <?php } else if ($status == "On-Going") {
             ?>
@@ -193,12 +193,14 @@ while ($row1 = mysqli_fetch_assoc($res1)) {
             ?>
                 <div>
                     <h2 class="text-danger"><u>No Actions allowed.</u></h2>
+                    <br>
+                    <a href="orghome.php" class="btn btn-outline-primary">Back to Home</a>
                 </div>
             <?php } else {
             ?>
                 <div>
-                    <a href="orghome.php" class="btn btn-primary">Back to Home</a>
-                    <a href="addcomp.php" class="btn btn-primary">Resubmit Competition</a>
+                    <a href="orghome.php" class="btn btn-lg btn-outline-primary">Back to Home</a>
+                    <button class="btn btn-warning btn-lg mx-auto px-5" data-bs-toggle="modal" data-bs-target="#rejectedModal">View Rejected Comment</button>
                 </div>
             <?php } ?>
         </div>
@@ -231,7 +233,7 @@ while ($row1 = mysqli_fetch_assoc($res1)) {
             document.write(str);
         }
     </script>
-    <script src="https://kit.fontawesome.com/8deb7b58d3.js" crossorigin="anonymous"></script>\
+    <script src="https://kit.fontawesome.com/8deb7b58d3.js" crossorigin="anonymous"></script>
 
     <!-- Make Announcement Modal -->
 
@@ -280,6 +282,7 @@ while ($row1 = mysqli_fetch_assoc($res1)) {
     </div>
 
     <!-- Terminate Competition Modal -->
+
     <div class="modal fade" id="terminateModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -294,6 +297,29 @@ while ($row1 = mysqli_fetch_assoc($res1)) {
                     <form action="" method="POST">
                         <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
                         <button name="terminate" type="submit" class="btn btn-danger">Terminate</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Rejected Competition Modal -->
+
+    <div class="modal fade" id="rejectedModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title text-dark" id="exampleModalLabel">Comments from ADMIN:</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <h3 style="white-space: pre-wrap;"><?php echo $rejectedComment ?></h3>
+                </div>
+                <div class="modal-footer">
+                    <form action="" method="POST">
+                        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
+                        <a href="addcomp.php"  class="btn btn-outline-info">Resubmit Competition</a>
+                        <!-- <button name="terminate" type="submit" class="btn btn-danger">Terminate</button> -->
                     </form>
                 </div>
             </div>
