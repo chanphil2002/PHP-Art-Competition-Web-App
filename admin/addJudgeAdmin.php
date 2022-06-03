@@ -1,7 +1,10 @@
 <?php include("../admin/partials/header.php");
-// include ("partials/database.php");
 
-session_start();
+if (!isset($_SESSION["admin"])){
+    header("Location: ../general/otherRoleLogin.php");
+}
+
+
 
 if (isset($_POST['submit'])) {
 	$ic = $_POST['ic'];
@@ -22,12 +25,11 @@ if (isset($_POST['submit'])) {
 
 		// if user account not exixts
 		if (mysqli_num_rows($result) == 0) {
-			$upload = "INSERT INTO judge (judgeIC, judgeName, judgeEmail, judgePassword, judgeBio, judgeProfilePic, status) VALUES ('$ic', '$name', '$email', '$password', '$bio', '$profile_picture', 'Pending')";
+			$upload = "INSERT INTO judge (judgeIC, judgeName, judgeEmail, judgePassword, judgeBio, judgeProfilePic, status) VALUES ('$ic', '$name', '$email', '$password', '$bio', '$profile_picture', 'Approved')";
 			$run_upload = mysqli_query($conn, $upload);
 
 			if ($run_upload == true) {
 				echo "<script>alert('Account Successfully Created!')</script>";
-				header("location:http://localhost/Virtual-X/organizer/selectedjudge.php");
 				move_uploaded_file($tmp_name, "../materials/judgeProfilePic/$profile_picture");
 			} else {
 				echo "<script>alert('Oops. Something Went Wrong, Please Try Again.')</script>";
@@ -53,7 +55,6 @@ if (isset($_POST['submit'])) {
 </head>
 
 <body class="form-v7">
-	<a class="btn btn-outline-success ms-5 rounded-end rounded-5" href="../organizer/selectedjudge.php" role="button">&laquo; Back to Judges Allocation page </a>
 	<div class="page-content">
 		<div class="form-v7-content">
 			<form class="form-detail" action="#" method="post" id="myform" enctype="multipart/form-data">
@@ -92,7 +93,10 @@ if (isset($_POST['submit'])) {
 					<br>
 				</div>
 				<div>
-					<center><button type="submit" name="submit" class="btn btn-primary">Submit</button></a></center>
+					<center>
+                        <a href="viewJudge.php" class="btn btn-primary">Back</a>&nbsp;&nbsp;&nbsp;&nbsp;
+                        <button type="submit" name="submit" class="btn btn-success">Submit</button></a>
+                    </center>
 				</div>
 			</form>
 		</div>

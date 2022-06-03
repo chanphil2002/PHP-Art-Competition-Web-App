@@ -1,4 +1,5 @@
 <?php include("../admin/partials/header.php");
+
 if (!isset($_SESSION["admin"])){
     header("Location: ../general/otherRoleLogin.php");
 }
@@ -30,7 +31,7 @@ if (!isset($_SESSION["admin"])){
                 <a class="nav-link" aria-current="page" href="pendingComp.php">Pending</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link active" href="approvedComp.php">Upcoming</a>
+                <a class="nav-link" href="approvedComp.php">Upcoming</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="onGoingComp.php">On-going</a>
@@ -39,7 +40,7 @@ if (!isset($_SESSION["admin"])){
                 <a class="nav-link" href="passComp.php">Pass</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="terminatedComp.php">Terminated</a>
+                <a class="nav-link active" href="terminatedComp.php">Terminated</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="rejectedComp.php">Rejected</a>
@@ -63,7 +64,7 @@ if (!isset($_SESSION["admin"])){
                 <?php
                 $count = 1;
                 $sum = 0;
-                $sql = "SELECT * FROM competition WHERE status = 'Upcoming'";
+                $sql = "SELECT * FROM competition WHERE status = 'Terminated'";
                 $result = mysqli_query($conn, $sql);
                 if (mysqli_num_rows($result) == 0){
                     echo "<h3>Currently No Related Competition.</h3>"; 

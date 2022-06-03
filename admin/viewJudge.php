@@ -1,6 +1,8 @@
 <?php include ("../admin/partials/header.php");
 
-    session_start();
+if (!isset($_SESSION["admin"])){
+    header("Location: ../general/otherRoleLogin.php");
+}
 ?>
 
 <!DOCTYPE html>
@@ -17,6 +19,9 @@
         <strong>
             <br><center><h2>Judge</h2></center><br>
         </strong>
+    </div>
+    <div>
+        <a href="addJudge.php" class="btn btn-success" style="float: right; margin-right:2%; margin-bottom: 1%;"><i class="fa-solid fa-plus"></i>  Add New Judge</a>
     </div>
     <div class="body">
         <table class="table">
