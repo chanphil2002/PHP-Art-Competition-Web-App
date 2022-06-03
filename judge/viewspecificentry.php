@@ -6,7 +6,7 @@ if (isset($_GET['entryID']) & isset($_GET['compID'])) {
     $compID = $_GET['compID'];
     $sql = "SELECT * FROM entry WHERE entryID='$entryID'";
     $res = mysqli_query($conn, $sql);
-    $sql1 = "SELECT * FROM comp_criteria WHERE compID='$compID'";
+    $sql1 = "SELECT * FROM comp_criteria INNER JOIN score_criteria ON comp_criteria.compID = score_criteria.compID WHERE score_criteria.entryID = '$entryID' AND comp_criteria.compID = '$compID'";
     $res1 = mysqli_query($conn, $sql1);
     $sql4 = "SELECT * from score_criteria WHERE compID='$compID' AND entryID='$entryID'";
     $res4 = mysqli_query($conn, $sql4);
@@ -135,14 +135,14 @@ if (isset($_POST['submit'])) {
                                     $i = 0;
                                     while ($row2 = mysqli_fetch_assoc($res1)) {
                                         $criteria = $row2['criteria'];
+                                        $crit = $row2["cri$i"];
                                     ?>
 
                                         <div class="mb-3">
                                             <form action=" " method="POST" class="d-flex">
                                                 <label for="crit"><?php echo $criteria; ?> Score</label>
-                                                <input type="text" name="crit<?php echo $i; ?>" class="form-control" id="crit.<?php echo $i; ?>" value='<?php while ($row3 = mysqli_fetch_assoc($res4)) {
-                                                                                                                                                            echo $row3["cri$i"];
-                                                                                                                                                        } ?>' required <?php $i++; ?>>
+                                                <input type="text" name="crit<?php echo $i; ?>" class="form-control" id="crit.<?php echo $i; ?>" value='<?php echo $crit;
+                                                                                                                                                        ?>' required <?php $i++; ?>>
                                         </div>
                                     <?php }
                                     ?>
