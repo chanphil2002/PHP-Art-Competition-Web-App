@@ -61,32 +61,36 @@ session_start();
                 $sum = 0;
                 $sql = "SELECT * FROM competition WHERE status = 'Rejected'";
                 $result = mysqli_query($conn, $sql);
-                while ($row_comp = mysqli_fetch_assoc($result)) {
-                    $id = $row_comp['compID'];
-                    $name = $row_comp['compName'];
-                    $organizer = $row_comp['organizerID'];
-                    $category = $row_comp['category'];
-                    $status = $row_comp['status'];
-                    $sum = $sum + $count;
+                if (mysqli_num_rows($result) == 0){
+                    echo "<h3>Currently No Related Competition.</h3>"; 
 
-                    $sql2 = "SELECT organizerName FROM organizer WHERE organizerID = $organizer";
-                    $result2 = mysqli_query($conn, $sql2);
-                    while ($row_organizer = mysqli_fetch_assoc($result2)) {
-                        $organizerName = $row_organizer['organizerName'];
-                    }
-                ?>
-                    <tr>
-                        <td data-label="No"><?php echo $sum ?></td>
-                        <td data-label="id"><?php echo $id ?></htd>
-                        <td data-label="name"><?php echo $name ?></td>
-                        <td data-label="organizer"><?php echo $organizerName ?></td>
-                        <td data-label="category"><?php echo $category ?></td>
-                        <td data-label="status"><?php echo $status ?></td>
-                        <td data-label="Action">
-                            <a href="viewCompDetails.php?selectedComp=<?php echo $id ?>"><i class="fa-solid fa-eye"></i></a>
-                        </td>
-                    </tr>
-                <?php } ?>
+                } else {
+                    while ($row_comp = mysqli_fetch_assoc($result)) {
+                        $id = $row_comp['compID'];
+                        $name = $row_comp['compName'];
+                        $organizer = $row_comp['organizerID'];
+                        $category = $row_comp['category'];
+                        $status = $row_comp['status'];
+                        $sum = $sum + $count;
+
+                        $sql2 = "SELECT organizerName FROM organizer WHERE organizerID = $organizer";
+                        $result2 = mysqli_query($conn, $sql2);
+                        while ($row_organizer = mysqli_fetch_assoc($result2)) {
+                            $organizerName = $row_organizer['organizerName'];
+                        }
+                    ?>
+                        <tr>
+                            <td data-label="No"><?php echo $sum ?></td>
+                            <td data-label="id"><?php echo $id ?></htd>
+                            <td data-label="name"><?php echo $name ?></td>
+                            <td data-label="organizer"><?php echo $organizerName ?></td>
+                            <td data-label="category"><?php echo $category ?></td>
+                            <td data-label="status"><?php echo $status ?></td>
+                            <td data-label="Action">
+                                <a href="viewCompDetails.php?selectedComp=<?php echo $id ?>"><i class="fa-solid fa-eye"></i></a>
+                            </td>
+                        </tr>
+                <?php }} ?>
             </tbody>
         </table>
     </div>

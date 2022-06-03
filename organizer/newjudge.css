@@ -213,50 +213,6 @@ label,input{
 	padding-left: 15px;
 }
 
-.form-v7-content .select{
-	/* Reset Select */
-	/* appearance: none;
-	outline: 0;
-	border: 0;
-	box-shadow: none; */
-	/* Personalize */
-	flex: 1;
-	padding: 0 1em;
-	/* color: #08007f; */
-	background-color: #cacaca;
-	/* border-color: #004cef; */
-	cursor: pointer;
-	/* Custom Select Wrapper */
-	position: relative;
-    display: flex;
-    width: 16em;
-    height: 2em;
-    margin-bottom: 0.1em;
-    border-radius: .25em;
-    overflow: hidden;
-}
-
-.form-v7-content .select::after {
-	content: '\25BC';
-    color: #fff;
-    position: absolute;
-    top: 0;
-    right: 0;
-    padding: 0.4em;
-    background-color: #adadad;
-    transition: .25s all ease;
-    pointer-events: none;
-}
-
-.form-v7-content select::-ms-expand {
-    display: none;
-}
-
-.form-v7-content .select:hover::after {
-	/* color: #a38599; */
-	color: #000000;
-}
-
 /* Responsive */
 @media screen and (max-width: 991px) {
 	.form-v7-content {

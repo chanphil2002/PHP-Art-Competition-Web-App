@@ -1,19 +1,15 @@
 <?php
-    include ("partials/database.php");
-    include ("partials/header.php");
+include("partials/database.php");
+include("partials/header.php");
 
-    if (isset($_POST['search'])) {
-        $search = $_POST['search'];
-        $sql = "SELECT * FROM competition WHERE compName LIKE '%$search%' OR category LIKE '%$search%'";
-        $res = mysqli_query($conn, $sql);
-        while ($row = mysqli_fetch_assoc($res)){
-          $sql1 = "SELECT * FROM competition WHERE status != 'Pending' ";
-          $res1 = mysqli_query($conn, $sql1);
-        }
-    } else {
-        $sql1 = "SELECT * FROM competition";
-        $res1 = mysqli_query($conn, $sql1);
-    }
+if (isset($_POST['search'])) {
+  $search = $_POST['search'];
+  $sql1 = "SELECT * FROM competition WHERE (compName LIKE '%$search%' OR category LIKE '%$search%') AND status <> 'Pending'";
+  $res1 = mysqli_query($conn, $sql1);
+} else {
+  $sql1 = "SELECT * FROM competition";
+  $res1 = mysqli_query($conn, $sql1);
+}
 ?>
 
 

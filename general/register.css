@@ -4,8 +4,8 @@
   font-family: "Roboto", sans-serif;
   font-weight: 500;
   box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+  /* margin: 100px; */
+  /* padding: 0; */
   text-decoration: none;
   /* background-color: #BDE6F1; */
 }
@@ -39,7 +39,7 @@ body {
     top: 70%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 400px;
+    width: 910px;
     background: white;
     border-radius: 10px;
     box-shadow: 10px 10px 15px rgba(0,0,0,0.05);

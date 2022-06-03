@@ -25,6 +25,8 @@
 <body>
     <br>
 
+    <h2 style="color: darkblue; text-decoration: underline; text-align: center">My Competitions</h2>
+
     <div class="container" style="max-width: 1320px">
         <div class="row">
             <?php

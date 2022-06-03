@@ -8,7 +8,7 @@ if (isset($_GET['compID'])) {
             FROM competition C INNER JOIN organizer O ON C.organizerID = O.organizerID and compID=$compID";
     $res = mysqli_query($conn, $sql);
 } else {
-    echo "mistake";
+    header("Location: ../organizer/orghome.php");
 }
 
 while ($row = mysqli_fetch_assoc($res)) {

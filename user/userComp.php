@@ -7,8 +7,20 @@
         header("Location: ../general/registeredUserLogin.php");
     }
 
-    $sql = "SELECT * FROM ((competition C INNER JOIN organizer O ON C.organizerID = O.organizerID) INNER JOIN entry E ON E.compID = C.compID) WHERE userEmail = '$_SESSION[user]' ";
-    $res = mysqli_query($conn, $sql);
+    if (isset($_GET["username"])){
+        $sql = "SELECT * FROM user WHERE username = '$_GET[username]' ";
+        $res = mysqli_query($conn, $sql);
+        while ($row = mysqli_fetch_assoc($res)){
+            $userEmail = $row["userEmail"];
+            $gender = $row["gender"];
+            $profilePic = $row["userProfilePic"];
+        }
+
+        $sql = "SELECT * FROM ((competition C INNER JOIN organizer O ON C.organizerID = O.organizerID) INNER JOIN entry E ON E.compID = C.compID) WHERE userEmail = '$userEmail' ";
+        $res = mysqli_query($conn, $sql);
+    }else{
+        header("Location: allComp.php");
+    }
 ?>
 
 <!DOCTYPE html>
@@ -23,6 +35,12 @@
     <link rel="stylesheet" href="../judge/judge.css">
 </head>
 <body>
+    <br>
+    <center><div style="position: relative; width: 150px; height: 150px; overflow: hidden; border-radius: 50%; border: 2px solid #08007f;">
+        <image src="../materials/userProfilePic/<?php echo $profilePic; ?>" style="width:100% ;height:auto;" class="" alt="...">
+    </div></center>
+    <h2 style="text-align: center; color: darkblue"><?php echo $_GET["username"]; ?></h2>    
+
     <br>
 
     <div class="container" style="max-width: 1320px">
@@ -64,7 +82,17 @@
                         </div>
                         <div style="text-align:right">
                             <br>
-                            <a href="entry.php?entryID=<?php echo $entry; ?>&compID=<?php echo $comp; ?>"><button type="button" class="btn btn-outline-success">View My Entry</button></a>
+                            <a href="entry.php?entryID=<?php echo $entry; ?>&compID=<?php echo $comp; ?>">
+                                <button type="button" class="btn btn-outline-success">
+                                    View 
+                                    <?php if ($gender == "M"){
+                                        echo "His ";
+                                    }else{
+                                        echo "Her ";
+                                    } ?>
+                                    Entry
+                                </button>
+                            </a>
                         </div>
                     </div>
                 </div>

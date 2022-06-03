@@ -64,8 +64,9 @@ $compPic = $row["compPic"];
 
                         <div class="d-flex align-items-center">
 
-
-                            <img src="../materials/judgeProfile/<?php echo $judgeProfilePic; ?>" class="rounded">
+                            <div class="image">
+                                <img src="../materials/judgeProfilePic/<?php echo $judgeProfilePic; ?>" class="rounded" width="155">
+                            </div>
 
                             <div class="ms-3 w-100">
 

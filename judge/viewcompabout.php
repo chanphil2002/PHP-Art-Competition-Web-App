@@ -3,10 +3,15 @@
 <?php
 if (isset($_GET['compID'])) {
     $compID = $_GET['compID'];
-    $sql = "SELECT competition.compID, organizer.organizerID, organizer.organizerName, organizer.organizerDesc,
+    $sql = "SELECT competition.compID, competition.compPic, organizer.organizerID, organizer.organizerName, organizer.organizerDesc,
             organizer.organizerProfilePic 
             FROM competition INNER JOIN organizer ON competition.compID = organizer.organizerID and compID='$compID'";
     $res = mysqli_query($conn, $sql);
+    $sql2 = "SELECT compPic FROM competition WHERE compID='$compID'";
+    $res2 = mysqli_query($conn, $sql2);
+    while ($row2 = mysqli_fetch_assoc($res2)) {
+        $compPic = $row2['compPic'];
+    }
 } else {
     echo "mistake";
 }
@@ -32,7 +37,7 @@ while ($row = mysqli_fetch_assoc($res)) {
 </head>
 
 <body>
-    <img src="../materials/image/test1.jpg" alt="Responsive image" height="300" style="background-size:cover">
+    <img src="../materials/compPic/<?php echo $compPic; ?>" alt="Responsive image" height="300" style="background-size:cover">
     <ul class="nav nav-pills nav-fill p-2 bg-light">
         <li class="nav-item">
             <a class="nav-link" aria-current="page" href="viewcompmain.php?compID=<?php echo $compID; ?>">Main</a>

@@ -11,6 +11,11 @@ if (isset($_GET['compID'])) {
             organizer.organizerProfilePic 
             FROM competition INNER JOIN organizer ON competition.compID = organizer.organizerID and compID='$compID'";
     $res = mysqli_query($conn, $sql);
+    $sql2 = "SELECT compPic FROM competition WHERE compID = '$compID'";
+    $res2 = mysqli_query($conn, $sql2);
+    while ($result2 = mysqli_fetch_assoc($res2)) {
+        $compPic = $result2['compPic'];
+    }
 } else {
     echo "mistake";
 }

@@ -3,7 +3,7 @@
 if (isset($_GET['compID'])) {
     $compID = $_GET['compID'];
     $sql = "SELECT * FROM entry WHERE compID=$compID";
-    $sql1 = "SELECT compName FROM competition WHERE compID=$compID";
+    $sql1 = "SELECT compName, compPic FROM competition WHERE compID=$compID";
     $res = mysqli_query($conn, $sql);
     $res1 = mysqli_query($conn, $sql1);
 } else {
@@ -12,6 +12,7 @@ if (isset($_GET['compID'])) {
 
 while ($row1 = mysqli_fetch_assoc($res1)) {
     $compName = $row1['compName'];
+    $compPic = $row1['compPic'];
 }
 
 if (isset($_POST['submit2'])) {
@@ -39,7 +40,7 @@ if (isset($_POST['submit2'])) {
 </head>
 
 <body>
-    <img src="../materials/image/test1.jpg" alt="Responsive image" height="300" style="background-size:cover">
+    <img src="../materials/compPic/<?php echo $compPic; ?>" alt="Responsive image" height="300" style="background-size:cover">
     <ul class="nav nav-pills nav-fill p-2 bg-light">
         <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="viewcompmain.php?compID=<?php echo $compID; ?>">Main</a>
@@ -48,10 +49,10 @@ if (isset($_POST['submit2'])) {
             <a class="nav-link" href="new-entry.php?compID=<?php echo $compID ?>">View Entries</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="viewcomp_rubric.php?compID=<?php echo $compID; ?>">Scoring Rubric</a>
+            <a class="nav-link" href="viewcomprubric.php?compID=<?php echo $compID; ?>">Scoring Rubric</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="viewcomp_about.php?compID=<?php echo $compID; ?>">About</a>
+            <a class="nav-link" href="viewcompabout.php?compID=<?php echo $compID; ?>">About</a>
         </li>
     </ul>
     <main>
@@ -102,7 +103,7 @@ if (isset($_POST['submit2'])) {
                                 <div class=" card border-1 grid-list">
                                     <a href="viewspecificentry.php?entryID=<?php echo $entryID; ?>&compID=<?php echo $compID; ?>" class="stretched-link">
                                         <span class="badge rounded-pill text-bg-success position-absolute top-0 end-0"><?php echo $entryID; ?></span>
-                                        <img class="card-img-top lazy" src="../materials/image/<?php echo $entryFile; ?>">
+                                        <img class="card-img-top lazy" src="../materials/entries/<?php echo $entryFile; ?>">
                                     </a>
                                     <div class="card-body description text-truncate text-color-2">
                                         <?php echo $submitDate ?> / <?php echo $userEmail; ?>

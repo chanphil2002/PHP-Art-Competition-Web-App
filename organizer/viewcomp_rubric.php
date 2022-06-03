@@ -11,7 +11,7 @@ if (isset($_GET['compID'])) {
     $res2 = mysqli_query($conn, $sql2);
     $res3 = mysqli_query($conn, $sql3);
 } else {
-    echo "mistake";
+    header("Location: ../organizer/orghome.php");
 }
 while ($row = mysqli_fetch_assoc($res3)) {
     $compID = $row['compID'];

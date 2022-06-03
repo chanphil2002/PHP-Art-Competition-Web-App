@@ -2,10 +2,13 @@
 
     
 ob_start();
+if (!isset($_SESSION["compID"])){
+    header("Location: ../organizer/orghome.php");
+}else{
     $compID = $_SESSION['compID'];
     $sql2 = "SELECT C.*, J.* FROM comp_judge C INNER JOIN judge J ON C.judgeIC = J.judgeIC AND C.compID = '$compID'";
     $res2 = mysqli_query($conn, $sql2);
-
+}
 
 ?>
 
@@ -19,7 +22,7 @@ ob_start();
 <a class="btn btn-success btn-lg mx-auto px-5" href="choosejudge.php" role="button"><i class="fa-solid fa-user-graduate me-2"></i>Choose Judges</a>
 
 </div>
-<a class="btn btn-outline-primary ms-5 mb-2" href="../admin/addJudge.php" role="button"><i class="fa-solid fa-user-plus me-2"></i>Add New Judge</a>
+<a class="btn btn-outline-primary ms-5 mb-2" href="../organizer/newjudge.php" role="button"><i class="fa-solid fa-user-plus me-2"></i>Add New Judge</a>
 
 
 

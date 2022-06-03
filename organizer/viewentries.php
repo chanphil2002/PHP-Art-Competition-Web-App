@@ -7,7 +7,7 @@ if (isset($_GET['compID'])) {
     $res = mysqli_query($conn, $sql);
     $res1 = mysqli_query($conn, $sql1);
 } else {
-    echo "mistake";
+    header("Location: ../organizer/orghome.php");
 }
 
 while ($row1 = mysqli_fetch_assoc($res1)) {
