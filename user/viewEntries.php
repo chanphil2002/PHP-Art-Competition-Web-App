@@ -83,16 +83,16 @@ while ($row1 = mysqli_fetch_assoc($res1)) {
                                         <?php echo $submitDate ?> / <?php echo $userEmail; ?>
                                         <div class="title text-truncate">
                                             <h3><?php echo $title; ?> </h3>
-                                            <?php if ($status == "On-Going"){ ?>
-                                                    <div class="text-success">Current Vote: <?php echo $vote; ?></div>
-                                            <?php }elseif ($status == "Past"){ ?>
-                                                    <div class="text-success">
-                                                        Vote: <?php echo $vote; ?><br>
-                                                        Judge's score: <?php echo $score; ?>/100
-                                                    </div>
-                                                    <div class="text-danger">
-                                                        Total Score: <?php echo $totalScore; ?>
-                                                    </div>
+                                            <?php if ($status == "On-Going") { ?>
+                                                <div class="text-success">Current Vote: <?php echo $vote; ?></div>
+                                            <?php } elseif ($status == "Past") { ?>
+                                                <div class="text-success">
+                                                    Vote: <?php echo $vote; ?><br>
+                                                    Judge's score: <?php echo $score; ?>/100
+                                                </div>
+                                                <div class="text-danger">
+                                                    Total Score: <?php echo $totalScore; ?>
+                                                </div>
                                             <?php } ?>
                                         </div>
                                     </div>

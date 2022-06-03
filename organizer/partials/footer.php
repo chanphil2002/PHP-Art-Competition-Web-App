@@ -9,21 +9,21 @@
       </ul>
     </div>
     <div class="col-6 col-md">
-      <h5>Terms and Conditions</h5>
+      <h5 class="text-white">Terms and Conditions</h5>
       <ul class="list-unstyled text-small">
         <li><a class="text-info" href="../profile/profile.php">User</a></li>
         <li><a class="text-info" href="../viewOrder/toShip.php">Organizer</a></li>
       </ul>
     </div>
     <div class="col-6 col-md">
-      <h5>My Account</h5>
+      <h5 class="text-white">My Account</h5>
       <ul class="list-unstyled text-small">
         <li><a class="text-info" href="../faq/faq.php">Account Setting</a></li>
         <li><a class="text-info" href="../contactUs/contactUs.php">Report</a></li>
       </ul>
     </div>
     <div class="col-6 col-md">
-      <h5>Follow Us On</h5>
+      <h5 class="text-white">Follow Us On</h5>
       <ul class="list-unstyled text-small">
         <li><a class="text-info" href="https://www.facebook.com/Organic-X-103220925584579"> <button type="button" class="btn btn-outline-primary">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fab fa-facebook"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button> </a></li> <br>
         <li><a class="text-info" href="https://www.instagram.com/organicx123/"> <button type="button" class="btn btn-outline-danger">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fab fa-instagram"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button> </a></li>

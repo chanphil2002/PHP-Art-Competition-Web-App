@@ -1,13 +1,28 @@
-.center {
-    text-align: center;
-}
-
-.text-color-3 {
-    color: #0800F7;
-}
-
 body {
     overflow: scroll;
+    font-family: 'Poppins', sans-serif;
+}
+
+h2 {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+}
+
+h3,
+h5 {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 300;
+    color: #1F2022;
+}
+
+span {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+}
+
+button {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
 }
 
 .nav {
@@ -40,4 +55,12 @@ body {
     background-repeat: no-repeat;
     background-color: var(--color-dark-gray);
     opacity: 1;
+}
+
+.center {
+    text-align: center;
+}
+
+.text-color-3 {
+    color: #0800F7;
 }

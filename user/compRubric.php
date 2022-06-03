@@ -1,7 +1,7 @@
 <?php
-    include("partials/header.php");
-    include("partials/database.php");
-    session_start();
+include("partials/header.php");
+include("partials/database.php");
+session_start();
 ?>
 
 <?php
@@ -53,22 +53,19 @@ $compPic = $row["compPic"];
                 <h2 style="display: inline-block">Meet the Judges</h2>
             </div>
 
-            <div class="container my-5 d-flex justify-content-center">
-
-                <?php while ($row = mysqli_fetch_assoc($res)) :
-                    $compID = $row['compID'];
-                    $judgeName = $row['judgeName'];
-                    $judgeBio = $row['judgeBio'];
-                    $judgeProfilePic = $row['judgeProfilePic'];
-                ?>
-
-                    <div class="card p-3 me-5 col-md-6">
+            <?php while ($row = mysqli_fetch_assoc($res)) :
+                $compID = $row['compID'];
+                $judgeName = $row['judgeName'];
+                $judgeBio = $row['judgeBio'];
+                $judgeProfilePic = $row['judgeProfilePic'];
+            ?>
+                <div class="card p-3 me-5 col-md-6 ">
+                    <div class="card mb-4 shadow-sm p-3">
 
                         <div class="d-flex align-items-center">
 
-                            <div class="image">
-                                <img src="../materials/judgeProfile/<?php echo $judgeProfilePic; ?>" class="rounded" width="155">
-                            </div>
+
+                            <img src="../materials/judgeProfile/<?php echo $judgeProfilePic; ?>" class="rounded">
 
                             <div class="ms-3 w-100">
 
@@ -91,7 +88,7 @@ $compPic = $row["compPic"];
                     </div>
                 <?php endwhile; ?>
 
-            </div>
+                </div>
         </div>
         <h1>Scoring Criteria</h1>
         <h1>Performance</h1>

@@ -44,27 +44,27 @@ if (!isset($_SESSION["user"])) {
             // Popular Competition
             $sql1 = "SELECT * FROM competition WHERE status = 'On-Going' ORDER BY noOFEntries DESC LIMIT 1";
             $res1 = mysqli_query($conn, $sql1);
-            
-            while ($compDetails = mysqli_fetch_assoc($res1)){
+
+            while ($compDetails = mysqli_fetch_assoc($res1)) {
                 $name = $compDetails["compName"];
                 $pic = $compDetails["compPic"];
                 $id = $compDetails["compID"];
-            
+
             ?>
 
-            <div class="carousel-item active" data-bs-interval="2000">
-                <a href="compDetails.php?compID=<?php echo $id; ?>">
-                    <center><img src="../materials/compPic/<?php echo $pic ?>" style="width:auto;height:360px;" class="" alt="..."></center>
-                </a>
-                <br><br><br><br><br><br>
-                <div class="carousel-caption d-none d-md-block">
-                    <div>
-                        <h5 style="color:black;display: inline-block"><?php echo $name ?> &nbsp;</h5>
-                        <span class="badge rounded-pill position-absolute bg-danger" style="height:20px">Popular</span>
+                <div class="carousel-item active" data-bs-interval="2000">
+                    <a href="compDetails.php?compID=<?php echo $id; ?>">
+                        <center><img src="../materials/compPic/<?php echo $pic ?>" style="width:auto;height:360px;" class="" alt="..."></center>
+                    </a>
+                    <br><br><br><br><br><br>
+                    <div class="carousel-caption d-none d-md-block">
+                        <div>
+                            <h5 style="color:black;display: inline-block"><?php echo $name ?> &nbsp;</h5>
+                            <span class="badge rounded-pill position-absolute bg-danger" style="height:20px">Popular</span>
+                        </div>
+                        <a class="align btn btn-outline-primary" href="compDetails.php?compID=<?php echo $id; ?>" role="button">View Details</a>
                     </div>
-                    <a class="align btn btn-outline-primary" href="compDetails.php?compID=<?php echo $id; ?>" role="button">View Details</a>
                 </div>
-            </div>
 
             <?php } ?>
 
@@ -147,39 +147,40 @@ if (!isset($_SESSION["user"])) {
             $res4 = mysqli_query($conn, $sql4);
 
             $row = mysqli_num_rows($res4);
-            if ($row != 0){
+            if ($row != 0) {
             ?>
                 <h2 class="ml-5" style="margin-left: 15px;">Most Popular Competition</h2>
-            
-            <?php
+
+                <?php
                 while ($compDetails = mysqli_fetch_assoc($res4)) {
                     $pic = $compDetails["compPic"];
                     $name = $compDetails["compName"];
                     $category = $compDetails["category"];
                     $id = $compDetails["compID"];
-            ?>
+                ?>
 
-                <div class="col-md-4 margincon1">
-                    <div class="card border-1 grid-list">
-                        <a href="compDetails.php?compID=<?php echo $id; ?>" class="stretched-link">
-                            <img class="card-img-top lazy" src="../materials/compPic/<?php echo $pic; ?>">
-                        </a>
-                        <div class="card-body description text-truncate text-color-2">
-                            <?php echo $category; ?>
-                            <div class="title text-truncate">
-                                <?php echo $name; ?>
+                    <div class="col-md-4 margincon1">
+                        <div class="card border-1 grid-list">
+                            <a href="compDetails.php?compID=<?php echo $id; ?>" class="stretched-link">
+                                <img class="card-img-top lazy" src="../materials/compPic/<?php echo $pic; ?>">
+                            </a>
+                            <div class="card-body description text-truncate text-color-2">
+                                <?php echo $category; ?>
+                                <div class="title text-truncate">
+                                    <?php echo $name; ?>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
 
-            <?php }} ?>
+            <?php }
+            } ?>
         </div>
     </div>
     <br>
 
     <!-- 2D Digital Arts -->
-    <div>
+    <div class="container" style="max-width: 1320px">
         <h2 class="ml-5" style="margin-left: 15px; display:inline-block">2D Digital Arts</h2>
         <a href="allComp.php?category=2D" style="color:darkblue; margin-left: 900px">See more&nbsp;<i class="fa-solid fa-angle-right"></i></a>
     </div>
@@ -192,9 +193,9 @@ if (!isset($_SESSION["user"])) {
             $res5 = mysqli_query($conn, $sql5);
 
             $row = mysqli_num_rows($res5);
-            if ($row == 0){
+            if ($row == 0) {
                 echo "<h3 class='text-primary'>Currently No Related Competition.</h3>";
-            }else{
+            } else {
 
                 while ($compDetails = mysqli_fetch_assoc($res5)) {
                     $pic = $compDetails["compPic"];
@@ -204,32 +205,33 @@ if (!isset($_SESSION["user"])) {
                     $id = $compDetails["compID"];
             ?>
 
-                <div class="col-md-4 margincon1">
-                    <div class="card border-1 grid-list">
-                        <a href="compDetails.php?compID=<?php echo $id; ?>" class="stretched-link">
-                            <?php if ($status == "Upcoming") { ?>
-                                <span class="badge rounded-pill position-absolute bg-danger end-0" style="height:20px">Upcoming</span>
-                            <?php } elseif ($status == "Past") { ?>
-                                <span class="badge rounded-pill position-absolute bg-dark end-0" style="height:20px">Past</span>
-                            <?php } ?>
-                            <img class="card-img-top lazy" src="../materials/compPic/<?php echo $pic; ?>">
-                        </a>
-                        <div class="card-body description text-truncate text-color-2" style="display:inline-block">
-                            <?php echo $orgName; ?>
-                            <div class="title text-truncate">
-                                <?php echo $name; ?>
+                    <div class="col-md-4 margincon1">
+                        <div class="card border-1 grid-list">
+                            <a href="compDetails.php?compID=<?php echo $id; ?>" class="stretched-link">
+                                <?php if ($status == "Upcoming") { ?>
+                                    <span class="badge rounded-pill position-absolute bg-danger end-0" style="height:20px">Upcoming</span>
+                                <?php } elseif ($status == "Past") { ?>
+                                    <span class="badge rounded-pill position-absolute bg-dark end-0" style="height:20px">Past</span>
+                                <?php } ?>
+                                <img class="card-img-top lazy" src="../materials/compPic/<?php echo $pic; ?>">
+                            </a>
+                            <div class="card-body description text-truncate text-color-2" style="display:inline-block">
+                                <?php echo $orgName; ?>
+                                <div class="title text-truncate">
+                                    <?php echo $name; ?>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
 
-            <?php }} ?>
+            <?php }
+            } ?>
         </div>
     </div>
     <br>
 
     <!-- 3D Digital Arts -->
-    <div>
+    <div class="container" style="max-width: 1320px">
         <h2 class="ml-5" style="margin-left: 15px; display:inline-block">3D Digital Arts</h2>
         <a href="allComp.php?category=3D" style="color:darkblue; margin-left: 900px">See more&nbsp;<i class="fa-solid fa-angle-right"></i></a>
     </div>
@@ -242,9 +244,9 @@ if (!isset($_SESSION["user"])) {
             $res6 = mysqli_query($conn, $sql6);
 
             $row = mysqli_num_rows($res6);
-            if ($row == 0){
+            if ($row == 0) {
                 echo "<h3 class='text-primary'>Currently No Related Competition.</h3>";
-            }else{
+            } else {
 
                 while ($compDetails = mysqli_fetch_assoc($res6)) {
                     $pic = $compDetails["compPic"];
@@ -254,32 +256,33 @@ if (!isset($_SESSION["user"])) {
                     $id = $compDetails["compID"];
             ?>
 
-                <div class="col-md-4 margincon1">
-                    <div class="card border-1 grid-list">
-                        <a href="compDetails.php?compID=<?php echo $id; ?>" class="stretched-link">
-                            <?php if ($status == "Upcoming") { ?>
-                                <span class="badge rounded-pill position-absolute bg-danger end-0" style="height:20px">Upcoming</span>
-                            <?php } elseif ($status == "Past") { ?>
-                                <span class="badge rounded-pill position-absolute bg-dark end-0" style="height:20px">Past</span>
-                            <?php } ?>
-                            <img class="card-img-top lazy" src="../materials/compPic/<?php echo $pic; ?>">
-                        </a>
-                        <div class="card-body description text-truncate text-color-2" style="display:inline-block">
-                            <?php echo $orgName; ?>
-                            <div class="title text-truncate">
-                                <?php echo $name; ?>
+                    <div class="col-md-4 margincon1">
+                        <div class="card border-1 grid-list">
+                            <a href="compDetails.php?compID=<?php echo $id; ?>" class="stretched-link">
+                                <?php if ($status == "Upcoming") { ?>
+                                    <span class="badge rounded-pill position-absolute bg-danger end-0" style="height:20px">Upcoming</span>
+                                <?php } elseif ($status == "Past") { ?>
+                                    <span class="badge rounded-pill position-absolute bg-dark end-0" style="height:20px">Past</span>
+                                <?php } ?>
+                                <img class="card-img-top lazy" src="../materials/compPic/<?php echo $pic; ?>">
+                            </a>
+                            <div class="card-body description text-truncate text-color-2" style="display:inline-block">
+                                <?php echo $orgName; ?>
+                                <div class="title text-truncate">
+                                    <?php echo $name; ?>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
 
-            <?php }} ?>
+            <?php }
+            } ?>
         </div>
     </div>
     <br>
 
     <!-- Paintings -->
-    <div>
+    <div class="container" style="max-width: 1320px">
         <h2 class="ml-5" style="margin-left: 15px; display:inline-block">Visual Art - Paintings</h2>
         <a href="allComp.php?category=Paintings" style="color:darkblue; margin-left: 800px">See more&nbsp;<i class="fa-solid fa-angle-right"></i></a>
     </div>
@@ -292,9 +295,9 @@ if (!isset($_SESSION["user"])) {
             $res7 = mysqli_query($conn, $sql7);
 
             $row = mysqli_num_rows($res7);
-            if ($row == 0){
+            if ($row == 0) {
                 echo "<h3 class='text-primary'>Currently No Related Competition.</h3>";
-            }else{
+            } else {
 
                 while ($compDetails = mysqli_fetch_assoc($res7)) {
                     $pic = $compDetails["compPic"];
@@ -304,32 +307,33 @@ if (!isset($_SESSION["user"])) {
                     $id = $compDetails["compID"];
             ?>
 
-                <div class="col-md-4 margincon1">
-                    <div class="card border-1 grid-list">
-                        <a href="compDetails.php?compID=<?php echo $id; ?>" class="stretched-link">
-                            <?php if ($status == "Upcoming") { ?>
-                                <span class="badge rounded-pill position-absolute bg-danger end-0" style="height:20px">Upcoming</span>
-                            <?php } elseif ($status == "Past") { ?>
-                                <span class="badge rounded-pill position-absolute bg-dark end-0" style="height:20px">Past</span>
-                            <?php } ?>
-                            <img class="card-img-top lazy" src="../materials/compPic/<?php echo $pic; ?>">
-                        </a>
-                        <div class="card-body description text-truncate text-color-2" style="display:inline-block">
-                            <?php echo $orgName; ?>
-                            <div class="title text-truncate">
-                                <?php echo $name; ?>
+                    <div class="col-md-4 margincon1">
+                        <div class="card border-1 grid-list">
+                            <a href="compDetails.php?compID=<?php echo $id; ?>" class="stretched-link">
+                                <?php if ($status == "Upcoming") { ?>
+                                    <span class="badge rounded-pill position-absolute bg-danger end-0" style="height:20px">Upcoming</span>
+                                <?php } elseif ($status == "Past") { ?>
+                                    <span class="badge rounded-pill position-absolute bg-dark end-0" style="height:20px">Past</span>
+                                <?php } ?>
+                                <img class="card-img-top lazy" src="../materials/compPic/<?php echo $pic; ?>">
+                            </a>
+                            <div class="card-body description text-truncate text-color-2" style="display:inline-block">
+                                <?php echo $orgName; ?>
+                                <div class="title text-truncate">
+                                    <?php echo $name; ?>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
 
-            <?php }} ?>
+            <?php }
+            } ?>
         </div>
     </div>
     <br>
 
     <!-- Photography -->
-    <div>
+    <div class="container" style="max-width: 1320px">
         <h2 class="ml-5" style="margin-left: 15px; display:inline-block">Visual Art - Photography</h2>
         <a href="allComp.php?category=Photography" style="color:darkblue; margin-left: 750px">See more&nbsp;<i class="fa-solid fa-angle-right"></i></a>
     </div>
@@ -342,9 +346,9 @@ if (!isset($_SESSION["user"])) {
             $res8 = mysqli_query($conn, $sql8);
 
             $row = mysqli_num_rows($res8);
-            if ($row == 0){
+            if ($row == 0) {
                 echo "<h3 class='text-primary'>Currently No Related Competition.</h3>";
-            }else{
+            } else {
 
                 while ($compDetails = mysqli_fetch_assoc($res8)) {
                     $pic = $compDetails["compPic"];
@@ -354,26 +358,27 @@ if (!isset($_SESSION["user"])) {
                     $id = $compDetails["compID"];
             ?>
 
-                <div class="col-md-4 margincon1">
-                    <div class="card border-1 grid-list">
-                        <a href="compDetails.php?compID=<?php echo $id; ?>" class="stretched-link">
-                            <?php if ($status == "Upcoming") { ?>
-                                <span class="badge rounded-pill position-absolute bg-danger end-0" style="height:20px">Upcoming</span>
-                            <?php } elseif ($status == "Past") { ?>
-                                <span class="badge rounded-pill position-absolute bg-dark end-0" style="height:20px">Past</span>
-                            <?php } ?>
-                            <img class="card-img-top lazy" src="../materials/compPic/<?php echo $pic; ?>">
-                        </a>
-                        <div class="card-body description text-truncate text-color-2" style="display:inline-block">
-                            <?php echo $orgName; ?>
-                            <div class="title text-truncate">
-                                <?php echo $name; ?>
+                    <div class="col-md-4 margincon1">
+                        <div class="card border-1 grid-list">
+                            <a href="compDetails.php?compID=<?php echo $id; ?>" class="stretched-link">
+                                <?php if ($status == "Upcoming") { ?>
+                                    <span class="badge rounded-pill position-absolute bg-danger end-0" style="height:20px">Upcoming</span>
+                                <?php } elseif ($status == "Past") { ?>
+                                    <span class="badge rounded-pill position-absolute bg-dark end-0" style="height:20px">Past</span>
+                                <?php } ?>
+                                <img class="card-img-top lazy" src="../materials/compPic/<?php echo $pic; ?>">
+                            </a>
+                            <div class="card-body description text-truncate text-color-2" style="display:inline-block">
+                                <?php echo $orgName; ?>
+                                <div class="title text-truncate">
+                                    <?php echo $name; ?>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
 
-            <?php }} ?>
+            <?php }
+            } ?>
         </div>
     </div>
     <br>
