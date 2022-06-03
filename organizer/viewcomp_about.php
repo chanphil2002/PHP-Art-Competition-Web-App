@@ -55,7 +55,7 @@ while ($row = mysqli_fetch_assoc($res)) {
         </li>
     </ul>
 
-    <div class="container pb-5">
+    <div class="container pt-4 pb-5">
         <div class="card mb-3">
             <div class="row g-0">
                 <div class="col-md-4">
@@ -63,8 +63,8 @@ while ($row = mysqli_fetch_assoc($res)) {
                 </div>
                 <div class="col-md-8">
                     <div class="card-body">
-                        <h5 class="card-title" style="color:black"><?php echo $organizerName ?></h5>
-                        <p class="card-text"><small class="text-muted">By <?php echo $organizerDesc ?></small></p>
+                        <h2 class="card-title" style="color:black"><?php echo $organizerName ?></h2>
+                        <h3 class="card-text" style="font-size: 1.2em;"><?php echo $organizerDesc ?></h3>
                     </div>
 
                 </div>

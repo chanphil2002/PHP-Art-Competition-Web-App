@@ -3,17 +3,14 @@
 <?php
 if (isset($_GET['compID'])) {
     $compID = $_GET['compID'];
-    $sql = "SELECT CJ.compID, CJ.judgeIC, J.judgeName, J.judgeBio, J.judgeProfilePic 
-            FROM comp_judge CJ INNER JOIN Judge J ON CJ.judgeIC = J.judgeIC AND compID='$compID'";
-    $sql2 = "SELECT * from comp_criteria WHERE compID = '$compID'";
-    $sql3 = "SELECT * from competition WHERE compID = '$compID'";
+    $sql = "SELECT * FROM feedback WHERE compID=$compID";
+    $sql1 = "SELECT * from competition WHERE compID = '$compID'";
     $res = mysqli_query($conn, $sql);
-    $res2 = mysqli_query($conn, $sql2);
-    $res3 = mysqli_query($conn, $sql3);
+    $res1 = mysqli_query($conn, $sql1);
 } else {
     header("Location: ../organizer/orghome.php");
 }
-while ($row = mysqli_fetch_assoc($res3)) {
+while ($row = mysqli_fetch_assoc($res1)) {
     $compID = $row['compID'];
     $compPic = $row['compPic'];
 }
@@ -52,6 +49,83 @@ while ($row = mysqli_fetch_assoc($res3)) {
         </li>
     </ul>
 
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div style="margin-bottom: 3em;">
+                    <h2>Feedback</h2>
+                    <?php
+                    $count = mysqli_num_rows($res);
+                    if ($count > 0) {
+                        while ($row = mysqli_fetch_assoc($res)) {
+                            $feedbackID = $row['feedbackID'];
+                            $feedbackType = $row['feedbackType'];
+                            $description = $row['description'];
+                            $entryID = $row['entryID'];
+                            $userEmail = $row['userEmail'];
+                            $organizerID = $row['organizerID'];
+                            $status = $row['status'];
+
+                            if ($feedbackType == 'Organizer' && $status != 'resolved') {
+                                echo
+                                "
+                                <div class='card'>
+                                    <div class='card-body'>
+                                    <h3 style='word-wrap: break-word; font-weight: bold;'>
+                                    <span class='badge bg-secondary'> $feedbackType </span> $userEmail 
+                                    <h3>$description</h3>
+                                    <form action='' method='POST'>
+                                    <input type='hidden' name='feedbackID' value='$feedbackID'>
+                                    <button name='submit' type='submit' class='btn btn-primary'>Resolve</button>
+                                    <form>
+                                    </h3>
+                                    </div>
+                                </div>
+                                ";
+                            } else if ($feedbackType == 'Entry' && $status != 'resolved') {
+                                echo
+                                "
+                                <div class='card'>
+                                    <div class='card-body'>
+                                    <h3 style='word-wrap: break-word; font-weight: bold;'>
+                                    <span class='badge bg-danger'> $feedbackType Report Case ID - $entryID </span> $userEmail
+                                    <h3>$description</h3>
+                                    <form action='' method='POST'>
+                                    <input type='hidden' name='feedbackID' value='$feedbackID'>
+                                    <button name='submit' type='submit' class='btn btn-primary'>Resolve</button>
+                                    </form>
+                                    </h3>
+                                    </div>
+                                </div>
+                                ";
+                            } else {
+                                echo "<h3 class='text-primary'>You have no incoming feedbacks.</h3>";
+                                break;
+                            }
+                        }
+                    }
+                    ?>
+
+                    <?php
+                    if (isset($_POST['submit'])) {
+                        $feedbackID = $_POST['feedbackID'];
+                        $sql1 = "UPDATE feedback SET
+                                status = 'resolved' WHERE feedbackID = $feedbackID";
+
+                        $res1 = mysqli_query($conn, $sql1);
+
+                        if ($res1 == true) {
+                            header("location:" . SITEURL . "organizer/viewfeedback.php?compID=$compID");
+                        }
+                    }
+
+
+
+                    ?>
+                </div>
+            </div>
+        </div>
+    </div>
 
 </body>
 
