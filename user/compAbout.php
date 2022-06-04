@@ -2,6 +2,9 @@
 include("partials/header.php");
 include("partials/database.php");
 session_start();
+if (!isset($_SESSION["user"])) {
+    header("Location: ../general/registeredUserLogin.php");
+}
 ?>
 
 <?php

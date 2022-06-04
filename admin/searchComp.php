@@ -23,7 +23,7 @@ if (!isset($_SESSION["admin"])){
                 <span class="text-color-3"></h3>
         </div>
         <div class="col-12 col-competition-2">
-            <form action="../admin/searchComp2.php" method="POST" class="d-flex">
+            <form action="../admin/searchComp3.php" method="POST" class="d-flex">
                 <input class="form-control me-2 mr-sm-2 col-md-5 ml-5" type="search" name="search" placeholder="Search...">
       </div>
       <div class="col-12 col-competition-3">
@@ -31,7 +31,7 @@ if (!isset($_SESSION["admin"])){
               <span aria-label="Filter By" style="position:relative; box-sizing: border-box; "></span>
               <label for="filter_dropdown"></label>
               <select name="filter_dropdown" id="filter_dropdown">
-                  <option>Filter By: All Competitions </option>
+                  <option value=" ">Filter By: All Competitions </option>
                 <option value="Upcoming">Filter By: Upcoming Competition</option>
                 <option value="On-Going">Filter By: Ongoing Competition</option>
                 <option value="Pending">Filter By: Past Competition</option>
@@ -44,7 +44,7 @@ if (!isset($_SESSION["admin"])){
             <span aria-label="Sort By" style="position:relative; box-sizing: border-box"></span>
             <label for="sort_dropdown"></label>
             <select name="sort_dropdown" id="sort_dropdown">
-                <option> Sort By: Please Select </option>
+                <option value=" "> Sort By: Please Select </option>
                 <option value="Release Date"> Sort By: Release Date</option>
                 <option value="Registration Dateline">Sort By: Registration Dateline</option>
                 <option value="Popularity">Sort By: Popularity</option>
@@ -82,7 +82,7 @@ if (!isset($_SESSION["admin"])){
                     ?>
                     <div class="col-md-4 margincon1">
                         <div class="card border-1 grid-list">
-                            <a href="viewcompmain.php?compID=<?php echo $compID; ?>" class="stretched-link">
+                            <a href="viewCompDetails.php?selectedComp=<?php echo $compID; ?>" class="stretched-link">
                             <span class="badge rounded-pill text-bg-success position-absolute top-0 end-0"><?php echo $status1; ?></span>
                             <img class="card-img-top lazy" src="../materials/compPic/<?php echo $compPic1; ?>"></a>
                             <div class="card-  description text-truncate text-color-2">

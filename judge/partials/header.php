@@ -1,5 +1,5 @@
 <?php include("../judge/partials/database.php");
-session_start();
+// session_start();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -25,7 +25,7 @@ session_start();
 <body>
   <nav class="navbar navbar-dark bg-secondary bg-gradient sticky-top px-5">
 
-    <a class="navbar-brand ml-5" href="../judge/judge.php">
+    <a class="navbar-brand ml-5" href="../judge/judgehomepage.php">
       <img src="../judge/partials/logo.png" alt="Virtual" width="200">
     </a>
     <form action="../judge/judge.php" method="POST" class="d-flex">
@@ -36,7 +36,7 @@ session_start();
       <ul class="navbar-nav">
 
         <li class="nav-item">
-          <a class="btn btn-info" href="     " role="button"><i class="fa-solid fa-trophy"></i>&nbsp; My Competition</a>&nbsp;&nbsp;&nbsp;
+          <a class="btn btn-info" href="../judge/judgehomepage.php" role="button"><i class="fa-solid fa-trophy"></i>&nbsp; My Competitions</a>&nbsp;&nbsp;&nbsp;
         </li>
 
         <li class="nav-item">
@@ -45,66 +45,37 @@ session_start();
               <i class="fas fa-user-circle"></i>&nbsp; My Account
             </button>
             <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton2">
-              <li><a class="dropdown-item" href="#">My Profile</a></li>
-              <li><a class="dropdown-item" href="#">Favourite</a></li>
+              <li><a class="dropdown-item" href="../judge/judgeprofile.php">My Profile</a></li>
               <li>
                 <hr class="dropdown-divider">
               </li>
-              <li><a class="dropdown-item text-danger" href="#">Log Out</a></li>
+              <li>
+                <button type="button" class="dropdown-item text-danger" data-bs-toggle="modal" data-bs-target="#logout">
+                  <i class="fa-solid fa-right-from-bracket"></i>&nbsp; Log Out
+                </button>
+              </li>
             </ul>
           </div>
         </li>
-
-
-
-
-
-
-
-
-
       </ul>
     </nav>
   </nav>
 
-
-  <!-- <div class= "mt-5 mb-5 pt-5" ></div>
-
-<<<<<<< Updated upstream
-=======
-<a class="btn btn-primary" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">
-  Link with href
-</a>
-<button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
-  Button with data-bs-target
-</button>
-
-<div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
-  <div class="offcanvas-header">
-    <h5 class="offcanvas-title" id="offcanvasExampleLabel">Offcanvas</h5>
-    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-  </div>
-  <div class="offcanvas-body">
-    <div>
-      Some text as placeholder. In real life you can have the elements you have chosen. Like, text, images, lists, etc.
+  <!-- Modal for Log Out-->
+<div class="modal fade" id="logout" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title text-dark" id="exampleModalLabel">Log Out</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Are you sure you want to <b>Log Out</b> from this judge account?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <a type="button" class="btn btn-danger" href="../general/logout.php">LOG OUT</a>
+      </div>
     </div>
-    <div class="dropdown mt-3">
-      <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown">
-        Dropdown button
-      </button>
-      <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-        <li><a class="dropdown-item" href="#">Action</a></li>
-        <li><a class="dropdown-item" href="#">Another action</a></li>
-        <li><a class="dropdown-item" href="#">Something else here</a></li>
-      </ul>
-    </div>
-
-
-    
-
-
-
-
   </div>
 </div>
- -->

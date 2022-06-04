@@ -1,36 +1,36 @@
 <?php
-    include ("partials/database.php");
+include("partials/database.php");
 
-    session_start();
+session_start();
 
-    if (isset($_POST["submit"])){
-        // Get IC and password entered: 
-        $id = $_POST["judgeid"];
-        $pw = $_POST["password"];
+if (isset($_POST["submit"])) {
+    // Get IC and password entered: 
+    $id = $_POST["judgeid"];
+    $pw = $_POST["password"];
 
-        $sql = "SELECT * FROM judge WHERE judgeIC = '$id' AND judgePassword = '$pw' AND status != 'Pending' LIMIT 1";
-        $result = mysqli_query($conn, $sql);
+    $sql = "SELECT * FROM judge WHERE judgeIC = '$id' AND judgePassword = '$pw' AND status != 'Pending' LIMIT 1";
+    $result = mysqli_query($conn, $sql);
 
-        if (mysqli_num_rows($result) == 1){
-            // Account found, email and password matched: 
-            $accDetails = mysqli_fetch_assoc($result);
-            $_SESSION["judge"] = $accDetails["judgeIC"];
-            unset($_SESSION["admin"]);
-            unset($_SESSION["organizer"]);
-            unset($_SESSION["user"]);
-            $email = $accDetails["judgeEmail"];
-            header("Location:../judge/test.php");
-            
-        }else{
-            // email and password not matched:
-            echo '<script>alert("Wrong Email or Password entered, please try again.")</script>';
-        }
+    if (mysqli_num_rows($result) == 1) {
+        // Account found, email and password matched: 
+        $accDetails = mysqli_fetch_assoc($result);
+        $_SESSION["judge"] = $accDetails["judgeIC"];
+        unset($_SESSION["admin"]);
+        unset($_SESSION["organizer"]);
+        unset($_SESSION["user"]);
+        $email = $accDetails["judgeEmail"];
+        header("Location:../judge/judgehomepage.php");
+    } else {
+        // email and password not matched:
+        echo '<script>alert("Wrong Email or Password entered, please try again.")</script>';
     }
-    
+}
+
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -47,7 +47,7 @@
 
     <div class="login-box" align="center">
         <img class="logo" align="center" src="partials/logo.png" alt="VirtualX_Logo">
-        
+
         <h1>Judge</h1>
 
         <form method="POST" action="">
@@ -62,7 +62,7 @@
                 <label>Password</label>
             </div>
             <button class="btn btn-primary" type="submit" name="submit" value="login">Log In</button>
-            <br><br> 
+            <br><br>
         </form>
 
         <div class="link">
@@ -75,4 +75,5 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 
 </body>
+
 </html>

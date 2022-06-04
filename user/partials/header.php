@@ -49,13 +49,37 @@ include("../user/partials/database.php");
               <li><a class="dropdown-item" href="myProfile.php">My Profile</a></li>
               <li><a class="dropdown-item" href="myComp.php">My Competitions</a></li>
               <li><a class="dropdown-item" href="bookmarkList.php">Favourite</a></li>
+              <li><a class="dropdown-item" href="feedback.php">Contact Us</a></li>
               <li>
                 <hr class="dropdown-divider">
               </li>
-              <li><a class="dropdown-item text-danger" href="../general/logout.php">Log Out</a></li>
+              <li>
+                <button type="button" class="dropdown-item text-danger" data-bs-toggle="modal" data-bs-target="#logout">
+                  <i class="fa-solid fa-right-from-bracket"></i>&nbsp; Log Out
+                </button>
+              </li>
             </ul>
           </div>
         </li>
       </ul>
     </nav>
   </nav>
+
+  <!-- Modal for Log Out-->
+<div class="modal fade" id="logout" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title text-dark" id="exampleModalLabel">Log Out</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Are you sure you want to <b>Log Out</b> from this user account?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <a type="button" class="btn btn-danger" href="../general/logout.php">LOG OUT</a>
+      </div>
+    </div>
+  </div>
+</div>

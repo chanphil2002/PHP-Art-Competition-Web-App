@@ -1,7 +1,6 @@
-<?php include("../admin/partials/header.php");
-if (!isset($_SESSION["admin"])){
-    header("Location: ../general/otherRoleLogin.php");
-}
+<?php
+include("partials/database.php");
+include("partials/header.php");
 
 if (isset($_POST['submit2'])) {
     $search = $_POST['search'];
@@ -9,17 +8,15 @@ if (isset($_POST['submit2'])) {
     $sort = $_POST['sort_dropdown'];
 
     if ($filter == " ") {
-        $sql1 = "CREATE TEMPORARY TABLE temp SELECT * FROM competition WHERE (compName LIKE '%$search%' OR category LIKE '%$search%') AND status <> 'Pending'";
+        $sql1 = "CREATE TEMPORARY TABLE temp AS (SELECT C.compID, C.compName, C.organizerID, C.description, C.category, C.status, C.releaseDate, C.registrationDeadline, C.compPic FROM competition C INNER JOIN organizer O ON C.organizerID = O.organizerID WHERE (compName LIKE '%$search%' OR category LIKE '%$search%' OR organizerName LIKE '%$search%') AND (Status = 'Upcoming' OR Status = 'On-Going' OR Status = 'Past'))";
         $res1 = mysqli_query($conn, $sql1);
+        
     } else if ($search == " ") {
-        $sql1 = "CREATE TEMPORARY TABLE temp SELECT * FROM competition WHERE STATUS LIKE '%filter%' AND status <> 'Pending' ";
+        $sql1 = "CREATE TEMPORARY TABLE temp AS SELECT * FROM competition WHERE status = '$filter' ";
         $res1 = mysqli_query($conn, $sql1);
     } else {
-        $sql1 = "CREATE TEMPORARY TABLE temp AS SELECT * FROM competition WHERE (compName LIKE '%$search%' OR category LIKE '%$search%') AND status LIKE '%$filter%'";
+        $sql1 = "CREATE TEMPORARY TABLE temp AS (SELECT C.compID, C.compName, C.organizerID, C.description, C.category, C.status, C.releaseDate, C.registrationDeadline, C.compPic FROM competition C INNER JOIN organizer O ON C.organizerID = O.organizerID WHERE (compName LIKE '%$search%' OR category LIKE '%$search%' OR organizerName LIKE '%$search%') AND (status = '$filter'))";
         $res1 = mysqli_query($conn, $sql1);
-        // echo "<script>alert('$filter');</script>";
-        // echo "<script>alert('$search');</script>";
-        // $sort = $_POST['sort_dropdown'];
     }
 
     if ($sort == "RegistrationDateline") {
@@ -33,6 +30,25 @@ if (isset($_POST['submit2'])) {
         $res2 = mysqli_query($conn, $sql2);
     }
 }
+
+
+// if (isset($_POST['submit'])) {
+//     $search = $_POST['search'];
+//     echo "<script>alert('$search');</script>";
+//     $sql1 = "SELECT * FROM competition WHERE compName LIKE '%$search%' OR category LIKE '%$search%'";
+//     $res1 = mysqli_query($conn, $sql1);
+//     if ($res1) {
+//         echo "<script>alert('success');</script>";
+//     } else {
+//         echo "<script>alert('wrong');</script>";
+//     }
+//     // echo "<script>alert('$filter');</script>";
+//     // $sort = $_POST['sort_dropdown'];
+// } else {
+//     $sql1 = "SELECT * FROM competition";
+//     $res1 = mysqli_query($conn, $sql1);
+// }
+
 ?>
 
 
@@ -41,12 +57,12 @@ if (isset($_POST['submit2'])) {
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="judge.css">
+    <link rel="stylesheet" href="../judge/judge.css">
 </head>
 
 <body>
     <div class="container mt-5">
-        <div class="row" style="margin-top: 3%">
+        <div class="row" style="margin-top: 2%">
             <div class="col-12 col-competition-1">
                 <h3 class="text-color-2">Search Query
                     <span class="text-color-3">
@@ -54,7 +70,7 @@ if (isset($_POST['submit2'])) {
             </div>
 
             <div class="col-12 col-competition-2">
-                <form action="../admin/searchComp2.php" method="POST" class="d-flex">
+                <form action="search2.php" method="POST" class="d-flex">
                     <input class="form-control me-2 mr-sm-2 col-md-5 ml-5" type="search" name="search" value="<?php echo $search ?>">
             </div>
             <div class="col-12 col-competition-3">
@@ -65,7 +81,7 @@ if (isset($_POST['submit2'])) {
                         <option <?php if ($_POST['filter_dropdown'] == ' ') { ?>selected="true" <?php }; ?> value=" ">Filter By: All Competitions </option>
                         <option <?php if ($_POST['filter_dropdown'] == 'Upcoming') { ?>selected="true" <?php }; ?>id="Upcoming" value="Upcoming">Filter By: Upcoming Competition</option>
                         <option <?php if ($_POST['filter_dropdown'] == 'On-Going') { ?>selected="true" <?php }; ?>id="On-Going" value="On-Going">Filter By: Ongoing Competition</option>
-                        <option <?php if ($_POST['filter_dropdown'] == 'Pending') { ?>selected="true" <?php }; ?>id="Pending" value="Pending">Filter By: Past Competition</option>
+                        <option <?php if ($_POST['filter_dropdown'] == 'Past') { ?>selected="true" <?php }; ?>id="Past" value="Past">Filter By: Past Competition</option>
                     </select>
 
                     <span aria-label="Sort By" style="position:relative; box-sizing: border-box"></span>
@@ -74,10 +90,8 @@ if (isset($_POST['submit2'])) {
                         <option <?php if ($_POST['sort_dropdown'] == ' ') { ?>selected="true" <?php }; ?>value=" "> Sort By: Please Select </option>
                         <option <?php if ($_POST['sort_dropdown'] == 'ReleaseDate') { ?>selected="true" <?php }; ?>value="ReleaseDate"> Sort By: Release Date</option>
                         <option <?php if ($_POST['sort_dropdown'] == 'RegistrationDateline') { ?>selected="true" <?php }; ?>value="RegistrationDateline">Sort By: Registration Dateline</option>
-                        <option <?php if ($_POST['sort_dropdown'] == 'Popularity') { ?>selected="true" <?php }; ?>value="Popularity">Sort By: Popularity</option>
                     </select>
                     <input type="submit" name="submit2" value="Search" class="btn btn-outline-dark my-2 my-sm-0" style="margin-left:20px">
-
 
                 </div>
             </div>
@@ -109,16 +123,20 @@ if (isset($_POST['submit2'])) {
                             $category1 = $row1['category'];
                             $compPic1 = $row1['compPic'];
                             $status1 = $row1['status'];
+                            $registrationDeadline = $row1["registrationDeadline"];
+                            $release = $row1["releaseDate"];
                     ?>
 
                             <div class="col-md-4 margincon1">
                                 <div class="card border-1 grid-list">
-                                    <a href="viewcompmain.php?compID=<?php echo $compID; ?>" class="stretched-link">
+                                    <a href="compDetails.php?compID=<?php echo $compID; ?>" class="stretched-link">
                                         <span class="badge rounded-pill text-bg-success position-absolute top-0 end-0"><?php echo $status1; ?></span>
                                         <img class="card-img-top lazy" src="../materials/compPic/<?php echo $compPic1; ?>">
                                     </a>
-                                    <div class="card-  description text-truncate text-color-2">
-                                        23 May 2022 / <?php echo $category1; ?>
+                                    <div class="card-body description text-truncate text-color-2">
+                                        <?php if ($sort == "ReleaseDate"){
+                                            echo "Release Date: " . $release;
+                                        }else{echo "Registration Deadline: " . $registrationDeadline;} ?> / <?php echo "Category: " . $category1; ?>
                                         <div class="title text-truncate"><?php echo $compName1; ?></div>
                                     </div>
                                 </div>
@@ -141,23 +159,15 @@ if (isset($_POST['submit2'])) {
 </html>
 
 
-<?php include("../judge/partials/footer.php"); ?>
+<?php include("partials/footer.php"); ?>
 
-<!-- <script type="text/javascript">
-    document.getElementById('filer_dropdown').onchange = function() {
-        localStorage.setItem('selectedtem', document.getElementById('filter_dropdown').value);
-    };
-
-    if (localStorage.getItem('selectedtem')) {
-        document.getElementById(localStorage.getItem('selectedtem')).selected = true;
+<!-- <script>
+    window.onload = function() {
+        var selItem = sessionStorage.getItem("SelItem");
+        $('#sort-item').val(selItem);
     }
-</script> -->
-
-<script>
-    $('#filter_dropdown').change(function(event) {
-        var selectedcategory = $(this).children("option:selected").val();
-        sessionStorage.setItem("itemName", selectedcategory);
+    $('#sort-item').change(function() {
+        var selVal = $(this).val();
+        sessionStorage.setItem("SelItem", selVal);
     });
-
-    $('select').find('option[value=' + sessionStorage.getItem('itemName') + ']').attr('selected', 'selected');
-</script>
+</script> -->

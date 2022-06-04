@@ -65,7 +65,7 @@
         </form>
 
         <div class="link">
-            <div><a href="../guest/homepage.php">Continue as Guest</a></div>
+            <div><a href="../index.php">Continue as Guest</a></div>
             <div><a href="loginRole.php">Login as Admin/Organizer/Judge</a></div>
         </div>
     </div>

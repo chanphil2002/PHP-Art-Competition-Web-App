@@ -1,8 +1,10 @@
-<?php include ("../admin/partials/header.php");?>
+<?php include("../guest/partials/header.php");
+?>
+
 
 <main role="main" class="container mt-5">
   <div class="jumbotron text-justify">
-    <h1>Organic-X's Privacy Notice</h1>
+    <h1>Virtual-X's Privacy Notice</h1>
     <p class="lead">We collect personal information that you voluntarily provide to us when you register on the Website, express an interest in obtaining information about us or our products and Services, when you participate in activities on the Website or otherwise when you contact us.</u></h3>
     <p class="lead">The personal information that we collect depends on the context of your interactions with us and the Website, the choices you make and the products and features you use. The personal information we collect may include the following:</p>
     <ul>
@@ -21,8 +23,9 @@
         <li><b>For other business purposes.</b> We may use your information for other business purposes, such as data analysis, identifying usage trends, determining the effectiveness of our promotional campaigns and to evaluate and improve our Website, Services, products, marketing and your experience. We may use and store this information in aggregated and anonymized form so that it is not associated with individual end users and does not include personal information. We will not use identifiable personal information without your consent.</li>
     </ul>
 
+    <a class="btn btn-lg btn-outline-primary me-4" href="../index.php" role="button">&laquo; Back to Home </a>
+    <a class="btn btn-lg btn-success" href="../general/register.php" role="button"> Sign Up Now!</a>
   </div>
 </main>
 
-
-<?php include("../admin/partials/footer.php");?>
+<?php include("../guest/partials/footer.php") ?>

@@ -12,6 +12,25 @@ if (!isset($_SESSION["admin"])){
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Competition Detail</title>
 	<link rel="stylesheet" href="addJudge.css" />
+
+	<style>
+		.container {
+		position: relative;
+		width: 100%;
+		overflow: hidden;
+		padding-top: 62.5%; /* 8:5 Aspect Ratio */
+		}
+		.responsive-iframe {
+		position: absolute;
+		top: 0;
+		left: 0;
+		bottom: 0;
+		right: 0;
+		width: 100%;
+		height: 100%;
+		border: none;
+		}
+	</style>
 </head>
 
 <body class="form-v7">
@@ -69,9 +88,9 @@ if (!isset($_SESSION["admin"])){
 						$badge = "badge text-bg-success position-absolute top-0 end-0";
 						$statusDisplay = "On-Going";
 						$update = "required";
-					} else if ($status == 'Pass') {
+					} else if ($status == 'Past') {
 						$badge = "badge text-bg-secondary position-absolute top-0 end-0";
-						$statusDisplay = "Pass";
+						$statusDisplay = "Past";
 						$update = "readonly";
 					} else if ($status == 'Terminated') {
 						$badge = "badge text-bg-secondary position-absolute top-0 end-0";
@@ -85,7 +104,7 @@ if (!isset($_SESSION["admin"])){
 				?>
 					<center>
 						<div>
-							<img src=<?php echo $picPath ?> style="width: 10rem;"><br><br><br>
+							<img style="width:90%" src=<?php echo $picPath ?> style="width: 10rem;"><br><br><br>
 						</div>
 					</center>
 					<div class="form-row">
@@ -185,10 +204,12 @@ if (!isset($_SESSION["admin"])){
 							echo "<p>No Payment Received Yet.</p><br><br>";
 						} else {
 						?>
+						<div class="container"> 
 							<center>
-								<iframe src=<?php echo $receiptPath ?> width="600" height="500">
-								</iframe><br><br><br><br>
+								<iframe class="responsive-iframe" src=<?php echo $receiptPath ?> width="600" height="500">
+								</iframe>
 							</center>
+						</div><br><br><br><br>
 					<?php }
 					} ?>
 					</div>
@@ -228,11 +249,11 @@ if (!isset($_SESSION["admin"])){
 									<button type="submit" name="update" class="btn btn-success">Update</button></a>
 								</center>
 							</div>
-						<?php } else if ($status == "Pass") {
+						<?php } else if ($status == "Past") {
 						?>
 							<div>
 								<center>
-									<a href="passComp.php" class="btn btn-primary">Back</a>
+									<a href="pastComp.php" class="btn btn-primary">Back</a>
 								</center>
 							</div>
 						<?php } else if ($status == "Rejected") {
@@ -309,7 +330,7 @@ if (isset($_POST["approve"])) {
 
 		if ($run_update == true) {
 			echo "<script>alert('Competition information updated successfully!')
-				location = 'approvedComp.php' </script>";
+				location = 'viewCompDetails.php?selectedComp=$compID' </script>";
 		} else {
 			echo "<script>alert('Oops! Something went wrong, please try again.')</script>";
 		}
@@ -324,9 +345,9 @@ if (isset($_POST["approve"])) {
 		$run_update = mysqli_query($conn, $update);
 
 		if ($run_update == true) {
-			echo "<script>alert('Profile updated successfully. Yeah')
-				location = 'approvedComp.php' </script>";
-			move_uploaded_file($tmp_name, "../materials/image/$newCompPic");
+			echo "<script>alert('Profile updated successfully.')
+				location = 'viewCompDetails.php?selectedComp=$compID' </script>";
+			move_uploaded_file($tmp_name, "../materials/compPic/$newCompPic");
 		} else {
 			echo "<script>alert('Oops! Something went wrong, please try again.')</script>";
 		}

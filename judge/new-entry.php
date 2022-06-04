@@ -1,5 +1,8 @@
 <?php include("../judge/partials/header.php");
-
+session_start();
+if (!isset($_SESSION["judge"])) {
+    header("Location: ../general/judgeLogin.php");
+}
 if (isset($_GET['compID'])) {
     $compID = $_GET['compID'];
     $sql = "SELECT * FROM entry WHERE compID=$compID";
@@ -39,7 +42,7 @@ if (isset($_POST['submit2'])) {
 </head>
 
 <body>
-    <img src="../materials/compPic/<?php echo $compPic; ?>" alt="Responsive image" height="300" style="background-size:cover">
+    <img class="img" src="../materials/compPic/<?php echo $compPic; ?>" alt="Responsive image" height="300" width="100%" style="object-fit: cover;">
     <ul class="nav nav-pills nav-fill p-2 bg-light">
         <li class="nav-item">
             <a class="nav-link" aria-current="page" href="viewcompmain.php?compID=<?php echo $compID; ?>">Main</a>
@@ -51,7 +54,7 @@ if (isset($_POST['submit2'])) {
             <a class="nav-link" href="viewcomprubric.php?compID=<?php echo $compID; ?>">Scoring Rubric</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="viewcompabout.php?compID=<?php echo $compID; ?>">About</a>
+            <a class="nav-link" href="viewcompabout.php?compID=<?php echo $compID; ?>">About Organizer</a>
         </li>
     </ul>
     <main>

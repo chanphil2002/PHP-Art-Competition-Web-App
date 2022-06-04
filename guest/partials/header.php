@@ -15,16 +15,16 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Magra:wght@400;700&display=swap" rel="stylesheet">
   <!-- CSS Style -->
-  <link rel="stylesheet" href="../guest/partials/header.css">
+  <link rel="stylesheet" href="partials/header.css">
 
 </head>
 <body>
-  <nav class="navbar navbar-dark bg-secondary bg-gradient fixed-top px-5">
+  <nav class="navbar navbar-dark bg-secondary bg-gradient sticky-top px-5">
     
-    <a class="navbar-brand ml-5" href="homepage.php">
-      <img src="../guest/partials/logo.png" alt="Virtual" width="200">
+    <a class="navbar-brand ml-5" href="../index.php">
+      <img src="partials/logo.png" alt="Virtual" width="200">
     </a>
-    <form action="     " method="POST" class="d-flex">
+    <form action="search.php" method="POST" class="d-flex">
       <input class="form-control me-2 mr-sm-2 col-md-5 ml-5" type="search" name="search" placeholder="Interested in Anything?">
       <input type="submit" name="submit" value="Search" class="btn btn-outline-light my-2 my-sm-0">
     </form>
@@ -32,18 +32,18 @@
       <ul class="navbar-nav">
         
         <li class="nav-item">
-          <a class="btn btn-success px-4" href="../general/registeredUserLogin.php" role="button"><i class="fa-solid fa-right-to-bracket"></i>&nbsp; Log In</a>&nbsp;&nbsp;&nbsp;
+          <a class="btn btn-info" href="allComp.php" role="button"><i class="fa-solid fa-trophy"></i>&nbsp; Competitions</a>&nbsp;&nbsp;&nbsp;
         </li>
 
         <li class="nav-item">
           <div class="dropdown">
-            <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
-            <i class="fa-solid fa-user-plus"></i>&nbsp; Sign Up As
+            <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
+              <i class="fas fa-user-circle"></i>&nbsp; Account
             </button>
             <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton2">
-              <li><a class="dropdown-item" href="../general/register.php">User</a></li>
-              <li><hr class="dropdown-divider"></li>
-              <li><a class="dropdown-item" href="organizerRegister.php">Organizer</a></li>
+              <li><a class="dropdown-item" href="../general/registeredUserLogin.php">Login</a></li>
+              <li><a class="dropdown-item" href="../general/register.php">User Registration</a></li>
+              <li><a class="dropdown-item" href="organizerRegister.php">Organizer Registration</a></li>
             </ul>
           </div>
         </li>
@@ -51,4 +51,4 @@
     </nav>
   </nav>
   
-<div class= "mt-5 mb-5 pt-5" ></div>
+<!-- <div class= "mt-5 mb-5 pt-5" ></div> -->

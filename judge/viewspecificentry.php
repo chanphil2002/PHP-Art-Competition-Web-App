@@ -1,13 +1,23 @@
-<?php include("../judge/partials/header.php"); ?>
+<?php include("../judge/partials/header.php");
+session_start();
+if (!isset($_SESSION["judge"])) {
+    header("Location: ../general/judgeLogin.php");
+}
+?>
 
 <?php
-if (isset($_GET['entryID']) & isset($_GET['compID'])) {
+if (isset($_GET['entryID']) & isset($_GET['compID']) & isset($_SESSION['judge'])) {
     $entryID = $_GET['entryID'];
     $compID = $_GET['compID'];
+    $judgeIC = $_SESSION['judge'];
     $sql = "SELECT * FROM entry WHERE entryID='$entryID'";
     $res = mysqli_query($conn, $sql);
     $sql1 = "SELECT * FROM comp_criteria INNER JOIN score_criteria ON comp_criteria.compID = score_criteria.compID WHERE score_criteria.entryID = '$entryID' AND comp_criteria.compID = '$compID'";
     $res1 = mysqli_query($conn, $sql1);
+    $sql20 = "SELECT * FROM score_criteria WHERE compID='$compID' AND entryID='$entryID'";
+    $res20 = mysqli_query($conn, $sql20);
+    $sql500 = "SELECT * FROM comp_criteria WHERE compID='$compID'";
+    $res500 = mysqli_query($conn, $sql500);
     $sql4 = "SELECT * from score_criteria WHERE compID='$compID' AND entryID='$entryID'";
     $res4 = mysqli_query($conn, $sql4);
     $sql5 = "SELECT compPic FROM competition WHERE compID='$compID'";
@@ -38,15 +48,15 @@ while ($row = mysqli_fetch_assoc($res)) {
 
 
 if (isset($_POST['submit'])) {
-    $count = mysqli_num_rows($res1);
+    $count = mysqli_num_rows($res500);
     $i = 0;
     $total = 0;
-    $sql2 = "INSERT INTO score_criteria (compID, entryID) VALUES ('$compID', '$entryID')";
+    $sql2 = "INSERT INTO score_criteria (compID, entryID, judgeIC) VALUES ('$compID', '$entryID','$judgeIC')";
     $res2 = mysqli_query($conn, $sql2);
     while ($count > 0) {
         // echo "<script>alert('crit.$i');</script>";
         $crit = $_POST["crit$i"];
-        $sql5 = "UPDATE score_criteria SET cri$i = '$crit'";
+        $sql5 = "UPDATE score_criteria SET cri$i = '$crit' WHERE compID = '$compID' and entryID='$entryID'";
         $res5 = mysqli_query($conn, $sql5);
         $total = $total + $crit;
         $i++;
@@ -59,9 +69,9 @@ if (isset($_POST['submit'])) {
         $cri3 = $row3['cri3'];
         $cri4 = $row3['cri4'];
     }
-    $count = mysqli_num_rows($res1);
+    $count = mysqli_num_rows($res500);
     $avg = $total / $count;
-    $sql3 = "UPDATE entry SET score = $avg WHERE compID = '$compID'";
+    $sql3 = "UPDATE entry SET score = $avg WHERE compID = '$compID' AND entryID = '$entryID'";
     $res3 = mysqli_query($conn, $sql3);
     header("location:../judge/viewspecificentry.php?entryID=$entryID&compID=$compID");
 }
@@ -98,7 +108,7 @@ if (isset($_POST['submit'])) {
 </head>
 
 <body>
-    <img src="../materials/compPic/<?php echo $compPic; ?>" alt="Responsive image" height="300" style="background-size:cover">
+    <img class="img" src="../materials/compPic/<?php echo $compPic; ?>" alt="Responsive image" height="300" width="100%" style="object-fit: cover;">
     <ul class="nav nav-pills nav-fill p-2 bg-light">
         <li class="nav-item">
             <a class="nav-link" aria-current="page" href="viewcompmain.php?compID=<?php echo $compID; ?>">Main</a>
@@ -110,7 +120,7 @@ if (isset($_POST['submit'])) {
             <a class="nav-link" href="viewcomprubric.php?compID=<?php echo $compID; ?>">Scoring Rubric</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="viewcompabout.php?compID=<?php echo $compID; ?>">About</a>
+            <a class="nav-link" href="viewcompabout.php?compID=<?php echo $compID; ?>">About Organizer</a>
         </li>
     </ul>
 
@@ -133,18 +143,33 @@ if (isset($_POST['submit'])) {
                                 <div class="col-md-4 order-md-2 mb-4">
                                     <?php
                                     $i = 0;
-                                    while ($row2 = mysqli_fetch_assoc($res1)) {
-                                        $criteria = $row2['criteria'];
-                                        $crit = $row2["cri$i"];
-                                    ?>
+                                    $count1 = mysqli_num_rows($res1);
+                                    if ($count1 == 0) {
+                                        $sql1 = "SELECT * FROM comp_criteria WHERE compID = '$compID'";
+                                        $res1 = mysqli_query($conn, $sql1);
+                                        while ($row2 = mysqli_fetch_assoc($res1)) {
+                                            $criteria = $row2['criteria']; ?>
+                                            <div class="mb-3">
+                                                <form action=" " method="POST" class="d-flex">
+                                                    <label for="crit"><?php echo $criteria; ?> Score</label>
+                                                    <input type="text" name="crit<?php echo $i; ?>" class="form-control" id="crit.<?php echo $i; ?>" value='' required <?php $i++; ?>>
+                                            </div>
+                                        <?php
+                                        }
+                                    } else {
+                                        while ($row2 = mysqli_fetch_assoc($res1)) {
+                                            $criteria = $row2['criteria'];
+                                            $crit = $row2["cri$i"];
+                                        ?>
 
-                                        <div class="mb-3">
-                                            <form action=" " method="POST" class="d-flex">
-                                                <label for="crit"><?php echo $criteria; ?> Score</label>
-                                                <input type="text" name="crit<?php echo $i; ?>" class="form-control" id="crit.<?php echo $i; ?>" value='<?php echo $crit;
-                                                                                                                                                        ?>' required <?php $i++; ?>>
-                                        </div>
+                                            <div class="mb-3">
+                                                <form action=" " method="POST" class="d-flex">
+                                                    <label for="crit"><?php echo $criteria; ?> Score</label>
+                                                    <input type="text" name="crit<?php echo $i; ?>" class="form-control" id="crit.<?php echo $i; ?>" value='<?php echo $crit;
+                                                                                                                                                            ?>' required <?php $i++; ?>>
+                                            </div>
                                     <?php }
+                                    }
                                     ?>
 
                                     <div class="mb-3">
