@@ -1,5 +1,10 @@
 <?php include("../organizer/partials/database.php");
 session_start();
+
+if (!isset($_SESSION["organizer"])) {
+  header("Location: ../general/otherRoleLogin.php");
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">

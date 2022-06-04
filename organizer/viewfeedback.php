@@ -1,10 +1,12 @@
 <?php include("../organizer/partials/header.php"); ?>
 
 <?php
+
 if (isset($_GET['compID'])) {
     $compID = $_GET['compID'];
-    $sql = "SELECT * FROM feedback WHERE compID=$compID";
-    $sql1 = "SELECT * from competition WHERE compID = '$compID'";
+    $sql = "SELECT F.*, O.* FROM feedback F INNER JOIN organizer O ON F.organizerID WHERE F.compID=$compID AND O.organizerID = '$_SESSION[organizer]'";
+    $sql1 = "SELECT C.* FROM  competition C INNER JOIN organizer O ON C.organizerID = O.organizerID AND 
+    C.compID=$compID AND O.organizerID='$_SESSION[organizer]'";
     $res = mysqli_query($conn, $sql);
     $res2 = mysqli_query($conn, $sql);
     $res1 = mysqli_query($conn, $sql1);

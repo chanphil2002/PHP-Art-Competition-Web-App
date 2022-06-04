@@ -1,12 +1,15 @@
 <?php include("../organizer/partials/header.php"); ?>
 
 <?php
+
 if (isset($_GET['compID'])) {
     $compID = $_GET['compID'];
-    $sql = "SELECT CJ.compID, CJ.judgeIC, J.judgeName, J.judgeBio, J.judgeProfilePic 
-            FROM comp_judge CJ INNER JOIN Judge J ON CJ.judgeIC = J.judgeIC AND compID='$compID'";
-    $sql2 = "SELECT * from comp_criteria WHERE compID = '$compID'";
-    $sql3 = "SELECT * from competition WHERE compID = '$compID'";
+    $sql = "SELECT O.*, C.*, CJ.*, J.* 
+    FROM comp_judge CJ INNER JOIN Judge J ON CJ.judgeIC = J.judgeIC INNER JOIN Competition C ON C.compID = CJ.compID 
+    INNER JOIN Organizer O ON O.organizerID = C.organizerID WHERE CJ.compID=$compID AND O.organizerID ='$_SESSION[organizer]'";
+    $sql2 = "SELECT * from comp_criteria WHERE compID = $compID";
+    $sql3 = "SELECT C.*, O.* FROM competition C INNER JOIN organizer O ON C.organizerID = O.organizerID AND 
+    C.compID=$compID AND O.organizerID='$_SESSION[organizer]'";
     $res = mysqli_query($conn, $sql);
     $res2 = mysqli_query($conn, $sql2);
     $res3 = mysqli_query($conn, $sql3);

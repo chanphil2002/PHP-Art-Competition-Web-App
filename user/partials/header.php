@@ -1,5 +1,6 @@
-<?php 
-  include("../user/partials/database.php"); 
+<?php
+include("../user/partials/database.php");
+
 ?>
 <html lang="en">
 

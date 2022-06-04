@@ -1,46 +1,45 @@
 <?php
-    include ("partials/database.php");
+include("partials/database.php");
 
-    session_start();
+session_start();
 
-    if (isset($_POST["submit"])){
-        // Get email and password entered: 
-        $id = $_POST["userEmail"];
-        $pw = $_POST["password"];
+if (isset($_POST["submit"])) {
+    // Get email and password entered: 
+    $id = $_POST["userEmail"];
+    $pw = $_POST["password"];
 
-        $sql1 = "SELECT * FROM admin WHERE adminEmail = '$id' AND adminPassword = '$pw' LIMIT 1";
-        $sql2 = "SELECT * FROM organizer WHERE organizerEmail = '$id' AND organizerPassword = '$pw' LIMIT 1";
-        $result1 = mysqli_query($conn, $sql1);
-        $result2 = mysqli_query($conn, $sql2);
+    $sql1 = "SELECT * FROM admin WHERE adminEmail = '$id' AND adminPassword = '$pw' LIMIT 1";
+    $sql2 = "SELECT * FROM organizer WHERE organizerEmail = '$id' AND organizerPassword = '$pw' LIMIT 1";
+    $result1 = mysqli_query($conn, $sql1);
+    $result2 = mysqli_query($conn, $sql2);
 
-        if (mysqli_num_rows($result1) == 1){
-            // Account found, email and password matched: 
-            $accDetails = mysqli_fetch_assoc($result1);
-            $_SESSION["admin"] = $accDetails["adminEmail"];
-            unset($_SESSION["user"]);
-            unset($_SESSION["organizer"]);
-            unset($_SESSION["judge"]);
-            header("Location:../admin/pendingComp.php");
-            
-        }elseif (mysqli_num_rows($result2) == 1){
-            $accDetails = mysqli_fetch_assoc($result2);
-            $_SESSION["organizer"] = $accDetails["organizerEmail"];
-            unset($_SESSION["user"]);
-            unset($_SESSION["admin"]);
-            unset($_SESSION["judge"]);
-            $orgID = $accDetails["organizerID"];
-            header("Location:../organizer/orghome.php");
-
-        }else{
-            // email and password not matched:
-            echo '<script>alert("Wrong Email or Password entered, please try again.")</script>';
-        }
+    if (mysqli_num_rows($result1) == 1) {
+        // Account found, email and password matched: 
+        $accDetails = mysqli_fetch_assoc($result1);
+        $_SESSION["admin"] = $accDetails["adminEmail"];
+        unset($_SESSION["user"]);
+        unset($_SESSION["organizer"]);
+        unset($_SESSION["judge"]);
+        header("Location:../admin/pendingComp.php");
+    } elseif (mysqli_num_rows($result2) == 1) {
+        $accDetails = mysqli_fetch_assoc($result2);
+        $_SESSION["organizer"] = $accDetails["organizerID"];
+        unset($_SESSION["user"]);
+        unset($_SESSION["admin"]);
+        unset($_SESSION["judge"]);
+        // $orgID = $accDetails["organizerID"];
+        header("Location:../organizer/orghome.php");
+    } else {
+        // email and password not matched:
+        echo '<script>alert("Wrong Email or Password entered, please try again.")</script>';
     }
-    
+}
+
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -57,7 +56,7 @@
 
     <div class="login-box" align="center">
         <img class="logo" align="center" src="partials/logo.png" alt="VirtualX_Logo">
-        
+
         <h1>Admin / Organizer</h1>
 
         <form method="POST" action="">
@@ -72,7 +71,7 @@
                 <label>Password</label>
             </div>
             <button class="btn btn-primary" type="submit" name="submit" value="login">Log In</button>
-            <br><br> 
+            <br><br>
         </form>
 
         <div class="link">
@@ -85,4 +84,5 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 
 </body>
+
 </html>

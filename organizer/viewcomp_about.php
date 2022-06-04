@@ -3,9 +3,10 @@
 <?php
 if (isset($_GET['compID'])) {
     $compID = $_GET['compID'];
-    $sql = "SELECT C.compID, C.compPic, O.organizerID, O.organizerName, O.organizerDesc,
+    $sql = "SELECT C.compID, C.compPic, O.organizerID, O.organizerName, O.organizerEmail, O.organizerDesc,
             O.organizerProfilePic 
-            FROM competition C INNER JOIN organizer O ON C.organizerID = O.organizerID and compID=$compID";
+            FROM competition C INNER JOIN organizer O ON C.organizerID = O.organizerID WHERE C.compID=$compID
+            and O.organizerID='$_SESSION[organizer]'";
     $res = mysqli_query($conn, $sql);
 } else {
     header("Location: ../organizer/orghome.php");

@@ -2,8 +2,10 @@
 
 if (isset($_GET['compID'])) {
     $compID = $_GET['compID'];
-    $sql = "SELECT * FROM entry WHERE compID=$compID";
-    $sql1 = "SELECT compName, compPic FROM competition WHERE compID=$compID";
+    $sql = "SELECT E.*, C.* FROM entry E INNER JOIN competition C ON E.compID = C.compID WHERE C.compID=$compID
+            AND C.organizerID = '$_SESSION[organizer]'";
+    $sql1 = "SELECT compName, compPic FROM  competition C INNER JOIN organizer O ON C.organizerID = O.organizerID AND 
+    C.compID=$compID AND O.organizerID='$_SESSION[organizer]'";
     $res = mysqli_query($conn, $sql);
     $res1 = mysqli_query($conn, $sql1);
 } else {

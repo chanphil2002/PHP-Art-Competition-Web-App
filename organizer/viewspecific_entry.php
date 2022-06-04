@@ -1,6 +1,7 @@
 <?php include("../organizer/partials/header.php"); ?>
 
 <?php
+
 if (isset($_GET['entryID']) & isset($_GET['compID'])) {
     $entryID = $_GET['entryID'];
     $compID = $_GET['compID'];

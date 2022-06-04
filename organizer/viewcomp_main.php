@@ -4,8 +4,10 @@
 <?php
 if (isset($_GET['compID'])) {
     $compID = $_GET['compID'];
-    $sql = "SELECT C.*, O.organizerName FROM competition C INNER JOIN organizer O ON C.organizerID = O.organizerID AND C.compID=$compID";
-    $sql1 = "SELECT COUNT(compID), SUM(vote) FROM entry WHERE compID=$compID";
+    $sql = "SELECT C.*, O.* FROM competition C INNER JOIN organizer O ON C.organizerID = O.organizerID AND 
+    C.compID=$compID AND O.organizerID='$_SESSION[organizer]'";
+    $sql1 = "SELECT COUNT(E.compID), SUM(E.vote) FROM entry E INNER JOIN competition C ON E.compID = C.compID 
+    WHERE E.compID=$compID AND C.organizerID = '$_SESSION[organizer]'";
     $res = mysqli_query($conn, $sql);
     $res1 = mysqli_query($conn, $sql1);
 } else {
@@ -32,8 +34,8 @@ while ($row = mysqli_fetch_assoc($res)) {
     $rejectedComment = $row['rejectedComment'];
 }
 while ($row1 = mysqli_fetch_assoc($res1)) {
-    $joinCount = $row1['COUNT(compID)'];
-    $voteCount = $row1['SUM(vote)'];
+    $joinCount = $row1['COUNT(E.compID)'];
+    $voteCount = $row1['SUM(E.vote)'];
 }
 ?>
 
@@ -318,7 +320,7 @@ while ($row1 = mysqli_fetch_assoc($res1)) {
                 <div class="modal-footer">
                     <form action="" method="POST">
                         <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
-                        <a href="addcomp.php"  class="btn btn-outline-info">Resubmit Competition</a>
+                        <a href="addcomp.php" class="btn btn-outline-info">Resubmit Competition</a>
                         <!-- <button name="terminate" type="submit" class="btn btn-danger">Terminate</button> -->
                     </form>
                 </div>

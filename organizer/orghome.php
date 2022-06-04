@@ -1,15 +1,15 @@
-<?php include("../organizer/partials/header.php"); 
+<?php include("../organizer/partials/header.php");
 
 
-  if (!isset($_SESSION["organizer"])){
-      header("Location: ../general/otherRoleLogin.php");
-  }
+if (!isset($_SESSION["organizer"])) {
+  header("Location: ../general/otherRoleLogin.php");
+}
 ?>
 
 
 <?php
-$organizerEmail = $_SESSION['organizer'];
-$request = "SELECT * FROM organizer WHERE organizerEmail = '$organizerEmail'";
+$organizerID = $_SESSION['organizer'];
+$request = "SELECT * FROM organizer WHERE organizerID = '$organizerID'";
 $result = mysqli_query($conn, $request);
 $display = mysqli_fetch_assoc($result);
 $organizerID = $display['organizerID'];
@@ -22,9 +22,9 @@ $res = mysqli_query($conn, $sql);
 
 
 <div class="album py-5">
-  <div class="ms-5">
-    <h1><?php echo $organizerName;?>'s Competition</h1>
-    <a class="btn btn-success" href="addcomp.php?organizerID=<?php echo $organizerID?>" role="button">Create Competition</a>
+  <div class="ms-5">`
+    <h1><?php echo $organizerName; ?>'s Competition</h1>
+    <a class="btn btn-success" href="addcomp.php?organizerID=<?php echo $organizerID ?>" role="button">Create Competition</a>
   </div>
 
 
