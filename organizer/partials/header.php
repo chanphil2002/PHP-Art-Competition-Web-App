@@ -67,10 +67,10 @@ session_start();
                 <hr class="dropdown-divider">
               </li>
               <li>
-              <button type="button" class="dropdown-item text-danger" data-bs-toggle="modal" data-bs-target="#logout">
-                <i class="fa-solid fa-right-from-bracket"></i>&nbsp; Log Out
-              </button>
-
+                <button type="button" class="dropdown-item text-danger" data-bs-toggle="modal" data-bs-target="#logout">
+                  <i class="fa-solid fa-right-from-bracket"></i>&nbsp; Log Out
+                </button>
+              </li>
             </ul>
           </div>
         </li>

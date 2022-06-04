@@ -47,7 +47,7 @@ if (!isset($_SESSION["judge"])) {
                 <div class="form-row">
                     <center>
                         <div style="position: relative; width: 150px; height: 150px; overflow: hidden; border-radius: 50%; border: 2px solid #08007f;">
-                            <image src="../materials/userProfilePic/<?php echo $profilePic; ?>" style="width:100% ;height:auto;" class="" alt="...">
+                            <image src="../materials/judgeProfilePic/<?php echo $profilePic; ?>" style="width:100% ;height:auto;" class="" alt="...">
                         </div>
                     </center>
                 </div>
