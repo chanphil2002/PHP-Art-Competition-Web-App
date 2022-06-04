@@ -11,9 +11,11 @@ if (!isset($_SESSION["user"])) {
 if (isset($_GET['compID'])) {
     $compID = $_GET['compID'];
     $sql = "SELECT * FROM competition C INNER JOIN organizer O ON C.organizerID = O.organizerID WHERE compID = '$compID' ";
+    $sql1 = "SELECT COUNT(compID), SUM(vote) FROM entry WHERE compID=$compID";
     $res = mysqli_query($conn, $sql);
+    $res1 = mysqli_query($conn, $sql1);
 } else {
-    echo "mistake";
+    header("Location: homepage.php");
 }
 while ($row = mysqli_fetch_assoc($res)) {
     $compID = $row['compID'];
@@ -31,7 +33,12 @@ while ($row = mysqli_fetch_assoc($res)) {
     $publicVote = $row['publicVote'];
     $prizePool = $row['prizePool'];
     $compPic = $row['compPic'];
-    $status = $row['status'];
+    $announcement = $row['announcement'];
+    $rejectedComment = $row['rejectedComment'];
+}
+while ($row1 = mysqli_fetch_assoc($res1)){
+    $joinCount = $row1["COUNT(compID)"];
+    $voteCount = $row1["SUM(vote)"];
 }
 ?>
 
@@ -42,8 +49,12 @@ while ($row = mysqli_fetch_assoc($res)) {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- <link href="organizer.css" rel="stylesheet"> -->
+    <link href="../organizer/organizer.css" rel="stylesheet">
     <title>Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
 </head>
 
 <body>
@@ -60,49 +71,51 @@ while ($row = mysqli_fetch_assoc($res)) {
             <a class="nav-link" href="compRubric.php?compID=<?php echo $compID; ?>">Scoring Rubric</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="compAbout.php?compID=<?php echo $compID; ?>">About</a>
+            <a class="nav-link" href="compAbout.php?compID=<?php echo $compID; ?>">About Organizer</a>
         </li>
     </ul>
-
-    <br>
 
     <div class="container pb-5">
         <div class="row">
             <div class="col-9">
                 <div>
-                    <h2 class="mr-2" style="display: inline-block"><?php echo $compName ?></h2>
-                    <span class="ml-2 badge text-bg-success align-top even-larger-badge"><?php echo $status; ?></span>
+                    <h2 style="display: inline-block" style="margin-right: 2em;"><?php echo $compName ?></h2>
+                    <span style="display: inline-block; margin-left: 1em" class="badge text-bg-success align-top even-larger-badge"><?php echo $status ?></span>
                 </div>
-                <h3 class="text-muted"><small class="text-muted">By <?php echo $organizerName ?></small>, <?php echo $category ?> Category</h3>
+                <h3 class="text-muted mb-4"><small class="text-muted">By <?php echo $organizerName ?>, <?php echo $category ?> Category</small></h3>
+                <h6 class="text-muted mb-4"><?php echo $joinCount; ?> People Participated<?php if ($voteCount != 0){echo ", " . $voteCount;  ?> Votes Collected <?php }?></h6>
 
-                <div class=" row">
+                <div class="row mb-5">
                     <div class="col-sm-4">
-                        <div class="card" style="height: 14rem;">
+                        <div class="card text-bg-light border-dark" style="max-width: 20rem; height: 14rem;">
+                            <div class="card-header text-bg-dark" style="font-size: 1.5em;">Competition Date</div>
                             <div class="card-body">
-                                <h3 class="card-title" style="color:black">Competition Date</h3>
-                                <h2><?php echo $releaseDate; ?> - <?php echo $registrationDeadline; ?></h2>
+                                <h3 class="card-text" style="font-weight: bold;"><?php echo $releaseDate; ?></h3>
+                                <h3 class="card-text">until</h3>
+                                <h3 class="card-text" style="font-weight: bold;"><?php echo $registrationDeadline; ?></h3>
                             </div>
                         </div>
                     </div>
                     <div class="col-sm-4">
-                        <div class="card" style="height: 14rem;">
+                        <div class="card text-bg-light border-dark" style="max-width: 20rem; height: 14rem;">
+                            <div class="card-header text-bg-dark" style="font-size: 1.5em;">Scoring Format</div>
                             <div class="card-body">
-                                <h3 class="card-title" style="color:black">Scoring Format</h3>
-                                <h2><u><?php echo $publicVote; ?> </u> Public Vote</h2>
-                                <h2><u><?php echo $judgeScore; ?></u> Judge</h2>
+                                <h3 class="card-text"><u style="font-weight: bold;"><?php echo $publicVote; ?></u>% Public Vote</h3>
+                                <h3 class="card-text"><u style="font-weight: bold;"><?php echo $judgeScore; ?></u>% Judge</h3>
                             </div>
                         </div>
                     </div>
                     <div class="col-sm-4">
-                        <div class="card" style="height: 14rem;">
+                        <div class="card text-bg-light border-dark" style="max-width: 20rem; height: 14rem;">
+                            <div class="card-header text-bg-dark" style="font-size: 1.5em;">Total Prize Pool</div>
                             <div class="card-body">
-                                <h3 class="card-title" style="color:black">Total Prize Pool</h3>
-                                <h2><?php echo 'RM ' . $prizePool; ?></h2>
+                                <h3 class="card-text"><?php echo "RM " . $prizePool; ?></h3>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div>
+
+                <div class="pb-4">
                     <h2>
                         Description
                     </h2>
