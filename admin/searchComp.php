@@ -23,7 +23,7 @@ if (!isset($_SESSION["admin"])){
                 <span class="text-color-3"></h3>
         </div>
         <div class="col-12 col-competition-2">
-            <form action="../admin/searchComp2.php" method="POST" class="d-flex">
+            <form action="../admin/searchComp3.php" method="POST" class="d-flex">
                 <input class="form-control me-2 mr-sm-2 col-md-5 ml-5" type="search" name="search" placeholder="Search...">
       </div>
       <div class="col-12 col-competition-3">
