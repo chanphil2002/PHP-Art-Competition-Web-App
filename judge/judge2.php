@@ -6,17 +6,15 @@ if (isset($_POST['submit2'])) {
     $sort = $_POST['sort_dropdown'];
 
     if ($filter == " ") {
-        $sql1 = "CREATE TEMPORARY TABLE temp SELECT * FROM competition WHERE (compName LIKE '%$search%' OR category LIKE '%$search%') AND status <> 'Pending'";
+        $sql1 = "CREATE TEMPORARY TABLE temp AS SELECT * FROM competition WHERE (compName LIKE '%$search%' OR category LIKE '%$search%') AND (Status = 'Upcoming' OR Status = 'On-Going' OR Status = 'Past')";
         $res1 = mysqli_query($conn, $sql1);
     } else if ($search == " ") {
-        $sql1 = "CREATE TEMPORARY TABLE temp SELECT * FROM competition WHERE STATUS LIKE '%filter%' AND status <> 'Pending' ";
+        $sql1 = "CREATE TEMPORARY TABLE temp AS SELECT * FROM competition WHERE STATUS LIKE '%filter%'";
         $res1 = mysqli_query($conn, $sql1);
     } else {
         $sql1 = "CREATE TEMPORARY TABLE temp AS SELECT * FROM competition WHERE (compName LIKE '%$search%' OR category LIKE '%$search%') AND status LIKE '%$filter%'";
         $res1 = mysqli_query($conn, $sql1);
-        // echo "<script>alert('$filter');</script>";
-        // echo "<script>alert('$search');</script>";
-        // $sort = $_POST['sort_dropdown'];
+
     }
 
     if ($sort == "RegistrationDateline") {
@@ -81,7 +79,7 @@ if (isset($_POST['submit2'])) {
                         <option <?php if ($_POST['filter_dropdown'] == ' ') { ?>selected="true" <?php }; ?> value=" ">Filter By: All Competitions </option>
                         <option <?php if ($_POST['filter_dropdown'] == 'Upcoming') { ?>selected="true" <?php }; ?>id="Upcoming" value="Upcoming">Filter By: Upcoming Competition</option>
                         <option <?php if ($_POST['filter_dropdown'] == 'On-Going') { ?>selected="true" <?php }; ?>id="On-Going" value="On-Going">Filter By: Ongoing Competition</option>
-                        <option <?php if ($_POST['filter_dropdown'] == 'Pending') { ?>selected="true" <?php }; ?>id="Pending" value="Pending">Filter By: Past Competition</option>
+                        <option <?php if ($_POST['filter_dropdown'] == 'Past') { ?>selected="true" <?php }; ?>id="Past" value="Past">Filter By: Past Competition</option>
                     </select>
 
                     <span aria-label="Sort By" style="position:relative; box-sizing: border-box"></span>
@@ -90,7 +88,6 @@ if (isset($_POST['submit2'])) {
                         <option <?php if ($_POST['sort_dropdown'] == ' ') { ?>selected="true" <?php }; ?>value=" "> Sort By: Please Select </option>
                         <option <?php if ($_POST['sort_dropdown'] == 'ReleaseDate') { ?>selected="true" <?php }; ?>value="ReleaseDate"> Sort By: Release Date</option>
                         <option <?php if ($_POST['sort_dropdown'] == 'RegistrationDateline') { ?>selected="true" <?php }; ?>value="RegistrationDateline">Sort By: Registration Dateline</option>
-                        <option <?php if ($_POST['sort_dropdown'] == 'Popularity') { ?>selected="true" <?php }; ?>value="Popularity">Sort By: Popularity</option>
                     </select>
                     <input type="submit" name="submit2" value="Search" class="btn btn-outline-dark my-2 my-sm-0" style="margin-left:20px">
 
@@ -169,11 +166,11 @@ if (isset($_POST['submit2'])) {
     }
 </script> -->
 
-<script>
+<!-- <script>
     $('#filter_dropdown').change(function(event) {
         var selectedcategory = $(this).children("option:selected").val();
         sessionStorage.setItem("itemName", selectedcategory);
     });
 
     $('select').find('option[value=' + sessionStorage.getItem('itemName') + ']').attr('selected', 'selected');
-</script>
+</script> -->

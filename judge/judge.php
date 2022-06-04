@@ -36,10 +36,10 @@ if (isset($_POST['search'])) {
           <span aria-label="Filter By" style="position:relative; box-sizing: border-box; "></span>
           <label for="filter_dropdown"></label>
           <select name="filter_dropdown" id="filter_dropdown">
-            <option>Filter By: All Competitions </option>
+            <option value=" ">Filter By: All Competitions </option>
             <option value="Upcoming">Filter By: Upcoming Competition</option>
             <option value="On-Going">Filter By: Ongoing Competition</option>
-            <option value="Pending">Filter By: Past Competition</option>
+            <option value="Past">Filter By: Past Competition</option>
           </select>
 
           <script type="text/javascript">
@@ -49,10 +49,9 @@ if (isset($_POST['search'])) {
           <span aria-label="Sort By" style="position:relative; box-sizing: border-box"></span>
           <label for="sort_dropdown"></label>
           <select name="sort_dropdown" id="sort_dropdown">
-            <option> Sort By: Please Select </option>
+            <option value=" "> Sort By: Please Select </option>
             <option value="Release Date"> Sort By: Release Date</option>
             <option value="Registration Dateline">Sort By: Registration Dateline</option>
-            <option value="Popularity">Sort By: Popularity</option>
           </select>
           <input type="submit" name="submit2" value="Search" class="btn btn-outline-dark my-2 my-sm-0" style="margin-left:20px">
 
