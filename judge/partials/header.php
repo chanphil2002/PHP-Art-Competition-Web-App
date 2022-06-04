@@ -1,5 +1,5 @@
 <?php include("../judge/partials/database.php");
-session_start();
+// session_start();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -25,7 +25,7 @@ session_start();
 <body>
   <nav class="navbar navbar-dark bg-secondary bg-gradient sticky-top px-5">
 
-    <a class="navbar-brand ml-5" href="../judge/judge.php">
+    <a class="navbar-brand ml-5" href="../judge/judgehomepage.php">
       <img src="../judge/partials/logo.png" alt="Virtual" width="200">
     </a>
     <form action="../judge/judge.php" method="POST" class="d-flex">
@@ -36,7 +36,7 @@ session_start();
       <ul class="navbar-nav">
 
         <li class="nav-item">
-          <a class="btn btn-info" href="     " role="button"><i class="fa-solid fa-trophy"></i>&nbsp; My Competition</a>&nbsp;&nbsp;&nbsp;
+          <a class="btn btn-info" href="../judge/judgehomepage.php" role="button"><i class="fa-solid fa-trophy"></i>&nbsp; My Competition</a>&nbsp;&nbsp;&nbsp;
         </li>
 
         <li class="nav-item">
@@ -45,12 +45,11 @@ session_start();
               <i class="fas fa-user-circle"></i>&nbsp; My Account
             </button>
             <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton2">
-              <li><a class="dropdown-item" href="#">My Profile</a></li>
-              <li><a class="dropdown-item" href="#">Favourite</a></li>
+              <li><a class="dropdown-item" href="../judge/judgeprofile.php">My Profile</a></li>
               <li>
                 <hr class="dropdown-divider">
               </li>
-              <li><a class="dropdown-item text-danger" href="#">Log Out</a></li>
+              <li><a class="dropdown-item text-danger" href="../general/logout.php">Log Out</a></li>
             </ul>
           </div>
         </li>

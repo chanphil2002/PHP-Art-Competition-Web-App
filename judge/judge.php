@@ -1,4 +1,8 @@
 <?php include("../judge/partials/header2.php");
+session_start();
+if (!isset($_SESSION["judge"])) {
+  header("Location: ../general/judgeLogin.php");
+}
 if (isset($_POST['search'])) {
   $search = $_POST['search'];
   $sql1 = "SELECT * FROM competition WHERE (compName LIKE '%$search%' OR category LIKE '%$search%') AND status <> 'Pending'";
@@ -22,7 +26,7 @@ if (isset($_POST['search'])) {
   <div class="container mt-5">
     <div class="row" style="margin-top: 2%">
       <div class="col-12 col-competition-1">
-        <h3 class="text-color-2">Search Result Displayed Based on
+        <h3 class="text-color-2">Search Query
           <span class="text-color-3">
         </h3>
       </div>
@@ -44,14 +48,15 @@ if (isset($_POST['search'])) {
 
           <script type="text/javascript">
             document.getElementById('filter_dropdown').value = "<?php echo $_GET['filter_dropdown']; ?>";
+            document.getElementById('sort_dropdown').value = "<?php echo $_GET['sort_dropdown']; ?>";
           </script>
 
           <span aria-label="Sort By" style="position:relative; box-sizing: border-box"></span>
           <label for="sort_dropdown"></label>
           <select name="sort_dropdown" id="sort_dropdown">
             <option value=" "> Sort By: Please Select </option>
-            <option value="Release Date"> Sort By: Release Date</option>
-            <option value="Registration Dateline">Sort By: Registration Dateline</option>
+            <option value="ReleaseDate"> Sort By: Release Date</option>
+            <option value="RegistrationDateline">Sort By: Registration Dateline</option>
           </select>
           <input type="submit" name="submit2" value="Search" class="btn btn-outline-dark my-2 my-sm-0" style="margin-left:20px">
 
@@ -84,6 +89,7 @@ if (isset($_POST['search'])) {
               $category = $row['category'];
               $compPic = $row['compPic'];
               $status = $row['status'];
+              $registrationDeadline = $row['registrationDeadline'];
           ?>
 
               <div class="col-md-4 margincon1">
@@ -93,7 +99,7 @@ if (isset($_POST['search'])) {
                     <img class="card-img-top lazy" src="../materials/compPic/<?php echo $compPic; ?>">
                   </a>
                   <div class="card-body description text-truncate text-color-2">
-                    23 May 2022 / <?php echo $category; ?>
+                    <?php echo $registrationDeadline; ?> / <?php echo $category; ?>
                     <div class="title text-truncate"><?php echo $compName; ?></div>
                   </div>
                 </div>

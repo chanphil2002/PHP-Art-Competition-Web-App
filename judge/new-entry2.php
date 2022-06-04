@@ -1,4 +1,8 @@
 <?php include("../judge/partials/header.php");
+session_start();
+if (!isset($_SESSION["judge"])) {
+    header("Location: ../general/judgeLogin.php");
+}
 
 if (isset($_GET['compID'])) {
     $compID = $_GET['compID'];
@@ -19,13 +23,13 @@ if (isset($_POST['submit2'])) {
     $filter = $_POST['filter_dropdown'];
 
     if ($filter == "Scored") {
-        $sql2 = "SELECT * FROM entry WHERE Score IS NOT NULL";
+        $sql2 = "SELECT * FROM entry WHERE Score IS NOT NULL AND compID=$compID";
         $res2 = mysqli_query($conn, $sql2);
     } else if ($filter == "Unscored") {
-        $sql2 = "SELECT * FROM entry WHERE Score IS NULL";
+        $sql2 = "SELECT * FROM entry WHERE Score IS NULL AND compID=$compID";
         $res2 = mysqli_query($conn, $sql2);
     } else {
-        $sql2 = "SELECT * FROM entry";
+        $sql2 = "SELECT * FROM entry WHERE compID=$compID";
         $res2 = mysqli_query($conn, $sql2);
     }
 }
@@ -40,19 +44,19 @@ if (isset($_POST['submit2'])) {
 </head>
 
 <body>
-    <img src="../materials/compPic/<?php echo $compPic; ?>" alt="Responsive image" height="300" style="background-size:cover">
+    <img class="img" src="../materials/compPic/<?php echo $compPic; ?>" alt="Responsive image" height="300" width="100%" style="object-fit: cover;">
     <ul class="nav nav-pills nav-fill p-2 bg-light">
         <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="viewcompmain.php?compID=<?php echo $compID; ?>">Main</a>
+            <a class="nav-link" aria-current="page" href="viewcompmain.php?compID=<?php echo $compID; ?>">Main</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="new-entry.php?compID=<?php echo $compID ?>">View Entries</a>
+            <a class="nav-link active" href="new-entry.php?compID=<?php echo $compID ?>">View Entries</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="viewcomprubric.php?compID=<?php echo $compID; ?>">Scoring Rubric</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="viewcompabout.php?compID=<?php echo $compID; ?>">About</a>
+            <a class="nav-link" href="viewcompabout.php?compID=<?php echo $compID; ?>">About Organizer</a>
         </li>
     </ul>
     <main>
@@ -70,9 +74,9 @@ if (isset($_POST['submit2'])) {
                                 <span aria-label="Filter By" style="position:relative; box-sizing: border-box; "></span>
                                 <label for="filter_dropdown"></label>
                                 <select name="filter_dropdown" id="filter_dropdown">
-                                    <option value=" ">Filter By: All Entries </option>
-                                    <option value="Scored">Filter By: Scored Entries</option>
-                                    <option value="Unscored">Filter By: Unscored Entries</option>
+                                    <option <?php if ($_POST['filter_dropdown'] == ' ') { ?>selected="true" <?php }; ?> value=" ">Filter By: All Entries </option>
+                                    <option <?php if ($_POST['filter_dropdown'] == 'Scored') { ?>selected="true" <?php }; ?>value="Scored">Filter By: Scored Entries</option>
+                                    <option <?php if ($_POST['filter_dropdown'] == 'Unscored') { ?>selected="true" <?php }; ?>value="Unscored">Filter By: Unscored Entries</option>
                                 </select>
                                 <input type="submit" name="submit2" value="Search" class="btn btn-outline-dark my-2 my-sm-0" style="margin-left:20px">
                             </div>

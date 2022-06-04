@@ -1,12 +1,23 @@
 <?php include("../judge/partials/header2.php");
 
+session_start();
+if (!isset($_SESSION["judge"])) {
+    header("Location: ../general/judgeLogin.php");
+}
+
+$judgeIC = $_SESSION['judge'];
+$request = "SELECT * FROM judge WHERE judgeIC = '$judgeIC'";
+$result = mysqli_query($conn, $request);
+$display = mysqli_fetch_assoc($result);
+$judgeName = $display['judgeName'];
+
 if (isset($_POST['submit2'])) {
     $search = $_POST['search'];
     $filter = $_POST['filter_dropdown'];
     $sort = $_POST['sort_dropdown'];
 
     if ($filter == " ") {
-        $sql1 = "CREATE TEMPORARY TABLE temp AS SELECT * FROM competition WHERE (compName LIKE '%$search%' OR category LIKE '%$search%') AND (Status = 'Upcoming' OR Status = 'On-Going' OR Status = 'Past')";
+        $sql1 = "CREATE TEMPORARY TABLE temp AS (SELECT competition.*, comp_judge.judgeIC FROM competition INNER JOIN comp_judge on competition.compID = comp_judge.compID WHERE (compName LIKE '%$search%' OR category LIKE '%$search%') AND (Status = 'Upcoming' OR Status = 'On-Going' OR Status = 'Past') AND comp_judge.judgeIC = '$judgeIC')";
         $res1 = mysqli_query($conn, $sql1);
     } else if ($search == " ") {
         $sql1 = "CREATE TEMPORARY TABLE temp AS SELECT * FROM competition WHERE STATUS LIKE '%filter%'";
@@ -14,7 +25,6 @@ if (isset($_POST['submit2'])) {
     } else {
         $sql1 = "CREATE TEMPORARY TABLE temp AS SELECT * FROM competition WHERE (compName LIKE '%$search%' OR category LIKE '%$search%') AND status LIKE '%$filter%'";
         $res1 = mysqli_query($conn, $sql1);
-
     }
 
     if ($sort == "RegistrationDateline") {
@@ -62,7 +72,7 @@ if (isset($_POST['submit2'])) {
     <div class="container mt-5">
         <div class="row" style="margin-top: 3%">
             <div class="col-12 col-competition-1">
-                <h3 class="text-color-2">Search Result Displayed Based on
+                <h3 class="text-color-2"><?php echo $judgeName ?>'s Assigned Competition(s)
                     <span class="text-color-3">
                 </h3>
             </div>
@@ -100,15 +110,6 @@ if (isset($_POST['submit2'])) {
     <main>
         <div class="index-section-6" style="box-sizing:border-box; display: block; padding-top: 1rem!important; padding-bottom: 1rem!important">
             <div class="container">
-                <div class="row" style="box-sizing:border-box">
-                    <div style="flex: 0 0 auto; width: 50%">
-                        <h3><span class="text-color-3">All</span>
-                            Tournament</h3>
-                    </div>
-                </div>
-            </div>
-
-            <div class="container">
 
 
                 <div class="row">
@@ -122,6 +123,7 @@ if (isset($_POST['submit2'])) {
                             $category1 = $row1['category'];
                             $compPic1 = $row1['compPic'];
                             $status1 = $row1['status'];
+                            $registrationDeadline = $row1['registrationDeadline'];
                     ?>
 
                             <div class="col-md-4 margincon1">
@@ -131,8 +133,8 @@ if (isset($_POST['submit2'])) {
                                         <img class="card-img-top lazy" src="../materials/compPic/<?php echo $compPic1; ?>">
                                     </a>
                                     <div class="card-  description text-truncate text-color-2">
-                                        23 May 2022 / <?php echo $category1; ?>
-                                        <div class="title text-truncate"><?php echo $compName1; ?></div>
+                                        <?php echo $registrationDeadline; ?> / Category: <?php echo $category1; ?>
+                                        <h3 class="card-text"><?php echo $compName1; ?></h3>
                                     </div>
                                 </div>
                             </div>

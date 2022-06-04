@@ -124,7 +124,7 @@ while ($row = mysqli_fetch_assoc($res)) {
                 $sql3 = "SELECT * FROM entry WHERE compID = '$compID' AND userEmail = '$_SESSION[user]' ";
                 $res3 = mysqli_query($conn, $sql3);
                 if (mysqli_num_rows($res3) != 0) {
-                    while ($entryDetails = mysqli_fetch_assoc($res3)){
+                    while ($entryDetails = mysqli_fetch_assoc($res3)) {
                         $myEntry = $entryDetails["entryID"];
                     }
                 ?>
