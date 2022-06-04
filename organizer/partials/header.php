@@ -53,7 +53,7 @@ session_start();
               <i class="fas fa-user-circle"></i>&nbsp; My Account
             </button>
             <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton2">
-              <li><a class="dropdown-item" href="#">My Profile</a></li>
+              <li><a class="dropdown-item" href="../organizer/orgprofile.php">My Profile</a></li>
               <li><a class="dropdown-item" href="#">Favourite</a></li>
               <li>
                 <hr class="dropdown-divider">
