@@ -1,10 +1,8 @@
-<?php
-include("partials/database.php");
-include("partials/header.php");
-session_start();
-if (!isset($_SESSION["user"])){
-    header ("Location: ../general/registeredUserLogin.php");
+<?php include("../admin/partials/header.php");
+if (!isset($_SESSION["admin"])){
+    header("Location: ../general/otherRoleLogin.php");
 }
+
 
 if (isset($_POST['submit2'])) {
     $search = $_POST['search'];
@@ -12,15 +10,15 @@ if (isset($_POST['submit2'])) {
     $sort = $_POST['sort_dropdown'];
 
     if ($filter == " ") {
-        $sql1 = "CREATE TEMPORARY TABLE temp AS SELECT * FROM competition WHERE (compName LIKE '%$search%' OR category LIKE '%$search%') AND (Status = 'Upcoming' OR Status = 'On-Going' OR Status = 'Past')";
+        $sql1 = "CREATE TEMPORARY TABLE temp AS (SELECT C.compID, C.compName, C.organizerID, C.description, C.category, C.status, C.releaseDate, C.registrationDeadline, C.compPic FROM competition C INNER JOIN organizer O ON C.organizerID = O.organizerID WHERE (compName LIKE '%$search%' OR category LIKE '%$search%' OR organizerName LIKE '%$search%') AND (Status = 'Upcoming' OR Status = 'On-Going' OR Status = 'Past'))";
         $res1 = mysqli_query($conn, $sql1);
+        
     } else if ($search == " ") {
-        $sql1 = "CREATE TEMPORARY TABLE temp AS SELECT * FROM competition WHERE STATUS LIKE '%filter%'";
+        $sql1 = "CREATE TEMPORARY TABLE temp AS SELECT * FROM competition WHERE status = '$filter' ";
         $res1 = mysqli_query($conn, $sql1);
     } else {
-        $sql1 = "CREATE TEMPORARY TABLE temp AS SELECT * FROM competition WHERE (compName LIKE '%$search%' OR category LIKE '%$search%') AND status LIKE '%$filter%'";
+        $sql1 = "CREATE TEMPORARY TABLE temp AS (SELECT C.compID, C.compName, C.organizerID, C.description, C.category, C.status, C.releaseDate, C.registrationDeadline, C.compPic FROM competition C INNER JOIN organizer O ON C.organizerID = O.organizerID WHERE (compName LIKE '%$search%' OR category LIKE '%$search%' OR organizerName LIKE '%$search%') AND (status = '$filter'))";
         $res1 = mysqli_query($conn, $sql1);
-
     }
 
     if ($sort == "RegistrationDateline") {
@@ -61,7 +59,7 @@ if (isset($_POST['submit2'])) {
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="../judge/judge.css">
+    <link rel="stylesheet" href="judge.css">
 </head>
 
 <body>
@@ -74,8 +72,8 @@ if (isset($_POST['submit2'])) {
             </div>
 
             <div class="col-12 col-competition-2">
-                <form action="search2.php" method="POST" class="d-flex">
-                    <input class="form-control me-2 mr-sm-2 col-md-5 ml-5" type="search" name="search" value="<?php echo $search ?>">
+                <form action="searchComp3.php" method="POST" class="d-flex">
+                    <input class="form-control me-2 mr-sm-2 col-md-5 ml-5" type="search" name="search" placeholder="Search..." value="<?php echo $search ?>">
             </div>
             <div class="col-12 col-competition-3">
                 <div class="overflow-auto">
@@ -128,16 +126,19 @@ if (isset($_POST['submit2'])) {
                             $compPic1 = $row1['compPic'];
                             $status1 = $row1['status'];
                             $registrationDeadline = $row1["registrationDeadline"];
+                            $release = $row1["releaseDate"];
                     ?>
 
                             <div class="col-md-4 margincon1">
                                 <div class="card border-1 grid-list">
-                                    <a href="compDetails.php?compID=<?php echo $compID; ?>" class="stretched-link">
+                                    <a href="viewCompDetails.php?selectedComp=<?php echo $compID; ?>" class="stretched-link">
                                         <span class="badge rounded-pill text-bg-success position-absolute top-0 end-0"><?php echo $status1; ?></span>
                                         <img class="card-img-top lazy" src="../materials/compPic/<?php echo $compPic1; ?>">
                                     </a>
                                     <div class="card-body description text-truncate text-color-2">
-                                        <?php echo $registrationDeadline; ?> / <?php echo $category1; ?>
+                                        <?php if ($sort == "ReleaseDate"){
+                                            echo "Release Date: " . $release;
+                                        }else{echo "Registration Deadline: " . $registrationDeadline;} ?> / <?php echo "Category: " . $category1; ?>
                                         <div class="title text-truncate"><?php echo $compName1; ?></div>
                                     </div>
                                 </div>
@@ -160,7 +161,7 @@ if (isset($_POST['submit2'])) {
 </html>
 
 
-<?php include("partials/footer.php"); ?>
+<?php include("../admin/partials/footer.php") ?>
 
 <!-- <script>
     window.onload = function() {

@@ -106,7 +106,7 @@ while ($row1 = mysqli_fetch_assoc($res1)) {
                         <div class="card text-bg-light border-dark" style="max-width: 20rem; height: 14rem;">
                             <div class="card-header text-bg-dark" style="font-size: 1.5em;">Total Prize Pool</div>
                             <div class="card-body">
-                                <h3 class="card-text"><?php echo $prizePool; ?></h3>
+                                <h3 class="card-text"><?php echo "RM " . $prizePool; ?></h3>
                             </div>
                         </div>
                     </div>

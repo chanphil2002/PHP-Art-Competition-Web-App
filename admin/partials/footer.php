@@ -4,8 +4,7 @@
       <div class="col-6 col-md">
         <h5 class="text-white">Virtual-X</h5>
         <ul class="list-unstyled text-small">
-          <li><a class="text-info" href="../aboutUs/aboutUs.php">About Us</a></li>
-          <li><a class="text-info" href="../product/shipping.php">Contact Us</a></li>
+          <li><a class="text-info" href="../admin/ourStory.php">About Us</a></li>
           <li><a class="text-info" href="../product/returnandrefund.php">Privacy Policy</a></li>
         </ul>
       </div>
@@ -16,18 +15,20 @@
           <li><a class="text-info" href="../viewOrder/toShip.php">Organizer</a></li>
         </ul>
       </div>
-      <div class="col-6 col-md">
-        <h5>My Account</h5>
+      <!-- <div class="col-6 col-md">
+        <h5>Manage</h5>
         <ul class="list-unstyled text-small">
-          <li><a class="text-info" href="../faq/faq.php">Account Setting</a></li>
-          <li><a class="text-info" href="../contactUs/contactUs.php">Report</a></li>
+          <li><a class="text-info" href="../admin/pendingComp.php">Competitions</a></li>
+          <li><a class="text-info" href="../admin/pendingOrganizer.php">Organizer</a></li>
+          <li><a class="text-info" href="../admin/viewJudge.php">Judge</a></li>
+          <li><a class="text-info" href="../admin/viewUser.php">Users</a></li>
         </ul>
-      </div>
+      </div> -->
       <div class="col-6 col-md">
-        <h5>Follow Us On</h5>
+        <h5>Our Social Media</h5>
         <ul class="list-unstyled text-small">
-          <li><a class="text-info" href="https://www.facebook.com/Organic-X-103220925584579"> <button type="button" class="btn btn-outline-primary">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fab fa-facebook"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button> </a></li> <br>
-          <li><a class="text-info" href="https://www.instagram.com/organicx123/"> <button type="button" class="btn btn-outline-danger">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fab fa-instagram"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button> </a></li>
+          <li><a class="text-info" href="https://www.facebook.com/Organic-X-103220925584579"> <button type="button" class="btn btn-primary">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fab fa-facebook"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button> </a></li> <br>
+          <li><a class="text-info" href="https://www.instagram.com/organicx123/"> <button type="button" class="btn btn-danger">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fab fa-instagram"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button> </a></li>
         </ul>
       </div>
       

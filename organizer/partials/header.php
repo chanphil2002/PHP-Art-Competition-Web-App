@@ -36,7 +36,7 @@ session_start();
     <a class="navbar-brand ml-5" href="../organizer/orghome.php">
       <img src="../organizer/partials/logo.png" alt="Virtual" width="200">
     </a>
-    <form action="     " method="POST" class="d-flex">
+    <form action="../organizer/orgsearch.php" method="POST" class="d-flex">
       <input class="form-control me-2 mr-sm-2 col-md-5 ml-5" type="search" name="search" placeholder="Interested in Anything?">
       <input type="submit" name="submit" value="Search" class="btn btn-outline-light my-2 my-sm-0">
     </form>
@@ -53,7 +53,7 @@ session_start();
               <i class="fas fa-user-circle"></i>&nbsp; My Account
             </button>
             <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton2">
-              <li><a class="dropdown-item" href="#">My Profile</a></li>
+              <li><a class="dropdown-item" href="../organizer/orgprofile.php">My Profile</a></li>
               <li><a class="dropdown-item" href="#">Favourite</a></li>
               <li>
                 <hr class="dropdown-divider">

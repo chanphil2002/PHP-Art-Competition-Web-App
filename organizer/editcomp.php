@@ -142,7 +142,6 @@ if(isset($_GET['compID']))
     ob_start();
     if(isset($_POST['submit']))
     {
-        $organizerID = $_POST['organizerID'];
         $compName = $_POST['compName'];
         $category = $_POST['category'];
         $releaseDate = $_POST['releaseDate'];

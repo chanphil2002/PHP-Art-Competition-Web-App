@@ -1,15 +1,19 @@
-<?php
-include("partials/database.php");
-include("partials/header.php");
+<?php include("../organizer/partials/header.php"); 
 
-session_start();
-if (!isset($_SESSION["user"])){
-  header ("Location: ../general/registeredUserLogin.php");
+
+if (!isset($_SESSION["organizer"])){
+    header("Location: ../general/otherRoleLogin.php");
 }
+
+$organizerEmail = $_SESSION['organizer'];
+$request = "SELECT * FROM organizer WHERE organizerEmail = '$organizerEmail'";
+$result = mysqli_query($conn, $request);
+$display = mysqli_fetch_assoc($result);
+$organizerID = $display['organizerID'];
 
 if (isset($_POST['search'])) {
   $search = $_POST['search'];
-  $sql1 = "SELECT * FROM competition C INNER JOIN organizer O ON C.organizerID = O.organizerID WHERE (compName LIKE '%$search%' OR category LIKE '%$search%' OR organizerName LIKE '%$search%') AND (Status = 'Upcoming' OR Status = 'On-Going' OR Status = 'Past')";
+  $sql1 = "SELECT * FROM competition WHERE (compName LIKE '%$search%' OR category LIKE '%$search%') AND organizerID = $organizerID";
   $res1 = mysqli_query($conn, $sql1);
 } else {
   $sql1 = "SELECT * FROM competition";
@@ -28,39 +32,43 @@ if (isset($_POST['search'])) {
 
 <body>
   <div class="container mt-5">
-    <div class="row" style="margin-top: 2%">
+    <div class="row" style="margin-top: 10%">
       <div class="col-12 col-competition-1">
-        <h3 class="text-color-2">Search Query
+        <h3 class="text-color-2">Search Result Displayed Based on
           <span class="text-color-3">
         </h3>
       </div>
 
       <div class="col-12 col-competition-2">
-        <form action="search3.php" method="POST" class="d-flex">
+        <form action="../organizer/orgsearch2.php" method="POST" class="d-flex">
           <input class="form-control me-2 mr-sm-2 col-md-5 ml-5" type="search" name="search" value="<?php echo $search ?>">
       </div>
-      <div class="col-12 col-competition-3">
+      <div class="col-12 col-competition-2">
         <div class="overflow-auto">
           <span aria-label="Filter By" style="position:relative; box-sizing: border-box; "></span>
           <label for="filter_dropdown"></label>
           <select name="filter_dropdown" id="filter_dropdown">
             <option value=" ">Filter By: All Competitions </option>
+            <option value="Pending">Filter By: Pending Competition</option>
             <option value="Upcoming">Filter By: Upcoming Competition</option>
             <option value="On-Going">Filter By: Ongoing Competition</option>
-            <option value="Pending">Filter By: Past Competition</option>
+            <option value="Past">Filter By: Past Competition</option>
+            <option value="Terminated">Filter By: Terminated Competition</option>
+            <option value="Rejected">Filter By: Rejected Competition</option>
           </select>
 
           <script type="text/javascript">
             document.getElementById('filter_dropdown').value = "<?php echo $_GET['filter_dropdown']; ?>";
           </script>
 
-          <span aria-label="Sort By" style="position:relative; box-sizing: border-box"></span>
-          <label for="sort_dropdown"></label>
-          <select name="sort_dropdown" id="sort_dropdown">
-            <option value=" "> Sort By: Please Select </option>
-            <option value="ReleaseDate"> Sort By: Release Date</option>
-            <option value="RegistrationDateline">Sort By: Registration Deadline</option>
-          </select>
+          <!-- <span aria-label="Sort By" style="position:relative; box-sizing: border-box"></span>
+                        <label for="sort_dropdown"></label>
+                        <select name="sort_dropdown" id="sort_dropdown">
+                            <option> Sort By: Please Select </option>
+                            <option value="Competition Date"> Sort By: Competition Date</option>
+                            <option value="Registration Dateline">Sort By: Registration Dateline</option>
+                            <option value="Popularity">Sort By: Popularity</option>
+                        </select> -->
           <input type="submit" name="submit2" value="Search" class="btn btn-outline-dark my-2 my-sm-0" style="margin-left:20px">
 
 
@@ -92,17 +100,16 @@ if (isset($_POST['search'])) {
               $category = $row['category'];
               $compPic = $row['compPic'];
               $status = $row['status'];
-              $registrationDeadline = $row["registrationDeadline"];
           ?>
 
               <div class="col-md-4 margincon1">
                 <div class="card border-1 grid-list">
-                  <a href="compDetails.php?compID=<?php echo $compID; ?>" class="stretched-link">
+                  <a href="../organizer/viewcomp_main.php?compID=<?php echo $compID; ?>" class="stretched-link">
                     <span class="badge rounded-pill text-bg-success position-absolute top-0 end-0"><?php echo $status; ?></span>
                     <img class="card-img-top lazy" src="../materials/compPic/<?php echo $compPic; ?>">
                   </a>
                   <div class="card-body description text-truncate text-color-2">
-                    <?php echo "Registration Deadline: " . $registrationDeadline; ?> / <?php echo "Category: " . $category; ?>
+                    23 May 2022 / <?php echo $category; ?>
                     <div class="title text-truncate"><?php echo $compName; ?></div>
                   </div>
                 </div>
@@ -125,4 +132,4 @@ if (isset($_POST['search'])) {
 </html>
 
 
-<?php include("partials/footer.php"); ?>
+<?php include("../organizer/partials/footer.php"); ?>

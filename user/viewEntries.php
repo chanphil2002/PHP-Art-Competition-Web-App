@@ -41,7 +41,7 @@ while ($row1 = mysqli_fetch_assoc($res1)) {
             <a class="nav-link" href="compRubric.php?compID=<?php echo $compID; ?>">Scoring Rubric</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="compAbout.php?compID=<?php echo $compID; ?>">About</a>
+            <a class="nav-link" href="compAbout.php?compID=<?php echo $compID; ?>">About Organizer</a>
         </li>
     </ul>
     <main>

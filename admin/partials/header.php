@@ -1,6 +1,5 @@
 <?php include("../admin/partials/database.php"); 
-session_start();
-?>
+session_start();?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -34,12 +33,12 @@ session_start();
         <nav class="navbar navbar-expand-xl">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="btn btn-info" href="pendingComp.php" role="button"><i class="fa-solid fa-trophy"></i>&nbsp; Manage Competitions</a>&nbsp;&nbsp;&nbsp;
+                    <a class="btn btn-info" href="pendingComp.php" role="button" title="Manage Competition"><i class="fa-solid fa-trophy"></i>&nbsp; Manage Competitions</a>&nbsp;&nbsp;&nbsp;
                 </li>
 
                 <li class="nav-item">
                     <div class="dropdown">
-                        <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
+                        <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false" title="Manage Users">
                             <i class="fa-solid fa-user"></i>&nbsp;Manage Users
                         </button>
                         <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton2">
@@ -52,7 +51,7 @@ session_start();
                 &nbsp;&nbsp;&nbsp;
                 <li class="nav-item"> 
                     <div class="dropdown">
-                        <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
+                        <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false" title="Search Users">
                             <i class="fa-solid fa-magnifying-glass"></i>&nbsp;Search
                         </button>
                         <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton2">
@@ -63,7 +62,10 @@ session_start();
                 </li>
                 &nbsp;&nbsp;&nbsp;
                 <li class="nav-item">
-                    <a class="btn btn-danger" href="../general/logout.php" role="button"><i class="fa-solid fa-right-from-bracket"></i>&nbsp; Sign Out</a>
+                    <a class="btn btn-info" href="viewFeedback.php" role="button" title="View Users' Feedbacks"><i class="fa-solid fa-comment-dots"></i>&nbsp;Feedbacks</a>&nbsp;&nbsp;&nbsp;
+                </li>
+                <li class="nav-item">
+                    <a class="btn btn-danger" href="../general/logout.php" role="button" title="Log Out"><i class="fa-solid fa-right-from-bracket"></i></a>
                 </li>
             </ul>
         </nav>
