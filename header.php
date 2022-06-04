@@ -1,4 +1,4 @@
-<?php include ("../admin/partials/database.php");?>
+<?php include ("admin/partials/database.php");?>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -15,16 +15,16 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Magra:wght@400;700&display=swap" rel="stylesheet">
   <!-- CSS Style -->
-  <link rel="stylesheet" href="../guest/partials/header.css">
+  <link rel="stylesheet" href="guest/partials/header.css">
 
 </head>
 <body>
   <nav class="navbar navbar-dark bg-secondary bg-gradient fixed-top px-5">
     
     <a class="navbar-brand ml-5" href="index.php">
-      <img src="guest/partials/logo.png" alt="Virtual" width="200">
+      <img src="guest/partials/logo.png" alt="VirtualX" width="200">
     </a>
-    <form action="search.php" method="POST" class="d-flex">
+    <form action="guest/search.php" method="POST" class="d-flex">
       <input class="form-control me-2 mr-sm-2 col-md-5 ml-5" type="search" name="search" placeholder="Interested in Anything?">
       <input type="submit" name="submit" value="Search" class="btn btn-outline-light my-2 my-sm-0">
     </form>
@@ -32,7 +32,7 @@
       <ul class="navbar-nav">
         
         <li class="nav-item">
-          <a class="btn btn-success px-4" href="../general/registeredUserLogin.php" role="button"><i class="fa-solid fa-right-to-bracket"></i>&nbsp; Log In</a>&nbsp;&nbsp;&nbsp;
+          <a class="btn btn-success px-4" href="general/registeredUserLogin.php" role="button"><i class="fa-solid fa-right-to-bracket"></i>&nbsp; Log In</a>&nbsp;&nbsp;&nbsp;
         </li>
 
         <li class="nav-item">
@@ -41,9 +41,9 @@
             <i class="fa-solid fa-user-plus"></i>&nbsp; Sign Up As
             </button>
             <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton2">
-              <li><a class="dropdown-item" href="../general/register.php">User</a></li>
+              <li><a class="dropdown-item" href="general/register.php">User</a></li>
               <li><hr class="dropdown-divider"></li>
-              <li><a class="dropdown-item" href="organizerRegister.php">Organizer</a></li>
+              <li><a class="dropdown-item" href="guest/organizerRegister.php">Organizer</a></li>
             </ul>
           </div>
         </li>

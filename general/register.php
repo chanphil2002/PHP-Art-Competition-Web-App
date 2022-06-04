@@ -72,7 +72,268 @@
     <!-- Bootstrap -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <!-- Custom CSS -->
-    <link rel="stylesheet" type="text/css" href="register.css"/>
+    <!-- <link rel="stylesheet" type="text/css" href="register.css"/> -->
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap');
+
+* {
+  font-family: "Roboto", sans-serif;
+  font-weight: 500;
+  box-sizing: border-box;
+  /* margin: 100px; */
+  /* padding: 0; */
+  text-decoration: none;
+  /* background-color: #BDE6F1; */
+}
+
+html {
+  overflow-y : scroll;
+  background-color: #BDE6F1;
+  }
+
+body {
+  background-color: #BDE6F1;
+}
+
+  .login-box li, button {
+    font-size: 16px;
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.login-box a{
+  color: #666;
+  font-weight: 600;
+  font-size: 13px;
+  margin-bottom: 3px;
+  font-family: 'Open Sans', sans-serif;
+}
+
+.login-box{
+    padding: 2em;
+    position: absolute;
+    top: 70%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 10px 10px 15px rgba(0,0,0,0.05);
+    margin-top: 3px;
+  }
+  .login-box h1{
+    font-size: 2em;
+    text-align: center;
+    padding: 20px 0;
+    border-bottom: 1px solid silver;
+  }
+  .login-box form{
+    padding: 0 40px;
+    box-sizing: border-box;
+  }
+  form .txt_field{
+    position: relative;
+    border-bottom: 2px solid #adadad;
+    margin: 30px 0;
+  }
+  .txt_field input{
+    width: 100%;
+    padding: 0 5px;
+    height: 40px;
+    font-size: 16px;
+    border: none;
+    background: none;
+    outline: none;
+  }
+  .txt_field label{
+    position: absolute;
+    top: 50%;
+    left: 5px;
+    color: #adadad;
+    transform: translateY(-50%);
+    font-size: 16px;
+    pointer-events: none;
+    transition: .5s;
+  }
+  .txt_field span::before{
+    content: '';
+    position: absolute;
+    top: 40px;
+    left: 0;
+    width: 0%;
+    height: 2px;
+    background: #08007f;
+    transition: .5s;
+  }
+
+  .txt_field input:focus ~ label,
+  .txt_field input:valid ~ label{
+    top: -5px;
+    color: #08007f;
+  }
+
+  .txt_field input:focus ~ span::before,
+  .txt_field input:valid ~ span::before{
+    width: 100%;
+  }
+
+  form .date{
+    position: relative;
+    border-bottom: 2px solid #adadad;
+    margin: 30px 0;
+  }
+  .date input{
+    width: 100%;
+    padding: 0 5px;
+    height: 40px;
+    font-size: 16px;
+    border: none;
+    background: none;
+    outline: none;
+  }
+  .date label{
+    position: absolute;
+    top: 50%;
+    left: 5px;
+    color: #adadad;
+    transform: translateY(-160%);
+    font-size: 16px;
+    pointer-events: none;
+    transition: .5s;
+  }
+  .date span::before{
+    content: '';
+    position: absolute;
+    top: 40px;
+    left: 0;
+    width: 0%;
+    height: 2px;
+    background: #08007f;
+    transition: .5s;
+  }
+
+  .date input:focus ~ label,
+  .date input:valid ~ label{
+    /* top: -5px; */
+    color: #08007f;
+  }
+
+  .date input:focus ~ span::before,
+  .date input:valid ~ span::before{
+    width: 100%;
+  }
+
+  .login-box select {
+    /* Reset Select */
+    appearance: none;
+    outline: 0;
+    border: 0;
+    box-shadow: none;
+    /* Personalize */
+    flex: 1;
+    padding: 0 1em;
+    /* color: #08007f; */
+    background-color: #cacaca;
+    /* border-color: #004cef; */
+    cursor: pointer;
+  }
+  /* Remove IE arrow */
+  .login-box select::-ms-expand {
+    display: none;
+  }
+  /* Custom Select wrapper */
+  .login-box .select {
+    position: relative;
+    display: flex;
+    width: 16em;
+    height: 2em;
+    margin-bottom: 0.1em;
+    border-radius: .25em;
+    overflow: hidden;
+  }
+  /* Arrow */
+  .login-box .select::after {
+    content: '\25BC';
+    color: #fff;
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 0.4em;
+    background-color: #adadad;
+    transition: .25s all ease;
+    pointer-events: none;
+    /* height: 2em; */
+  }
+  /* Transition */
+  .login-box .select:hover::after {
+    /* color: #a38599; */
+    color: #000000;
+  }
+
+.collapse {
+    font-size: 2em;
+    margin-right: 5em;
+}
+
+.nav-item {
+    padding-left: 2em;
+    z-index: 999;
+}
+
+.logout {
+    margin-left: 3em;
+}
+
+/* Logo */
+.logo {
+    width: 250px;
+}
+
+/* Login CSS */
+/* .login_page {
+    background-color: rgba(189, 74, 118, 30%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+} */
+
+
+button {
+    padding: 9px 25px;
+    /* background-color: #E63E6D; */
+    margin: 5px;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease 0s;
+    width: 200px;
+}
+
+button:not(.close):hover {
+    border-color: #15027e;
+    background-color: #160287;
+  }
+
+.custom-container {
+    max-width: 700px;
+    width: 100%;
+    background: #ffffff;
+    padding: 25px 30px;
+    border-radius: 5px;
+
+}
+
+.inactiveLink {
+  pointer-events: none;
+  cursor: default;
+}
+
+.link {
+    text-align: right;
+    padding-right: 40px;
+}
+    </style>
 </head>
 
 <body>
@@ -126,7 +387,7 @@
 
         <div class="link">
             <div><a href="registeredUserLogin.php">User Login</a></div>
-            <div><a href="../guest/homepage.php">Continue as Guest</a></div>
+            <div><a href="../index.php">Continue as Guest</a></div>
         </div>
     </div>
 
