@@ -345,8 +345,8 @@ if (isset($_POST["approve"])) {
 		$run_update = mysqli_query($conn, $update);
 
 		if ($run_update == true) {
-			echo "<script>alert('Profile updated successfully. Yeah')
-				location = 'approvedComp.php' </script>";
+			echo "<script>alert('Profile updated successfully.')
+				location = 'viewCompDetails.php?selectedComp=$compID' </script>";
 			move_uploaded_file($tmp_name, "../materials/compPic/$newCompPic");
 		} else {
 			echo "<script>alert('Oops! Something went wrong, please try again.')</script>";
