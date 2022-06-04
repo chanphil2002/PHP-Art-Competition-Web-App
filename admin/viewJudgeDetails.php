@@ -36,7 +36,7 @@ if (!isset($_SESSION["admin"])){
 						$imgPath = ("../materials/judgeProfilePic/$img");
 
                 ?>
-                <center><div>
+                <center><div >
                     <img src="<?php echo $imgPath?>" style="width: 10rem;"><br><br><br>
                 </div></center>
 				<div class="form-row">

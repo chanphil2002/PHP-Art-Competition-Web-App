@@ -12,6 +12,25 @@ if (!isset($_SESSION["admin"])){
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Competition Detail</title>
 	<link rel="stylesheet" href="addJudge.css" />
+
+	<style>
+		.container {
+		position: relative;
+		width: 100%;
+		overflow: hidden;
+		padding-top: 62.5%; /* 8:5 Aspect Ratio */
+		}
+		.responsive-iframe {
+		position: absolute;
+		top: 0;
+		left: 0;
+		bottom: 0;
+		right: 0;
+		width: 100%;
+		height: 100%;
+		border: none;
+		}
+	</style>
 </head>
 
 <body class="form-v7">
@@ -85,7 +104,7 @@ if (!isset($_SESSION["admin"])){
 				?>
 					<center>
 						<div>
-							<img src=<?php echo $picPath ?> style="width: 10rem;"><br><br><br>
+							<img style="width:90%" src=<?php echo $picPath ?> style="width: 10rem;"><br><br><br>
 						</div>
 					</center>
 					<div class="form-row">
@@ -185,10 +204,12 @@ if (!isset($_SESSION["admin"])){
 							echo "<p>No Payment Received Yet.</p><br><br>";
 						} else {
 						?>
+						<div class="container"> 
 							<center>
-								<iframe src=<?php echo $receiptPath ?> width="600" height="500">
-								</iframe><br><br><br><br>
+								<iframe class="responsive-iframe" src=<?php echo $receiptPath ?> width="600" height="500">
+								</iframe>
 							</center>
+						</div><br><br><br><br>
 					<?php }
 					} ?>
 					</div>
@@ -309,7 +330,7 @@ if (isset($_POST["approve"])) {
 
 		if ($run_update == true) {
 			echo "<script>alert('Competition information updated successfully!')
-				location = 'approvedComp.php' </script>";
+				location = 'viewCompDetails.php?selectedComp=$compID' </script>";
 		} else {
 			echo "<script>alert('Oops! Something went wrong, please try again.')</script>";
 		}
@@ -326,7 +347,7 @@ if (isset($_POST["approve"])) {
 		if ($run_update == true) {
 			echo "<script>alert('Profile updated successfully. Yeah')
 				location = 'approvedComp.php' </script>";
-			move_uploaded_file($tmp_name, "../materials/image/$newCompPic");
+			move_uploaded_file($tmp_name, "../materials/compPic/$newCompPic");
 		} else {
 			echo "<script>alert('Oops! Something went wrong, please try again.')</script>";
 		}
