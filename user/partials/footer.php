@@ -3,7 +3,7 @@
       <div class="col-6 col-md">
         <h5 class="text-white">Virtual-X</h5>
         <ul class="list-unstyled text-small">
-          <li><a class="text-info" href="../aboutUs/aboutUs.php">About Us</a></li>
+          <li><a class="text-info" href="../user/ourStory.php">About Us</a></li>
           <li><a class="text-info" href="feedback.php">Contact Us</a></li>
           <li><a class="text-info" href="../product/returnandrefund.php">Privacy Policy</a></li>
         </ul>

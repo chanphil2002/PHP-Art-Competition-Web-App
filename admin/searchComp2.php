@@ -17,9 +17,6 @@ if (isset($_POST['submit2'])) {
     } else {
         $sql1 = "CREATE TEMPORARY TABLE temp AS SELECT * FROM competition WHERE (compName LIKE '%$search%' OR category LIKE '%$search%') AND status LIKE '%$filter%'";
         $res1 = mysqli_query($conn, $sql1);
-        // echo "<script>alert('$filter');</script>";
-        // echo "<script>alert('$search');</script>";
-        // $sort = $_POST['sort_dropdown'];
     }
 
     if ($sort == "RegistrationDateline") {
@@ -113,7 +110,7 @@ if (isset($_POST['submit2'])) {
 
                             <div class="col-md-4 margincon1">
                                 <div class="card border-1 grid-list">
-                                    <a href="viewcompmain.php?compID=<?php echo $compID; ?>" class="stretched-link">
+                                    <a href="viewCompDetails.php?selectedComp=<?php echo $compID; ?>" class="stretched-link">
                                         <span class="badge rounded-pill text-bg-success position-absolute top-0 end-0"><?php echo $status1; ?></span>
                                         <img class="card-img-top lazy" src="../materials/compPic/<?php echo $compPic1; ?>">
                                     </a>

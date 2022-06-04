@@ -69,9 +69,9 @@ if (!isset($_SESSION["admin"])){
 						$badge = "badge text-bg-success position-absolute top-0 end-0";
 						$statusDisplay = "On-Going";
 						$update = "required";
-					} else if ($status == 'Pass') {
+					} else if ($status == 'Past') {
 						$badge = "badge text-bg-secondary position-absolute top-0 end-0";
-						$statusDisplay = "Pass";
+						$statusDisplay = "Past";
 						$update = "readonly";
 					} else if ($status == 'Terminated') {
 						$badge = "badge text-bg-secondary position-absolute top-0 end-0";
@@ -228,11 +228,11 @@ if (!isset($_SESSION["admin"])){
 									<button type="submit" name="update" class="btn btn-success">Update</button></a>
 								</center>
 							</div>
-						<?php } else if ($status == "Pass") {
+						<?php } else if ($status == "Past") {
 						?>
 							<div>
 								<center>
-									<a href="passComp.php" class="btn btn-primary">Back</a>
+									<a href="pastComp.php" class="btn btn-primary">Back</a>
 								</center>
 							</div>
 						<?php } else if ($status == "Rejected") {
