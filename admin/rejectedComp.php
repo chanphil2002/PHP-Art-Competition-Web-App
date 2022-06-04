@@ -37,7 +37,7 @@ if (!isset($_SESSION["admin"])){
                 <a class="nav-link" href="onGoingComp.php">On-going</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="pastComp.php">Pass</a>
+                <a class="nav-link" href="pastComp.php">Past</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="terminatedComp.php">Terminated</a>
