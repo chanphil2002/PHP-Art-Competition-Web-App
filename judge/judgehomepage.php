@@ -99,7 +99,7 @@ $res = mysqli_query($conn, $sql);
     </div>
 
 </body>
-<?php include("../organizer/partials/footer.php"); ?>
+<?php include("../judge/partials/footer.php"); ?>
 
 <!-- 
 <div class="col-md-4">

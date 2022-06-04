@@ -65,8 +65,28 @@ session_start();?>
                     <a class="btn btn-info" href="viewFeedback.php" role="button" title="View Users' Feedbacks"><i class="fa-solid fa-comment-dots"></i>&nbsp;Feedbacks</a>&nbsp;&nbsp;&nbsp;
                 </li>
                 <li class="nav-item">
-                    <a class="btn btn-danger" href="../general/logout.php" role="button" title="Log Out"><i class="fa-solid fa-right-from-bracket"></i></a>
+                    <button type="button" class="btn btn-danger" role="button" data-bs-toggle="modal" data-bs-target="#logout">
+                        <i class="fa-solid fa-right-from-bracket"></i>&nbsp; Log Out
+                    </button>
                 </li>
             </ul>
         </nav>
     </nav>
+<!-- Modal for Log Out-->
+<div class="modal fade" id="logout" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title text-dark" id="exampleModalLabel">Log Out</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Are you sure you want to <b>Log Out</b> from this organizer account?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <a type="button" class="btn btn-danger" href="../general/logout.php">LOG OUT</a>
+      </div>
+    </div>
+  </div>
+</div>
