@@ -48,37 +48,43 @@
     <div class="page-content">
 		<div class="form-v7-content">
 			<form class="form-detail" action="#" method="post" id="myform" enctype="multipart/form-data">
+                <?php if ($profilePic != ""){ ?>
                 <div class="form-row">
                     <center><div style="position: relative; width: 150px; height: 150px; overflow: hidden; border-radius: 50%; border: 2px solid #08007f;">
                         <image src="../materials/userProfilePic/<?php echo $profilePic; ?>" style="width:100% ;height:auto;" class="" alt="...">
                     </div></center>
-                </div>
+                </div><?php } ?>
                 <div class="form-row">
-					<br><label for="username">USERNAME *</label>
-					<input type="text" name="username" id="username" class="input-text" value="<?php echo $username; ?>" required>
+					<br><label for="username">USERNAME</label>
+					<input type="text" name="username" id="username" class="input-text" value="<?php echo $username; ?>" readonly required>
 				</div>
                 <div class="form-row">
-					<br><label for="userEmail">EMAIL *</label>
+					<br><label for="userEmail">EMAIL</label>
 					<input type="text" name="userEmail" id="userEmail" class="input-text" value="<?php echo $userEmail; ?>" readonly required>
 				</div>
-                <div class="select">
-                    <select name="gender" value="<?php echo $g; ?>" required>
-                        <option value="">Gender *</option>
-                        <option value="M">Male</option>
-                        <option value="F">Female</option>
-                    </select>
+                <div class = "form-row">
+                    <br><label for="gender">GENDER</label>
+					<input type="text" name="gender" id="gender" class="input-text" value="<?php echo $gender; ?>" readonly required>
+                </div>
+                <div class="form-row" style="width: 100%">
+                    <br><label for="dob">DATE OF BIRTH</label>
+					<input type="text" name="dob" id="dob" class="input-text" value="<?php echo $dob; ?>" readonly required>
                 </div>
                 <div class="form-row">
-					<br><label for="username">USERNAME *</label>
-					<input type="text" name="username" id="username" class="input-text" value="<?php echo $username; ?>" readonly required>
+					<br><label for="username">PHONE NUMBER</label>
+					<input type="text" name="phone" id="phone" class="input-text" value="<?php echo $phone; ?>" readonly required>
 				</div>
-                <div class="form-row">
-					<br><label for="username">USERNAME *</label>
-					<input type="text" name="username" id="username" class="input-text" value="<?php echo $username; ?>" readonly required>
-				</div>
+                <div>
+                    <center>
+                        <a href="homepage.php" class="btn btn-primary">Back</a>&nbsp;&nbsp;&nbsp;&nbsp;
+                        <a href="editProfile.php"><button type="button" name="edit" class="btn btn-primary">Edit Information</button></a>
+                    </center>
+                </div>
             </form>
         </div>
     </div>
 
 </body>
 </html>
+
+<?php include("partials/footer.php"); ?>

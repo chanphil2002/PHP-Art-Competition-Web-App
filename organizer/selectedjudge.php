@@ -6,6 +6,13 @@ if (!isset($_SESSION["compID"])){
     header("Location: ../organizer/orghome.php");
 }else{
     $compID = $_SESSION['compID'];
+
+    $getStatus = "SELECT status FROM competition WHERE compID = '$compID'";
+    $res3 = mysqli_query($conn, $getStatus);
+    while ($row3 = mysqli_fetch_assoc($res3)) {
+    $status = $row3['status'];
+    }
+
     $sql2 = "SELECT C.*, J.* FROM comp_judge C INNER JOIN judge J ON C.judgeIC = J.judgeIC AND C.compID = '$compID'";
     $res2 = mysqli_query($conn, $sql2);
 }
@@ -22,8 +29,22 @@ if (!isset($_SESSION["compID"])){
 <a class="btn btn-success btn-lg mx-auto px-5" href="choosejudge.php" role="button"><i class="fa-solid fa-user-graduate me-2"></i>Choose Judges</a>
 
 </div>
-<a class="btn btn-outline-primary ms-5 mb-2" href="../organizer/newjudge.php" role="button"><i class="fa-solid fa-user-plus me-2"></i>Add New Judge</a>
+<!-- <a class="btn btn-outline-primary ms-5 mb-2" href="../organizer/newjudge.php" role="button"><i class="fa-solid fa-user-plus me-2"></i>Add New Judge</a> -->
 
+<div class="form-row">
+    <?php
+    if ($status == "Pending") {
+    ?>
+        <div>
+            <a class="btn btn-outline-primary ms-5 mb-2" href="../organizer/newjudge.php" role="button"><i class="fa-solid fa-user-plus me-2"></i>Add New Judge</a>
+        </div>
+    <?php }else{
+    ?>
+        <div>
+            <!-- <a class="btn btn-outline-primary ms-5 mb-2" href="../organizer/newjudge.php" role="button" disabled><i class="fa-solid fa-user-plus me-2"></i>Add New Judge</a> -->
+        </div>
+    <?php } ?>
+</div>
 
 
 <div class="album ">

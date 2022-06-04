@@ -1,5 +1,7 @@
 <?php include("../admin/partials/header.php");
-session_start();
+if (!isset($_SESSION["admin"])){
+    header("Location: ../general/otherRoleLogin.php");
+};
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -135,7 +137,7 @@ if (isset($_POST["update"])) {
 			echo "<script>alert('Profile updated successfully.')
 				location = 'viewUser.php' </script>";
 			unlink($imgPath);
-			move_uploaded_file($tmp_name, "../materials/userPic/$newProfilePic");
+			move_uploaded_file($tmp_name, "../materials/userProfilePic/$newProfilePic");
 		} else {
 			echo "<script>alert('Oops! Something went wrong, please try again.')</script>";
 		}

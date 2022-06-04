@@ -6,7 +6,6 @@ if(isset($_GET['compID']))
         $sql = "SELECT * FROM competition WHERE compID = $compID";
         $res = mysqli_query($conn, $sql);
         $row = mysqli_fetch_assoc($res);
-        $organizerID = $row['organizerID'];
         $compName = $row['compName'];
         $category = $row['category'];
         $releaseDate = $row['releaseDate'];
@@ -19,7 +18,6 @@ if(isset($_GET['compID']))
         $currentcompPic = $row['compPic'];
         $evaluationDays = $row['evaluationDays'];
 } else {
-    // echo "mistake";
     header("Location: ../organizer/orghome.php");
 }
 
@@ -34,12 +32,6 @@ if(isset($_GET['compID']))
 
     <div class="row">
         <div class="col-md-4 order-md-2 mb-4 mx-auto">
-
-            <div class="mb-3">
-                <label for="stock">Organizer ID</label>
-                <input type="text" name="organizerID" value="<?php echo $organizerID;?>" class="form-control"
-                    id="search" placeholder="State the Organizer ID" required>
-            </div>
 
             <div class="mb-3">
                 <label for="inlineFormInput">Competition Name</label>
@@ -190,7 +182,6 @@ if(isset($_GET['compID']))
 
         $sql = "UPDATE competition SET
             compName = '$compName',
-            organizerID = $organizerID,
             description = '$description',
             rules = '$rules',
             category = '$category',

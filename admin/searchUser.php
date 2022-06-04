@@ -1,4 +1,7 @@
-<?php include("../admin/partials/header.php"); ?>
+<?php include("../admin/partials/header.php"); 
+if (!isset($_SESSION["admin"])){
+    header("Location: ../general/otherRoleLogin.php");
+}?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -36,16 +39,21 @@
 
 <body>
     <div>
-        <br><br>
+        <br>
+        <center>
+            <br><h2>Search User</h2>
+        </center>
+    </div>
+    <div>
         <form class="search" method="post">
-            <input type="text" placeholder="Search..." name="search">
+            <input type="text" placeholder="Search..." name="search" required>
         </form>
         <br>
     </div>
     <div>
         <hr><br>
         <center>
-            <h3>Search Result</h3>
+            <h3>Search Result</h3><br><br>
         </center>
     </div>
 </body>
@@ -176,3 +184,5 @@ if (isset($_POST["search"])) {
             }
         }
     } ?>
+
+<?php include("../admin/partials/footer.php") ?>

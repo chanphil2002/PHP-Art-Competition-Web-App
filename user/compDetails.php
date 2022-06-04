@@ -1,10 +1,10 @@
-<?php 
-    include("partials/header.php"); 
-    include("partials/database.php");
-    session_start();
-    if (!isset($_SESSION["user"])){
-        header("Location: ../general/registeredUserLogin.php");
-    }
+<?php
+include("partials/header.php");
+include("partials/database.php");
+session_start();
+if (!isset($_SESSION["user"])) {
+    header("Location: ../general/registeredUserLogin.php");
+}
 ?>
 
 <?php
@@ -51,7 +51,7 @@ while ($row = mysqli_fetch_assoc($res)) {
     <img class="img" src="../materials/compPic/<?php echo $compPic; ?>" alt="Responsive image" height="300" width="100%" style="object-fit: cover;">
     <ul class="nav nav-pills nav-fill p-2 bg-light">
         <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="compDetails.php?compID=<?php echo $compID; ?>">Main</a>
+            <a class="nav-link active" aria-current="page" href="viewcomp_main.php?compID=<?php echo $compID; ?>">Main</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="viewEntries.php?compID=<?php echo $compID ?>">View Entries</a>
@@ -97,7 +97,7 @@ while ($row = mysqli_fetch_assoc($res)) {
                         <div class="card" style="height: 14rem;">
                             <div class="card-body">
                                 <h3 class="card-title" style="color:black">Total Prize Pool</h3>
-                                <h2><?php echo 'RM '. $prizePool; ?></h2>
+                                <h2><?php echo 'RM ' . $prizePool; ?></h2>
                             </div>
                         </div>
                     </div>
@@ -121,35 +121,48 @@ while ($row = mysqli_fetch_assoc($res)) {
             </div>
             <div class="col-3">
                 <?php
-                    $sql3 = "SELECT * FROM entry WHERE compID = '$compID' AND userEmail = '$_SESSION[user]' ";
-                    $res3 = mysqli_query($conn, $sql3);
-                    if (mysqli_num_rows($res3) != 0){
+                $sql3 = "SELECT * FROM entry WHERE compID = '$compID' AND userEmail = '$_SESSION[user]' ";
+                $res3 = mysqli_query($conn, $sql3);
+                if (mysqli_num_rows($res3) != 0) {
+                    while ($entryDetails = mysqli_fetch_assoc($res3)){
+                        $myEntry = $entryDetails["entryID"];
+                    }
                 ?>
-                    <a href="myComp.php" style="text-decoration: none"><h3>&#128101; My Entry</h3></a>
-                <?php }else{
-                    if ($status == "On-Going"){
-                ?>
-                        <a href="joinComp.php?competition=<?php echo $compID; ?>" style="text-decoration: none"><h3>&#128101; Join</h3></a>
-                <?php }} ?>
-                
-                <a href="bookmark.php?compID=<?php echo $compID; ?>" style="text-decoration: none"><h3>🔖 Bookmark</h3></a>
-                
+                    <a href="entry.php?entryID=<?php echo $myEntry; ?>&compID=<?php echo $compID; ?>" style="text-decoration: none">
+                        <h3>&#128101; My Entry</h3>
+                    </a>
+                    <?php } else {
+                    if ($status == "On-Going") {
+                    ?>
+                        <a href="joinComp.php?competition=<?php echo $compID; ?>" style="text-decoration: none">
+                            <h3>&#128101; Join</h3>
+                        </a>
+                <?php }
+                } ?>
+
+                <a href="bookmark.php?compID=<?php echo $compID; ?>" style="text-decoration: none">
+                    <h3>🔖 Bookmark</h3>
+                </a>
+                <a href="feedback.php?org&compID=<?php echo $compID; ?>" style="text-decoration: none">
+                    <h3>📩 Feedback</h3>
+                </a>
+
                 <?php
-                    if ($status == 'Past'){
+                if ($status == 'Past') {
                 ?>
-                        <hr>
-                        <h2><u>Winner</u></h2>
-                        <?php
-                            $sql2 = "SELECT * FROM entry WHERE compID = '$compID' ORDER BY totalScore DESC LIMIT 1";
-                            $run2 = mysqli_query($conn, $sql2);
-                            while ($win = mysqli_fetch_assoc($run2)){
-                                $entryID = $win["entryID"];
-                                $entry = $win["entryFile"];
-                                $title = $win["title"];
-                            }
-                        ?>
-                        <a href="../user/entry.php?entryID=<?php echo $entryID; ?>&compID=<?php echo $compID; ?>"><img src="../materials/entries/<?php echo $entry; ?>" alt="<?php echo $title; ?>" style="width: 300px; height: auto"></a>
-                <?php } ?>                
+                    <hr>
+                    <h2><u>Winner</u></h2>
+                    <?php
+                    $sql2 = "SELECT * FROM entry WHERE compID = '$compID' ORDER BY totalScore DESC LIMIT 1";
+                    $run2 = mysqli_query($conn, $sql2);
+                    while ($win = mysqli_fetch_assoc($run2)) {
+                        $entryID = $win["entryID"];
+                        $entry = $win["entryFile"];
+                        $title = $win["title"];
+                    }
+                    ?>
+                    <a href="../user/entry.php?entryID=<?php echo $entryID; ?>&compID=<?php echo $compID; ?>"><img src="../materials/entries/<?php echo $entry; ?>" alt="<?php echo $title; ?>" style="width: 300px; height: auto"></a>
+                <?php } ?>
             </div>
         </div>
     </div>
@@ -159,5 +172,4 @@ while ($row = mysqli_fetch_assoc($res)) {
 </body>
 
 </html>
-
 <?php include("partials/footer.php"); ?>
