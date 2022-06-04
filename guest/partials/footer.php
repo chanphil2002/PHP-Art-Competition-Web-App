@@ -3,13 +3,8 @@
       <div class="col-6 col-md">
         <h5 class="text-white">Virtual-X</h5>
         <ul class="list-unstyled text-small">
-<<<<<<< Updated upstream
-          <li><a class="text-info" href="../guest/ourStory.php">About Us</a></li>
-          <li><a class="text-info" href="../product/shipping.php">Contact Us</a></li>
-=======
           <li><a class="text-info" href="../aboutUs/aboutUs.php">About Us</a></li>
           <li><a class="text-info" href="alert.php">Contact Us</a></li>
->>>>>>> Stashed changes
           <li><a class="text-info" href="../product/returnandrefund.php">Privacy Policy</a></li>
         </ul>
       </div>
@@ -23,7 +18,7 @@
       <div class="col-6 col-md">
         <h5>My Account</h5>
         <ul class="list-unstyled text-small">
-          <li><a class="text-info" href="../faq/faq.php">Account Setting</a></li>
+          <!-- <li><a class="text-info" href="../faq/faq.php">Account Setting</a></li> -->
           <li><a class="text-info" href="../contactUs/contactUs.php">Report</a></li>
         </ul>
       </div>

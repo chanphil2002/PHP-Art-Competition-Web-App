@@ -31,19 +31,19 @@
     <nav class="navbar navbar-expand-xl">
       <ul class="navbar-nav">
         
-        <li class="nav-item">
-          <a class="btn btn-success px-4" href="general/registeredUserLogin.php" role="button"><i class="fa-solid fa-right-to-bracket"></i>&nbsp; Log In</a>&nbsp;&nbsp;&nbsp;
+      <li class="nav-item">
+          <a class="btn btn-info" href="guest/allComp.php" role="button"><i class="fa-solid fa-trophy"></i>&nbsp; Competitions</a>&nbsp;&nbsp;&nbsp;
         </li>
 
         <li class="nav-item">
           <div class="dropdown">
-            <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
-            <i class="fa-solid fa-user-plus"></i>&nbsp; Sign Up As
+            <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
+              <i class="fas fa-user-circle"></i>&nbsp; Account
             </button>
             <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton2">
-              <li><a class="dropdown-item" href="general/register.php">User</a></li>
-              <li><hr class="dropdown-divider"></li>
-              <li><a class="dropdown-item" href="guest/organizerRegister.php">Organizer</a></li>
+              <li><a class="dropdown-item" href="general/registeredUserLogin.php">Login</a></li>
+              <li><a class="dropdown-item" href="general/register.php">User Registration</a></li>
+              <li><a class="dropdown-item" href="guest/organizerRegister.php">Organizer Registration</a></li>
             </ul>
           </div>
         </li>

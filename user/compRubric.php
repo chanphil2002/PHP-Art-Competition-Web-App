@@ -1,4 +1,11 @@
-<?php include("partials/header.php"); ?>
+<?php
+include("partials/header.php");
+include("partials/database.php");
+session_start();
+if (!isset($_SESSION["user"])) {
+    header("Location: ../general/registeredUserLogin.php");
+}
+?>
 
 <?php
 if (isset($_GET['compID'])) {
@@ -11,7 +18,7 @@ if (isset($_GET['compID'])) {
     $res2 = mysqli_query($conn, $sql2);
     $res3 = mysqli_query($conn, $sql3);
 } else {
-    header("Location: ../organizer/orghome.php");
+    header("Location: homepage.php");
 }
 while ($row = mysqli_fetch_assoc($res3)) {
     $compID = $row['compID'];
@@ -108,4 +115,4 @@ while ($row = mysqli_fetch_assoc($res3)) {
 
 </html>
 
-<?php include("../organizer/partials/footer.php"); ?>
+<?php include("partials/footer.php"); ?>

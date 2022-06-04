@@ -3,8 +3,6 @@
 include ("partials/database.php");
 include ("partials/header.php");
 
-session_start();
-
 if (isset($_POST['submit'])) {
 	$email = $_POST['orgEmail'];
 	$name = $_POST['name'];
@@ -28,10 +26,11 @@ if (isset($_POST['submit'])) {
 			$run_upload = mysqli_query($conn, $upload);
 
 			if ($run_upload == true) {
-				echo "<script>alert('Application submitted!')</script>";
-				move_uploaded_file($tmp_name, "../materials/organizerPic/$profile_picture");
+				echo "<script>alert('Application submitted!')
+				location='../index.php'</script>";
+				move_uploaded_file($tmp_name, "../materials/orgProfilePic/$profile_picture");
 				$tmp_name = $_FILES['verify_doc']['tmp_name'];
-				move_uploaded_file($tmp_name, "../materials/organizerDoc/$verify_doc");
+				move_uploaded_file($tmp_name, "../materials/orgDocument/$verify_doc");
 			} else {
 				echo "<script>alert('Oops. Something Went Wrong, Please Try Again.')</script>";
 			}

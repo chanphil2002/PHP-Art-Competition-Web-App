@@ -1,0 +1,168 @@
+<?php
+include("partials/header.php");
+include("partials/database.php");
+?>
+
+<?php
+if (isset($_GET['compID'])) {
+    $compID = $_GET['compID'];
+    $sql = "SELECT * FROM competition C INNER JOIN organizer O ON C.organizerID = O.organizerID WHERE compID = '$compID' ";
+    $sql1 = "SELECT COUNT(compID), SUM(vote) FROM entry WHERE compID=$compID";
+    $res = mysqli_query($conn, $sql);
+    $res1 = mysqli_query($conn, $sql1);
+} else {
+    header("Location: ../index.php");
+}
+while ($row = mysqli_fetch_assoc($res)) {
+    $compID = $row['compID'];
+    $compName = $row['compName'];
+    $organizerID = $row['organizerID'];
+    $organizerName = $row['organizerName'];
+    $description = $row['description'];
+    $rules = $row['rules'];
+    $category = $row['category'];
+    $status = $row['status'];
+    $releaseDate = $row['releaseDate'];
+    $registrationDeadline = $row['registrationDeadline'];
+    $evaluationDays = $row['evaluationDays'];
+    $judgeScore = $row['judgeScore'];
+    $publicVote = $row['publicVote'];
+    $prizePool = $row['prizePool'];
+    $compPic = $row['compPic'];
+    $announcement = $row['announcement'];
+    $rejectedComment = $row['rejectedComment'];
+}
+while ($row1 = mysqli_fetch_assoc($res1)){
+    $joinCount = $row1["COUNT(compID)"];
+    $voteCount = $row1["SUM(vote)"];
+}
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="../organizer/organizer.css" rel="stylesheet">
+    <title>Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+
+    <img class="img" src="../materials/compPic/<?php echo $compPic; ?>" alt="Responsive image" height="300" width="100%" style="object-fit: cover;">
+    <ul class="nav nav-pills nav-fill p-2 bg-light">
+        <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="viewcomp_main.php?compID=<?php echo $compID; ?>">Main</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="viewEntries.php?compID=<?php echo $compID ?>">View Entries</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="compRubric.php?compID=<?php echo $compID; ?>">Scoring Rubric</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="compAbout.php?compID=<?php echo $compID; ?>">About Organizer</a>
+        </li>
+    </ul>
+
+    <div class="container pb-5">
+        <div class="row">
+            <div class="col-9">
+                <div>
+                    <h2 style="display: inline-block" style="margin-right: 2em;"><?php echo $compName ?></h2>
+                    <span style="display: inline-block; margin-left: 1em" class="badge text-bg-success align-top even-larger-badge"><?php echo $status ?></span>
+                </div>
+                <h3 class="text-muted mb-4"><small class="text-muted">By <?php echo $organizerName ?>, <?php echo $category ?> Category</small></h3>
+                <h6 class="text-muted mb-4"><?php echo $joinCount; ?> People Participated<?php if ($voteCount != 0){echo ", " . $voteCount;  ?> Votes Collected <?php }?></h6>
+
+                <div class="row mb-5">
+                    <div class="col-sm-4">
+                        <div class="card text-bg-light border-dark" style="max-width: 20rem; height: 14rem;">
+                            <div class="card-header text-bg-dark" style="font-size: 1.5em;">Competition Date</div>
+                            <div class="card-body">
+                                <h3 class="card-text" style="font-weight: bold;"><?php echo $releaseDate; ?></h3>
+                                <h3 class="card-text">until</h3>
+                                <h3 class="card-text" style="font-weight: bold;"><?php echo $registrationDeadline; ?></h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="card text-bg-light border-dark" style="max-width: 20rem; height: 14rem;">
+                            <div class="card-header text-bg-dark" style="font-size: 1.5em;">Scoring Format</div>
+                            <div class="card-body">
+                                <h3 class="card-text"><u style="font-weight: bold;"><?php echo $publicVote; ?></u>% Public Vote</h3>
+                                <h3 class="card-text"><u style="font-weight: bold;"><?php echo $judgeScore; ?></u>% Judge</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="card text-bg-light border-dark" style="max-width: 20rem; height: 14rem;">
+                            <div class="card-header text-bg-dark" style="font-size: 1.5em;">Total Prize Pool</div>
+                            <div class="card-body">
+                                <h3 class="card-text"><?php echo "RM " . $prizePool; ?></h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pb-4">
+                    <h2>
+                        Description
+                    </h2>
+                    <h3>
+                        <?php echo $description; ?>
+                    </h3>
+                </div>
+                <div>
+                    <h2>
+                        Rules and Regulation
+                    </h2>
+                    <h3>
+                        <?php echo $rules; ?>
+                    </h3>
+                </div>
+            </div>
+            <div class="col-3">
+                <a href="alert.php" style="text-decoration: none">
+                    <h3>&#128101; Join</h3>
+                </a>
+
+                <a href="alert.php" style="text-decoration: none">
+                    <h3>🔖 Bookmark</h3>
+                </a>
+                <a href="alert.php" style="text-decoration: none">
+                    <h3>📩 Feedback</h3>
+                </a>
+
+                <?php
+                if ($status == 'Past') {
+                ?>
+                    <hr>
+                    <h2><u>Winner</u></h2>
+                    <?php
+                    $sql2 = "SELECT * FROM entry WHERE compID = '$compID' ORDER BY totalScore DESC LIMIT 1";
+                    $run2 = mysqli_query($conn, $sql2);
+                    while ($win = mysqli_fetch_assoc($run2)) {
+                        $entryID = $win["entryID"];
+                        $entry = $win["entryFile"];
+                        $title = $win["title"];
+                    }
+                    ?>
+                    <a href="entry.php?entryID=<?php echo $entryID; ?>&compID=<?php echo $compID; ?>"><img src="../materials/entries/<?php echo $entry; ?>" alt="<?php echo $title; ?>" style="width: 300px; height: auto"></a>
+                <?php } ?>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="https://kit.fontawesome.com/8deb7b58d3.js" crossorigin="anonymous"></script>
+</body>
+
+</html>
+<?php include("partials/footer.php"); ?>

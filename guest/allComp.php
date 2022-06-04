@@ -4,10 +4,13 @@
 
     if (isset($_GET["category"])){
         $category = $_GET["category"];
-        $sql = "SELECT * FROM competition C INNER JOIN organizer O ON C.organizerID = O.organizerID WHERE category = '$category'";
+        $sql = "SELECT * FROM competition C INNER JOIN organizer O ON C.organizerID = O.organizerID WHERE category = '$category' AND status != 'Pending' ";
+        $res = mysqli_query($conn, $sql);
+    }elseif(isset($_GET["Participated"])){
+        $sql = "SELECT * FROM (( competition C INNER JOIN organizer O ON C.organizerID = O.organizerID) INNER JOIN entry E ON C.compID = E.compID) WHERE userEmail = '$_SESSION[user]' ";
         $res = mysqli_query($conn, $sql);
     }else{
-        $sql = "SELECT * FROM competition C INNER JOIN organizer O ON C.organizerID = O.organizerID";
+        $sql = "SELECT * FROM competition C INNER JOIN organizer O ON C.organizerID = O.organizerID WHERE status != 'Pending' ";
         $res = mysqli_query($conn, $sql);
     }
 ?>
@@ -33,6 +36,7 @@
 </head>
 
 <body>
+    <br><br>
 
     <?php
         if (isset($_GET["category"])){
@@ -54,9 +58,6 @@
                     <li class="nav-item" role="presentation">
                         <a href="allComp.php?category=Photography"><button class="nav-link" id="Photography-tab" data-bs-toggle="tab" type="button" role="tab">Photography</button></a>
                     </li>
-                    <li class="nav-item" role="presentation">
-                        <a href=""><button class="nav-link" id="participated-tab" data-bs-toggle="tab" type="button" role="tab">Participated</button></a>
-                    </li>
                 </ul>
         <?php }elseif ($_GET["category"] == "3D"){ ?>
                 <ul class="nav nav-tabs" id="myTab" role="tablist" style="margin-left:20px">
@@ -74,9 +75,6 @@
                     </li>
                     <li class="nav-item" role="presentation">
                         <a href="allComp.php?category=Photography"><button class="nav-link" id="Photography-tab" data-bs-toggle="tab" type="button" role="tab">Photography</button></a>
-                    </li>
-                    <li class="nav-item" role="presentation">
-                        <a href=""><button class="nav-link" id="participated-tab" data-bs-toggle="tab" type="button" role="tab">Participated</button></a>
                     </li>
                 </ul>
         <?php }elseif ($_GET["category"] == "Paintings"){ ?>
@@ -96,9 +94,6 @@
                     <li class="nav-item" role="presentation">
                         <a href="allComp.php?category=Photography"><button class="nav-link" id="Photography-tab" data-bs-toggle="tab" type="button" role="tab">Photography</button></a>
                     </li>
-                    <li class="nav-item" role="presentation">
-                        <a href=""><button class="nav-link" id="participated-tab" data-bs-toggle="tab" type="button" role="tab">Participated</button></a>
-                    </li>
                 </ul>
         <?php }elseif ($_GET["category"] == "Photography"){ ?>
                 <ul class="nav nav-tabs" id="myTab" role="tablist" style="margin-left:20px">
@@ -116,9 +111,6 @@
                     </li>
                     <li class="nav-item" role="presentation">
                         <a href="allComp.php?category=Photography"><button class="nav-link active" id="Photography-tab" data-bs-toggle="tab" type="button" role="tab">Photography</button></a>
-                    </li>
-                    <li class="nav-item" role="presentation">
-                        <a href=""><button class="nav-link" id="participated-tab" data-bs-toggle="tab" type="button" role="tab">Participated</button></a>
                     </li>
                 </ul>
         <?php }}else{ ?>
@@ -138,32 +130,33 @@
                     <li class="nav-item" role="presentation">
                         <a href="allComp.php?category=Photography"><button class="nav-link" id="Photography-tab" data-bs-toggle="tab" type="button" role="tab">Photography</button></a>
                     </li>
-                    <li class="nav-item" role="presentation">
-                        <a href=""><button class="nav-link" id="participated-tab" data-bs-toggle="tab" type="button" role="tab">Participated Competitions</button></a>
-                    </li>
                 </ul>
     <?php } ?>
 
     <div class="container" style="max-width: 1320px">
         <div class="row">
             <?php
-                while ($compDetails = mysqli_fetch_assoc($res)){
-                    $pic = $compDetails["compPic"];
-                    $name = $compDetails["compName"];
-                    $org = $compDetails["organizerName"];
-                    $status = $compDetails["status"];
-                    $category = $compDetails["category"];
+                if (($num = mysqli_num_rows($res)) == 0){
+                    echo "<h3 class='text-success' style='margin-left:20px'><br>Currently No Related Competition.</h3>";
+                }else{
+                    while ($compDetails = mysqli_fetch_assoc($res)){
+                        $comp = $compDetails["compID"];
+                        $pic = $compDetails["compPic"];
+                        $name = $compDetails["compName"];
+                        $org = $compDetails["organizerName"];
+                        $status = $compDetails["status"];
+                        $category = $compDetails["category"];
             ?>
 
             <div class="col-md-4 margincon1">
                 <div class="card border-1 grid-list">
-                    <a href="" class="stretched-link">
+                    <a href="compDetails.php?compID=<?php echo $comp; ?>" class="stretched-link">
                         <?php if ($status == "Upcoming"){ ?>
                                 <span class="badge rounded-pill position-absolute bg-danger end-0" style="height:20px">Upcoming</span>
                         <?php } elseif ($status == "Past"){ ?>
                             <span class="badge rounded-pill position-absolute bg-dark end-0" style="height:20px">Past</span>
                         <?php } ?>
-                        <img class="card-img-top lazy" src="../materials/image/<?php echo $pic; ?>">
+                        <img class="card-img-top lazy" src="../materials/compPic/<?php echo $pic; ?>">
                     </a>
                     <div class="card-body description text-truncate text-color-2" style="display:inline-block">
                         <?php echo $org; ?>
@@ -180,7 +173,7 @@
                 </div>
             </div>
 
-            <?php } ?>
+            <?php }} ?>
         </div>
     </div>
 
