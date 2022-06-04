@@ -19,7 +19,7 @@ if (!isset($_SESSION["admin"])){
     <div class="container mt-5">
         <div class="row" style="margin-top: 2%">
         <div class="col-12 col-competition-1">
-            <h3 class="text-color-2">Search Result Displayed Based on
+            <h3 class="text-color-2">Search Query
                 <span class="text-color-3"></h3>
         </div>
         <div class="col-12 col-competition-2">

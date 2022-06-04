@@ -153,9 +153,6 @@ while ($row = mysqli_fetch_assoc($res1)) {
                             header("location:" . SITEURL . "organizer/viewfeedback.php?compID=$compID");
                         }
                     }
-
-
-
                     ?>
                 </div>
             </div>
