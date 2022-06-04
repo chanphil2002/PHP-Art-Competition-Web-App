@@ -4,7 +4,7 @@
       <h5 class="text-white">Virtual-X</h5>
       <ul class="list-unstyled text-small">
         <li><a class="text-info" href="../organizer/ourStory.php">About Us</a></li>
-        <li><a class="text-info" href="../product/returnandrefund.php">Privacy Policy</a></li>
+        <li><a class="text-info" href="../organizer/orghome.php">Organizer's Competition</a></li>
       </ul>
     </div>
     <div class="col-6 col-md">
