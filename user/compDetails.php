@@ -10,7 +10,7 @@ if (!isset($_SESSION["user"])) {
 <?php
 if (isset($_GET['compID'])) {
     $compID = $_GET['compID'];
-    $sql = "SELECT C.*, O.organizerName FROM competition C INNER JOIN organizer O ON C.compID=$compID";
+    $sql = "SELECT * FROM competition C INNER JOIN organizer O ON C.compID=$compID";
     $res = mysqli_query($conn, $sql);
 } else {
     echo "mistake";

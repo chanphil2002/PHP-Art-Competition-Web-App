@@ -12,15 +12,15 @@ if (isset($_POST['submit2'])) {
     $sort = $_POST['sort_dropdown'];
 
     if ($filter == " ") {
-        $sql1 = "CREATE TEMPORARY TABLE temp AS SELECT * FROM competition WHERE (compName LIKE '%$search%' OR category LIKE '%$search%') AND (Status = 'Upcoming' OR Status = 'On-Going' OR Status = 'Past')";
+        $sql1 = "CREATE TEMPORARY TABLE temp AS (SELECT C.compID, C.compName, C.organizerID, C.description, C.category, C.status, C.releaseDate, C.registrationDeadline, C.compPic FROM competition C INNER JOIN organizer O ON C.organizerID = O.organizerID WHERE (compName LIKE '%$search%' OR category LIKE '%$search%' OR organizerName LIKE '%$search%') AND (Status = 'Upcoming' OR Status = 'On-Going' OR Status = 'Past'))";
         $res1 = mysqli_query($conn, $sql1);
+        
     } else if ($search == " ") {
-        $sql1 = "CREATE TEMPORARY TABLE temp AS SELECT * FROM competition WHERE STATUS LIKE '%filter%'";
+        $sql1 = "CREATE TEMPORARY TABLE temp AS SELECT * FROM competition WHERE status = '$filter' ";
         $res1 = mysqli_query($conn, $sql1);
     } else {
-        $sql1 = "CREATE TEMPORARY TABLE temp AS SELECT * FROM competition WHERE (compName LIKE '%$search%' OR category LIKE '%$search%') AND status LIKE '%$filter%'";
+        $sql1 = "CREATE TEMPORARY TABLE temp AS (SELECT C.compID, C.compName, C.organizerID, C.description, C.category, C.status, C.releaseDate, C.registrationDeadline, C.compPic FROM competition C INNER JOIN organizer O ON C.organizerID = O.organizerID WHERE (compName LIKE '%$search%' OR category LIKE '%$search%' OR organizerName LIKE '%$search%') AND (status = '$filter'))";
         $res1 = mysqli_query($conn, $sql1);
-
     }
 
     if ($sort == "RegistrationDateline") {
@@ -74,7 +74,7 @@ if (isset($_POST['submit2'])) {
             </div>
 
             <div class="col-12 col-competition-2">
-                <form action="search2.php" method="POST" class="d-flex">
+                <form action="search3.php" method="POST" class="d-flex">
                     <input class="form-control me-2 mr-sm-2 col-md-5 ml-5" type="search" name="search" value="<?php echo $search ?>">
             </div>
             <div class="col-12 col-competition-3">
@@ -128,6 +128,7 @@ if (isset($_POST['submit2'])) {
                             $compPic1 = $row1['compPic'];
                             $status1 = $row1['status'];
                             $registrationDeadline = $row1["registrationDeadline"];
+                            $release = $row1["releaseDate"];
                     ?>
 
                             <div class="col-md-4 margincon1">
@@ -137,7 +138,9 @@ if (isset($_POST['submit2'])) {
                                         <img class="card-img-top lazy" src="../materials/compPic/<?php echo $compPic1; ?>">
                                     </a>
                                     <div class="card-body description text-truncate text-color-2">
-                                        <?php echo $registrationDeadline; ?> / <?php echo $category1; ?>
+                                        <?php if ($sort == "ReleaseDate"){
+                                            echo "Release Date: " . $release;
+                                        }else{echo "Registration Deadline: " . $registrationDeadline;} ?> / <?php echo "Category: " . $category1; ?>
                                         <div class="title text-truncate"><?php echo $compName1; ?></div>
                                     </div>
                                 </div>

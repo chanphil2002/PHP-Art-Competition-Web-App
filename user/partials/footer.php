@@ -18,7 +18,7 @@
       <div class="col-6 col-md">
         <h5>My Account</h5>
         <ul class="list-unstyled text-small">
-          <li><a class="text-info" href="../faq/faq.php">Account Setting</a></li>
+          <li><a class="text-info" href="myProfile.php">Account Setting</a></li>
           <li><a class="text-info" href="../contactUs/contactUs.php">Report</a></li>
         </ul>
       </div>
