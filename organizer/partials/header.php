@@ -43,8 +43,16 @@ session_start();
     <nav class="navbar navbar-expand-xl">
       <ul class="navbar-nav">
 
-        <li class="nav-item">
-          <a class="btn btn-info" href="     " role="button"><i class="fa-solid fa-trophy"></i>&nbsp; My Competition</a>&nbsp;&nbsp;&nbsp;
+        <li class="nav-item me-3">
+          <div class="dropdown">
+            <button class="btn btn-outline-light dropdown-toggle text-dark border-dark" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="fa-solid fa-comment"></i>&nbsp; Feedbacks
+            </button>
+            <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton2">
+              <li><a class="dropdown-item" href="#">View Feedback from User</a></li>
+              <li><a class="dropdown-item text-warning" href=""><i class="fa-solid fa-flag"></i>&nbsp; Report to Admin</a></li>
+            </ul>
+          </div>
         </li>
 
         <li class="nav-item">
@@ -54,39 +62,15 @@ session_start();
             </button>
             <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton2">
               <li><a class="dropdown-item" href="../organizer/orgprofile.php">My Profile</a></li>
-              <li><a class="dropdown-item" href="#">Favourite</a></li>
+              <li><a class="dropdown-item" href="../organizer/editOrgProfile.php">Edit Profile</a></li>
               <li>
                 <hr class="dropdown-divider">
               </li>
-              <li><a class="dropdown-item text-danger" href="../general/logout.php">Log Out</a></li>
+              <li><a class="dropdown-item text-danger" href="../general/logout.php"><i class="fa-solid fa-right-from-bracket"></i>&nbsp; Log Out</a></li>
             </ul>
           </div>
         </li>
+
       </ul>
     </nav>
-  </nav>
-
-  <!-- <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
-    <div class="offcanvas-header">
-      <h5 class="offcanvas-title" id="offcanvasExampleLabel">Offcanvas</h5>
-      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-    </div>
-    <div class="offcanvas-body">
-      <div>
-        Some text as placeholder. In real life you can have the elements you have chosen. Like, text, images, lists, etc.
-      </div>
-      <div class="dropdown mt-3">
-        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown">
-          Dropdown button
-        </button>
-        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-          <li><a class="dropdown-item" href="#">Action</a></li>
-          <li><a class="dropdown-item" href="#">Another action</a></li>
-          <li><a class="dropdown-item" href="#">Something else here</a></li>
-        </ul>
-      </div>
-
-
-    </div>
-  </div> -->
   </nav>
