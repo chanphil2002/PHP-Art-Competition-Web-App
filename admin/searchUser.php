@@ -53,28 +53,10 @@ if (!isset($_SESSION["admin"])){
     <div>
         <hr><br>
         <center>
-            <h3>Search Result</h3><br><br>
+            <h3>Search Result</h3>
         </center>
     </div>
-</body>
-
-</html>
-<?php
-if (isset($_POST["search"])) {
-
-    $search = $_POST['search'];
-    $sql = "SELECT * FROM user WHERE username LIKE '%$search%' OR userEmail LIKE '%$search%'";
-    $res = mysqli_query($conn, $sql);
-    if (mysqli_num_rows($res) != 0) {
-        while ($rowUser = mysqli_fetch_assoc($res)) {
-            $username = $rowUser['username'];
-            $email = $rowUser['userEmail'];
-            $dob = $rowUser['DoB'];
-            $gender = $rowUser['gender'];
-            $phone = $rowUser['phoneNum'];
-
-?>
-            <div class="body">
+    <div class="body">
                 <table class="table">
                     <thead>
                         <tr>
@@ -86,6 +68,24 @@ if (isset($_POST["search"])) {
                             <th>Action</th>
                         </tr>
                     </thead>
+</body>
+
+</html>
+<?php
+if (isset($_POST["search"])) {
+
+    $search = $_POST['search'];
+    $sql = "SELECT * FROM user WHERE (username LIKE '%$search%' OR userEmail LIKE '%$search%') AND status != 'Terminated'";
+    $res = mysqli_query($conn, $sql);
+    if (mysqli_num_rows($res) != 0) {
+        while ($rowUser = mysqli_fetch_assoc($res)) {
+            $username = $rowUser['username'];
+            $email = $rowUser['userEmail'];
+            $dob = $rowUser['DoB'];
+            $gender = $rowUser['gender'];
+            $phone = $rowUser['phoneNum'];
+
+?>
                     <tr>
                         <td data-label="username"><?php echo $username ?></td>
                         <td data-label="email"><?php echo $email ?></td>

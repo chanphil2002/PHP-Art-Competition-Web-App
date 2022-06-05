@@ -51,6 +51,19 @@ session_start();?>
                 &nbsp;&nbsp;&nbsp;
                 <li class="nav-item"> 
                     <div class="dropdown">
+                        <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" title="Generate Report">
+                            <i class="fa-solid fa-file"></i>&nbsp;Report
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton1">
+                            <li><a class="dropdown-item"  title="View the number of users in each category." href="">User Type</a></li>
+                            <li><a class="dropdown-item" title="View the number of competitions in each category" href="">Competition Type</a></li>
+                            <li><a class="dropdown-item" title="View the number of participants in each competition category." href="">Participants</a></li>
+                        </ul>
+                    </div>
+                </li>
+                &nbsp;&nbsp;&nbsp;
+                <li class="nav-item"> 
+                    <div class="dropdown">
                         <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false" title="Search Users">
                             <i class="fa-solid fa-magnifying-glass"></i>&nbsp;Search
                         </button>

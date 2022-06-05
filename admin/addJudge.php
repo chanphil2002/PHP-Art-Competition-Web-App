@@ -20,7 +20,7 @@ if (isset($_POST['submit'])) {
 	// double confirm password entered
 	if ($confirm_pass == $password) {
 		// check whether the user account already exists
-		$sql = "SELECT * FROM judge WHERE judgeIC ='$ic'";
+		$sql = "SELECT * FROM judge WHERE judgeIC ='$ic' AND status != 'Terminated'";
 		$result = mysqli_query($conn, $sql);
 
 		// if user account not exixts
@@ -60,9 +60,9 @@ if (isset($_POST['submit'])) {
 			<form class="form-detail" action="#" method="post" id="myform" enctype="multipart/form-data">
 				<div class="form-row">
 					<strong>
-						<h2 class="text-1">Judge Registration Page</h2>
+						<h2 class="text-1" style="font-size:3vw;">Judge Registration Page</h2>
 					</strong>
-					<br><br><br><br><br><label for="ic">IDENTITY CARD NUMBER *</label>
+					<br><br><br><br><label for="ic">IDENTITY CARD NUMBER *</label>
 					<input type="text" name="ic" placeholder="xxxxxx-xx-xxxx" pattern="[0-9]{6}-[0-9]{2}-[0-9]{4}" id="ic" class="input-text" required>
 				</div>
 				<div class="form-row">

@@ -63,20 +63,4 @@ if (!isset($_SESSION["admin"])){
     </div>
 </body>
 </html>
-<?php
-    if (isset($_GET['removeIC'])) {
-        $removeIC = $_GET['removeIC'];
-
-        $update = "UPDATE judge SET status = 'Terminated' WHERE judgeIC ='$removeIC'";
-        $run_update = mysqli_query($conn, $update);
-        if($run_update == true) {
-            echo "<script>alert('The judge has been removed successfully!')
-            location = 'viewJudge.php'</script>";
-
-        }else {
-            echo "<script>alert('Failed, Please Try Again.')
-            location = 'viewJudge.php'</script>";
-    }
-}       
-?>
 <?php include("partials/footer.php"); ?>

@@ -86,7 +86,7 @@ if (!isset($_SESSION["admin"])){
 
 			if($run_update == true){
 				echo "<script>alert('Profile updated successfully!')
-				location = 'viewJudge.php' </script>";
+				location = 'viewJudgeDetails.php?selectedIC=$ic' </script>";
 
 			}else {
 				echo "<script>alert('Oops! Something went wrong, please try again.')</script>";
@@ -101,7 +101,7 @@ if (!isset($_SESSION["admin"])){
 
 			if($run_update == true){
 				echo "<script>alert('Profile updated successfully.')
-				location = 'viewJudge.php' </script>";
+				location = 'viewJudgeDetails.php?selectedIC=$ic' </script>";
 				move_uploaded_file($tmp_name, "../materials/judgeProfilePic/$newProfilePic");
 
 			}else {
