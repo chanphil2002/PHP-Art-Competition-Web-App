@@ -55,7 +55,7 @@ session_start();?>
                             <i class="fa-solid fa-file"></i>&nbsp;Report
                         </button>
                         <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton1">
-                            <li><a class="dropdown-item"  title="View the number of users in each category." href="">User Type</a></li>
+                            <li><a class="dropdown-item"  title="View the number of users in each category." href="report.php">User Type</a></li>
                             <li><a class="dropdown-item" title="View the number of competitions in each category" href="">Competition Type</a></li>
                             <li><a class="dropdown-item" title="View the number of participants in each competition category." href="">Participants</a></li>
                         </ul>
