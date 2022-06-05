@@ -20,10 +20,10 @@ if (isset($_POST['submit2'])) {
         $sql1 = "CREATE TEMPORARY TABLE temp AS (SELECT competition.*, comp_judge.judgeIC FROM competition INNER JOIN comp_judge on competition.compID = comp_judge.compID WHERE (compName LIKE '%$search%' OR category LIKE '%$search%') AND (Status = 'Upcoming' OR Status = 'On-Going' OR Status = 'Past') AND comp_judge.judgeIC = '$judgeIC')";
         $res1 = mysqli_query($conn, $sql1);
     } else if ($search == " ") {
-        $sql1 = "CREATE TEMPORARY TABLE temp AS SELECT * FROM competition WHERE STATUS LIKE '%filter%'";
+        $sql1 = "CREATE TEMPORARY TABLE temp AS (SELECT competition.*, comp_judge.judgeIC FROM competition INNER JOIN comp_judge on competition.compID = comp_judge.compID WHERE competition.STATUS LIKE '%$filter%' AND comp_judge.judgeIC = '$judgeIC')";
         $res1 = mysqli_query($conn, $sql1);
     } else {
-        $sql1 = "CREATE TEMPORARY TABLE temp AS SELECT * FROM competition WHERE (compName LIKE '%$search%' OR category LIKE '%$search%') AND status LIKE '%$filter%'";
+        $sql1 = "CREATE TEMPORARY TABLE temp AS (SELECT competition.*, comp_judge.judgeIC FROM competition INNER JOIN comp_judge on competition.compID = comp_judge.compID WHERE (compName LIKE '%$search%' OR category LIKE '%$search%') AND status LIKE '%$filter%' AND comp_judge.judgeIC = '$judgeIC')";
         $res1 = mysqli_query($conn, $sql1);
     }
 
