@@ -74,7 +74,7 @@
         }
 
         $desc = $_POST["feedback"];
-        $status = "unresolved";
+        $status = "unresolved";  
         $user = $_SESSION["user"];
 
         if (isset($_GET["org"])){
