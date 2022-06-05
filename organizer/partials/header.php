@@ -49,7 +49,7 @@ if (!isset($_SESSION["organizer"])) {
       <ul class="navbar-nav">
 
         <li class="nav-item me-3">
-        <a class="btn btn-outline-light text-dark border-dark" href="#" role="button"><i class="fa-solid fa-comment"></i>&nbsp; Send Feedback</a>
+        <a class="btn btn-outline-light text-dark border-dark" href="contactUs.php" role="button"><i class="fa-solid fa-comment"></i>&nbsp; Send Feedback</a>
         </li>
 
         <li class="nav-item">

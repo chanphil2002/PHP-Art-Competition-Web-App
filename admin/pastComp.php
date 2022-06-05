@@ -64,7 +64,7 @@ if (!isset($_SESSION["admin"])){
                 <?php
                 $count = 1;
                 $sum = 0;
-                $sql = "SELECT * FROM competition WHERE status = 'Pass'";
+                $sql = "SELECT * FROM competition WHERE status = 'Past'";
                 $result = mysqli_query($conn, $sql);
                 if (mysqli_num_rows($result) == 0){
                     echo "<h3>Currently No Related Competition.</h3>"; 
