@@ -1,6 +1,8 @@
-<?php include("../admin/partials/database.php"); 
-session_start();?>
-
+<?php include("../admin/partials/database.php");
+session_start();
+if (!isset($_SESSION["admin"])){
+    header("Location: ../general/otherRoleLogin.php");
+}?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
