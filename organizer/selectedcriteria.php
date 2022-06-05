@@ -7,6 +7,10 @@ if (!isset($_SESSION["compID"])) {
     $compID = $_SESSION['compID'];
     $sql2 = "SELECT * FROM comp_criteria WHERE compID = '$compID'";
     $res2 = mysqli_query($conn, $sql2);
+    $sql3 = "SELECT COUNT(compID) AS 'num_of_criteria' FROM comp_criteria WHERE compID = '$compID'";
+    $res3 = mysqli_query($conn, $sql3);
+    $row3 = mysqli_fetch_assoc($res3);
+    $num_of_criteria = $row3['num_of_criteria'];
 }
 ?>
 
@@ -15,12 +19,32 @@ if (!isset($_SESSION["compID"])) {
     <div class="bg-info bg-opacity-10 border border-info border-start-5 rounded-circle">
         <h5 class="text-center text-dark">Competition ID: <?php echo $compID; ?></h5>
     </div>
-    <h5 class="ms-5 text-dark pt-4">Add Criteria(s) for your competition:</h5>
+    <h5 class="ms-5 text-dark pt-4">Add Criteria(s) for your competition (Max 5):</h5>
 </div>
 
+
+
+<div class="form-row">
+    <?php
+    if ($num_of_criteria > 4) {
+    ?>
+        <div>
+            <h5 class="text-danger text-center">You have reached the maximum amount of criterias. </h5>
+        </div>
+    <?php } else {
+    ?>
+        <div class='d-flex'>
+            <a class="btn btn-outline-success btn-lg mx-auto px-5 mb-4" href="addcriteria.php?compID=<?php echo $compID; ?>" role="button"><i class="fa-solid fa-list-check me-2"></i>Add Criteria</a>
+        </div>
+    <?php } ?>
+</div>
+
+
+
+<!-- 
 <div class='d-flex'>
     <a class="btn btn-outline-success btn-lg mx-auto px-5 mb-4" href="addcriteria.php?compID=<?php echo $compID; ?>" role="button"><i class="fa-solid fa-list-check me-2"></i>Add Criteria</a>
-</div>
+</div> -->
 
 
 

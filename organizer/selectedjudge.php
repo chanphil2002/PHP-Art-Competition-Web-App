@@ -15,21 +15,40 @@ if (!isset($_SESSION["compID"])) {
 
     $sql2 = "SELECT C.*, J.* FROM comp_judge C INNER JOIN judge J ON C.judgeIC = J.judgeIC AND C.compID = '$compID'";
     $res2 = mysqli_query($conn, $sql2);
+
+    $sql4 = "SELECT COUNT(compID) AS 'num_of_judge' FROM comp_judge WHERE compID = '$compID'";
+    $res4 = mysqli_query($conn, $sql4);
+    $row4 = mysqli_fetch_assoc($res4);
+    $num_of_judge = $row4['num_of_judge'];
+    
 }
 
 ?>
 
 <div class="mx-auto">
     <h2 class=" text-center"><b>Judges Allocation</b></h2>
-    <h5 class="text-center text-dark">Competition ID: <?php echo $compID; ?></h5>
+    <div class="bg-info bg-opacity-10 border border-info border-start-5 rounded-circle">
+        <h5 class="text-center text-dark">Competition ID: <?php echo $compID; ?></h5>
+    </div>
     <br>
-    <h5 class="ms-5 text-dark">Choose the existing judges or add a new judge for your competition:</h5>
+    <h5 class="ms-5 text-dark">Choose the existing judges or add a new judge for your competition (Max 5):</h5>
 </div>
-<div class='d-flex'>
-    <a class="btn btn-success btn-lg mx-auto px-5" href="choosejudge.php" role="button"><i class="fa-solid fa-user-graduate me-2"></i>Choose Judges</a>
 
+<div class="form-row">
+    <?php
+    if ($num_of_judge > 4) {
+    ?>
+        <div>
+            <h5 class="text-danger text-center">You have reached the maximum amount of judges. </h5>
+        </div>
+    <?php } else {
+    ?>
+        <div class='d-flex'>
+            <a class="btn btn-success btn-lg mx-auto px-5 mb-5" href="choosejudge.php" role="button"><i class="fa-solid fa-user-graduate me-2"></i>Choose Judges</a>
+        </div>
+    <?php } ?>
 </div>
-<!-- <a class="btn btn-outline-primary ms-5 mb-2" href="../organizer/newjudge.php" role="button"><i class="fa-solid fa-user-plus me-2"></i>Add New Judge</a> -->
+
 
 <div class="form-row">
     <?php
