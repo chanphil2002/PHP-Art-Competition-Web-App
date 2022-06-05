@@ -75,7 +75,7 @@ if (!isset($_SESSION["admin"])){
 if (isset($_POST["search"])) {
 
     $search = $_POST['search'];
-    $sql = "SELECT * FROM user WHERE (username LIKE '%$search%' OR userEmail LIKE '%$search%') AND status != 'Terminated'";
+    $sql = "SELECT * FROM user WHERE username LIKE '%$search%' OR userEmail LIKE '%$search%'";
     $res = mysqli_query($conn, $sql);
     if (mysqli_num_rows($res) != 0) {
         while ($rowUser = mysqli_fetch_assoc($res)) {

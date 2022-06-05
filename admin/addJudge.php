@@ -20,7 +20,7 @@ if (isset($_POST['submit'])) {
 	// double confirm password entered
 	if ($confirm_pass == $password) {
 		// check whether the user account already exists
-		$sql = "SELECT * FROM judge WHERE judgeIC ='$ic' AND status != 'Terminated'";
+		$sql = "SELECT * FROM judge WHERE judgeIC ='$ic'";
 		$result = mysqli_query($conn, $sql);
 
 		// if user account not exixts

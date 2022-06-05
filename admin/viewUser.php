@@ -36,7 +36,7 @@ if (!isset($_SESSION["admin"])){
                 <?php
                     $count = 1;
                     $sum = 0;
-                    $sql = "SELECT * FROM user WHERE status != 'Terminated'";
+                    $sql = "SELECT * FROM user";
                     $result = mysqli_query($conn, $sql); 
                     while($row_user = mysqli_fetch_assoc($result)){
                         $username = $row_user['username'];
@@ -55,8 +55,6 @@ if (!isset($_SESSION["admin"])){
                     <td data-label="phone"><?php echo $phone?></td>
                     <td data-label="Action">
                         <a href="editUser.php?editEmail=<?php echo $email?>"><i class="fa-solid fa-pen"></i></a>
-                        &nbsp;&nbsp;&nbsp;
-                        <a href="viewUser.php?removeEmail=<?php echo $email?>"><i class='fas fa-trash-alt' style='color:red'></i></a>
                     </td>
                 </tr>
                 <?php } ?>
@@ -66,26 +64,3 @@ if (!isset($_SESSION["admin"])){
 </body>
 </html>
 <?php include ("../admin/partials/footer.php")?>
-<?php
-    if (isset($_GET['removeEmail'])) {
-        $removeEmail = $_GET['removeEmail'];
-        $sql = "SELECT * FROM user WHERE userEmail = '$removeEmail'";
-        $result = mysqli_query($conn, $sql); 
-        $row_user = mysqli_fetch_assoc($result);
-        $pic = $row_user['userProfilePic'];
-        $picPath = ("../materials/userProfilePic/$pic");
-
-        $update = "UPDATE user SET status = 'Terminated' WHERE userEmail ='$removeEmail'";
-        $run_update = mysqli_query($conn, $update);
-        if($run_update == true) {
-            unlink($picPath);
-            echo "<script>alert('The user has been removed successfully!')
-            location = 'viewUser.php'</script>";
-            
-
-        }else {
-            echo "<script>alert('Failed, Please Try Again.')
-            location = 'viewUser.php'</script>";
-    }
-}       
-?>
