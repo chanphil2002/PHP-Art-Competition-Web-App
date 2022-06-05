@@ -70,23 +70,3 @@ $res = mysqli_query($conn, $sql);
 
 
 <?php include("../organizer/partials/footer.php"); ?>
-
-<!-- 
-<div class="col-md-4">
-          <div class="card mb-4 shadow-sm me-5">
-            <span class="badge rounded-pill text-bg-success position-absolute top-0 end-0"><?php echo $status; ?></span>
-            <svg class="bd-placeholder-img card-img-top" width="100%" height="0" role="img" preserveAspectRatio="xMidYMid slice" focusable="false"><img src="../materials/image/<?php echo $compPic; ?>" alt="<?= $compID; ?>"></svg>
-
-            <div class="card-body">
-              <h3 class="text-center card-text"><?php echo $compName; ?></h3>
-              <h5 class="text-center text-secondary"><?php echo $category; ?></h5>
-              <div class="d-flex justify-content-center align-items-center">
-                <div class="btn-group">
-                  <a class="align btn btn-outline-primary" href="viewcomp_main.php?compID=<?php echo $compID; ?>" role="button">View Details</a>
-                  <a class="align btn btn-outline-primary" href="editcomp.php?compID=<?php echo $compID; ?>" role="button">Manage Details</a>
-                  <a class="align btn btn-outline-danger" href="deleteItem.php?compID=<?php echo $compID; ?>&compPic=<?php echo $compPic; ?>" role="button">Terminate Competition</a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div> -->
