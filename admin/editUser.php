@@ -56,7 +56,7 @@ if (!isset($_SESSION["admin"])){
 					</div>
 					<div class="form-row">
 						<br><label for="email">EMAIL *</label>
-						<input type="email" name="email" placeholder="abc@gmail.com" id="email" class="input-text" value="<?php echo $email ?>" required>
+						<input type="email" name="email" placeholder="abc@gmail.com" id="email" class="input-text" value="<?php echo $email ?>" readonly>
 					</div>
 					<div class="form-row">
 						<br><label for="dob">DoB *</label>
@@ -110,14 +110,13 @@ if (!isset($_SESSION["admin"])){
 <?php
 if (isset($_POST["update"])) {
 	$newUsername = $_POST['username'];
-	$newEmail = $_POST['email'];
 	$newDoB = $_POST["dob"];
 	$newGender = $_POST["gender"];
 	$newPhone = $_POST["phone"];
 
 	//if no profile picture added
 	if ($_FILES['profile_picture']['name'] == "") {
-		$update = "UPDATE user SET userEmail= '$newEmail', username= '$newUsername', DoB='$newDoB', gender='$newGender', phoneNum= '$newPhone' WHERE userEmail = '$email'";
+		$update = "UPDATE user SET username= '$newUsername', DoB='$newDoB', gender='$newGender', phoneNum= '$newPhone' WHERE userEmail = '$email'";
 		$run_update = mysqli_query($conn, $update);
 
 		if ($run_update == true) {
