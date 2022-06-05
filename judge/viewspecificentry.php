@@ -38,14 +38,6 @@ while ($row = mysqli_fetch_assoc($res)) {
     $totalScore = $row['totalScore'];
 }
 
-// while ($row3 = mysqli_fetch_assoc($res4)) {
-//     $cri0 = $row3['cri0'];
-//     $cri1 = $row3['cri1'];
-//     $cri2 = $row3['cri2'];
-//     $cri3 = $row3['cri3'];
-//     $cri4 = $row3['cri4'];
-// }
-
 
 if (isset($_POST['submit'])) {
     $count = mysqli_num_rows($res500);
@@ -76,25 +68,7 @@ if (isset($_POST['submit'])) {
     header("location:../judge/viewspecificentry.php?entryID=$entryID&compID=$compID");
 }
 
-// while ($row1 = mysqli_fetch_assoc($res1)) {
-//     $criteria = $row1['criteria'];
-// }
 
-
-// if (isset($_GET['entryID']) & isset($_GET['compID'])) {
-//     $entryID = $_GET['entryID'];
-//     $compID = $_GET['compID'];
-//     $sql2 = "SELECT * FROM comp_criteria WHERE compID='$compID'";
-//     $res = mysqli_query($conn, $sql2);
-// }
-// if (isset($_POST['submit'])) {
-//     $crit1 = $_POST['crit1'];
-//     $crit2 = $_POST['crit2'];
-//     $crit3 = $_POST['crit3'];
-//     $crit4 = $_POST['crit4'];
-//     $crit5 = $_POST['crit5'];
-//     $total = ($crit1 + $crit2 + $crit3 + $crit4 + $crit5) / 5;
-// }
 ?>
 <!DOCTYPE html>
 <html lang="en">

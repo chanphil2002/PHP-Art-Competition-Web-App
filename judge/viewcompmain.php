@@ -30,6 +30,7 @@ while ($row = mysqli_fetch_assoc($res)) {
     $publicVote = $row['publicVote'];
     $prizePool = $row['prizePool'];
     $compPic = $row['compPic'];
+    $announcement = $row['announcement'];
 }
 
 while ($row1 = mysqli_fetch_assoc($res1)) {
@@ -159,32 +160,20 @@ while ($row1 = mysqli_fetch_assoc($res1)) {
         <hr>
         <div class="form-row">
             <?php
-            if ($status == "Pending") {
+            if ($status == "Upcoming") {
             ?>
                 <div>
-                    <a href="editcomp.php?compID=<?php echo $compID; ?>"><button type="button" class="btn btn-primary btn-lg mx-auto px-5">Edit</button></a>
-                    <button type="button" class="btn btn-danger btn-lg mx-auto px-5" data-bs-toggle="modal" data-bs-target="#terminateModal">Terminate Competition</button>
-                </div>
-            <?php } else if ($status == "Upcoming") {
-            ?>
-                <div>
-                    <button class="btn btn-success btn-lg mx-auto px-5" data-bs-toggle="modal" data-bs-target="#makeModal">Make Announcement</button>
                     <button class="btn btn-primary btn-lg mx-auto px-5" data-bs-toggle="modal" data-bs-target="#viewModal">View Announcement</button>
-                    <a href="editcomp.php?compID=<?php echo $compID; ?>"><button type="button" class="btn btn-primary btn-lg mx-auto px-5">Edit</button></a>
-                    <button type="button" class="btn btn-danger btn-lg mx-auto px-5" data-bs-toggle="modal" data-bs-target="#terminateModal">Terminate Competition</button>
                 </div>
             <?php } else if ($status == "On-Going") {
             ?>
                 <div>
-                    <button class="btn btn-success btn-lg mx-auto px-5" data-bs-toggle="modal" data-bs-target="#makeModal">Make Announcement</button>
                     <button class="btn btn-primary btn-lg mx-auto px-5" data-bs-toggle="modal" data-bs-target="#viewModal">View Announcement</button>
                 </div>
             <?php } else if ($status == "Past") {
             ?>
                 <div>
-                    <button class="btn btn-success btn-lg mx-auto px-5" data-bs-toggle="modal" data-bs-target="#makeModal">Make Announcement</button>
                     <button class="btn btn-primary btn-lg mx-auto px-5" data-bs-toggle="modal" data-bs-target="#viewModal">View Announcement</button>
-                    <a href="addcert.php?compID=<?php echo $compID; ?>" type="button" class="btn btn-warning btn-lg mx-auto px-5">Submit Certificate</button></a>
                 </div>
             <?php } else if ($status == "Terminated") {
             ?>
@@ -197,7 +186,6 @@ while ($row1 = mysqli_fetch_assoc($res1)) {
             ?>
                 <div>
                     <a href="orghome.php" class="btn btn-lg btn-outline-primary">Back to Home</a>
-                    <button class="btn btn-warning btn-lg mx-auto px-5" data-bs-toggle="modal" data-bs-target="#rejectedModal">View Rejected Comment</button>
                 </div>
             <?php } ?>
         </div>
