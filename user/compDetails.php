@@ -123,7 +123,7 @@ while ($row1 = mysqli_fetch_assoc($res1)){
                         <?php echo $description; ?>
                     </h3>
                 </div>
-                <div>
+                <div class="pb-4">
                     <h2>
                         Rules and Regulation
                     </h2>
@@ -131,6 +131,18 @@ while ($row1 = mysqli_fetch_assoc($res1)){
                         <?php echo $rules; ?>
                     </h3>
                 </div>
+
+                <?php if ($announcement != NULL){ ?>
+                    <div class="pb-4">
+                        <h2>
+                        Announcement
+                        </h2>
+                        <h3>
+                            <?php echo "$announcement"; ?>
+                        </h3>
+                    </div>
+                <?php } ?>
+                
             </div>
             <div class="col-3">
                 <?php
