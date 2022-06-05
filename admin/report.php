@@ -131,21 +131,48 @@ include("partials/header.php");
         ]);
 
         var options = {
-        //   title: <?php 
-        //   if (isset($_GET["user"])){ echo 'Type of Virtual X Competition System Users';}
-        //   elseif (isset($_GET["competition"])){ echo 'Category of Competitions Held in Virtual X';}
-        //   elseif (isset($_GET["participant"])){ echo 'Amount of Participants in Each Category';} ?>,
+            <?php if (isset($_GET["user"])){ ?>
+                title: 'Users of Virtual X Competition System',
+            <?php }elseif (isset($_GET["competition"])) { ?>
+                title: 'Competitions Held in Virtual X Competition System',
+            <?php }elseif (isset($_GET["participant"])){ ?>
+                title: 'Participants of Each Category',
+            <?php } ?>
           is3D: true,
         };
 
         var chart = new google.visualization.PieChart(document.getElementById('piechart_3d'));
         chart.draw(data, options);
       }
+
     </script>
 
 </head>
 <body>
-    <div id="piechart_3d" style="width: 900px; height: 500px;"></div>
+
+    <div class="row">
+        <div class="col-lg-6 m-auto">
+            <div class="card mt-5">
+                <div class="card-header">
+                    <center><h3>
+                        <?php if (isset($_GET["user"])){
+                            echo "Users of Virtual X Competition";
+                        }elseif (isset($_GET["competition"])){
+                            echo "Competitions Held in Virtual X Competition System";
+                        }elseif (isset($_GET["participant"])){
+                            echo "Participants of Each Category";
+                        } ?>
+                    </h3></center>
+                </div>
+                <div class="card-body">
+                    <div id="piechart_3d" style="width: 600px; height: 400px;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <br><br>
+
 </body>
 </html>
 
