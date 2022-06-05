@@ -49,15 +49,7 @@ if (!isset($_SESSION["organizer"])) {
       <ul class="navbar-nav">
 
         <li class="nav-item me-3">
-          <div class="dropdown">
-            <button class="btn btn-outline-light dropdown-toggle text-dark border-dark" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
-            <i class="fa-solid fa-comment"></i>&nbsp; Feedbacks
-            </button>
-            <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton2">
-              <li><a class="dropdown-item" href="#">View Feedback from User</a></li>
-              <li><a class="dropdown-item text-warning" href=""><i class="fa-solid fa-flag"></i>&nbsp; Report to Admin</a></li>
-            </ul>
-          </div>
+        <a class="btn btn-outline-light text-dark border-dark" href="#" role="button"><i class="fa-solid fa-comment"></i>&nbsp; Send Feedback</a>
         </li>
 
         <li class="nav-item">
