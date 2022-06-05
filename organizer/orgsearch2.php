@@ -1,12 +1,12 @@
-<?php include("../organizer/partials/header.php"); 
+<?php include("../organizer/partials/header.php");
 
 
-if (!isset($_SESSION["organizer"])){
+if (!isset($_SESSION["organizer"])) {
     header("Location: ../general/otherRoleLogin.php");
 }
 
-$organizerEmail = $_SESSION['organizer'];
-$request = "SELECT * FROM organizer WHERE organizerEmail = '$organizerEmail'";
+$organizerID = $_SESSION['organizer'];
+$request = "SELECT * FROM organizer WHERE organizerID = '$organizerID'";
 $result = mysqli_query($conn, $request);
 $display = mysqli_fetch_assoc($result);
 $organizerID = $display['organizerID'];

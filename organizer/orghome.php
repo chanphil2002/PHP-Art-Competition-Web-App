@@ -42,7 +42,19 @@ $res = mysqli_query($conn, $sql);
         <div class="col-md-4 margincon1 mb-4">
           <div class="card border-1 grid-list ">
             <a href="../organizer/viewcomp_main.php?compID= <?php echo $compID; ?>" class="stretched-link">
-              <span class="badge rounded-pill text-bg-success position-absolute top-0 end-0"><?php echo $status; ?></span>
+              <?php
+              if ($status == 'Pending') {
+                echo "<span style='display: inline-block; margin-left: 1em' class='badge rounded-pill text-bg-primary position-absolute top-0 end-0'> $status </span>";
+              } else if ($status == 'Upcoming') {
+                echo "<span style='display: inline-block; margin-left: 1em' class='badge rounded-pill text-bg-warning position-absolute top-0 end-0'> $status </span>";
+              } else if ($status == 'On-Going') {
+                echo "<span style='display: inline-block; margin-left: 1em' class='badge rounded-pill text-bg-success position-absolute top-0 end-0'>$status </span>";
+              } else if ($status == 'Past') {
+                echo "<span style='display: inline-block; margin-left: 1em' class='badge rounded-pill text-bg-dark position-absolute top-0 end-0'> $status </span>";
+              } else if ($status == 'Terminated') {
+                echo "<span style='display: inline-block; margin-left: 1em' class='badge rounded-pill text-bg-danger position-absolute top-0 end-0'> $status </span>";
+              }
+              ?>
               <img class="card-img-top lazy" src="../materials/compPic/<?php echo $compPic; ?>">
             </a>
             <div class="card-body description text-truncate text-color-2">
