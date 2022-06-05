@@ -329,7 +329,7 @@
     <!-- Photography -->
     <div class="container" style="max-width: 1320px">
         <h2 class="ml-5" style="margin-left: 15px; display:inline-block">Visual Art - Photography</h2>
-        <a href="guest/allComp.php?category=Photography" style="color:darkblue; margin-left: 750px">See more&nbsp;<i class="fa-solid fa-angle-right"></i></a>
+        <a href="guest/allComp.php?category=Photography" style="color:darkblue; margin-left: 725px">See more&nbsp;<i class="fa-solid fa-angle-right"></i></a>
     </div>
 
 
