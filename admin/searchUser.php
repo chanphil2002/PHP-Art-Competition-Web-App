@@ -53,10 +53,48 @@ if (!isset($_SESSION["admin"])){
     <div>
         <hr><br>
         <center>
-            <h3>Search Result</h3>
+            <h3>Search Result</h3><br><br>
         </center>
     </div>
-    <div class="body">
+</body>
+
+</html>
+<?php
+if (isset($_POST["search"])) {
+
+    $search = $_POST['search'];
+    $sql = "SELECT * FROM user WHERE username LIKE '%$search%' OR userEmail LIKE '%$search%'";
+    $res = mysqli_query($conn, $sql);
+    if (mysqli_num_rows($res) != 0){
+        $role = "user";
+        if($role == "user"){
+            ?>
+            <div class="body">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Username</th>
+                                <th>Email</th>
+                                <th>DoB</th>
+                                <th>Gender</th>
+                                <th>Phone Number</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+            <?php
+        }
+    }
+   
+    if (mysqli_num_rows($res) != 0) {
+        while ($rowUser = mysqli_fetch_assoc($res)) {
+            $username = $rowUser['username'];
+            $email = $rowUser['userEmail'];
+            $dob = $rowUser['DoB'];
+            $gender = $rowUser['gender'];
+            $phone = $rowUser['phoneNum'];
+
+?>
+            <!-- <div class="body">
                 <table class="table">
                     <thead>
                         <tr>
@@ -67,25 +105,7 @@ if (!isset($_SESSION["admin"])){
                             <th>Phone Number</th>
                             <th>Action</th>
                         </tr>
-                    </thead>
-</body>
-
-</html>
-<?php
-if (isset($_POST["search"])) {
-
-    $search = $_POST['search'];
-    $sql = "SELECT * FROM user WHERE username LIKE '%$search%' OR userEmail LIKE '%$search%'";
-    $res = mysqli_query($conn, $sql);
-    if (mysqli_num_rows($res) != 0) {
-        while ($rowUser = mysqli_fetch_assoc($res)) {
-            $username = $rowUser['username'];
-            $email = $rowUser['userEmail'];
-            $dob = $rowUser['DoB'];
-            $gender = $rowUser['gender'];
-            $phone = $rowUser['phoneNum'];
-
-?>
+                    </thead> -->
                     <tr>
                         <td data-label="username"><?php echo $username ?></td>
                         <td data-label="email"><?php echo $email ?></td>
@@ -94,8 +114,6 @@ if (isset($_POST["search"])) {
                         <td data-label="phone"><?php echo $phone ?></td>
                         <td data-label="Action">
                             <a href="editUser.php?editEmail=<?php echo $email ?>"><i class="fa-solid fa-pen"></i></a>
-                            &nbsp;&nbsp;&nbsp;
-                            <a href="viewUser.php?removeEmail=<?php echo $email ?>"><i class='fas fa-trash-alt' style='color:red'></i></a>
                         </td>
                     </tr>
                 <?php } ?>
@@ -103,8 +121,28 @@ if (isset($_POST["search"])) {
                 </table>
             </div>
             <?php } else {
-            $sql2 = "SELECT * FROM organizer WHERE organizerName LIKE '%$search%' OR organizerID LIKE '%$search%'";
+            $sql2 = "SELECT * FROM organizer WHERE organizerName LIKE '%$search%' OR organizerID LIKE '%$search%' OR organizerEmail LIKE '%$search%'";
             $res2 = mysqli_query($conn, $sql2);
+            
+            if (mysqli_num_rows($res2) != 0){
+                $role = "organizer";
+                if ($role == "organizer"){
+                    ?>
+                    <div class="body">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Organizer ID</th>
+                                        <th>Organizer Name</th>
+                                        <th>Organizer Email</th>
+                                        <th>Status</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                    <?php
+                }
+            }
+           
             if (mysqli_num_rows($res2) != 0) {
                 while ($rowOrganizer = mysqli_fetch_assoc($res2)) {
                     $id = $rowOrganizer['organizerID'];
@@ -112,7 +150,7 @@ if (isset($_POST["search"])) {
                     $name = $rowOrganizer['organizerName'];
                     $status = $rowOrganizer['organizerStatus'];
             ?>
-                    <div class="body">
+                    <!-- <div class="body">
                         <table class="table">
                             <thead>
                                 <tr>
@@ -122,7 +160,7 @@ if (isset($_POST["search"])) {
                                     <th>Status</th>
                                     <th>Action</th>
                                 </tr>
-                            </thead>
+                            </thead> -->
                             <tbody>
                                 <tr>
                                     <td data-label="id"><?php echo $id ?></td>
@@ -135,20 +173,18 @@ if (isset($_POST["search"])) {
                                         <a href="approvedOrganizer.php?removeID=<?php echo $id ?>"><i class='fas fa-trash-alt' style='color:red'></i></a>
                                     </td>
                                 </tr>
+                            <?php } ?>
                             </tbody>
                         </table>
                     </div>
                     <?php
-                }
             } else {
-                $sql3 = "SELECT * FROM judge WHERE judgeName LIKE '%$search%' OR judgeIC LIKE '%$search%'";
+                $sql3 = "SELECT * FROM judge WHERE judgeName LIKE '%$search%' OR judgeIC LIKE '%$search%' OR judgeEmail LIKE '%$search%'";
                 $res3 = mysqli_query($conn, $sql3);
-                if (mysqli_num_rows($res3) != 0) {
-                    while ($row_judge = mysqli_fetch_assoc($res3)) {
-                        $ic = $row_judge['judgeIC'];
-                        $name = $row_judge['judgeName'];
-                        $email = $row_judge['judgeEmail'];
-                    ?>
+                if (mysqli_num_rows($res3) != 0){
+                    $role = "judge";
+                    if ($role == "judge"){
+                        ?>
                         <div class="body">
                             <table class="table">
                                 <thead>
@@ -159,6 +195,25 @@ if (isset($_POST["search"])) {
                                         <th>Action</th>
                                     </tr>
                                 </thead>
+                        <?php
+                    }
+                }
+                if (mysqli_num_rows($res3) != 0) {
+                    while ($row_judge = mysqli_fetch_assoc($res3)) {
+                        $ic = $row_judge['judgeIC'];
+                        $name = $row_judge['judgeName'];
+                        $email = $row_judge['judgeEmail'];
+                    ?>
+                        <!-- <div class="body">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>IC</th>
+                                        <th>Name</th>
+                                        <th>Email</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead> -->
                                 <tbody>
                                     <tr>
                                         <td data-label="IC"><?php echo $ic ?></td>
@@ -170,10 +225,11 @@ if (isset($_POST["search"])) {
                                             <a href="viewJudge.php?removeIC=<?php echo $ic ?>"><i class='fas fa-trash-alt' style='color:red'></i></a>
                                         </td>
                                     </tr>
+                                    <?php } ?>
                                 </tbody>
                             </table>
                         </div>
-                    <?php }
+                    <?php
                 } else {
                     ?>
                     <div class="alert alert-danger" role="alert">
