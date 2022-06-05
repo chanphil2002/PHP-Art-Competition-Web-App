@@ -22,7 +22,7 @@ $res = mysqli_query($conn, $sql);
 
 
 <div class="album py-5">
-  <div class="ms-5">`
+  <div class="ms-5">
     <h1><?php echo $organizerName; ?>'s Competition</h1>
     <a class="btn btn-success" href="addcomp.php?organizerID=<?php echo $organizerID ?>" role="button">Create Competition</a>
   </div>
