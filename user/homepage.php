@@ -69,7 +69,7 @@ if (!isset($_SESSION["user"])) {
             <?php } ?>
 
             <?php
-            // Upcoming Competition
+            // New Competition
             $sql2 = "SELECT * FROM competition WHERE status='On-Going' ORDER BY releaseDate DESC LIMIT 2";
             $res2 = mysqli_query($conn, $sql2);
 
@@ -96,7 +96,7 @@ if (!isset($_SESSION["user"])) {
             <?php } ?>
 
             <?php
-            // New Competition
+            // Upcoming Competition
             $sql3 = "SELECT * FROM competition WHERE status='Upcoming' ORDER BY releaseDate ASC LIMIT 2";
             $res3 = mysqli_query($conn, $sql3);
 
@@ -114,7 +114,7 @@ if (!isset($_SESSION["user"])) {
                     <div class="carousel-caption d-none d-md-block">
                         <div>
                             <h5 style="color:black;display: inline-block"><?php echo $name ?> &nbsp;</h5>
-                            <span class="badge rounded-pill position-absolute bg-primary" style="height:20px">Upcoming</span>
+                            <span class="badge rounded-pill position-absolute bg-warning" style="height:20px">Upcoming</span>
                         </div>
                         <a class="align btn btn-outline-primary" href="compDetails.php?compID=<?php echo $id; ?>" role="button">View Details</a>
                     </div>
@@ -162,6 +162,7 @@ if (!isset($_SESSION["user"])) {
                     <div class="col-md-4 margincon1">
                         <div class="card border-1 grid-list">
                             <a href="compDetails.php?compID=<?php echo $id; ?>" class="stretched-link">
+                            <span class="badge rounded-pill position-absolute bg-danger end-0" style="height:20px">Popular</span>
                                 <img class="card-img-top lazy" src="../materials/compPic/<?php echo $pic; ?>">
                             </a>
                             <div class="card-body description text-truncate text-color-2">
@@ -189,7 +190,7 @@ if (!isset($_SESSION["user"])) {
     <div class="container" style="max-width: 1320px">
         <div class="row">
             <?php
-            $sql5 = "SELECT * FROM competition C INNER JOIN organizer O ON C.organizerID = O.organizerID WHERE category = '2D' AND status != 'Pending' LIMIT 3";
+            $sql5 = "SELECT * FROM competition C INNER JOIN organizer O ON C.organizerID = O.organizerID WHERE category = '2D' AND (status != 'Pending' AND status != 'Terminated' AND status != 'Rejected') LIMIT 3";
             $res5 = mysqli_query($conn, $sql5);
 
             $row = mysqli_num_rows($res5);
@@ -209,9 +210,11 @@ if (!isset($_SESSION["user"])) {
                         <div class="card border-1 grid-list">
                             <a href="compDetails.php?compID=<?php echo $id; ?>" class="stretched-link">
                                 <?php if ($status == "Upcoming") { ?>
-                                    <span class="badge rounded-pill position-absolute bg-danger end-0" style="height:20px">Upcoming</span>
+                                    <span class="badge rounded-pill position-absolute bg-warning end-0" style="height:20px">Upcoming</span>
                                 <?php } elseif ($status == "Past") { ?>
                                     <span class="badge rounded-pill position-absolute bg-dark end-0" style="height:20px">Past</span>
+                                <?php } elseif ($status == "On-Going") { ?>
+                                    <span class="badge rounded-pill position-absolute bg-success end-0" style="height:20px">On-Going</span>
                                 <?php } ?>
                                 <img class="card-img-top lazy" src="../materials/compPic/<?php echo $pic; ?>">
                             </a>
@@ -240,7 +243,7 @@ if (!isset($_SESSION["user"])) {
     <div class="container" style="max-width: 1320px">
         <div class="row">
             <?php
-            $sql6 = "SELECT * FROM competition C INNER JOIN organizer O ON C.organizerID = O.organizerID WHERE category = '3D' AND status != 'Pending' LIMIT 3";
+            $sql6 = "SELECT * FROM competition C INNER JOIN organizer O ON C.organizerID = O.organizerID WHERE category = '3D' AND (status != 'Pending' AND status != 'Terminated' AND status != 'Rejected') LIMIT 3";
             $res6 = mysqli_query($conn, $sql6);
 
             $row = mysqli_num_rows($res6);
@@ -263,6 +266,8 @@ if (!isset($_SESSION["user"])) {
                                     <span class="badge rounded-pill position-absolute bg-danger end-0" style="height:20px">Upcoming</span>
                                 <?php } elseif ($status == "Past") { ?>
                                     <span class="badge rounded-pill position-absolute bg-dark end-0" style="height:20px">Past</span>
+                                <?php } elseif ($status == "On-Going") { ?>
+                                    <span class="badge rounded-pill position-absolute bg-success end-0" style="height:20px">On-Going</span>
                                 <?php } ?>
                                 <img class="card-img-top lazy" src="../materials/compPic/<?php echo $pic; ?>">
                             </a>
@@ -291,7 +296,7 @@ if (!isset($_SESSION["user"])) {
     <div class="container" style="max-width: 1320px">
         <div class="row">
             <?php
-            $sql7 = "SELECT * FROM competition C INNER JOIN organizer O ON C.organizerID = O.organizerID WHERE category = 'Paintings' AND status != 'Pending' LIMIT 3";
+            $sql7 = "SELECT * FROM competition C INNER JOIN organizer O ON C.organizerID = O.organizerID WHERE category = 'Paintings' AND (status != 'Pending' AND status != 'Terminated' AND status != 'Rejected') LIMIT 3";
             $res7 = mysqli_query($conn, $sql7);
 
             $row = mysqli_num_rows($res7);
@@ -314,6 +319,8 @@ if (!isset($_SESSION["user"])) {
                                     <span class="badge rounded-pill position-absolute bg-danger end-0" style="height:20px">Upcoming</span>
                                 <?php } elseif ($status == "Past") { ?>
                                     <span class="badge rounded-pill position-absolute bg-dark end-0" style="height:20px">Past</span>
+                                <?php } elseif ($status == "On-Going") { ?>
+                                    <span class="badge rounded-pill position-absolute bg-success end-0" style="height:20px">On-Going</span>
                                 <?php } ?>
                                 <img class="card-img-top lazy" src="../materials/compPic/<?php echo $pic; ?>">
                             </a>
@@ -335,14 +342,14 @@ if (!isset($_SESSION["user"])) {
     <!-- Photography -->
     <div class="container" style="max-width: 1320px">
         <h2 class="ml-5" style="margin-left: 15px; display:inline-block">Visual Art - Photography</h2>
-        <a href="allComp.php?category=Photography" style="color:darkblue; margin-left: 750px">See more&nbsp;<i class="fa-solid fa-angle-right"></i></a>
+        <a href="allComp.php?category=Photography" style="color:darkblue; margin-left: 725px">See more&nbsp;<i class="fa-solid fa-angle-right"></i></a>
     </div>
 
 
     <div class="container" style="max-width: 1320px">
         <div class="row">
             <?php
-            $sql8 = "SELECT * FROM competition C INNER JOIN organizer O ON C.organizerID = O.organizerID WHERE category = 'Photography' AND status != 'Pending' LIMIT 3";
+            $sql8 = "SELECT * FROM competition C INNER JOIN organizer O ON C.organizerID = O.organizerID WHERE category = 'Photography' AND (status != 'Pending' AND status != 'Terminated' AND status != 'Rejected') LIMIT 3";
             $res8 = mysqli_query($conn, $sql8);
 
             $row = mysqli_num_rows($res8);
@@ -365,6 +372,8 @@ if (!isset($_SESSION["user"])) {
                                     <span class="badge rounded-pill position-absolute bg-danger end-0" style="height:20px">Upcoming</span>
                                 <?php } elseif ($status == "Past") { ?>
                                     <span class="badge rounded-pill position-absolute bg-dark end-0" style="height:20px">Past</span>
+                                <?php } elseif ($status == "On-Going") { ?>
+                                    <span class="badge rounded-pill position-absolute bg-success end-0" style="height:20px">On-Going</span>
                                 <?php } ?>
                                 <img class="card-img-top lazy" src="../materials/compPic/<?php echo $pic; ?>">
                             </a>

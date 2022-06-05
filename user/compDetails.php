@@ -62,7 +62,7 @@ while ($row1 = mysqli_fetch_assoc($res1)){
     <img class="img" src="../materials/compPic/<?php echo $compPic; ?>" alt="Responsive image" height="300" width="100%" style="object-fit: cover;">
     <ul class="nav nav-pills nav-fill p-2 bg-light">
         <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="viewcomp_main.php?compID=<?php echo $compID; ?>">Main</a>
+            <a class="nav-link active" aria-current="page" href="compDetails.php?compID=<?php echo $compID; ?>">Main</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="viewEntries.php?compID=<?php echo $compID ?>">View Entries</a>
@@ -123,7 +123,7 @@ while ($row1 = mysqli_fetch_assoc($res1)){
                         <?php echo $description; ?>
                     </h3>
                 </div>
-                <div>
+                <div class="pb-4">
                     <h2>
                         Rules and Regulation
                     </h2>
@@ -131,6 +131,18 @@ while ($row1 = mysqli_fetch_assoc($res1)){
                         <?php echo $rules; ?>
                     </h3>
                 </div>
+
+                <?php if ($announcement != NULL){ ?>
+                    <div class="pb-4">
+                        <h2>
+                        Announcement
+                        </h2>
+                        <h3>
+                            <?php echo "$announcement"; ?>
+                        </h3>
+                    </div>
+                <?php } ?>
+                
             </div>
             <div class="col-3">
                 <?php

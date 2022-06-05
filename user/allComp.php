@@ -9,13 +9,13 @@
 
     if (isset($_GET["category"])){
         $category = $_GET["category"];
-        $sql = "SELECT * FROM competition C INNER JOIN organizer O ON C.organizerID = O.organizerID WHERE category = '$category' AND status != 'Pending' ";
+        $sql = "SELECT * FROM competition C INNER JOIN organizer O ON C.organizerID = O.organizerID WHERE category = '$category' AND (status != 'Pending' AND status != 'Terminated' AND status != 'Rejected') ";
         $res = mysqli_query($conn, $sql);
     }elseif(isset($_GET["Participated"])){
         $sql = "SELECT * FROM (( competition C INNER JOIN organizer O ON C.organizerID = O.organizerID) INNER JOIN entry E ON C.compID = E.compID) WHERE userEmail = '$_SESSION[user]' ";
         $res = mysqli_query($conn, $sql);
     }else{
-        $sql = "SELECT * FROM competition C INNER JOIN organizer O ON C.organizerID = O.organizerID WHERE status != 'Pending' ";
+        $sql = "SELECT * FROM competition C INNER JOIN organizer O ON C.organizerID = O.organizerID WHERE (status != 'Pending' AND status != 'Terminated' AND status != 'Rejected') ";
         $res = mysqli_query($conn, $sql);
     }
 ?>
@@ -193,9 +193,11 @@
                 <div class="card border-1 grid-list">
                     <a href="compDetails.php?compID=<?php echo $comp; ?>" class="stretched-link">
                         <?php if ($status == "Upcoming"){ ?>
-                                <span class="badge rounded-pill position-absolute bg-danger end-0" style="height:20px">Upcoming</span>
+                            <span class="badge rounded-pill position-absolute bg-warning end-0" style="height:20px">Upcoming</span>
                         <?php } elseif ($status == "Past"){ ?>
                             <span class="badge rounded-pill position-absolute bg-dark end-0" style="height:20px">Past</span>
+                        <?php } elseif ($status == "On-Going"){ ?>
+                            <span class="badge rounded-pill position-absolute bg-success end-0" style="height:20px">On-Going</span>
                         <?php } ?>
                         <img class="card-img-top lazy" src="../materials/compPic/<?php echo $pic; ?>">
                     </a>
