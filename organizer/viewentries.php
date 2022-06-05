@@ -4,17 +4,21 @@ if (isset($_GET['compID'])) {
     $compID = $_GET['compID'];
     $sql = "SELECT E.*, C.* FROM entry E INNER JOIN competition C ON E.compID = C.compID WHERE C.compID=$compID
             AND C.organizerID = '$_SESSION[organizer]'";
-    $sql1 = "SELECT compName, compPic FROM  competition C INNER JOIN organizer O ON C.organizerID = O.organizerID AND 
-    C.compID=$compID AND O.organizerID='$_SESSION[organizer]'";
+    $sql1 = "SELECT E.entryID, E.entryFile, E.title, E.compID, E.userEmail, E.submitDate, E.vote, 
+                    E.score, C.publicVote, C.judgeScore, 
+                    ((E.vote / (SELECT SUM(vote) FROM entry WHERE compID = $compID)) * C.publicVote) AS 
+                    votePercentage, (E.score * (C.judgeScore/100)) AS judgePercentage FROM entry E 
+                    INNER JOIN competition C ON E.compID = C.compID WHERE C.compID = $compID";
     $res = mysqli_query($conn, $sql);
     $res1 = mysqli_query($conn, $sql1);
 } else {
     header("Location: ../organizer/orghome.php");
 }
 
-while ($row1 = mysqli_fetch_assoc($res1)) {
-    $compName = $row1['compName'];
-    $compPic = $row1['compPic'];
+while ($row = mysqli_fetch_assoc($res)) {
+    $compName = $row['compName'];
+    $compPic = $row['compPic'];
+    $status = $row['status'];
 }
 
 ?>
@@ -62,18 +66,21 @@ while ($row1 = mysqli_fetch_assoc($res1)) {
             <div class="container pb-5">
                 <div class="row">
                     <?php
-                    $count = mysqli_num_rows($res);
+                    $count = mysqli_num_rows($res1);
                     if ($count > 0) {
-                        while ($row = mysqli_fetch_assoc($res)) {
-                            $entryID = $row['entryID'];
-                            $entryFile = $row['entryFile'];
-                            $title = $row['title'];
-                            $compID = $row['compID'];
-                            $userEmail = $row['userEmail'];
-                            $submitDate = $row['submitDate'];
-                            $vote = $row['vote'];
-                            $score = $row['score'];
-                            $totalScore = $row['totalScore'];
+                        while ($row1 = mysqli_fetch_assoc($res1)) {
+                            $entryID = $row1['entryID'];
+                            $entryFile = $row1['entryFile'];
+                            $title = $row1['title'];
+                            $compID = $row1['compID'];
+                            $userEmail = $row1['userEmail'];
+                            $submitDate = $row1['submitDate'];
+                            $vote = $row1['vote'];
+                            $score = $row1['score'];
+                            $publicVote = $row1['publicVote'];
+                            $judgeScore = $row1['judgeScore'];
+                            $votePercentage = $row1['votePercentage'];
+                            $judgePercentage = $row1['judgePercentage'];
 
                     ?>
 
@@ -85,7 +92,25 @@ while ($row1 = mysqli_fetch_assoc($res1)) {
                                     </a>
                                     <div class="card-body description text-truncate text-color-2">
                                         <?php echo $submitDate ?> / <?php echo $userEmail; ?>
-                                        <div class="title text-truncate"><?php echo $title; ?></div>
+                                        <div class="title text-truncate">
+                                            <h3><?php echo $title; ?> </h3>
+                                            <?php if ($status == "On-Going") { ?>
+                                                <div class="text-success">
+                                                    Vote: <?php echo $votePercentage; ?>/ <?php echo $publicVote; ?><br>
+                                                    Judge's score: <?php echo $judgePercentage; ?>/ <?php echo $judgeScore; ?>
+                                                </div>
+                                                <div class="text-danger">
+                                                    Total Score:
+                                                    <?php
+                                                    echo $judgePercentage + $votePercentage;
+                                                    $sql2 = "UPDATE entry SET totalScore = $votePercentage + $judgePercentage WHERE entryID = $entryID";
+                                                    $res2 = mysqli_query($conn, $sql2);
+
+
+                                                    ?>
+                                                </div>
+                                            <?php } ?>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

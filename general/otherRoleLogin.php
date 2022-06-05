@@ -27,7 +27,7 @@ if (isset($_POST["submit"])) {
         unset($_SESSION["user"]);
         unset($_SESSION["admin"]);
         unset($_SESSION["judge"]);
-        // $orgID = $accDetails["organizerID"];
+        $orgID = $accDetails["organizerID"];
         header("Location:../organizer/orghome.php");
     } else {
         // email and password not matched:
