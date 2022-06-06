@@ -93,7 +93,7 @@ while ($row = mysqli_fetch_assoc($res)) {
                                         <?php echo $submitDate ?> / <?php echo $userEmail; ?>
                                         <div class="title text-truncate">
                                             <h3><?php echo $title; ?> </h3>
-                                            <?php if ($status == "On-Going") { ?>
+                                            <?php if ($status == "On-Going" || $status == "Past") { ?>
                                                 <div class="text-success">
                                                     Vote: <?php echo $votePercentage; ?>/ <?php echo $publicVote; ?><br>
                                                     Judge's score: <?php echo $judgePercentage; ?>/ <?php echo $judgeScore; ?>
