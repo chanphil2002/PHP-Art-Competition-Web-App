@@ -6,11 +6,6 @@ if (!isset($_SESSION["organizer"])) {
 }
 
 $organizerID = $_SESSION['organizer'];
-$request = "SELECT * FROM organizer WHERE organizerID = '$organizerID'";
-$result = mysqli_query($conn, $request);
-$display = mysqli_fetch_assoc($result);
-$organizerID = $display['organizerID'];
-
 if (isset($_POST['submit2'])) {
     $search = $_POST['search'];
     $filter = $_POST['filter_dropdown'];
@@ -24,30 +19,8 @@ if (isset($_POST['submit2'])) {
     } else {
         $sql1 = "SELECT * FROM competition WHERE (compName LIKE '%$search%' OR category LIKE '%$search%') AND status LIKE '%$filter%' AND organizerID = $organizerID";
         $res1 = mysqli_query($conn, $sql1);
-        // echo "<script>alert('$filter');</script>";
-        // echo "<script>alert('$search');</script>";
-        // $sort = $_POST['sort_dropdown'];
     }
 }
-
-
-// if (isset($_POST['submit'])) {
-//     $search = $_POST['search'];
-//     echo "<script>alert('$search');</script>";
-//     $sql1 = "SELECT * FROM competition WHERE compName LIKE '%$search%' OR category LIKE '%$search%'";
-//     $res1 = mysqli_query($conn, $sql1);
-//     if ($res1) {
-//         echo "<script>alert('success');</script>";
-//     } else {
-//         echo "<script>alert('wrong');</script>";
-//     }
-//     // echo "<script>alert('$filter');</script>";
-//     // $sort = $_POST['sort_dropdown'];
-// } else {
-//     $sql1 = "SELECT * FROM competition";
-//     $res1 = mysqli_query($conn, $sql1);
-// }
-
 ?>
 
 
@@ -63,7 +36,7 @@ if (isset($_POST['submit2'])) {
     <div class="container mt-5">
         <div class="row" style="margin-top: 10%">
             <div class="col-12 col-competition-1">
-                <h3 class="text-color-2">Search Result Displayed Based on
+                <h3 class="text-color-2">Search Query
                     <span class="text-color-3">
                 </h3>
             </div>
@@ -72,7 +45,7 @@ if (isset($_POST['submit2'])) {
                 <form action="../organizer/orgsearch2.php" method="POST" class="d-flex">
                     <input class="form-control me-2 mr-sm-2 col-md-5 ml-5" type="search" name="search" value="<?php echo $search ?>">
             </div>
-            <div class="col-12 col-competition-2">
+            <div class="col-12 col-competition-3">
                 <div class="overflow-auto">
                     <span aria-label="Filter By" style="position:relative; box-sizing: border-box; "></span>
                     <label for="filter_dropdown"></label>
@@ -86,16 +59,14 @@ if (isset($_POST['submit2'])) {
                         <option <?php if ($_POST['filter_dropdown'] == 'Rejected') { ?>selected="true" <?php }; ?>value="Rejected">Filter By: Rejected Competition</option>
                     </select>
 
-                    <!-- <span aria-label="Sort By" style="position:relative; box-sizing: border-box"></span>
-                        <label for="sort_dropdown"></label>
-                        <select name="sort_dropdown" id="sort_dropdown">
-                            <option> Sort By: Please Select </option>
-                            <option value="Competition Date"> Sort By: Competition Date</option>
-                            <option value="Registration Dateline">Sort By: Registration Dateline</option>
-                            <option value="Popularity">Sort By: Popularity</option>
-                        </select> -->
+                    <span aria-label="Sort By" style="position:relative; box-sizing: border-box"></span>
+                    <label for="sort_dropdown"></label>
+                    <select name="sort_dropdown" id="sort_dropdown">
+                        <option <?php if ($_POST['sort_dropdown'] == ' ') { ?>selected="true" <?php }; ?>value=" "> Sort By: Please Select </option>
+                        <option <?php if ($_POST['sort_dropdown'] == 'ReleaseDate') { ?>selected="true" <?php }; ?>value="ReleaseDate"> Sort By: Release Date</option>
+                        <option <?php if ($_POST['sort_dropdown'] == 'RegistrationDateline') { ?>selected="true" <?php }; ?>value="RegistrationDateline">Sort By: Registration Dateline</option>
+                    </select>
                     <input type="submit" name="submit2" value="Search" class="btn btn-outline-dark my-2 my-sm-0" style="margin-left:20px">
-
 
                 </div>
             </div>
@@ -160,14 +131,3 @@ if (isset($_POST['submit2'])) {
 
 
 <?php include("../organizer/partials/footer.php"); ?>
-
-<!-- <script>
-    window.onload = function() {
-        var selItem = sessionStorage.getItem("SelItem");
-        $('#sort-item').val(selItem);
-    }
-    $('#sort-item').change(function() {
-        var selVal = $(this).val();
-        sessionStorage.setItem("SelItem", selVal);
-    });
-</script> -->
