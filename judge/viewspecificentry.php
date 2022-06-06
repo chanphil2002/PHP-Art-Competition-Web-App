@@ -12,14 +12,12 @@ if (isset($_GET['entryID']) & isset($_GET['compID']) & isset($_SESSION['judge'])
     $judgeIC = $_SESSION['judge'];
     $sql = "SELECT * FROM entry WHERE entryID='$entryID'";
     $res = mysqli_query($conn, $sql);
-    $sql1 = "SELECT * FROM comp_criteria INNER JOIN score_criteria ON comp_criteria.compID = score_criteria.compID WHERE score_criteria.entryID = '$entryID' AND comp_criteria.compID = '$compID'";
+    $sql1 = "SELECT * FROM comp_criteria INNER JOIN score_criteria ON comp_criteria.compID = score_criteria.compID WHERE score_criteria.entryID = '$entryID' AND comp_criteria.compID = '$compID' AND judgeIC = '$judgeIC'";
     $res1 = mysqli_query($conn, $sql1);
-    $sql20 = "SELECT * FROM score_criteria WHERE compID='$compID' AND entryID='$entryID'";
+    $sql20 = "SELECT * FROM score_criteria WHERE compID='$compID' AND entryID='$entryID' AND judgeIC = '$judgeIC'";
     $res20 = mysqli_query($conn, $sql20);
     $sql500 = "SELECT * FROM comp_criteria WHERE compID='$compID'";
     $res500 = mysqli_query($conn, $sql500);
-    $sql4 = "SELECT * from score_criteria WHERE compID='$compID' AND entryID='$entryID'";
-    $res4 = mysqli_query($conn, $sql4);
     $sql5 = "SELECT compPic FROM competition WHERE compID='$compID'";
     $res5 = mysqli_query($conn, $sql5);
     while ($row8 = mysqli_fetch_assoc($res5)) {
@@ -38,6 +36,15 @@ while ($row = mysqli_fetch_assoc($res)) {
     $totalScore = $row['totalScore'];
 }
 
+$count20 = mysqli_num_rows($res20);
+if ($count20 > 0) {
+    while ($row20 = mysqli_fetch_assoc($res20)) {
+        $cri_tscore = $row20['cri_tscore'];
+    }
+} else {
+    $cri_tscore = NULL;
+}
+
 
 if (isset($_POST['submit'])) {
     $count = mysqli_num_rows($res500);
@@ -45,16 +52,21 @@ if (isset($_POST['submit'])) {
     $total = 0;
     $sql2 = "INSERT INTO score_criteria (compID, entryID, judgeIC) VALUES ('$compID', '$entryID','$judgeIC')";
     $res2 = mysqli_query($conn, $sql2);
+
     while ($count > 0) {
         // echo "<script>alert('crit.$i');</script>";
         $crit = $_POST["crit$i"];
-        $sql5 = "UPDATE score_criteria SET cri$i = '$crit' WHERE compID = '$compID' and entryID='$entryID'";
+        // if (is_numeric($crit) == FALSE) {
+        //     echo "<script>alert('Only integers allowed')</script>";
+        //     break;
+        // }
+        $sql5 = "UPDATE score_criteria SET cri$i = '$crit' WHERE compID = '$compID' and entryID='$entryID' and judgeIC = '$judgeIC'";
         $res5 = mysqli_query($conn, $sql5);
         $total = $total + $crit;
         $i++;
         $count--;
     }
-    while ($row3 = mysqli_fetch_assoc($res4)) {
+    while ($row3 = mysqli_fetch_assoc($res20)) {
         $cri0 = $row3['cri0'];
         $cri1 = $row3['cri1'];
         $cri2 = $row3['cri2'];
@@ -62,9 +74,17 @@ if (isset($_POST['submit'])) {
         $cri4 = $row3['cri4'];
     }
     $count = mysqli_num_rows($res500);
+
     $avg = $total / $count;
-    $sql3 = "UPDATE entry SET score = $avg WHERE compID = '$compID' AND entryID = '$entryID'";
+    $sql3 = "UPDATE score_criteria SET cri_tscore = $avg WHERE compID = '$compID' AND entryID = '$entryID' and judgeIC = '$judgeIC'";
     $res3 = mysqli_query($conn, $sql3);
+    $sql520 = "SELECT AVG(cri_tscore) AS cri_tscore FROM score_criteria WHERE compID = '$compID' and entryID = '$entryID'";
+    $res520 = mysqli_query($conn, $sql520);
+    while ($row520 = mysqli_fetch_assoc($res520)) {
+        $entryscore = $row520['cri_tscore'];
+    }
+    $sql521 = "UPDATE entry SET score = $entryscore WHERE compID='$compID' AND entryID = '$entryID'";
+    $res521 = mysqli_query($conn, $sql521);
     header("location:../judge/viewspecificentry.php?entryID=$entryID&compID=$compID");
 }
 
@@ -148,7 +168,7 @@ if (isset($_POST['submit'])) {
 
                                     <div class="mb-3">
                                         <label for="total">Total Score</label>
-                                        <input type="text" name="total" class="form-control" id="total" value="<?php echo $score ?>" readonly>
+                                        <input type="text" name="total" class="form-control" id="total" value="<?php echo $cri_tscore; ?>" readonly>
                                     </div>
 
                                     <hr class="mb-4">
