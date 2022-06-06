@@ -44,15 +44,15 @@ $res = mysqli_query($conn, $sql);
             <a href="../organizer/viewcomp_main.php?compID= <?php echo $compID; ?>" class="stretched-link">
               <?php
               if ($status == 'Pending') {
-                echo "<span style='display: inline-block; margin-left: 1em' class='badge rounded-pill text-bg-primary position-absolute top-0 end-0'> $status </span>";
+                echo "<span style='display: inline-block; margin-left: 1em' class='badge rounded-pill position-absolute bg-primary end-0'> $status </span>";
               } else if ($status == 'Upcoming') {
-                echo "<span style='display: inline-block; margin-left: 1em' class='badge rounded-pill text-bg-warning position-absolute top-0 end-0'> $status </span>";
+                echo "<span style='display: inline-block; margin-left: 1em' class='badge rounded-pill position-absolute bg-warning end-0'> $status </span>";
               } else if ($status == 'On-Going') {
-                echo "<span style='display: inline-block; margin-left: 1em' class='badge rounded-pill text-bg-success position-absolute top-0 end-0'>$status </span>";
+                echo "<span style='display: inline-block; margin-left: 1em' class='badge rounded-pill position-absolute bg-success end-0'>$status </span>";
               } else if ($status == 'Past') {
-                echo "<span style='display: inline-block; margin-left: 1em' class='badge rounded-pill text-bg-dark position-absolute top-0 end-0'> $status </span>";
+                echo "<span style='display: inline-block; margin-left: 1em' class='badge rounded-pill position-absolute bg-dark end-0'> $status </span>";
               } else if ($status == 'Terminated') {
-                echo "<span style='display: inline-block; margin-left: 1em' class='badge rounded-pill text-bg-danger position-absolute top-0 end-0'> $status </span>";
+                echo "<span style='display: inline-block; margin-left: 1em' class='badge rounded-pill position-absolute bg-danger end-0'> $status </span>";
               }
               ?>
               <img class="card-img-top lazy" src="../materials/compPic/<?php echo $compPic; ?>">

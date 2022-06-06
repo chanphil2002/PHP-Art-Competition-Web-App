@@ -87,15 +87,15 @@ while ($row1 = mysqli_fetch_assoc($res1)) {
                     <h2 style="display: inline-block" style="margin-right: 2em;"><?php echo $compName ?></h2>
                     <?php
                     if ($status == 'Pending') {
-                        echo "<span style='display: inline-block; margin-left: 1em' class='badge text-bg-primary align-top even-larger-badge'> $status </span>";
+                        echo "<span style='margin-left: 1em' class='badge rounded-pill bg-primary align-top end-0'> $status </span>";
                     } else if ($status == 'Upcoming') {
-                        echo "<span style='display: inline-block; margin-left: 1em' class='badge text-bg-warning align-top even-larger-badge'> $status </span>";
+                        echo "<span style='margin-left: 1em' class='badge rounded-pill bg-warning align-top end-0'> $status </span>";
                     } else if ($status == 'On-Going') {
-                        echo "<span style='display: inline-block; margin-left: 1em' class='badge text-bg-success align-top even-larger-badge'>$status </span>";
+                        echo "<span style='margin-left: 1em' class='badge rounded-pill bg-success align-top end-0'>$status </span>";
                     } else if ($status == 'Past') {
-                        echo "<span style='display: inline-block; margin-left: 1em' class='badge text-bg-dark align-top even-larger-badge'> $status </span>";
+                        echo "<span style='margin-left: 1em' class='badge rounded-pill bg-dark align-top end-0'> $status </span>";
                     } else if ($status == 'Terminated') {
-                        echo "<span style='display: inline-block; margin-left: 1em' class='badge text-bg-danger align-top even-larger-badge'> $status </span>";
+                        echo "<span style='margin-left: 1em' class='badge rounded-pill bg-danger align-top end-0'> $status </span>";
                     }
                     ?>
                     <!-- <span style="display: inline-block; margin-left: 1em" class="badge text-bg-success align-top even-larger-badge"><?php echo $status ?></span> -->
@@ -150,12 +150,12 @@ while ($row1 = mysqli_fetch_assoc($res1)) {
             </div>
             <div class="col-3">
                 <h3>&#128101; <?php if ($joinCount == 0) {
-                                    echo "Be The First To Join!</h3>";
+                                    echo "Currently No One Joins.</h3>";
                                 } else {
                                     echo "$joinCount People Participated</h3>";
                                 } ?>
                     <h3>&#128147; <?php if ($voteCount == NULL) {
-                                        echo "Be The First To Vote!</h3>";
+                                        echo "Currently No One Votes.</h3>";
                                     } else {
                                         echo "$voteCount People Voted</h3>";
                                     } ?>

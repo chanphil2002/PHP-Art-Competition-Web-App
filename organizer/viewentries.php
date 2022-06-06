@@ -2,8 +2,7 @@
 
 if (isset($_GET['compID'])) {
     $compID = $_GET['compID'];
-    $sql = "SELECT E.*, C.* FROM entry E INNER JOIN competition C ON E.compID = C.compID WHERE C.compID=$compID
-            AND C.organizerID = '$_SESSION[organizer]'";
+    $sql = "SELECT C.*, O.* FROM competition C INNER JOIN organizer O ON C.organizerID = O.organizerID AND C.compID=$compID AND O.organizerID='$_SESSION[organizer]'";
     $sql1 = "SELECT E.entryID, E.entryFile, E.title, E.compID, E.userEmail, E.submitDate, E.vote, 
                     E.score, C.publicVote, C.judgeScore, 
                     ((E.vote / (SELECT SUM(vote) FROM entry WHERE compID = $compID)) * C.publicVote) AS 
