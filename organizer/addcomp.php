@@ -20,7 +20,8 @@ if(isset($_GET['organizerID']))
             <div class="mb-3">
                 <label for="inlineFormInput">Competition Name</label>
                 <div class="input-group">
-                    <input type="text" name="compName" class="form-control" id="search" placeholder="What is the Competition Name?" required>
+                    <input type="text" name="compName" class="form-control" id="search" 
+                    placeholder="What is the Competition Name?" required>
                 </div>
             </div>
 
@@ -37,7 +38,8 @@ if(isset($_GET['organizerID']))
             <div class="mb-3">
                 <label for="date">Competition Release Date</label>
                 <div class="input-group date">
-                    <input type="date" name="releaseDate" id="releaseDate" min="<?php echo date("Y-m-d"); ?>" class="form-control" placeholder="Competition Release Date" required />
+                    <input type="date" name="releaseDate" id="releaseDate" min="<?php echo date("Y-m-d"); ?>" class="form-control" 
+                    placeholder="Competition Release Date" required />
                     <span class="input-group-append">
                     </span>
                 </div>
@@ -46,43 +48,41 @@ if(isset($_GET['organizerID']))
             <div class="mb-3">
                 <label for="date">Competition Registration Deadline</label>
                 <div class="input-group date">
-                    <input type="date" name="registrationDeadline" id="registrationDeadline" min="<?php echo date("Y-m-d"); ?>" class="form-control" placeholder="When is the Deadline?" required />
+                    <input type="date" name="registrationDeadline" id="registrationDeadline" min="<?php echo date("Y-m-d"); ?>" 
+                    class="form-control" placeholder="When is the Deadline?" required />
                     <span class="input-group-append">
                     </span>
                 </div>
             </div>
-            <!-- <div class="mb-3">
-            <label for="date">Competition Registration Deadline</label>
-            <div class="input-group date" id="datepicker2">
-                <input type="text" name="registrationDeadline" id ="registrationDeadline" class="form-control" placeholder="When is the Deadline?" readonly/>
-                <span class="input-group-append">
-                </span>
-            </div>
-        </div> -->
 
             <div class="mb-3">
                 <label for="stock">Public Vote</label>
-                <input type="number" name="publicVote" class="form-control" id="publicVote" placeholder="How many percentage for public vote?" required>
+                <input type="number" name="publicVote" class="form-control" id="publicVote" 
+                placeholder="How many percentage for public vote?" required>
             </div>
 
             <div class="mb-3">
                 <label for="stock">Judge Score</label>
-                <input type="number" name="judgeScore" class="form-control" id="judgeScore" placeholder="How many percentage for judge score?" required>
+                <input type="number" name="judgeScore" class="form-control" id="judgeScore" 
+                placeholder="How many percentage for judge score?" required>
             </div>
 
             <div class="mb-3">
                 <label for="price">Prize Pool</label>
-                <input type="float" name="prizePool" class="form-control" id="prizePool" placeholder="Enter Prize Pool..." required>
+                <input type="float" name="prizePool" class="form-control" id="prizePool" 
+                placeholder="Enter Prize Pool..." required>
             </div>
 
             <div class="mb-3">
                 <label for="exampleFormControlTextarea1">Competition Description</label>
-                <textarea class="form-control" name="description" id="exampleFormControlTextarea1" rows="3" placeholder="Tell more about the competition..." required></textarea>
+                <textarea class="form-control" name="description" id="exampleFormControlTextarea1" rows="3" 
+                placeholder="Tell more about the competition..." required></textarea>
             </div>
 
             <div class="mb-3">
                 <label for="exampleFormControlTextarea1">Competition Rules and Regulations</label>
-                <textarea class="form-control" name="rules" id="exampleFormControlTextarea1" rows="3" placeholder="State the competition rules..." required></textarea>
+                <textarea class="form-control" name="rules" id="exampleFormControlTextarea1" rows="3" 
+                placeholder="State the competition rules..." required></textarea>
             </div>
 
             <div class="mb-3">
@@ -94,7 +94,8 @@ if(isset($_GET['organizerID']))
 
             <div class="mb-3">
                 <label for="stock">Evaluation Days</label>
-                <input type="number" name="evaluationDays" class="form-control" id="evaluationDays" placeholder="How many days for evaluation?" required>
+                <input type="number" name="evaluationDays" class="form-control" id="evaluationDays" 
+                placeholder="How many days for evaluation?" required>
             </div>
 
 
@@ -110,6 +111,7 @@ if(isset($_GET['organizerID']))
 
 <?php
 ob_start();
+//Add data into variables
 if (isset($_POST['submit'])) {
     $organizerID = $_POST['organizerID'];
     $compName = $_POST['compName'];
@@ -123,6 +125,7 @@ if (isset($_POST['submit'])) {
     $rules = $_POST['rules'];
     $evaluationDays = $_POST['evaluationDays'];
 
+    //Get photo, change file name & Add into specific folder
     if (isset($_FILES['compPic']['name'])) {
         $compPic = $_FILES['compPic']['name'];
         $image = explode('.', $compPic);
@@ -135,6 +138,7 @@ if (isset($_POST['submit'])) {
         $compPic = "";
     }
 
+    //Get the receipt, Change receipt name & Append into Specific Folder
     if (isset($_FILES['receipt']['name'])) {
         $receipt = $_FILES['receipt']['name'];
         $image1 = explode('.', $receipt);
@@ -147,6 +151,7 @@ if (isset($_POST['submit'])) {
         $receipt = "";
     }
 
+    //Add the competition data into Competition column
     $sql = "INSERT INTO competition SET
             compName = '$compName',
             organizerID = $organizerID,
@@ -165,20 +170,14 @@ if (isset($_POST['submit'])) {
 
     $res = mysqli_query($conn, $sql);
 
-    // $sql3 = "SELECT compID FROM competition WHERE compName = $compName";
-
+    //Direct user to the Judges Allocation page when the competition data added successfully
     if ($res == true) {
-
-        
-
         $sql3 = "SELECT compID FROM competition WHERE compName = '$compName' ORDER BY compID DESC LIMIT 1; ";
         $res3 = mysqli_query($conn, $sql3);
         $row3 = mysqli_fetch_assoc($res3);
         $compID = $row3['compID'];
-        // echo "window.location.href = '../organizer/choosejudge.php?compID=$compID';";
         $_SESSION['compID'] = $compID;
         echo $_SESSION['compID'];
-
         header("location:" . SITEURL . "organizer/selectedjudge.php");
     }
 }
