@@ -185,7 +185,7 @@ while ($row1 = mysqli_fetch_assoc($res1)) {
             if ($status == "Pending") {
             ?>
                 <div>
-                    <a href="editcomp.php?compID=<?php echo $compID; ?>"><button type="button" class="btn btn-primary btn-lg mx-auto px-5">Edit</button></a>
+                    <a href="editcomp.php?compID=<?php echo $compID; ?>"><button type="button" class="btn btn-info btn-lg mx-auto px-5">Edit</button></a>
                     <button type="button" class="btn btn-danger btn-lg mx-auto px-5" data-bs-toggle="modal" data-bs-target="#terminateModal">Terminate Competition</button>
                 </div>
             <?php } else if ($status == "Upcoming") {
@@ -193,7 +193,7 @@ while ($row1 = mysqli_fetch_assoc($res1)) {
                 <div>
                     <button class="btn btn-success btn-lg mx-auto px-5" data-bs-toggle="modal" data-bs-target="#makeModal">Make Announcement</button>
                     <button class="btn btn-primary btn-lg mx-auto px-5" data-bs-toggle="modal" data-bs-target="#viewModal">View Announcement</button>
-                    <a href="editcomp.php?compID=<?php echo $compID; ?>"><button type="button" class="btn btn-primary btn-lg mx-auto px-5">Edit</button></a>
+                    <a href="editcomp.php?compID=<?php echo $compID; ?>"><button type="button" class="btn btn-info btn-lg mx-auto px-5">Edit</button></a>
                     <button type="button" class="btn btn-danger btn-lg mx-auto px-5" data-bs-toggle="modal" data-bs-target="#terminateModal">Terminate Competition</button>
                 </div>
             <?php } else if ($status == "On-Going") {
