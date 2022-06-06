@@ -1,6 +1,15 @@
 <?php
 include("../user/partials/database.php");
 
+$autorejectstatus = "UPDATE competition
+    SET status = 'Rejected' WHERE CURDATE() >= releaseDate AND status = 'Pending'";
+$ongoingstatus = "UPDATE competition
+    SET status = 'On-Going' WHERE releaseDate <= CURDATE() AND registrationDeadline >= CURDATE() AND status = 'Upcoming'";
+$paststatus = "UPDATE competition
+    SET status = 'Past' WHERE CURDATE() >= registrationDeadline AND status = 'On-Going'";
+$autorejectres = mysqli_query($conn, $autorejectstatus);
+$ongoingres = mysqli_query($conn, $ongoingstatus);
+$pastres = mysqli_query($conn, $paststatus);
 ?>
 <html lang="en">
 

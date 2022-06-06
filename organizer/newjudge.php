@@ -1,4 +1,4 @@
-<?php include ("../organizer/partials/header.php");
+<?php include("../organizer/partials/header.php");
 
 
 

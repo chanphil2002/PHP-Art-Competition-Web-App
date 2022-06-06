@@ -162,7 +162,7 @@ if (!isset($_SESSION["user"])) {
                     <div class="col-md-4 margincon1">
                         <div class="card border-1 grid-list">
                             <a href="compDetails.php?compID=<?php echo $id; ?>" class="stretched-link">
-                            <span class="badge rounded-pill position-absolute bg-danger end-0" style="height:20px">Popular</span>
+                                <span class="badge rounded-pill position-absolute bg-danger end-0" style="height:20px">Popular</span>
                                 <img class="card-img-top lazy" src="../materials/compPic/<?php echo $pic; ?>">
                             </a>
                             <div class="card-body description text-truncate text-color-2">
@@ -369,7 +369,7 @@ if (!isset($_SESSION["user"])) {
                         <div class="card border-1 grid-list">
                             <a href="compDetails.php?compID=<?php echo $id; ?>" class="stretched-link">
                                 <?php if ($status == "Upcoming") { ?>
-                                    <span class="badge rounded-pill position-absolute bg-danger end-0" style="height:20px">Upcoming</span>
+                                    <span class="badge rounded-pill position-absolute bg-warning end-0" style="height:20px">Upcoming</span>
                                 <?php } elseif ($status == "Past") { ?>
                                     <span class="badge rounded-pill position-absolute bg-dark end-0" style="height:20px">Past</span>
                                 <?php } elseif ($status == "On-Going") { ?>

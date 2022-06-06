@@ -36,7 +36,7 @@ while ($row = mysqli_fetch_assoc($res)) {
     $announcement = $row['announcement'];
     $rejectedComment = $row['rejectedComment'];
 }
-while ($row1 = mysqli_fetch_assoc($res1)){
+while ($row1 = mysqli_fetch_assoc($res1)) {
     $joinCount = $row1["COUNT(compID)"];
     $voteCount = $row1["SUM(vote)"];
 }
@@ -80,10 +80,23 @@ while ($row1 = mysqli_fetch_assoc($res1)){
             <div class="col-9">
                 <div>
                     <h2 style="display: inline-block" style="margin-right: 2em;"><?php echo $compName ?></h2>
-                    <span style="display: inline-block; margin-left: 1em" class="badge text-bg-success align-top even-larger-badge"><?php echo $status ?></span>
+                    <?php
+                    if ($status == 'Pending') {
+                        echo "<span style='margin-left: 1em' class='badge rounded-pill bg-primary align-top end-0'> $status </span>";
+                    } else if ($status == 'Upcoming') {
+                        echo "<span style='margin-left: 1em' class='badge rounded-pill bg-warning align-top end-0'> $status </span>";
+                    } else if ($status == 'On-Going') {
+                        echo "<span style='margin-left: 1em' class='badge rounded-pill bg-success align-top end-0'>$status </span>";
+                    } else if ($status == 'Past') {
+                        echo "<span style='margin-left: 1em' class='badge rounded-pill bg-dark align-top end-0'> $status </span>";
+                    } else if ($status == 'Terminated') {
+                        echo "<span style='margin-left: 1em' class='badge rounded-pill bg-danger align-top end-0'> $status </span>";
+                    }
+                    ?>
                 </div>
                 <h3 class="text-muted mb-4"><small class="text-muted">By <?php echo $organizerName ?>, <?php echo $category ?> Category</small></h3>
-                <h6 class="text-muted mb-4"><?php echo $joinCount; ?> People Participated<?php if ($voteCount != 0){echo ", " . $voteCount;  ?> Votes Collected <?php }?></h6>
+                <h6 class="text-muted mb-4"><?php echo $joinCount; ?> People Participated<?php if ($voteCount != 0) {
+                                                                                                echo ", " . $voteCount;  ?> Votes Collected <?php } ?></h6>
 
                 <div class="row mb-5">
                     <div class="col-sm-4">
@@ -132,17 +145,17 @@ while ($row1 = mysqli_fetch_assoc($res1)){
                     </h3>
                 </div>
 
-                <?php if ($announcement != NULL){ ?>
+                <?php if ($announcement != NULL) { ?>
                     <div class="pb-4">
                         <h2>
-                        Announcement
+                            Announcement
                         </h2>
                         <h3>
                             <?php echo "$announcement"; ?>
                         </h3>
                     </div>
                 <?php } ?>
-                
+
             </div>
             <div class="col-3">
                 <?php

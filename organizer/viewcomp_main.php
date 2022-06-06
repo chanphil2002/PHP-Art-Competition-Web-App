@@ -7,14 +7,8 @@ if (isset($_GET['compID'])) {
     $sql = "SELECT C.*, O.* FROM competition C INNER JOIN organizer O ON C.organizerID = O.organizerID AND C.compID=$compID AND O.organizerID='$_SESSION[organizer]'";
     $sql1 = "SELECT COUNT(E.compID), SUM(E.vote) FROM entry E INNER JOIN competition C ON E.compID = C.compID 
     WHERE E.compID=$compID AND C.organizerID = '$_SESSION[organizer]'";
-    $sql2 = "UPDATE competition
-    SET status = 'On-Going' WHERE timestamp >= releaseDate AND timestamp <= registrationDeadline AND status != 'Rejected' AND compID = $compID AND organizerID ='$_SESSION[organizer]'";
-    $sql3 = "UPDATE competition
-    SET status = 'Past' WHERE timestamp >= registrationDeadline AND status != 'Rejected' AND compID = $compID AND organizerID ='$_SESSION[organizer]'";
     $res = mysqli_query($conn, $sql);
     $res1 = mysqli_query($conn, $sql1);
-    $res2 = mysqli_query($conn, $sql2);
-    $res3 = mysqli_query($conn, $sql3);
 } else {
     // echo "mistake";
     header("Location: ../organizer/orghome.php");
@@ -173,7 +167,12 @@ while ($row1 = mysqli_fetch_assoc($res1)) {
                                 $title = $win["title"];
                             }
                             ?>
-                            <a href="../organizer/entry.php?entryID=<?php echo $entryID; ?>&compID=<?php echo $compID; ?>"><img src="../materials/entries/<?php echo $entry; ?>" alt="<?php echo $title; ?>" style="width: 300px; height: auto"></a>
+
+                            <a href="../organizer/entry.php?entryID=<?php echo $entryID; ?>&compID=<?php echo $compID; ?>"><img src="../materials/entries/<?php echo $entry; ?>" alt="<?php echo $title; ?>" style="width: 300px; max-height: 500px; object-fit:cover;"></a>
+                            <form action="" method="POST">
+                                <input type="hidden" value="<?php echo $entryID ?>">
+                                <button class="mt-3 btn btn-success btn-lg mx-auto px-5" name="announce_winner" type="submit">Announce Winner</button>
+                            </form>
                         <?php } else { ?>
                             <h3 style="font-weight: bold;">Winner is yet to announce.</h3>
                         <?php } ?>
@@ -185,7 +184,7 @@ while ($row1 = mysqli_fetch_assoc($res1)) {
             if ($status == "Pending") {
             ?>
                 <div>
-                    <a href="editcomp.php?compID=<?php echo $compID; ?>"><button type="button" class="btn btn-info btn-lg mx-auto px-5">Edit</button></a>
+                    <a href="editcomp.php?compID=<?php echo $compID; ?>"><button type="button" class="btn btn-info text-white btn-lg mx-auto px-5">Edit</button></a>
                     <button type="button" class="btn btn-danger btn-lg mx-auto px-5" data-bs-toggle="modal" data-bs-target="#terminateModal">Terminate Competition</button>
                 </div>
             <?php } else if ($status == "Upcoming") {
@@ -193,7 +192,7 @@ while ($row1 = mysqli_fetch_assoc($res1)) {
                 <div>
                     <button class="btn btn-success btn-lg mx-auto px-5" data-bs-toggle="modal" data-bs-target="#makeModal">Make Announcement</button>
                     <button class="btn btn-primary btn-lg mx-auto px-5" data-bs-toggle="modal" data-bs-target="#viewModal">View Announcement</button>
-                    <a href="editcomp.php?compID=<?php echo $compID; ?>"><button type="button" class="btn btn-info btn-lg mx-auto px-5">Edit</button></a>
+                    <a href="editcomp.php?compID=<?php echo $compID; ?>"><button type="button" class="btn btn-info text-white btn-lg mx-auto px-5">Edit</button></a>
                     <button type="button" class="btn btn-danger btn-lg mx-auto px-5" data-bs-toggle="modal" data-bs-target="#terminateModal">Terminate Competition</button>
                 </div>
             <?php } else if ($status == "On-Going") {
@@ -366,6 +365,16 @@ if (isset($_POST['submit'])) {
 
     $sql = "UPDATE competition SET
             status = 'Terminated' WHERE compID = $compID";
+
+    $res = mysqli_query($conn, $sql);
+
+    if ($res == true) {
+        header("location:" . SITEURL . "organizer/viewcomp_main.php?compID=$compID");
+    }
+} else if (isset($_POST['announce_winner'])) {
+
+    $sql = "UPDATE competition SET
+            entry_winner = $entryID WHERE compID = $compID";
 
     $res = mysqli_query($conn, $sql);
 
