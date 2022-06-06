@@ -93,9 +93,14 @@ while ($row = mysqli_fetch_assoc($res1)) {
                                     <h3 style='word-wrap: break-word; font-weight: bold;'>
                                     <span class='badge bg-danger'> Entry Report Case ID - $entryID </span> $userEmail
                                     <h3>$description</h3>
-                                    <form action='' method='POST'>
+                                    <form style='float: left; padding-right:1em;' action='' method='POST'>
                                     <input type='hidden' name='feedbackID' value='$feedbackID'>
-                                    <button name='submit' type='submit' class='btn btn-primary'>Resolve</button>
+                                    <button name='resolve' type='submit' class='btn btn-primary'>Resolve</button>
+                                    </form>
+                                    <form style='float: left;' action='' method='POST'>
+                                    <input type='hidden' name='feedbackID' value='$feedbackID'>
+                                    <input type='hidden' name='entryID' value='$entryID'>
+                                    <button name='exempt' type='submit' class='btn btn-danger'>Disqualify Entry</button>
                                     </form>
                                     </h3>
                                     </div>
@@ -131,6 +136,7 @@ while ($row = mysqli_fetch_assoc($res1)) {
                                     <div class='card-body bg-success'>
                                     <h3 class='text-white' style='word-wrap: break-word; font-weight: bold;'>
                                     <span class='badge bg-danger'> Entry Report Case ID - $entryID </span> $userEmail
+                                    
                                     <h3 class='text-white'>$description </h3> 
                                     </h3>
                                     </div>
@@ -144,7 +150,20 @@ while ($row = mysqli_fetch_assoc($res1)) {
                     ?>
 
                     <?php
-                    if (isset($_POST['submit'])) {
+                    if (isset($_POST['exempt'])) {
+                        $feedbackID = $_POST['feedbackID'];
+                        $entryID = $_POST['entryID'];
+                        $sql1 = "UPDATE feedback SET
+                                status = 'resolved' WHERE feedbackID = $feedbackID";
+                        $sql2 = "UPDATE entry SET vote = 0, score = 0, totalScore = 0 WHERE entryID = $entryID";
+
+                        $res1 = mysqli_query($conn, $sql1);
+                        $res2 = mysqli_query($conn, $sql2);
+
+                        if ($res1 == true && $res2 == true) {
+                            header("location:" . SITEURL . "organizer/viewfeedback.php?compID=$compID");
+                        }
+                    } else if (isset($_POST['resolve'])) {
                         $feedbackID = $_POST['feedbackID'];
                         $sql1 = "UPDATE feedback SET
                                 status = 'resolved' WHERE feedbackID = $feedbackID";

@@ -1,11 +1,23 @@
-<?php include ("../admin/partials/database.php");?>
+<?php include("../admin/partials/database.php");
+$autorejectstatus = "UPDATE competition
+SET status = 'Rejected' WHERE CURDATE() >= releaseDate AND status = 'Pending'";
+$ongoingstatus = "UPDATE competition
+SET status = 'On-Going' WHERE releaseDate <= CURDATE() AND registrationDeadline >= CURDATE() AND status = 'Upcoming'";
+$paststatus = "UPDATE competition
+SET status = 'Past' WHERE CURDATE() >= registrationDeadline AND status = 'On-Going'";
+$autorejectres = mysqli_query($conn, $autorejectstatus);
+$ongoingres = mysqli_query($conn, $ongoingstatus);
+$pastres = mysqli_query($conn, $paststatus);
+
+?>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Virtual-X</title>
-  
+
   <!-- Bootstrap -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
   <!-- Font Awesome -->
@@ -18,9 +30,10 @@
   <link rel="stylesheet" href="../general/partials/header.css">
 
 </head>
+
 <body>
   <nav class="navbar navbar-dark bg-secondary bg-gradient fixed-top px-5">
-    
+
     <a class="navbar-brand ml-5" href="    ">
       <img src="../general/partials/logo.png" alt="Virtual" width="200">
     </a>
@@ -30,7 +43,7 @@
     </form>
     <nav class="navbar navbar-expand-xl">
       <ul class="navbar-nav">
-        
+
         <li class="nav-item">
           <a class="btn btn-info" href="     " role="button"><i class="fa-solid fa-trophy"></i>&nbsp; My Competition</a>&nbsp;&nbsp;&nbsp;
         </li>
@@ -44,7 +57,9 @@
               <li><a class="dropdown-item" href="#">My Profile</a></li>
               <li><a class="dropdown-item" href="#">Favourite</a></li>
               <li><a class="dropdown-item" href="../logout.php">Log Out</a></li>
-              <li><hr class="dropdown-divider"></li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
               <li><a class="dropdown-item text-danger" href="#">Log Out</a></li>
             </ul>
           </div>
@@ -52,6 +67,5 @@
       </ul>
     </nav>
   </nav>
-  
-<div class= "mt-5 mb-5 pt-5" ></div>
 
+  <div class="mt-5 mb-5 pt-5"></div>

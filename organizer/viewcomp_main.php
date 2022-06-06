@@ -4,8 +4,7 @@
 <?php
 if (isset($_GET['compID'])) {
     $compID = $_GET['compID'];
-    $sql = "SELECT C.*, O.* FROM competition C INNER JOIN organizer O ON C.organizerID = O.organizerID AND 
-    C.compID=$compID AND O.organizerID='$_SESSION[organizer]'";
+    $sql = "SELECT C.*, O.* FROM competition C INNER JOIN organizer O ON C.organizerID = O.organizerID AND C.compID=$compID AND O.organizerID='$_SESSION[organizer]'";
     $sql1 = "SELECT COUNT(E.compID), SUM(E.vote) FROM entry E INNER JOIN competition C ON E.compID = C.compID 
     WHERE E.compID=$compID AND C.organizerID = '$_SESSION[organizer]'";
     $res = mysqli_query($conn, $sql);
@@ -80,7 +79,20 @@ while ($row1 = mysqli_fetch_assoc($res1)) {
             <div class="col-9">
                 <div>
                     <h2 style="display: inline-block" style="margin-right: 2em;"><?php echo $compName ?></h2>
-                    <span style="display: inline-block; margin-left: 1em" class="badge text-bg-success align-top even-larger-badge"><?php echo $status ?></span>
+                    <?php
+                    if ($status == 'Pending') {
+                        echo "<span style='margin-left: 1em' class='badge rounded-pill bg-primary align-top end-0'> $status </span>";
+                    } else if ($status == 'Upcoming') {
+                        echo "<span style='margin-left: 1em' class='badge rounded-pill bg-warning align-top end-0'> $status </span>";
+                    } else if ($status == 'On-Going') {
+                        echo "<span style='margin-left: 1em' class='badge rounded-pill bg-success align-top end-0'>$status </span>";
+                    } else if ($status == 'Past') {
+                        echo "<span style='margin-left: 1em' class='badge rounded-pill bg-dark align-top end-0'> $status </span>";
+                    } else if ($status == 'Terminated') {
+                        echo "<span style='margin-left: 1em' class='badge rounded-pill bg-danger align-top end-0'> $status </span>";
+                    }
+                    ?>
+                    <!-- <span style="display: inline-block; margin-left: 1em" class="badge text-bg-success align-top even-larger-badge"><?php echo $status ?></span> -->
                 </div>
                 <h3 class="text-muted mb-4"><small class="text-muted">By <?php echo $organizerName ?>, <?php echo $category ?> Category</small></h3>
 
@@ -132,12 +144,12 @@ while ($row1 = mysqli_fetch_assoc($res1)) {
             </div>
             <div class="col-3">
                 <h3>&#128101; <?php if ($joinCount == 0) {
-                                    echo "Be The First To Join!</h3>";
+                                    echo "Currently No One Joins.</h3>";
                                 } else {
                                     echo "$joinCount People Participated</h3>";
                                 } ?>
                     <h3>&#128147; <?php if ($voteCount == NULL) {
-                                        echo "Be The First To Vote!</h3>";
+                                        echo "Currently No One Votes.</h3>";
                                     } else {
                                         echo "$voteCount People Voted</h3>";
                                     } ?>
@@ -155,7 +167,12 @@ while ($row1 = mysqli_fetch_assoc($res1)) {
                                 $title = $win["title"];
                             }
                             ?>
-                            <a href="../organizer/entry.php?entryID=<?php echo $entryID; ?>&compID=<?php echo $compID; ?>"><img src="../materials/entries/<?php echo $entry; ?>" alt="<?php echo $title; ?>" style="width: 300px; height: auto"></a>
+
+                            <a href="../organizer/entry.php?entryID=<?php echo $entryID; ?>&compID=<?php echo $compID; ?>"><img src="../materials/entries/<?php echo $entry; ?>" alt="<?php echo $title; ?>" style="width: 300px; max-height: 500px; object-fit:cover;"></a>
+                            <form action="" method="POST">
+                                <input type="hidden" value="<?php echo $entryID ?>">
+                                <button class="mt-3 btn btn-success btn-lg mx-auto px-5" name="announce_winner" type="submit">Announce Winner</button>
+                            </form>
                         <?php } else { ?>
                             <h3 style="font-weight: bold;">Winner is yet to announce.</h3>
                         <?php } ?>
@@ -167,7 +184,7 @@ while ($row1 = mysqli_fetch_assoc($res1)) {
             if ($status == "Pending") {
             ?>
                 <div>
-                    <a href="editcomp.php?compID=<?php echo $compID; ?>"><button type="button" class="btn btn-primary btn-lg mx-auto px-5">Edit</button></a>
+                    <a href="editcomp.php?compID=<?php echo $compID; ?>"><button type="button" class="btn btn-info text-white btn-lg mx-auto px-5">Edit</button></a>
                     <button type="button" class="btn btn-danger btn-lg mx-auto px-5" data-bs-toggle="modal" data-bs-target="#terminateModal">Terminate Competition</button>
                 </div>
             <?php } else if ($status == "Upcoming") {
@@ -175,7 +192,7 @@ while ($row1 = mysqli_fetch_assoc($res1)) {
                 <div>
                     <button class="btn btn-success btn-lg mx-auto px-5" data-bs-toggle="modal" data-bs-target="#makeModal">Make Announcement</button>
                     <button class="btn btn-primary btn-lg mx-auto px-5" data-bs-toggle="modal" data-bs-target="#viewModal">View Announcement</button>
-                    <a href="editcomp.php?compID=<?php echo $compID; ?>"><button type="button" class="btn btn-primary btn-lg mx-auto px-5">Edit</button></a>
+                    <a href="editcomp.php?compID=<?php echo $compID; ?>"><button type="button" class="btn btn-info text-white btn-lg mx-auto px-5">Edit</button></a>
                     <button type="button" class="btn btn-danger btn-lg mx-auto px-5" data-bs-toggle="modal" data-bs-target="#terminateModal">Terminate Competition</button>
                 </div>
             <?php } else if ($status == "On-Going") {
@@ -348,6 +365,16 @@ if (isset($_POST['submit'])) {
 
     $sql = "UPDATE competition SET
             status = 'Terminated' WHERE compID = $compID";
+
+    $res = mysqli_query($conn, $sql);
+
+    if ($res == true) {
+        header("location:" . SITEURL . "organizer/viewcomp_main.php?compID=$compID");
+    }
+} else if (isset($_POST['announce_winner'])) {
+
+    $sql = "UPDATE competition SET
+            entry_winner = $entryID WHERE compID = $compID";
 
     $res = mysqli_query($conn, $sql);
 

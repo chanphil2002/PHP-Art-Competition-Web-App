@@ -1,6 +1,15 @@
 <?php
 include("../user/partials/database.php");
 
+$autorejectstatus = "UPDATE competition
+    SET status = 'Rejected' WHERE CURDATE() >= releaseDate AND status = 'Pending'";
+$ongoingstatus = "UPDATE competition
+    SET status = 'On-Going' WHERE releaseDate <= CURDATE() AND registrationDeadline >= CURDATE() AND status = 'Upcoming'";
+$paststatus = "UPDATE competition
+    SET status = 'Past' WHERE CURDATE() >= registrationDeadline AND status = 'On-Going'";
+$autorejectres = mysqli_query($conn, $autorejectstatus);
+$ongoingres = mysqli_query($conn, $ongoingstatus);
+$pastres = mysqli_query($conn, $paststatus);
 ?>
 <html lang="en">
 
@@ -66,20 +75,20 @@ include("../user/partials/database.php");
   </nav>
 
   <!-- Modal for Log Out-->
-<div class="modal fade" id="logout" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title text-dark" id="exampleModalLabel">Log Out</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        Are you sure you want to <b>Log Out</b> from this user account?
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <a type="button" class="btn btn-danger" href="../general/logout.php">LOG OUT</a>
+  <div class="modal fade" id="logout" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title text-dark" id="exampleModalLabel">Log Out</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          Are you sure you want to <b>Log Out</b> from this user account?
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <a type="button" class="btn btn-danger" href="../general/logout.php">LOG OUT</a>
+        </div>
       </div>
     </div>
   </div>
-</div>

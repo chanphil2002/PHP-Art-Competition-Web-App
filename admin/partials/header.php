@@ -1,10 +1,22 @@
 <?php include("../admin/partials/database.php");
 session_start();
-if (!isset($_SESSION["admin"])){
+if (!isset($_SESSION["admin"])) {
     header("Location: ../general/otherRoleLogin.php");
-}?>
+}
+$autorejectstatus = "UPDATE competition
+    SET status = 'Rejected' WHERE CURDATE() >= releaseDate AND status = 'Pending'";
+$ongoingstatus = "UPDATE competition
+    SET status = 'On-Going' WHERE releaseDate <= CURDATE() AND registrationDeadline >= CURDATE() AND status = 'Upcoming'";
+$paststatus = "UPDATE competition
+    SET status = 'Past' WHERE CURDATE() >= registrationDeadline AND status = 'On-Going'";
+$autorejectres = mysqli_query($conn, $autorejectstatus);
+$ongoingres = mysqli_query($conn, $ongoingstatus);
+$pastres = mysqli_query($conn, $paststatus);
+
+?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -13,19 +25,20 @@ if (!isset($_SESSION["admin"])){
 
     <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
-    
+
     <!-- Font Awesome -->
     <script src="https://kit.fontawesome.com/388ecdb17f.js" crossorigin="anonymous"></script>
-    
+
     <!-- Google Font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Magra:wght@400;700&display=swap" rel="stylesheet">
-    
+
     <!-- CSS Style -->
     <link rel="stylesheet" href="../user/partials/header.css">
 
 </head>
+
 <body>
     <nav class="navbar navbar-dark bg-secondary bg-gradient sticky-top px-5">
         <a class="navbar-brand ml-5" href="pendingComp.php">
@@ -51,20 +64,20 @@ if (!isset($_SESSION["admin"])){
                     </div>
                 </li>
                 &nbsp;&nbsp;&nbsp;
-                <li class="nav-item"> 
+                <li class="nav-item">
                     <div class="dropdown">
                         <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" title="Generate Report">
                             <i class="fa-solid fa-file"></i>&nbsp;Report
                         </button>
                         <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton1">
-                            <li><a class="dropdown-item"  title="View the number of users in each category." href="report.php?user">User Type</a></li>
+                            <li><a class="dropdown-item" title="View the number of users in each category." href="report.php?user">User Type</a></li>
                             <li><a class="dropdown-item" title="View the number of competitions in each category" href="report.php?competition">Competition Type</a></li>
                             <li><a class="dropdown-item" title="View the number of participants in each competition category." href="report.php?participant">Participants</a></li>
                         </ul>
                     </div>
                 </li>
                 &nbsp;&nbsp;&nbsp;
-                <li class="nav-item"> 
+                <li class="nav-item">
                     <div class="dropdown">
                         <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false" title="Search Users">
                             <i class="fa-solid fa-magnifying-glass"></i>&nbsp;Search
@@ -87,21 +100,21 @@ if (!isset($_SESSION["admin"])){
             </ul>
         </nav>
     </nav>
-<!-- Modal for Log Out-->
-<div class="modal fade" id="logout" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title text-dark" id="exampleModalLabel">Log Out</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        Are you sure you want to <b>Log Out</b> from this admin account?
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <a type="button" class="btn btn-danger" href="../general/logout.php">LOG OUT</a>
-      </div>
+    <!-- Modal for Log Out-->
+    <div class="modal fade" id="logout" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title text-dark" id="exampleModalLabel">Log Out</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Are you sure you want to <b>Log Out</b> from this admin account?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <a type="button" class="btn btn-danger" href="../general/logout.php">LOG OUT</a>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
-</div>

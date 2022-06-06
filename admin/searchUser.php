@@ -179,7 +179,7 @@ if (isset($_POST["search"])) {
                     </div>
                     <?php
             } else {
-                $sql3 = "SELECT * FROM judge WHERE judgeName LIKE '%$search%' OR judgeIC LIKE '%$search%' OR judgeEmail LIKE '%$search%'";
+                $sql3 = "SELECT * FROM judge WHERE (judgeName LIKE '%$search%' OR judgeIC LIKE '%$search%' OR judgeEmail LIKE '%$search%') AND status != 'Terminated' AND status != 'Pending'";
                 $res3 = mysqli_query($conn, $sql3);
                 if (mysqli_num_rows($res3) != 0){
                     $role = "judge";

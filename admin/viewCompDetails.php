@@ -64,11 +64,9 @@ if (!isset($_SESSION["admin"])){
 					$judgeScore = $compInfo['judgeScore'];
 					$publicVote = $compInfo['publicVote'];
 					$prizePool = $compInfo['prizePool'];
-					$compPic = $compInfo['compPic'];
 					$receipt = $compInfo['receipt'];
 					$receiptPath = ("../materials/compReceipt/$receipt");
 					$compPic = $compInfo['compPic'];
-					$picPath = ("../materials/compPic/$compPic");
 					$reason = $compInfo['rejectedComment'];
 
 					$sql2 = "SELECT organizerName FROM organizer WHERE organizerID = $organizerID";
@@ -80,37 +78,43 @@ if (!isset($_SESSION["admin"])){
 						$badge = "badge text-bg-success position-absolute top-0 end-0 larger-badge";
 						$statusDisplay = "Upcoming";
 						$update = "required";
+						$date = "required";
 					} else if ($status == 'Pending') {
 						$badge = "badge text-bg-warning position-absolute top-0 end-0";
 						$statusDisplay = "Pending";
 						$update = "readonly";
+						$date = "readonly";
 					} else if ($status == 'On-Going') {
 						$badge = "badge text-bg-success position-absolute top-0 end-0";
 						$statusDisplay = "On-Going";
 						$update = "required";
+						$date = "readonly";
 					} else if ($status == 'Past') {
-						$badge = "badge text-bg-secondary position-absolute top-0 end-0";
+						$badge = "badge text-bg-dark position-absolute top-0 end-0";
 						$statusDisplay = "Past";
 						$update = "readonly";
+						$date = "readonly";
 					} else if ($status == 'Terminated') {
 						$badge = "badge text-bg-secondary position-absolute top-0 end-0";
 						$statusDisplay = "Terminated";
 						$update = "readonly";
+						$date = "readonly";
 					} else {
 						$badge = "badge text-bg-danger position-absolute top-0 end-0";
 						$statusDisplay = "Rejected";
 						$update = "readonly";
+						$date = "readonly";
 					}
 				?>
 					<center>
 						<div>
-							<img style="width:90%" src=<?php echo $picPath ?> style="width: 10rem;"><br><br><br>
+							<img style="width:90%" src="../materials/compPic/<?php echo $compPic; ?>"><br><br><br>
 						</div>
 					</center>
 					<div class="form-row">
 						<span class="<?php echo $badge ?>"><?php echo $statusDisplay ?></span>
 						<label for="name">COMPETITION ID</label>
-						<input type="text" name="id" id="id" class="input-text" value="<?php echo $compID ?>" <?php echo $update ?>>
+						<input type="text" name="id" id="id" class="input-text" value="<?php echo $compID ?>" readonly>
 					</div>
 					<div class="form-row">
 						<label for="name">COMPETITION NAME</label>
@@ -120,10 +124,57 @@ if (!isset($_SESSION["admin"])){
 						<br><label for="organizerName">ORGANIZER NAME</label>
 						<input type="text" name="organizerName" id="organizerName" class="input-text" value="<?php echo $organizerName ?>" readonly>
 					</div>
-					<div class="form-row">
+					<!-- <div class="form-row">
 						<br><label for="category">CATEGORY</label>
 						<input type="text" name="category" id="category" class="input-text" value="<?php echo $category ?>" <?php echo $update ?>>
-					</div>
+					</div> -->
+					<?php
+					if ($category == "Photography") {
+					?>
+						<div class="form-row">
+							<label for="category">Category *</label>
+							<select class="form-row" name="category" id="category" style="height: 25px; margin-top: 3%;" <?php echo $update ?>>
+								<option value="">Choose a category *&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</option>
+								<option value="Photography" selected>Photography</option>
+								<option value="Paintings">Paintings</option>
+								<option value="2D">2D</option>
+								<option value="3D">3D</option>
+							</select>
+						</div>
+					<?php } else if ($category == 'Paintings') { ?>
+						<div class="form-row">
+							<label for="category">Category *</label>
+							<select class="form-row" name="category" id="category" style="height: 25px; margin-top: 3%;" <?php echo $update ?>>
+								<option value="">Choose a category *&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</option>
+								<option value="Photography">Photography</option>
+								<option value="Paintings" selected>Paintings</option>
+								<option value="2D">2D</option>
+								<option value="3D">3D</option>
+							</select>
+						</div>
+					<?php } else if ($category == '2D') { ?>
+						<div class="form-row">
+							<label for="category">Category *</label>
+							<select class="form-row" name="category" id="category" style="height: 25px; margin-top: 3%;" <?php echo $update ?>>
+								<option value="">Choose a category *&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</option>
+								<option value="Photography">Photography</option>
+								<option value="Paintings">Paintings</option>
+								<option value="2D" selected>2D</option>
+								<option value="3D">3D</option>
+							</select>
+						</div>
+					<?php } else if ($category == '3D') { ?>
+						<div class="form-row">
+							<label for="category">Category *</label>
+							<select class="form-row" name="category" id="category" style="height: 25px; margin-top: 3%;" <?php echo $update ?>>
+								<option value="">Choose a category *&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</option>
+								<option value="Photography">Photography</option>
+								<option value="Paintings">Paintings</option>
+								<option value="2D">2D</option>
+								<option value="3D" selected>3D</option>
+							</select>
+						</div>
+					<?php } ?>
 					<div class="form-row">
 						<br><label for="description" class="form-label">DESCRIPTION</label>
 						<textarea class="form-control" name="description" id="description" rows="30" <?php echo $update ?>><?php echo $description ?></textarea>
@@ -134,11 +185,11 @@ if (!isset($_SESSION["admin"])){
 					</div>
 					<div class="form-row">
 						<br><label for="releaseDate">RELEASE DATE</label>
-						<input type="date" name="releaseDate" id="releaseDate" class="input-text" value="<?php echo $releaseDate ?>" <?php echo $update ?>>
+						<input type="date" name="releaseDate" id="releaseDate" class="input-text" value="<?php echo $releaseDate ?>" <?php echo $date ?>>
 					</div>
 					<div class="form-row">
 						<label for="regisDeadline">REGISTRATION DEADLINE</label>
-						<input type="date" name="regisDeadline" id="regisDeadline" class="input-text" value="<?php echo $regisDeadline ?>" <?php echo $update ?>>
+						<input type="date" name="regisDeadline" id="regisDeadline" class="input-text" value="<?php echo $regisDeadline ?>" <?php echo $date ?>>
 					</div>
 					<div class="form-row">
 						<label for="evaluation">EVALUATION DAY</label>
@@ -306,7 +357,6 @@ if (isset($_POST["approve"])) {
 	}
 } else if (isset($_POST['update'])) {
 	$newCompName = $_POST['name'];
-	$organizer = $_POST['organizerName'];
 	$newCategory = $_POST['category'];
 	$newDesc = $_POST['description'];
 	$newRules = $_POST['rules'];
@@ -317,13 +367,12 @@ if (isset($_POST["approve"])) {
 	$newPublic = $_POST['vote'];
 	$newPrize = $_POST['prize'];
 
-	$sql3 = "SELECT * FROM organizer WHERE organizerName = '$organizer'";
-	$result3 = mysqli_query($conn, $sql3);
-	$organizerInfo = mysqli_fetch_assoc($result3);
-	$newID = $organizerInfo['organizerID'];
+	$sql = "SELECT * FROM competition WHERE compID = '$compID'";
+	$compPic = $compInfo['compPic'];
+	$picPath = "../materials/compPic/$compPic";
 
 	if ($_FILES['compPic']['name'] == "") {
-		$update = "UPDATE competition SET compName = '$newCompName', organizerID = '$newID', description = '$newDesc', rules = '$newRules',
+		$update = "UPDATE competition SET compName = '$newCompName', description = '$newDesc', rules = '$newRules',
 			category = '$newCategory', releaseDate = '$newRelese', registrationDeadline = '$newDeadline', evaluationDays = '$newEvaluate',
 			judgeScore = '$newJudgeScore', publicVote = '$newPublic', prizePool = '$newPrize' WHERE compID = '$compID'";
 		$run_update = mysqli_query($conn, $update);
@@ -335,19 +384,20 @@ if (isset($_POST["approve"])) {
 			echo "<script>alert('Oops! Something went wrong, please try again.')</script>";
 		}
 	} else {
-		unlink($picPath);
-		$newCompPic = $_FILES['compPic']['name'];
+		$compPic = $_FILES['compPic']['name'];
 		$tmp_name = $_FILES['compPic']['tmp_name'];
 
-		$update = "UPDATE competition SET compName = '$newCompName', organizerID = '$newID', description = '$newDesc', rules = '$newRules',
+		$update = "UPDATE competition SET compName = '$newCompName', description = '$newDesc', rules = '$newRules',
 			category = '$newCategory', releaseDate = '$newRelese', registrationDeadline = '$newDeadline', evaluationDays = '$newEvaluate',
-			judgeScore = '$newJudgeScore', publicVote = '$newPublic', prizePool = '$newPrize', compPic = '$newCompPic' WHERE compID = '$compID'";
+			judgeScore = '$newJudgeScore', publicVote = '$newPublic', prizePool = '$newPrize', compPic = '$compPic' WHERE compID = '$compID'";
 		$run_update = mysqli_query($conn, $update);
 
 		if ($run_update == true) {
+			unlink($picPath);
+			move_uploaded_file($tmp_name, "../materials/compPic/$compPic");
 			echo "<script>alert('Profile updated successfully.')
 				location = 'viewCompDetails.php?selectedComp=$compID' </script>";
-			move_uploaded_file($tmp_name, "../materials/compPic/$newCompPic");
+
 		} else {
 			echo "<script>alert('Oops! Something went wrong, please try again.')</script>";
 		}

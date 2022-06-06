@@ -1,22 +1,18 @@
-<?php include("../organizer/partials/header.php"); 
+<?php include("../organizer/partials/header.php");
 
 
-if (!isset($_SESSION["organizer"])){
-    header("Location: ../general/otherRoleLogin.php");
+if (!isset($_SESSION["organizer"])) {
+  header("Location: ../general/otherRoleLogin.php");
 }
 
-$organizerEmail = $_SESSION['organizer'];
-$request = "SELECT * FROM organizer WHERE organizerEmail = '$organizerEmail'";
-$result = mysqli_query($conn, $request);
-$display = mysqli_fetch_assoc($result);
-$organizerID = $display['organizerID'];
+$organizerID = $_SESSION['organizer'];
 
 if (isset($_POST['search'])) {
   $search = $_POST['search'];
   $sql1 = "SELECT * FROM competition WHERE (compName LIKE '%$search%' OR category LIKE '%$search%') AND organizerID = $organizerID";
   $res1 = mysqli_query($conn, $sql1);
 } else {
-  $sql1 = "SELECT * FROM competition";
+  $sql1 = "SELECT * FROM competition WHERE organizerID = $organizerID";
   $res1 = mysqli_query($conn, $sql1);
 }
 ?>
@@ -34,7 +30,7 @@ if (isset($_POST['search'])) {
   <div class="container mt-5">
     <div class="row" style="margin-top: 10%">
       <div class="col-12 col-competition-1">
-        <h3 class="text-color-2">Search Result Displayed Based on
+        <h3 class="text-color-2">Search Query
           <span class="text-color-3">
         </h3>
       </div>
@@ -43,7 +39,7 @@ if (isset($_POST['search'])) {
         <form action="../organizer/orgsearch2.php" method="POST" class="d-flex">
           <input class="form-control me-2 mr-sm-2 col-md-5 ml-5" type="search" name="search" value="<?php echo $search ?>">
       </div>
-      <div class="col-12 col-competition-2">
+      <div class="col-12 col-competition-3">
         <div class="overflow-auto">
           <span aria-label="Filter By" style="position:relative; box-sizing: border-box; "></span>
           <label for="filter_dropdown"></label>
@@ -61,14 +57,14 @@ if (isset($_POST['search'])) {
             document.getElementById('filter_dropdown').value = "<?php echo $_GET['filter_dropdown']; ?>";
           </script>
 
-          <!-- <span aria-label="Sort By" style="position:relative; box-sizing: border-box"></span>
+          <span aria-label="Sort By" style="position:relative; box-sizing: border-box"></span>
                         <label for="sort_dropdown"></label>
                         <select name="sort_dropdown" id="sort_dropdown">
                             <option> Sort By: Please Select </option>
                             <option value="Competition Date"> Sort By: Competition Date</option>
                             <option value="Registration Dateline">Sort By: Registration Dateline</option>
                             <option value="Popularity">Sort By: Popularity</option>
-                        </select> -->
+                        </select>
           <input type="submit" name="submit2" value="Search" class="btn btn-outline-dark my-2 my-sm-0" style="margin-left:20px">
 
 
