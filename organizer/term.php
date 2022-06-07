@@ -27,6 +27,7 @@
     <h3><u>PRIVACY NOTICE</u></h3>
     <p class="lead">We care about data privacy and security. Please review our Privacy Notice to understand our use of your personal information. You acknowledge that you have reviewed and understand our Privacy Notice.</p>
     <p class="lead">Please be advised the Services is hosted in the Malaysia. If you access the Services from any other region of the world with laws or other requirements governing personal data collection, use, or disclosure that differ from applicable laws in Malaysia, and you agree to have your data transferred to and processed in Malaysia.</p>
+    <p class="lead text-danger">Please be aware that the competition will be released on when it is approved by the admin. Any competition release date that is stated less than 7 days from registration date may have to assume the risk or competition being rejected. </p>
 
     <a class="btn btn-lg btn-success" href="orghome.php" role="button">&laquo; Back to Home </a>
   </div>

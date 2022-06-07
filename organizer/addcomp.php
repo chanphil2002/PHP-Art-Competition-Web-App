@@ -36,7 +36,7 @@ if(isset($_GET['organizerID']))
             </div>
 
             <div class="mb-3">
-                <label for="date">Competition Release Date</label>
+                <label for="date">Competition Release Date <br>(preferrably 7 days after registration date)</label>
                 <div class="input-group date">
                     <input type="date" name="releaseDate" id="releaseDate" min="<?php echo date("Y-m-d"); ?>" class="form-control" 
                     placeholder="Competition Release Date" required />
