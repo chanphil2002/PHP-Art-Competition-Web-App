@@ -36,8 +36,8 @@ if (!isset($_SESSION["admin"])){
                 <tr>
                     <th>No</th>
                     <th>Organizer ID</th>
-                    <th>Organizer Email</th>
                     <th>Organizer Name</th>
+                    <th>Organizer Email</th>
                     <th>Status</th>
                     <th>Action</th>
                 </tr>
