@@ -191,15 +191,20 @@ while ($row1 = mysqli_fetch_assoc($res1)) {
                     <hr>
                     <h2><u>Winner</u></h2>
                     <?php
-                    $sql2 = "SELECT * FROM entry WHERE compID = '$compID' ORDER BY totalScore DESC LIMIT 1";
+                    $sql2 = "SELECT entry_winner FROM competition WHERE compID = '$compID'";
                     $run2 = mysqli_query($conn, $sql2);
                     while ($win = mysqli_fetch_assoc($run2)) {
+                        $entry_winner = $win["entry_winner"];
+                    }
+                    $sql3 = "SELECT * FROM entry WHERE entryID = '$entry_winner'";
+                    $run3 = mysqli_query($conn, $sql3);
+                    while ($win = mysqli_fetch_assoc($run3)) {
                         $entryID = $win["entryID"];
-                        $entry = $win["entryFile"];
+                        $entryFile = $win["entryFile"];
                         $title = $win["title"];
                     }
                     ?>
-                    <a href="../user/entry.php?entryID=<?php echo $entryID; ?>&compID=<?php echo $compID; ?>"><img src="../materials/entries/<?php echo $entry; ?>" alt="<?php echo $title; ?>" style="width: 300px; height: auto"></a>
+                    <a href="../user/entry.php?entryID=<?php echo $entryID; ?>&compID=<?php echo $compID; ?>"><img src="../materials/entries/<?php echo $entryFile; ?>" alt="<?php echo $title; ?>" style="width: 300px; height: auto"></a>
                 <?php } ?>
             </div>
         </div>

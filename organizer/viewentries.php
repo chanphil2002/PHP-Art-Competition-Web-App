@@ -95,14 +95,15 @@ while ($row = mysqli_fetch_assoc($res)) {
                                             <h3><?php echo $title; ?> </h3>
                                             <?php if ($status == "On-Going" || $status == "Past") { ?>
                                                 <div class="text-success">
-                                                    Vote: <?php echo $votePercentage; ?>/ <?php echo $publicVote; ?><br>
-                                                    Judge's score: <?php echo $judgePercentage; ?>/ <?php echo $judgeScore; ?>
+                                                    Vote: <?php echo number_format((float)$votePercentage, 2, '.', ''); ?>/ <?php echo $publicVote; ?><br>
+                                                    Judge's score: <?php echo number_format((float)$judgePercentage, 2, '.', ''); ?>/ <?php echo $judgeScore; ?>
                                                 </div>
                                                 <div class="text-danger">
                                                     Total Score:
                                                     <?php
-                                                    echo $judgePercentage + $votePercentage;
-                                                    $sql2 = "UPDATE entry SET totalScore = $votePercentage + $judgePercentage WHERE entryID = $entryID";
+                                                    echo number_format((float)$judgePercentage, 2, '.', '') + number_format((float)$votePercentage, 2, '.', '');
+                                                    $sql2 = "UPDATE entry SET totalScore = number_format((float)$votePercentage, 2, '.', '') + 
+                                                    number_format((float)$judgePercentage, 2, '.', '') WHERE entryID = $entryID";
                                                     $res2 = mysqli_query($conn, $sql2);
 
 
