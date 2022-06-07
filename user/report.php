@@ -7,17 +7,22 @@
         header ("Location: ../general/registeredUserLogin.php");
     }
 
-    $sql = "SELECT * FROM entry E INNER JOIN competition C ON E.compID = C.compID WHERE entryID = '$_GET[entryID]' ";
-    $run = mysqli_query($conn, $sql);
-    while ($res = mysqli_fetch_assoc($run)){
-        $id = $res["entryID"];
-        $title = $res["title"];
-        $author = $res["userEmail"];
-        $pic = $res["entryFile"];
-        $path = "../materials/entries/$pic";
-        $compID = $res["compID"];
-        $orgID = $res["organizerID"];
+    if (isset($_GET["entryID"])){
+        $sql = "SELECT * FROM entry E INNER JOIN competition C ON E.compID = C.compID WHERE entryID = '$_GET[entryID]' ";
+        $run = mysqli_query($conn, $sql);
+        while ($res = mysqli_fetch_assoc($run)){
+            $id = $res["entryID"];
+            $title = $res["title"];
+            $author = $res["userEmail"];
+            $pic = $res["entryFile"];
+            $path = "../materials/entries/$pic";
+            $compID = $res["compID"];
+            $orgID = $res["organizerID"];
+        }
+    }else {
+        header("Location: allComp.php");
     }
+    
 ?>
 
 <!DOCTYPE html>
