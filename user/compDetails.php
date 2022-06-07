@@ -146,13 +146,26 @@ while ($row1 = mysqli_fetch_assoc($res1)) {
                 </div>
 
                 <?php if ($announcement != NULL) { ?>
-                    <div class="pb-4">
-                        <h2>
-                            Announcement
-                        </h2>
-                        <h3>
-                            <?php echo "$announcement"; ?>
-                        </h3>
+                    <button class="btn btn-primary btn-lg mx-auto px-5" data-bs-toggle="modal" data-bs-target="#viewModal">View Announcement</button>
+                    <!-- View Announcement Modal -->
+
+                    <div class="modal fade bd-example-modal-lg" id="viewModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-scrollable">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h3 class="modal-title" style="color: black; font-weight: bold;" id="exampleModalLabel">New Announcement</h3>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="mb-3">
+                                        <h3 style="white-space: pre-wrap;"><?php echo $announcement ?></h3>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 <?php } ?>
 
