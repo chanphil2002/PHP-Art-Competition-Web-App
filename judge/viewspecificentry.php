@@ -26,7 +26,7 @@ if (isset($_GET['entryID']) & isset($_GET['compID']) & isset($_SESSION['judge'])
 } else {
     echo "mistake";
 }
-while ($row = mysqli_fetch_assoc($res)) {
+while ($row = mysqli_fetch_assoc($res,)) {
     $entryID = $row['entryID'];
     $entryFile = $row['entryFile'];
     $title = $row['title'];

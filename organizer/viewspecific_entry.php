@@ -7,6 +7,8 @@ if (isset($_GET['entryID']) & isset($_GET['compID'])) {
     $compID = $_GET['compID'];
     $sql = "SELECT C.*, E.* FROM competition C INNER JOIN entry E ON C.compID = E.compID AND entryID='$entryID'";
     $res = mysqli_query($conn, $sql);
+    $sql20 = "SELECT score_criteria.*, judge.judgeName FROM score_criteria INNER JOIN judge ON score_criteria.judgeIC = judge.judgeIC WHERE compID='$compID' AND entryID='$entryID'";
+    $res20 = mysqli_query($conn, $sql20);
 } else {
     header("Location: ../organizer/orghome.php");
 }
@@ -20,6 +22,14 @@ while ($row = mysqli_fetch_assoc($res)) {
     $totalScore = $row['totalScore'];
     $compPic = $row['compPic'];
 }
+
+$count20 = mysqli_num_rows($res20);
+// if ($count20 > 0) {
+//     while ($row20 = mysqli_fetch_assoc($res20)) {
+//         $cri_tscore = $row20['cri_tscore'];
+//     }
+// }
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -68,7 +78,22 @@ while ($row = mysqli_fetch_assoc($res)) {
                         <p class="card-text"><small class="text-muted">By <?php echo $userEmail ?></small></p>
                     </div>
 
+                    <div class="card-body">
+                        <?php if ($count20 > 0) {
+                            while ($row20 = mysqli_fetch_assoc($res20)) {
+                                $cri_tscore = $row20['cri_tscore'];
+                                $judgeName = $row20['judgeName'];
+                        ?>
+                                <div class="mb-3">
+                                    <label for="total">Total Score From Judge <?php echo $judgeName ?></label>
+                                    <input type="text" name="total" class="form-control" id="total" value="<?php echo $cri_tscore; ?>" readonly>
+                                </div>
+                        <?php }
+                        } ?>
+                    </div>
+
                 </div>
+
             </div>
         </div>
     </div>
