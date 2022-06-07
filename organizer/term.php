@@ -9,6 +9,17 @@
 
 <main role="main" class="container mt-5">
   <div class="jumbotron text-justify">
+  <h1>TERMS TO ORGANIZER (IMPORTANT)</h1>
+    <p class="lead text-danger">Please be aware that the competition will be released on when it is approved by the admin. Any competition release date that is stated less than 7 days from registration date may have to assume the risk or competition being rejected. </p>
+    <p class="lead text-danger">Each of the competition is requried to transfer a total of RM20(Ringgit Malaysia) for the competition processing and management fees. Please make a transfer to the following account number: - </p>
+    <ul>
+      <li>
+        <p class="lead text-primary"><b>Account Number: 5366-2534-5356 (MBB)</b></p>
+
+      </li>
+    </ul>
+    <p class="lead text-danger">The payment will be requested while in the process of creating competition. Please ensure the document payment receipt is clear and paid amount is listed clearly.</p>
+
     <h1>AGREEMENT TO TERMS</h1>
     <p class="lead">We are Virtual-X Sdn. Bhd., doing business as Virtual-X ("Virtual-X,” “we,” “us,” or “our”), a company registered in Malaysia. 
         We operate the website through which we provide you our services, (collectively, the “Services” which include the provision and use of the Website).</p>
@@ -27,7 +38,6 @@
     <h3><u>PRIVACY NOTICE</u></h3>
     <p class="lead">We care about data privacy and security. Please review our Privacy Notice to understand our use of your personal information. You acknowledge that you have reviewed and understand our Privacy Notice.</p>
     <p class="lead">Please be advised the Services is hosted in the Malaysia. If you access the Services from any other region of the world with laws or other requirements governing personal data collection, use, or disclosure that differ from applicable laws in Malaysia, and you agree to have your data transferred to and processed in Malaysia.</p>
-    <p class="lead text-danger">Please be aware that the competition will be released on when it is approved by the admin. Any competition release date that is stated less than 7 days from registration date may have to assume the risk or competition being rejected. </p>
 
     <a class="btn btn-lg btn-success" href="orghome.php" role="button">&laquo; Back to Home </a>
   </div>
