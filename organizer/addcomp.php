@@ -45,6 +45,8 @@ if (isset($_GET['organizerID'])) {
 
             <div class="mb-3">
                 <label for="date">Competition Registration Deadline</label>
+                <br>
+                <label class="text-secondary">(Choose dates after competiton release date)</label>
                 <div class="input-group date">
                     <input type="date" name="registrationDeadline" id="registrationDeadline" min="<?php echo date("Y-m-d"); ?>" class="form-control" placeholder="When is the Deadline?" required />
                     <span class="input-group-append">

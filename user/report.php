@@ -63,7 +63,7 @@
                 <div>
                     <center>
                         <a href="entry.php?entryID=<?php echo $id; ?>&compID=<?php echo $compID; ?>" class="btn btn-primary">Back</a>&nbsp;&nbsp;&nbsp;&nbsp;
-                        <button type="submit" name="submit" class="btn btn-success">Submit Feedback</button>
+                        <button type="submit" name="submit" class="btn btn-success">Submit Report</button>
                     </center>
                 </div>
             </form>
@@ -84,7 +84,7 @@
         $res = mysqli_query($conn, $sql);    
 
         if ($res){
-            echo "<script>alert ('Feedback submitted successfully!') 
+            echo "<script>alert ('Report submitted successfully!') 
             location = 'homepage.php' </script>";
         }else {
             echo "<script>alert ('Oops, something went wrong. Please try again.') </script>";
