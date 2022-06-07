@@ -9,7 +9,7 @@ if (isset($_POST["submit"])) {
     $pw = $_POST["password"];
 
     $sql1 = "SELECT * FROM admin WHERE adminEmail = '$id' AND adminPassword = '$pw' LIMIT 1";
-    $sql2 = "SELECT * FROM organizer WHERE organizerEmail = '$id' AND organizerPassword = '$pw' LIMIT 1";
+    $sql2 = "SELECT * FROM organizer WHERE organizerEmail = '$id' AND organizerPassword = '$pw' AND organizerStatus = 'approved' LIMIT 1";
     $result1 = mysqli_query($conn, $sql1);
     $result2 = mysqli_query($conn, $sql2);
 

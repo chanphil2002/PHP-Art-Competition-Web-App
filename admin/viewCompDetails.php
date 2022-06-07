@@ -345,16 +345,6 @@ if (isset($_POST["approve"])) {
 	} else {
 		echo "<script>alert('Oops! Something went wrong, please try again.')</script>";
 	}
-} else if (isset($_POST["reject"])) {
-	$update = "UPDATE competition SET status= 'Rejected' WHERE compID = '$compID'";
-	$run_update = mysqli_query($conn, $update);
-
-	if ($run_update == true && $deleteJudge == true) {
-		echo "<script>alert('The competition has been rejected.')
-			location = 'rejectCompReason.php?selectedComp=<?php echo $compID?>' </script>";
-	} else {
-		echo "<script>alert('Oops! Something went wrong, please try again.')</script>";
-	}
 } else if (isset($_POST['update'])) {
 	$newCompName = $_POST['name'];
 	$newCategory = $_POST['category'];

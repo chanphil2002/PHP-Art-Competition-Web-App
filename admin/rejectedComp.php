@@ -12,7 +12,7 @@ if (!isset($_SESSION["admin"])){
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Competition Application List</title>
+    <title>Rejected Competition List</title>
     <link rel="stylesheet" href="view.css" />
 </head>
 
@@ -21,7 +21,7 @@ if (!isset($_SESSION["admin"])){
         <strong>
             <br>
             <center>
-                <h2>Competition Application List</h2>
+                <h2>Rejected Competition List</h2>
             </center><br>
         </strong>
     </div>

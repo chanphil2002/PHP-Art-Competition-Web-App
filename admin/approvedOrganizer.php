@@ -8,13 +8,13 @@ if (!isset($_SESSION["admin"])){
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Competition Application List</title>
+    <title>Approved Organizer Application List</title>
     <link rel="stylesheet" href="view.css"/>
 </head>
 <body>
     <div>
         <strong>
-            <br><center><h2>Organizer Application List</h2></center><br>
+            <br><center><h2>Approved Organizer Application List</h2></center><br>
         </strong>
     </div>
     <div>
@@ -36,8 +36,8 @@ if (!isset($_SESSION["admin"])){
                 <tr>
                     <th>No</th>
                     <th>Organizer ID</th>
-                    <th>Organizer Email</th>
                     <th>Organizer Name</th>
+                    <th>Organizer Email</th>
                     <th>Status</th>
                     <th>Action</th>
                 </tr>

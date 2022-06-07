@@ -7,17 +7,22 @@
         header ("Location: ../general/registeredUserLogin.php");
     }
 
-    $sql = "SELECT * FROM entry E INNER JOIN competition C ON E.compID = C.compID WHERE entryID = '$_GET[entryID]' ";
-    $run = mysqli_query($conn, $sql);
-    while ($res = mysqli_fetch_assoc($run)){
-        $id = $res["entryID"];
-        $title = $res["title"];
-        $author = $res["userEmail"];
-        $pic = $res["entryFile"];
-        $path = "../materials/entries/$pic";
-        $compID = $res["compID"];
-        $orgID = $res["organizerID"];
+    if (isset($_GET["entryID"])){
+        $sql = "SELECT * FROM entry E INNER JOIN competition C ON E.compID = C.compID WHERE entryID = '$_GET[entryID]' ";
+        $run = mysqli_query($conn, $sql);
+        while ($res = mysqli_fetch_assoc($run)){
+            $id = $res["entryID"];
+            $title = $res["title"];
+            $author = $res["userEmail"];
+            $pic = $res["entryFile"];
+            $path = "../materials/entries/$pic";
+            $compID = $res["compID"];
+            $orgID = $res["organizerID"];
+        }
+    }else {
+        header("Location: allComp.php");
     }
+    
 ?>
 
 <!DOCTYPE html>
@@ -58,7 +63,7 @@
                 <div>
                     <center>
                         <a href="entry.php?entryID=<?php echo $id; ?>&compID=<?php echo $compID; ?>" class="btn btn-primary">Back</a>&nbsp;&nbsp;&nbsp;&nbsp;
-                        <button type="submit" name="submit" class="btn btn-success">Submit Feedback</button>
+                        <button type="submit" name="submit" class="btn btn-success">Submit Report</button>
                     </center>
                 </div>
             </form>
@@ -79,7 +84,7 @@
         $res = mysqli_query($conn, $sql);    
 
         if ($res){
-            echo "<script>alert ('Feedback submitted successfully!') 
+            echo "<script>alert ('Report submitted successfully!') 
             location = 'homepage.php' </script>";
         }else {
             echo "<script>alert ('Oops, something went wrong. Please try again.') </script>";

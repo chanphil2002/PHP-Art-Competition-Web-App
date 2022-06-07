@@ -1,12 +1,11 @@
 <?php include("../organizer/partials/header.php");
 
-if(isset($_GET['organizerID']))
-    {
-        $organizerID = $_GET['organizerID'];
-    } else {
-        header("Location: ../organizer/orghome.php");
-    }
-    
+if (isset($_GET['organizerID'])) {
+    $organizerID = $_GET['organizerID'];
+} else {
+    header("Location: ../organizer/orghome.php");
+}
+
 ?>
 
 <form action="" method="POST" enctype="multipart/form-data">
@@ -35,7 +34,8 @@ if(isset($_GET['organizerID']))
             </div>
 
             <div class="mb-3">
-                <label for="date">Competition Release Date</label>
+                <label for="date">Competition Release Date</label><br>
+                <label class="text-secondary">(preferrably 7 days after registration date)</label>
                 <div class="input-group date">
                     <input type="date" name="releaseDate" id="releaseDate" min="<?php echo date("Y-m-d"); ?>" class="form-control" placeholder="Competition Release Date" required />
                     <span class="input-group-append">
@@ -45,33 +45,30 @@ if(isset($_GET['organizerID']))
 
             <div class="mb-3">
                 <label for="date">Competition Registration Deadline</label>
+                <br>
+                <label class="text-secondary">(Choose dates after competiton release date)</label>
                 <div class="input-group date">
                     <input type="date" name="registrationDeadline" id="registrationDeadline" min="<?php echo date("Y-m-d"); ?>" class="form-control" placeholder="When is the Deadline?" required />
                     <span class="input-group-append">
                     </span>
                 </div>
             </div>
-            <!-- <div class="mb-3">
-            <label for="date">Competition Registration Deadline</label>
-            <div class="input-group date" id="datepicker2">
-                <input type="text" name="registrationDeadline" id ="registrationDeadline" class="form-control" placeholder="When is the Deadline?" readonly/>
-                <span class="input-group-append">
-                </span>
-            </div>
-        </div> -->
 
             <div class="mb-3">
-                <label for="stock">Public Vote</label>
+                <label for="stock">Public Vote (%)</label>
+                <br>
+                <label class="text-secondary">(Max 100% including Judge Scoring percentage)</label>
                 <input type="number" name="publicVote" class="form-control" id="publicVote" placeholder="How many percentage for public vote?" required>
             </div>
 
             <div class="mb-3">
-                <label for="stock">Judge Score</label>
+                <label for="stock">Judge Score (%)</label><br>
+                <label class="text-secondary">(Max 100% including Public Voting percentage)</label>
                 <input type="number" name="judgeScore" class="form-control" id="judgeScore" placeholder="How many percentage for judge score?" required>
             </div>
 
             <div class="mb-3">
-                <label for="price">Prize Pool</label>
+                <label for="price">Prize Pool (RM)</label>
                 <input type="float" name="prizePool" class="form-control" id="prizePool" placeholder="Enter Prize Pool..." required>
             </div>
 
@@ -97,9 +94,15 @@ if(isset($_GET['organizerID']))
                 <input type="number" name="evaluationDays" class="form-control" id="evaluationDays" placeholder="How many days for evaluation?" required>
             </div>
 
+            <div class="mb-3">
+                <label for="price">Competition Receipt</label>
+                <div class="input-group mb-3">
+                    <input type="file" class="form-control" name="receipt" id="receipt" required>
+                </div>
+            </div>
 
             <hr class="mb-4">
-            <input type="hidden" id='organizerID' name='organizerID' value= "<?php echo $organizerID;?>">
+            <input type="hidden" id='organizerID' name='organizerID' value="<?php echo $organizerID; ?>">
             <button class="btn btn-primary btn-lg btn-block mx-auto d-flex px-5" name="submit" type="submit">Continue</button>
         </div>
     </div>
@@ -110,6 +113,7 @@ if(isset($_GET['organizerID']))
 
 <?php
 ob_start();
+//Add data into variables
 if (isset($_POST['submit'])) {
     $organizerID = $_POST['organizerID'];
     $compName = $_POST['compName'];
@@ -123,6 +127,7 @@ if (isset($_POST['submit'])) {
     $rules = $_POST['rules'];
     $evaluationDays = $_POST['evaluationDays'];
 
+    //Get photo, change file name & Add into specific folder
     if (isset($_FILES['compPic']['name'])) {
         $compPic = $_FILES['compPic']['name'];
         $image = explode('.', $compPic);
@@ -135,6 +140,7 @@ if (isset($_POST['submit'])) {
         $compPic = "";
     }
 
+    //Get the receipt, Change receipt name & Append into Specific Folder
     if (isset($_FILES['receipt']['name'])) {
         $receipt = $_FILES['receipt']['name'];
         $image1 = explode('.', $receipt);
@@ -147,6 +153,7 @@ if (isset($_POST['submit'])) {
         $receipt = "";
     }
 
+    //Add the competition data into Competition column
     $sql = "INSERT INTO competition SET
             compName = '$compName',
             organizerID = $organizerID,
@@ -165,20 +172,14 @@ if (isset($_POST['submit'])) {
 
     $res = mysqli_query($conn, $sql);
 
-    // $sql3 = "SELECT compID FROM competition WHERE compName = $compName";
-
+    //Direct user to the Judges Allocation page when the competition data added successfully
     if ($res == true) {
-
-        
-
         $sql3 = "SELECT compID FROM competition WHERE compName = '$compName' ORDER BY compID DESC LIMIT 1; ";
         $res3 = mysqli_query($conn, $sql3);
         $row3 = mysqli_fetch_assoc($res3);
         $compID = $row3['compID'];
-        // echo "window.location.href = '../organizer/choosejudge.php?compID=$compID';";
         $_SESSION['compID'] = $compID;
         echo $_SESSION['compID'];
-
         header("location:" . SITEURL . "organizer/selectedjudge.php");
     }
 }
