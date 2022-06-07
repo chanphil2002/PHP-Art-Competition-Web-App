@@ -102,8 +102,8 @@ while ($row = mysqli_fetch_assoc($res)) {
                                                     Total Score:
                                                     <?php
                                                     echo number_format((float)$judgePercentage, 2, '.', '') + number_format((float)$votePercentage, 2, '.', '');
-                                                    $sql2 = "UPDATE entry SET totalScore = number_format((float)$votePercentage, 2, '.', '') + 
-                                                    number_format((float)$judgePercentage, 2, '.', '') WHERE entryID = $entryID";
+                                                    $sql2 = "UPDATE entry SET totalScore = $votePercentage + 
+                                                    $judgePercentage WHERE entryID = $entryID";
                                                     $res2 = mysqli_query($conn, $sql2);
 
 
