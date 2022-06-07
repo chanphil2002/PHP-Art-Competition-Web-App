@@ -91,7 +91,7 @@ if (isset($_POST['submit2'])) {
                     <select name="sort_dropdown" id="sort_dropdown">
                         <option <?php if ($_POST['sort_dropdown'] == ' ') { ?>selected="true" <?php }; ?>value=" "> Sort By: Please Select </option>
                         <option <?php if ($_POST['sort_dropdown'] == 'ReleaseDate') { ?>selected="true" <?php }; ?>value="ReleaseDate"> Sort By: Release Date</option>
-                        <option <?php if ($_POST['sort_dropdown'] == 'RegistrationDateline') { ?>selected="true" <?php }; ?>value="RegistrationDateline">Sort By: Registration Dateline</option>
+                        <option <?php if ($_POST['sort_dropdown'] == 'RegistrationDateline') { ?>selected="true" <?php }; ?>value="RegistrationDateline">Sort By: Registration Deadline</option>
                     </select>
                     <input type="submit" name="submit2" value="Search" class="btn btn-outline-dark my-2 my-sm-0" style="margin-left:20px">
 
@@ -127,12 +127,31 @@ if (isset($_POST['submit2'])) {
                             $status1 = $row1['status'];
                             $registrationDeadline = $row1["registrationDeadline"];
                             $release = $row1["releaseDate"];
+                            if ($status1 == 'Upcoming') {
+                                $badge = "badge rounded-pill text-bg-success position-absolute top-0 end-0 larger-badge";
+                                $statusDisplay = "Upcoming";
+                            } else if ($status1 == 'Pending') {
+                                $badge = "badge rounded-pill text-bg-warning position-absolute top-0 end-0";
+                                $statusDisplay = "Pending";
+                            } else if ($status1 == 'On-Going') {
+                                $badge = "badge rounded-pill text-bg-success position-absolute top-0 end-0";
+                                $statusDisplay = "On-Going";
+                            } else if ($status1 == 'Past') {
+                                $badge = "badge rounded-pill text-bg-dark position-absolute top-0 end-0";
+                                $statusDisplay = "Past";
+                            } else if ($status1 == 'Terminated') {
+                                $badge = "badge rounded-pill text-bg-secondary position-absolute top-0 end-0";
+                                $statusDisplay = "Terminated";
+                            } else {
+                                $badge = "badge rounded-pill text-bg-danger position-absolute top-0 end-0";
+                                $statusDisplay = "Rejected";
+                            }
                     ?>
 
                             <div class="col-md-4 margincon1">
                                 <div class="card border-1 grid-list">
                                     <a href="viewCompDetails.php?selectedComp=<?php echo $compID; ?>" class="stretched-link">
-                                        <span class="badge rounded-pill text-bg-success position-absolute top-0 end-0"><?php echo $status1; ?></span>
+                                        <span class="<?php echo $badge ?>"><?php echo $status1; ?></span>
                                         <img class="card-img-top lazy" src="../materials/compPic/<?php echo $compPic1; ?>">
                                     </a>
                                     <div class="card-body description text-truncate text-color-2">
