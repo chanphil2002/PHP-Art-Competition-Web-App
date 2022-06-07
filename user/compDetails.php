@@ -146,13 +146,26 @@ while ($row1 = mysqli_fetch_assoc($res1)) {
                 </div>
 
                 <?php if ($announcement != NULL) { ?>
-                    <div class="pb-4">
-                        <h2>
-                            Announcement
-                        </h2>
-                        <h3>
-                            <?php echo "$announcement"; ?>
-                        </h3>
+                    <button class="btn btn-primary btn-lg mx-auto px-5" data-bs-toggle="modal" data-bs-target="#viewModal">View Announcement</button>
+                    <!-- View Announcement Modal -->
+
+                    <div class="modal fade bd-example-modal-lg" id="viewModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-scrollable">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h3 class="modal-title" style="color: black; font-weight: bold;" id="exampleModalLabel">New Announcement</h3>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="mb-3">
+                                        <h3 style="white-space: pre-wrap;"><?php echo $announcement ?></h3>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 <?php } ?>
 
@@ -191,15 +204,20 @@ while ($row1 = mysqli_fetch_assoc($res1)) {
                     <hr>
                     <h2><u>Winner</u></h2>
                     <?php
-                    $sql2 = "SELECT * FROM entry WHERE compID = '$compID' ORDER BY totalScore DESC LIMIT 1";
+                    $sql2 = "SELECT entry_winner FROM competition WHERE compID = '$compID'";
                     $run2 = mysqli_query($conn, $sql2);
                     while ($win = mysqli_fetch_assoc($run2)) {
+                        $entry_winner = $win["entry_winner"];
+                    }
+                    $sql3 = "SELECT * FROM entry WHERE entryID = '$entry_winner'";
+                    $run3 = mysqli_query($conn, $sql3);
+                    while ($win = mysqli_fetch_assoc($run3)) {
                         $entryID = $win["entryID"];
-                        $entry = $win["entryFile"];
+                        $entryFile = $win["entryFile"];
                         $title = $win["title"];
                     }
                     ?>
-                    <a href="../user/entry.php?entryID=<?php echo $entryID; ?>&compID=<?php echo $compID; ?>"><img src="../materials/entries/<?php echo $entry; ?>" alt="<?php echo $title; ?>" style="width: 300px; height: auto"></a>
+                    <a href="../user/entry.php?entryID=<?php echo $entryID; ?>&compID=<?php echo $compID; ?>"><img src="../materials/entries/<?php echo $entryFile; ?>" alt="<?php echo $title; ?>" style="width: 300px; height: auto"></a>
                 <?php } ?>
             </div>
         </div>

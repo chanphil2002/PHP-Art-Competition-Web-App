@@ -1,12 +1,11 @@
 <?php include("../organizer/partials/header.php");
 
-if(isset($_GET['organizerID']))
-    {
-        $organizerID = $_GET['organizerID'];
-    } else {
-        header("Location: ../organizer/orghome.php");
-    }
-    
+if (isset($_GET['organizerID'])) {
+    $organizerID = $_GET['organizerID'];
+} else {
+    header("Location: ../organizer/orghome.php");
+}
+
 ?>
 
 <form action="" method="POST" enctype="multipart/form-data">
@@ -20,8 +19,7 @@ if(isset($_GET['organizerID']))
             <div class="mb-3">
                 <label for="inlineFormInput">Competition Name</label>
                 <div class="input-group">
-                    <input type="text" name="compName" class="form-control" id="search" 
-                    placeholder="What is the Competition Name?" required>
+                    <input type="text" name="compName" class="form-control" id="search" placeholder="What is the Competition Name?" required>
                 </div>
             </div>
 
@@ -39,8 +37,7 @@ if(isset($_GET['organizerID']))
                 <label for="date">Competition Release Date</label><br>
                 <label class="text-secondary">(preferrably 7 days after registration date)</label>
                 <div class="input-group date">
-                    <input type="date" name="releaseDate" id="releaseDate" min="<?php echo date("Y-m-d"); ?>" class="form-control" 
-                    placeholder="Competition Release Date" required />
+                    <input type="date" name="releaseDate" id="releaseDate" min="<?php echo date("Y-m-d"); ?>" class="form-control" placeholder="Competition Release Date" required />
                     <span class="input-group-append">
                     </span>
                 </div>
@@ -51,8 +48,7 @@ if(isset($_GET['organizerID']))
                 <br>
                 <label class="text-secondary">(Choose dates after competiton release date)</label>
                 <div class="input-group date">
-                    <input type="date" name="registrationDeadline" id="registrationDeadline" min="<?php echo date("Y-m-d"); ?>" 
-                    class="form-control" placeholder="When is the Deadline?" required />
+                    <input type="date" name="registrationDeadline" id="registrationDeadline" min="<?php echo date("Y-m-d"); ?>" class="form-control" placeholder="When is the Deadline?" required />
                     <span class="input-group-append">
                     </span>
                 </div>
@@ -62,33 +58,28 @@ if(isset($_GET['organizerID']))
                 <label for="stock">Public Vote (%)</label>
                 <br>
                 <label class="text-secondary">(Max 100% including Judge Scoring percentage)</label>
-                <input type="number" name="publicVote" class="form-control" id="publicVote" 
-                placeholder="How many percentage for public vote?" required>
+                <input type="number" name="publicVote" class="form-control" id="publicVote" placeholder="How many percentage for public vote?" required>
             </div>
 
             <div class="mb-3">
                 <label for="stock">Judge Score (%)</label><br>
                 <label class="text-secondary">(Max 100% including Public Voting percentage)</label>
-                <input type="number" name="judgeScore" class="form-control" id="judgeScore" 
-                placeholder="How many percentage for judge score?" required>
+                <input type="number" name="judgeScore" class="form-control" id="judgeScore" placeholder="How many percentage for judge score?" required>
             </div>
 
             <div class="mb-3">
                 <label for="price">Prize Pool (RM)</label>
-                <input type="float" name="prizePool" class="form-control" id="prizePool" 
-                placeholder="Enter Prize Pool..." required>
+                <input type="float" name="prizePool" class="form-control" id="prizePool" placeholder="Enter Prize Pool..." required>
             </div>
 
             <div class="mb-3">
                 <label for="exampleFormControlTextarea1">Competition Description</label>
-                <textarea class="form-control" name="description" id="exampleFormControlTextarea1" rows="3" 
-                placeholder="Tell more about the competition..." required></textarea>
+                <textarea class="form-control" name="description" id="exampleFormControlTextarea1" rows="3" placeholder="Tell more about the competition..." required></textarea>
             </div>
 
             <div class="mb-3">
                 <label for="exampleFormControlTextarea1">Competition Rules and Regulations</label>
-                <textarea class="form-control" name="rules" id="exampleFormControlTextarea1" rows="3" 
-                placeholder="State the competition rules..." required></textarea>
+                <textarea class="form-control" name="rules" id="exampleFormControlTextarea1" rows="3" placeholder="State the competition rules..." required></textarea>
             </div>
 
             <div class="mb-3">
@@ -100,8 +91,7 @@ if(isset($_GET['organizerID']))
 
             <div class="mb-3">
                 <label for="stock">Evaluation Days</label>
-                <input type="number" name="evaluationDays" class="form-control" id="evaluationDays" 
-                placeholder="How many days for evaluation?" required>
+                <input type="number" name="evaluationDays" class="form-control" id="evaluationDays" placeholder="How many days for evaluation?" required>
             </div>
 
             <div class="mb-3">
@@ -112,7 +102,7 @@ if(isset($_GET['organizerID']))
             </div>
 
             <hr class="mb-4">
-            <input type="hidden" id='organizerID' name='organizerID' value= "<?php echo $organizerID;?>">
+            <input type="hidden" id='organizerID' name='organizerID' value="<?php echo $organizerID; ?>">
             <button class="btn btn-primary btn-lg btn-block mx-auto d-flex px-5" name="submit" type="submit">Continue</button>
         </div>
     </div>
