@@ -32,7 +32,7 @@ while ($row = mysqli_fetch_assoc($res)) {
     $announcement = $row['announcement'];
     $rejectedComment = $row['rejectedComment'];
 }
-while ($row1 = mysqli_fetch_assoc($res1)){
+while ($row1 = mysqli_fetch_assoc($res1)) {
     $joinCount = $row1["COUNT(compID)"];
     $voteCount = $row1["SUM(vote)"];
 }
@@ -58,7 +58,7 @@ while ($row1 = mysqli_fetch_assoc($res1)){
     <img class="img" src="../materials/compPic/<?php echo $compPic; ?>" alt="Responsive image" height="300" width="100%" style="object-fit: cover;">
     <ul class="nav nav-pills nav-fill p-2 bg-light">
         <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="viewcomp_main.php?compID=<?php echo $compID; ?>">Main</a>
+            <a class="nav-link active" aria-current="page" href="compDetails.php?compID=<?php echo $compID; ?>">Main</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="viewEntries.php?compID=<?php echo $compID ?>">View Entries</a>
@@ -79,7 +79,8 @@ while ($row1 = mysqli_fetch_assoc($res1)){
                     <span style="display: inline-block; margin-left: 1em" class="badge text-bg-success align-top even-larger-badge"><?php echo $status ?></span>
                 </div>
                 <h3 class="text-muted mb-4"><small class="text-muted">By <?php echo $organizerName ?>, <?php echo $category ?> Category</small></h3>
-                <h6 class="text-muted mb-4"><?php echo $joinCount; ?> People Participated<?php if ($voteCount != 0){echo ", " . $voteCount;  ?> Votes Collected <?php }?></h6>
+                <h6 class="text-muted mb-4"><?php echo $joinCount; ?> People Participated<?php if ($voteCount != 0) {
+                                                                                                echo ", " . $voteCount;  ?> Votes Collected <?php } ?></h6>
 
                 <div class="row mb-5">
                     <div class="col-sm-4">
@@ -128,16 +129,30 @@ while ($row1 = mysqli_fetch_assoc($res1)){
                     </h3>
                 </div>
 
-                <?php if ($announcement != NULL){ ?>
-                    <div class="pb-4">
-                        <h2>
-                        Announcement
-                        </h2>
-                        <h3>
-                            <?php echo "$announcement"; ?>
-                        </h3>
+                <?php if ($announcement != NULL) { ?>
+                    <button class="btn btn-primary btn-lg mx-auto px-5" data-bs-toggle="modal" data-bs-target="#viewModal">View Announcement</button>
+                    <!-- View Announcement Modal -->
+
+                    <div class="modal fade bd-example-modal-lg" id="viewModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-scrollable">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h3 class="modal-title" style="color: black; font-weight: bold;" id="exampleModalLabel">New Announcement</h3>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="mb-3">
+                                        <h3 style="white-space: pre-wrap;"><?php echo $announcement ?></h3>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 <?php } ?>
+
             </div>
             <div class="col-3">
                 <a href="alert.php" style="text-decoration: none">

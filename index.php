@@ -47,7 +47,7 @@
             ?>
 
                 <div class="carousel-item active" data-bs-interval="2000">
-                    <a href="guest/compDetails.php?compID=<?php echo $id; ?>">
+                    <a href="compDetails.php?compID=<?php echo $id; ?>">
                         <center><img src="materials/compPic/<?php echo $pic ?>" style="width:auto;height:360px;" class="" alt="..."></center>
                     </a>
                     <br><br><br><br><br><br>
@@ -56,14 +56,14 @@
                             <h5 style="color:black;display: inline-block"><?php echo $name ?> &nbsp;</h5>
                             <span class="badge rounded-pill position-absolute bg-danger" style="height:20px">Popular</span>
                         </div>
-                        <a class="align btn btn-outline-primary" href="guest/compDetails.php?compID=<?php echo $id; ?>" role="button">View Details</a>
+                        <a class="align btn btn-outline-primary" href="compDetails.php?compID=<?php echo $id; ?>" role="button">View Details</a>
                     </div>
                 </div>
 
             <?php } ?>
 
             <?php
-            // Upcoming Competition
+            // New Competition
             $sql2 = "SELECT * FROM competition WHERE status='On-Going' ORDER BY releaseDate DESC LIMIT 2";
             $res2 = mysqli_query($conn, $sql2);
 
@@ -74,7 +74,7 @@
             ?>
 
                 <div class="carousel-item" data-bs-interval="2000">
-                    <a href="guest/compDetails.php?compID=<?php echo $id; ?>">
+                    <a href="compDetails.php?compID=<?php echo $id; ?>">
                         <center><img src="materials/compPic/<?php echo $pic ?>" style="width:auto;height:360px;" class="" alt="..."></center>
                     </a>
                     <br><br><br><br><br><br>
@@ -83,14 +83,14 @@
                             <h5 style="color:black;display: inline-block"><?php echo $name ?> &nbsp;</h5>
                             <span class="badge rounded-pill position-absolute bg-success" style="height:20px">New</span>
                         </div>
-                        <a class="align btn btn-outline-primary" href="guest/compDetails.php?compID=<?php echo $id; ?>" role="button">View Details</a>
+                        <a class="align btn btn-outline-primary" href="compDetails.php?compID=<?php echo $id; ?>" role="button">View Details</a>
                     </div>
                 </div>
 
             <?php } ?>
 
             <?php
-            // New Competition
+            // Upcoming Competition
             $sql3 = "SELECT * FROM competition WHERE status='Upcoming' ORDER BY releaseDate ASC LIMIT 2";
             $res3 = mysqli_query($conn, $sql3);
 
@@ -101,16 +101,16 @@
             ?>
 
                 <div class="carousel-item" data-bs-interval="2000">
-                    <a href="guest/compDetails.php?compID=<?php echo $id; ?>">
+                    <a href="compDetails.php?compID=<?php echo $id; ?>">
                         <center><img src="materials/compPic/<?php echo $pic ?>" style="width:auto;height:360px;" class="" alt="..."></center>
                     </a>
                     <br><br><br><br><br><br>
                     <div class="carousel-caption d-none d-md-block">
                         <div>
                             <h5 style="color:black;display: inline-block"><?php echo $name ?> &nbsp;</h5>
-                            <span class="badge rounded-pill position-absolute bg-primary" style="height:20px">Upcoming</span>
+                            <span class="badge rounded-pill position-absolute bg-warning" style="height:20px">Upcoming</span>
                         </div>
-                        <a class="align btn btn-outline-primary" href="guest/compDetails.php?compID=<?php echo $id; ?>" role="button">View Details</a>
+                        <a class="align btn btn-outline-primary" href="compDetails.php?compID=<?php echo $id; ?>" role="button">View Details</a>
                     </div>
                 </div>
 
@@ -183,7 +183,7 @@
     <div class="container" style="max-width: 1320px">
         <div class="row">
             <?php
-            $sql5 = "SELECT * FROM competition C INNER JOIN organizer O ON C.organizerID = O.organizerID WHERE category = '2D' AND status != 'Pending' LIMIT 3";
+            $sql5 = "SELECT * FROM competition C INNER JOIN organizer O ON C.organizerID = O.organizerID WHERE category = '2D' AND (status != 'Pending' AND status != 'Terminated' AND status != 'Rejected') LIMIT 3";
             $res5 = mysqli_query($conn, $sql5);
 
             $row = mysqli_num_rows($res5);
@@ -203,9 +203,11 @@
                         <div class="card border-1 grid-list">
                             <a href="guest/compDetails.php?compID=<?php echo $id; ?>" class="stretched-link">
                                 <?php if ($status == "Upcoming") { ?>
-                                    <span class="badge rounded-pill position-absolute bg-danger end-0" style="height:20px">Upcoming</span>
+                                    <span class="badge rounded-pill position-absolute bg-warning end-0" style="height:20px">Upcoming</span>
                                 <?php } elseif ($status == "Past") { ?>
                                     <span class="badge rounded-pill position-absolute bg-dark end-0" style="height:20px">Past</span>
+                                <?php } elseif ($status == "On-Going") { ?>
+                                    <span class="badge rounded-pill position-absolute bg-success end-0" style="height:20px">On-Going</span>
                                 <?php } ?>
                                 <img class="card-img-top lazy" src="materials/compPic/<?php echo $pic; ?>">
                             </a>
@@ -234,7 +236,7 @@
     <div class="container" style="max-width: 1320px">
         <div class="row">
             <?php
-            $sql6 = "SELECT * FROM competition C INNER JOIN organizer O ON C.organizerID = O.organizerID WHERE category = '3D' AND status != 'Pending' LIMIT 3";
+            $sql6 = "SELECT * FROM competition C INNER JOIN organizer O ON C.organizerID = O.organizerID WHERE category = '3D' AND (status != 'Pending' AND status != 'Terminated' AND status != 'Rejected') LIMIT 3";
             $res6 = mysqli_query($conn, $sql6);
 
             $row = mysqli_num_rows($res6);
@@ -254,9 +256,11 @@
                         <div class="card border-1 grid-list">
                             <a href="guest/compDetails.php?compID=<?php echo $id; ?>" class="stretched-link">
                                 <?php if ($status == "Upcoming") { ?>
-                                    <span class="badge rounded-pill position-absolute bg-danger end-0" style="height:20px">Upcoming</span>
+                                    <span class="badge rounded-pill position-absolute bg-warning end-0" style="height:20px">Upcoming</span>
                                 <?php } elseif ($status == "Past") { ?>
                                     <span class="badge rounded-pill position-absolute bg-dark end-0" style="height:20px">Past</span>
+                                <?php } elseif ($status == "On-Going") { ?>
+                                    <span class="badge rounded-pill position-absolute bg-success end-0" style="height:20px">On-Going</span>
                                 <?php } ?>
                                 <img class="card-img-top lazy" src="materials/compPic/<?php echo $pic; ?>">
                             </a>
@@ -285,7 +289,7 @@
     <div class="container" style="max-width: 1320px">
         <div class="row">
             <?php
-            $sql7 = "SELECT * FROM competition C INNER JOIN organizer O ON C.organizerID = O.organizerID WHERE category = 'Paintings' AND status != 'Pending' LIMIT 3";
+            $sql7 = "SELECT * FROM competition C INNER JOIN organizer O ON C.organizerID = O.organizerID WHERE category = 'Paintings' AND (status != 'Pending' AND status != 'Terminated' AND status != 'Rejected') LIMIT 3";
             $res7 = mysqli_query($conn, $sql7);
 
             $row = mysqli_num_rows($res7);
@@ -305,9 +309,11 @@
                         <div class="card border-1 grid-list">
                             <a href="guest/compDetails.php?compID=<?php echo $id; ?>" class="stretched-link">
                                 <?php if ($status == "Upcoming") { ?>
-                                    <span class="badge rounded-pill position-absolute bg-danger end-0" style="height:20px">Upcoming</span>
+                                    <span class="badge rounded-pill position-absolute bg-warning end-0" style="height:20px">Upcoming</span>
                                 <?php } elseif ($status == "Past") { ?>
                                     <span class="badge rounded-pill position-absolute bg-dark end-0" style="height:20px">Past</span>
+                                <?php } elseif ($status == "On-Going") { ?>
+                                    <span class="badge rounded-pill position-absolute bg-success end-0" style="height:20px">On-Going</span>
                                 <?php } ?>
                                 <img class="card-img-top lazy" src="materials/compPic/<?php echo $pic; ?>">
                             </a>
@@ -336,7 +342,7 @@
     <div class="container" style="max-width: 1320px">
         <div class="row">
             <?php
-            $sql8 = "SELECT * FROM competition C INNER JOIN organizer O ON C.organizerID = O.organizerID WHERE category = 'Photography' AND status != 'Pending' LIMIT 3";
+            $sql8 = "SELECT * FROM competition C INNER JOIN organizer O ON C.organizerID = O.organizerID WHERE category = 'Photography' AND (status != 'Pending' AND status != 'Terminated' AND status != 'Rejected') LIMIT 3";
             $res8 = mysqli_query($conn, $sql8);
 
             $row = mysqli_num_rows($res8);
@@ -356,9 +362,11 @@
                         <div class="card border-1 grid-list">
                             <a href="guest/compDetails.php?compID=<?php echo $id; ?>" class="stretched-link">
                                 <?php if ($status == "Upcoming") { ?>
-                                    <span class="badge rounded-pill position-absolute bg-danger end-0" style="height:20px">Upcoming</span>
+                                    <span class="badge rounded-pill position-absolute bg-warning end-0" style="height:20px">Upcoming</span>
                                 <?php } elseif ($status == "Past") { ?>
                                     <span class="badge rounded-pill position-absolute bg-dark end-0" style="height:20px">Past</span>
+                                <?php } elseif ($status == "On-Going") { ?>
+                                    <span class="badge rounded-pill position-absolute bg-success end-0" style="height:20px">On-Going</span>
                                 <?php } ?>
                                 <img class="card-img-top lazy" src="materials/compPic/<?php echo $pic; ?>">
                             </a>
