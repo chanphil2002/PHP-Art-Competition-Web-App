@@ -98,6 +98,12 @@ if(isset($_GET['organizerID']))
                 placeholder="How many days for evaluation?" required>
             </div>
 
+            <div class="mb-3">
+                <label for="price">Competition Receipt</label>
+                <div class="input-group mb-3">
+                    <input type="file" class="form-control" name="receipt" id="receipt" required>
+                </div>
+            </div>
 
             <hr class="mb-4">
             <input type="hidden" id='organizerID' name='organizerID' value= "<?php echo $organizerID;?>">
