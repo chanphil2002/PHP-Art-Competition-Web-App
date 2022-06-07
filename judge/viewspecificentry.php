@@ -50,9 +50,10 @@ if (isset($_POST['submit'])) {
     $count = mysqli_num_rows($res500);
     $i = 0;
     $total = 0;
-    $sql2 = "INSERT INTO score_criteria (compID, entryID, judgeIC) VALUES ('$compID', '$entryID','$judgeIC')";
-    $res2 = mysqli_query($conn, $sql2);
-
+    if ($count20 == 0) {
+        $sql2 = "INSERT INTO score_criteria (compID, entryID, judgeIC) VALUES ('$compID', '$entryID','$judgeIC')";
+        $res2 = mysqli_query($conn, $sql2);
+    }
     while ($count > 0) {
         // echo "<script>alert('crit.$i');</script>";
         $crit = $_POST["crit$i"];
@@ -74,7 +75,6 @@ if (isset($_POST['submit'])) {
         $cri4 = $row3['cri4'];
     }
     $count = mysqli_num_rows($res500);
-
     $avg = $total / $count;
     $sql3 = "UPDATE score_criteria SET cri_tscore = $avg WHERE compID = '$compID' AND entryID = '$entryID' and judgeIC = '$judgeIC'";
     $res3 = mysqli_query($conn, $sql3);
