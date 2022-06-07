@@ -32,7 +32,7 @@ while ($row = mysqli_fetch_assoc($res)) {
     $announcement = $row['announcement'];
     $rejectedComment = $row['rejectedComment'];
 }
-while ($row1 = mysqli_fetch_assoc($res1)){
+while ($row1 = mysqli_fetch_assoc($res1)) {
     $joinCount = $row1["COUNT(compID)"];
     $voteCount = $row1["SUM(vote)"];
 }
@@ -58,7 +58,7 @@ while ($row1 = mysqli_fetch_assoc($res1)){
     <img class="img" src="../materials/compPic/<?php echo $compPic; ?>" alt="Responsive image" height="300" width="100%" style="object-fit: cover;">
     <ul class="nav nav-pills nav-fill p-2 bg-light">
         <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="viewcomp_main.php?compID=<?php echo $compID; ?>">Main</a>
+            <a class="nav-link active" aria-current="page" href="compDetails.php?compID=<?php echo $compID; ?>">Main</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="viewEntries.php?compID=<?php echo $compID ?>">View Entries</a>
@@ -79,7 +79,8 @@ while ($row1 = mysqli_fetch_assoc($res1)){
                     <span style="display: inline-block; margin-left: 1em" class="badge text-bg-success align-top even-larger-badge"><?php echo $status ?></span>
                 </div>
                 <h3 class="text-muted mb-4"><small class="text-muted">By <?php echo $organizerName ?>, <?php echo $category ?> Category</small></h3>
-                <h6 class="text-muted mb-4"><?php echo $joinCount; ?> People Participated<?php if ($voteCount != 0){echo ", " . $voteCount;  ?> Votes Collected <?php }?></h6>
+                <h6 class="text-muted mb-4"><?php echo $joinCount; ?> People Participated<?php if ($voteCount != 0) {
+                                                                                                echo ", " . $voteCount;  ?> Votes Collected <?php } ?></h6>
 
                 <div class="row mb-5">
                     <div class="col-sm-4">
@@ -151,7 +152,7 @@ while ($row1 = mysqli_fetch_assoc($res1)){
                         </div>
                     </div>
                 <?php } ?>
-                
+
             </div>
             <div class="col-3">
                 <a href="alert.php" style="text-decoration: none">
