@@ -36,7 +36,8 @@ if(isset($_GET['organizerID']))
             </div>
 
             <div class="mb-3">
-                <label for="date">Competition Release Date <br>(preferrably 7 days after registration date)</label>
+                <label for="date">Competition Release Date</label><br>
+                <label class="text-secondary">(preferrably 7 days after registration date)</label>
                 <div class="input-group date">
                     <input type="date" name="releaseDate" id="releaseDate" min="<?php echo date("Y-m-d"); ?>" class="form-control" 
                     placeholder="Competition Release Date" required />
@@ -56,19 +57,22 @@ if(isset($_GET['organizerID']))
             </div>
 
             <div class="mb-3">
-                <label for="stock">Public Vote</label>
+                <label for="stock">Public Vote (%)</label>
+                <br>
+                <label class="text-secondary">(Max 100% including Judge Scoring percentage)</label>
                 <input type="number" name="publicVote" class="form-control" id="publicVote" 
                 placeholder="How many percentage for public vote?" required>
             </div>
 
             <div class="mb-3">
-                <label for="stock">Judge Score</label>
+                <label for="stock">Judge Score (%)</label><br>
+                <label class="text-secondary">(Max 100% including Public Voting percentage)</label>
                 <input type="number" name="judgeScore" class="form-control" id="judgeScore" 
                 placeholder="How many percentage for judge score?" required>
             </div>
 
             <div class="mb-3">
-                <label for="price">Prize Pool</label>
+                <label for="price">Prize Pool (RM)</label>
                 <input type="float" name="prizePool" class="form-control" id="prizePool" 
                 placeholder="Enter Prize Pool..." required>
             </div>
