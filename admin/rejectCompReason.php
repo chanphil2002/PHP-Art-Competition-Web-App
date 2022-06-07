@@ -48,7 +48,7 @@
 <?php 
     if (isset($_POST["submit"])){
         $reason = $_POST['reason'];
-		$update = "UPDATE competition SET status= 'Rejected', rejectedComment = '$reason' WHERE compID = '$compID'";
+		$update = "UPDATE competition SET status = 'Rejected', rejectedComment = '$reason' WHERE compID = '$compID'";
 		$run_update = mysqli_query($conn, $update);
 
 		if($run_update == true){
