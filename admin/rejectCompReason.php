@@ -47,7 +47,7 @@
 <?php include ("../admin/partials/footer.php")?>
 <?php 
     if (isset($_POST["submit"])){
-        $reason = $_POST['reason'];
+        $reason = addslashes( $_POST['reason']);
 		$update = "UPDATE competition SET status = 'Rejected', rejectedComment = '$reason' WHERE compID = '$compID'";
 		$run_update = mysqli_query($conn, $update);
 
