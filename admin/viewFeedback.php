@@ -1,4 +1,10 @@
-<?php include("../admin/partials/header.php");?>
+<?php 
+include("../admin/partials/header.php");
+
+$check = "SELECT * FROM feedback WHERE feedbackType = 'Admin' ";
+$run = mysqli_query($conn, $check);
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -17,92 +23,94 @@
     <div class="container">
         <div class="row">
             <div class="col-12">
-                <div style="margin-bottom: 3em;">
-                    <h2>Feedback</h2>
-                    <!-- display all the unresolved feedbacks -->
-                    <?php
-                    $sql = "SELECT * FROM feedback WHERE feedbackType = 'Admin' AND status = 'unresolved'";
-                    $res = mysqli_query($conn, $sql);
-                    $count = mysqli_num_rows($res);
-                    if ($count > 0) {
-                        while ($row = mysqli_fetch_assoc($res)) {
-                            $feedbackID = $row['feedbackID'];
-                            $feedbackType = $row['feedbackType'];
-                            $description = $row['description'];
-                            $userEmail = $row['userEmail'];
-                            $organizerID = $row['organizerID'];
-                            $status = $row['status'];
-
-                            if($organizerID != ""){
-                                $sql2 = "SELECT * FROM organizer WHERE organizerID = '$organizerID'";
-                                $res2 = mysqli_query($conn, $sql2);
-                                while ($row_organizer = mysqli_fetch_assoc($res2)){
-                                    $email = $row_organizer['organizerEmail'];
-                                }
-                            } else if ($userEmail != ""){
-                                $email = $userEmail;
-                            }
-
-                            if ($status != 'resolved') {
-                                echo
-                                "
-                                <div class='card'>
-                                    <div class='card-body'>
-                                    <h3 style='word-wrap: break-word; font-weight: bold;'>
-                                    <span class='badge bg-secondary'> Feedback </span> $email 
-                                    <h3>$description</h3>
-                                    <form action='' method='POST'>
-                                    <input type='hidden' name='feedbackID' value='$feedbackID'>
-                                    <button name='submit' type='submit' class='btn btn-primary'>Resolve</button>
-                                    </form>
-                                    </h3>
-                                    </div>
-                                </div>
-                                ";
-
-                        }}
-                    
-                    // display all the resolved feedback
-                    $sql2 = "SELECT * FROM feedback WHERE feedbackType = 'Admin' AND status = 'resolved'";
-                    $res2 = mysqli_query($conn, $sql2);
-                    $count2 = mysqli_num_rows($res2);
-                    if ($count2 > 0) {
-                        while ($row = mysqli_fetch_assoc($res2)) {
-                            $feedbackID = $row['feedbackID'];
-                            $feedbackType = $row['feedbackType'];
-                            $description = $row['description'];
-                            $userEmail = $row['userEmail'];
-                            $organizerID = $row['organizerID'];
-                            $status = $row['status'];
-
-                            if($organizerID != ""){
-                                $sql2 = "SELECT * FROM organizer WHERE organizerID = '$organizerID'";
-                                $res2 = mysqli_query($conn, $sql2);
-                                while ($row_organizer = mysqli_fetch_assoc($res2)){
-                                    $email = $row_organizer['organizerEmail'];
-                                }
-                            } else if ($userEmail != ""){
-                                $email = $userEmail;
-                            }
-                            
-                            if ($status != 'unresolved') {
-                                echo
-                                "
-                                <div class='card'>
-                                    <div class='card-body bg-success'>
-                                    <h3 class='text-white' style='word-wrap: break-word; font-weight: bold;'>
-                                    <span class='badge bg-secondary'> Feedback </span> $email 
-                                    <h3 class='text-white'>$description </h3> 
-                                    </h3>
-                                    </div>
-                                </div>
-                                ";
-                            }
-                        }}
-                    } else {
+                <div style="margin-bottom: 3em; margin-top: 25px">
+                    <h2>Feedback</h2><br>
+                    <!-- No Admin Feedback -->
+                    <?php if (mysqli_num_rows($run) == 0){
                         echo "<h2 class='text-primary'>Currently there are no feedbacks.</h2>";
-                    }
-                     
+
+                    }else{
+                        // Unresolved Admin Feedback
+                        $sql = "SELECT * FROM feedback WHERE feedbackType = 'Admin' AND status = 'unresolved' ";
+                        $run = mysqli_query($conn, $sql);
+
+                        while ($records = mysqli_fetch_assoc($run)){
+
+                            $org = $records["organizerID"];
+                            // $query = "SELECT * FROM organizer WHERE organizerID = '$org' ";
+                            // $res = mysqli_query($conn, $query);
+                            // $data = mysqli_fetch_assoc($res);
+                            // $orgEmail = $data["organizerEmail"];
+
+                            $user = $records["userEmail"];
+                            $desc = $records["description"];
+                            $feedbackID = $records["feedbackID"];
+
+                            if ($user == NULL){
+                                $t = "OrganizerID: ";
+                            }elseif ($org == NULL){
+                                $t = "User Email: ";
+                            }
+
+                            // print
+                            echo "
+                            <div class = 'card'>
+                                <div class='card-body'>
+                                    <h3 style='word-wrap: break-word; font-weight: bold;'>
+                                        <span class='badge bg-secondary'> Feedback </span> 
+                                        $t $user $org 
+                                    </h3>
+
+                                    <h3>$desc</h3>
+                                        
+                                    <form action='' method='POST'>
+                                        <input type='hidden' name='feedbackID' value='$feedbackID'>
+                                        <button name='submit' type='submit' class='btn btn-primary'>Resolve</button>
+                                    </form>
+                                </div>
+                            </div>
+                            ";
+                        }
+
+                        // Resolved Admin Feedback
+                        $sql = "SELECT * FROM feedback WHERE feedbackType = 'Admin' AND status = 'resolved' ";
+                        $run = mysqli_query($conn, $sql);
+
+                        while ($records = mysqli_fetch_assoc($run)){
+
+                            $org = $records["organizerID"];
+                            // $query = "SELECT * FROM organizer WHERE organizerID = '$org' ";
+                            // $res = mysqli_query($conn, $query);
+                            // $data = mysqli_fetch_assoc($res);
+                            // $orgEmail = $data["organizerEmail"];
+
+                            $user = $records["userEmail"];
+                            $desc = $records["description"];
+                            $feedbackID = $records["feedbackID"];
+
+                            if ($user == NULL){
+                                $t = "OrganizerID: ";
+                            }elseif ($org == NULL){
+                                $t = "User Email: ";
+                            }
+
+                            // print
+                            echo "
+                            <div class = 'card'>
+                                <div class='card-body bg-success'>
+                                    <h3 class='text-white' style='word-wrap: break-word; font-weight: bold;'>
+                                        <span class='badge bg-secondary'> Feedback </span> 
+                                        $t $user $org
+                                    </h3>
+
+                                    <h3>$desc</h3>
+                                </div>
+                            </div>
+                            ";
+                        }
+                    } ?>                            
+                    
+                    <?php                     
                     if (isset($_POST['submit'])) {
                         $feedbackID = $_POST['feedbackID'];
                         $sql1 = "UPDATE feedback SET
@@ -113,8 +121,7 @@
                         if ($res1 == true) {
                            echo "<script>alert('The feedback has been resolved.')
                            location = 'viewfeedback.php' </script>";
-                        }
-                    }
+                        }}
                     ?>
                 </div>
             </div>
