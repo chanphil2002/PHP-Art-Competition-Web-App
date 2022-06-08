@@ -151,8 +151,8 @@ if (isset($_POST["approve"])) {
 	}
 } else if (isset($_POST["update"])) {
 	$newEmail = $_POST['organizerEmail'];
-	$newName = $_POST['name'];
-	$newDesc = $_POST['description'];
+	$newName = addslashes($_POST['name']);
+	$newDesc = addslashes($_POST['description']);
 	if ($_FILES['profile_picture']['name'] == "" && $_FILES['verifiedDoc']['name'] == "") {
 		$update = "UPDATE organizer SET organizerEmail = '$newEmail', organizerName = '$newName', organizerDesc = '$newDesc' WHERE organizerID = '$organizerID'";
 		$run_update = mysqli_query($conn, $update);

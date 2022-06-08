@@ -348,8 +348,8 @@ if (isset($_POST["approve"])) {
 } else if (isset($_POST['update'])) {
 	$newCompName = $_POST['name'];
 	$newCategory = $_POST['category'];
-	$newDesc = $_POST['description'];
-	$newRules = $_POST['rules'];
+	$newDesc = addslashes($_POST['description']);
+	$newRules = addslashes($_POST['rules']);
 	$newRelese = $_POST['releaseDate'];
 	$newDeadline = $_POST['regisDeadline'];
 	$newEvaluate = $_POST['evaluation'];

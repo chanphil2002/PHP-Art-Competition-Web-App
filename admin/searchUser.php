@@ -62,7 +62,7 @@ if (!isset($_SESSION["admin"])){
 <?php
 if (isset($_POST["search"])) {
 
-    $search = $_POST['search'];
+    $search = addslashes($_POST['search']);
     $sql = "SELECT * FROM user WHERE username LIKE '%$search%' OR userEmail LIKE '%$search%'";
     $res = mysqli_query($conn, $sql);
     if (mysqli_num_rows($res) != 0){
