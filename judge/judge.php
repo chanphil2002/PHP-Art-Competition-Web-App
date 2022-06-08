@@ -4,7 +4,7 @@ if (!isset($_SESSION["judge"])) {
   header("Location: ../general/judgeLogin.php");
 }
 if (isset($_POST['search'])) {
-  $search = $_POST['search'];
+  $search = addslashes($_POST['search']);
   $sql1 = "SELECT * FROM competition WHERE (compName LIKE '%$search%' OR category LIKE '%$search%') AND status <> 'Pending'";
   $res1 = mysqli_query($conn, $sql1);
 } else {

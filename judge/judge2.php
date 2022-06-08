@@ -12,7 +12,7 @@ $display = mysqli_fetch_assoc($result);
 $judgeName = $display['judgeName'];
 
 if (isset($_POST['submit2'])) {
-    $search = $_POST['search'];
+    $search = addslashes($_POST['search']);
     $filter = $_POST['filter_dropdown'];
     $sort = $_POST['sort_dropdown'];
 

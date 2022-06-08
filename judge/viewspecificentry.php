@@ -18,10 +18,11 @@ if (isset($_GET['entryID']) & isset($_GET['compID']) & isset($_SESSION['judge'])
     $res20 = mysqli_query($conn, $sql20);
     $sql500 = "SELECT * FROM comp_criteria WHERE compID='$compID'";
     $res500 = mysqli_query($conn, $sql500);
-    $sql5 = "SELECT compPic FROM competition WHERE compID='$compID'";
+    $sql5 = "SELECT compPic, status FROM competition WHERE compID='$compID'";
     $res5 = mysqli_query($conn, $sql5);
     while ($row8 = mysqli_fetch_assoc($res5)) {
         $compPic = $row8['compPic'];
+        $status = $row8['status'];
     }
 } else {
     echo "mistake";
@@ -130,53 +131,52 @@ if (isset($_POST['submit'])) {
                         <h5 class="card-title" style="color:black"><?php echo $title ?></h5>
                         <p class="card-text"><small class="text-muted">By <?php echo $userEmail ?></small></p>
                         --------------------------------------------------------------
-                        <h3 class="card-text">Scoring Form</small></h2>
-
-
-                            <form action="" method="POST" class="d-flex">
-                                <div class="col-md-4 order-md-2 mb-4">
-                                    <?php
-                                    $i = 0;
-                                    $count1 = mysqli_num_rows($res1);
-                                    if ($count1 == 0) {
-                                        $sql1 = "SELECT * FROM comp_criteria WHERE compID = '$compID'";
-                                        $res1 = mysqli_query($conn, $sql1);
-                                        while ($row2 = mysqli_fetch_assoc($res1)) {
-                                            $criteria = $row2['criteria']; ?>
-                                            <div class="mb-3">
-                                                <form action=" " method="POST" class="d-flex">
-                                                    <label for="crit"><?php echo $criteria; ?> Score</label>
-                                                    <input type="text" name="crit<?php echo $i; ?>" class="form-control" id="crit.<?php echo $i; ?>" value='' required <?php $i++; ?>>
-                                            </div>
+                        <form action="" method="POST" class="d-flex">
+                            <div class="col-md-4 order-md-2 mb-4">
+                                <?php if ($status == 'Past') { ?>
+                                    <h3 class="card-text">Scoring Form</small></h2>
                                         <?php
+                                        $i = 0;
+                                        $count1 = mysqli_num_rows($res1);
+                                        if ($count1 == 0) {
+                                            $sql1 = "SELECT * FROM comp_criteria WHERE compID = '$compID'";
+                                            $res1 = mysqli_query($conn, $sql1);
+                                            while ($row2 = mysqli_fetch_assoc($res1)) {
+                                                $criteria = $row2['criteria']; ?>
+                                                <div class="mb-3">
+                                                    <form action=" " method="POST" class="d-flex">
+                                                        <label for="crit"><?php echo $criteria; ?> Score</label>
+                                                        <input type="number" name="crit<?php echo $i; ?>" class="form-control" id="crit.<?php echo $i; ?>" onkeypress="return AllowOnlyNumbers(event);" value='' required <?php $i++; ?>>
+                                                </div>
+                                            <?php
+                                            }
+                                        } else {
+                                            while ($row2 = mysqli_fetch_assoc($res1)) {
+                                                $criteria = $row2['criteria'];
+                                                $crit = $row2["cri$i"];
+                                            ?>
+
+                                                <div class="mb-3">
+                                                    <form action=" " method="POST" class="d-flex">
+                                                        <label for="crit"><?php echo $criteria; ?> Score</label>
+                                                        <input type="text" name="crit<?php echo $i; ?>" class="form-control" id="crit.<?php echo $i; ?>" onkeypress="return AllowOnlyNumbers(event);" value='<?php echo $crit;
+                                                                                                                                                                                                                ?>' required <?php $i++; ?>>
+                                                </div>
+                                        <?php }
                                         }
-                                    } else {
-                                        while ($row2 = mysqli_fetch_assoc($res1)) {
-                                            $criteria = $row2['criteria'];
-                                            $crit = $row2["cri$i"];
                                         ?>
 
-                                            <div class="mb-3">
-                                                <form action=" " method="POST" class="d-flex">
-                                                    <label for="crit"><?php echo $criteria; ?> Score</label>
-                                                    <input type="text" name="crit<?php echo $i; ?>" class="form-control" id="crit.<?php echo $i; ?>" value='<?php echo $crit;
-                                                                                                                                                            ?>' required <?php $i++; ?>>
-                                            </div>
-                                    <?php }
-                                    }
-                                    ?>
+                                        <div class="mb-3">
+                                            <label for="total">Total Score</label>
+                                            <input type="text" name="total" class="form-control" id="total" value="<?php echo $cri_tscore; ?>" readonly>
+                                        </div>
 
-                                    <div class="mb-3">
-                                        <label for="total">Total Score</label>
-                                        <input type="text" name="total" class="form-control" id="total" value="<?php echo $cri_tscore; ?>" readonly>
-                                    </div>
+                                        <hr class="mb-4">
+                                        <button class="btn btn-primary btn-lg btn-block mx-auto d-flex px-5" name="submit" type="submit">Save</button>
+                            </div>
+                        <?php } ?>
 
-                                    <hr class="mb-4">
-                                    <button class="btn btn-primary btn-lg btn-block mx-auto d-flex px-5" name="submit" type="submit">Save</button>
-                                </div>
-
-
-                            </form>
+                        </form>
 
                     </div>
                 </div>
@@ -188,3 +188,14 @@ if (isset($_POST['submit'])) {
 </html>
 
 <?php include("../organizer/partials/footer.php"); ?>
+<script>
+    function AllowOnlyNumbers(e) {
+
+        e = (e) ? e : window.event;
+        var clipboardData = e.clipboardData ? e.clipboardData : window.clipboardData;
+        var key = e.keyCode ? e.keyCode : e.which ? e.which : e.charCode;
+        var str = (e.type && e.type == "paste") ? clipboardData.getData('Text') : String.fromCharCode(key);
+
+        return (/^\d+$/.test(str));
+    }
+</script>
