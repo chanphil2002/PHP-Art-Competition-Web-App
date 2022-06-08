@@ -2,8 +2,8 @@
 include("partials/database.php");
 include("partials/header.php");
 session_start();
-if (!isset($_SESSION["user"])){
-    header ("Location: ../general/registeredUserLogin.php");
+if (!isset($_SESSION["user"])) {
+    header("Location: ../general/registeredUserLogin.php");
 }
 
 if (isset($_POST['submit2'])) {
@@ -20,7 +20,6 @@ if (isset($_POST['submit2'])) {
     } else {
         $sql1 = "CREATE TEMPORARY TABLE temp AS SELECT * FROM competition WHERE (compName LIKE '%$search%' OR category LIKE '%$search%') AND status LIKE '%$filter%'";
         $res1 = mysqli_query($conn, $sql1);
-
     }
 
     if ($sort == "RegistrationDateline") {
@@ -133,8 +132,21 @@ if (isset($_POST['submit2'])) {
                             <div class="col-md-4 margincon1">
                                 <div class="card border-1 grid-list">
                                     <a href="compDetails.php?compID=<?php echo $compID; ?>" class="stretched-link">
-                                        <span class="badge rounded-pill text-bg-success position-absolute top-0 end-0"><?php echo $status1; ?></span>
-                                        <img class="card-img-top lazy" src="../materials/compPic/<?php echo $compPic1; ?>">
+                                        <?php
+                                        if ($status1 == 'Pending') {
+                                            echo "<span style='margin-left: 1em' class='badge rounded-pill bg-primary align-top end-0'> $status1 </span>";
+                                        } else if ($status1 == 'Upcoming') {
+                                            echo "<span style='margin-left: 1em' class='badge rounded-pill bg-warning align-top end-0'> $status1 </span>";
+                                        } else if ($status1 == 'On-Going') {
+                                            echo "<span style='margin-left: 1em' class='badge rounded-pill bg-success align-top end-0'>$status1 </span>";
+                                        } else if ($status1 == 'Past') {
+                                            echo "<span style='margin-left: 1em' class='badge rounded-pill bg-dark align-top end-0'> $status1 </span>";
+                                        } else if ($status1 == 'Terminated') {
+                                            echo "<span style='margin-left: 1em' class='badge rounded-pill bg-danger align-top end-0'> $status1 </span>";
+                                        } else if ($status1 == 'Rejected') {
+                                            echo "<span style='margin-left: 1em' class='badge rounded-pill bg-secondary align-top end-0'> $status1 </span>";
+                                        }
+                                        ?> <img class="card-img-top lazy" src="../materials/compPic/<?php echo $compPic1; ?>">
                                     </a>
                                     <div class="card-body description text-truncate text-color-2">
                                         <?php echo $registrationDeadline; ?> / <?php echo $category1; ?>

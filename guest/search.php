@@ -93,8 +93,21 @@ if (isset($_POST['search'])) {
               <div class="col-md-4 margincon1">
                 <div class="card border-1 grid-list">
                   <a href="compDetails.php?compID=<?php echo $compID; ?>" class="stretched-link">
-                    <span class="badge rounded-pill text-bg-success position-absolute top-0 end-0"><?php echo $status; ?></span>
-                    <img class="card-img-top lazy" src="../materials/compPic/<?php echo $compPic; ?>">
+                    <?php
+                    if ($status == 'Pending') {
+                      echo "<span style='margin-left: 1em' class='badge rounded-pill bg-primary align-top end-0'> $status </span>";
+                    } else if ($status == 'Upcoming') {
+                      echo "<span style='margin-left: 1em' class='badge rounded-pill bg-warning align-top end-0'> $status </span>";
+                    } else if ($status == 'On-Going') {
+                      echo "<span style='margin-left: 1em' class='badge rounded-pill bg-success align-top end-0'>$status </span>";
+                    } else if ($status == 'Past') {
+                      echo "<span style='margin-left: 1em' class='badge rounded-pill bg-dark align-top end-0'> $status </span>";
+                    } else if ($status == 'Terminated') {
+                      echo "<span style='margin-left: 1em' class='badge rounded-pill bg-danger align-top end-0'> $status </span>";
+                    } else if ($status == 'Rejected') {
+                      echo "<span style='margin-left: 1em' class='badge rounded-pill bg-secondary align-top end-0'> $status </span>";
+                    }
+                    ?> <img class="card-img-top lazy" src="../materials/compPic/<?php echo $compPic; ?>">
                   </a>
                   <div class="card-body description text-truncate text-color-2">
                     <?php echo "Registration Deadline: " . $registrationDeadline; ?> / <?php echo "Category: " . $category; ?>
