@@ -142,15 +142,15 @@ if(isset($_GET['compID']))
     ob_start();
     if(isset($_POST['submit']))
     {
-        $compName = $_POST['compName'];
+        $compName = addslashes($_POST['compName']);
         $category = $_POST['category'];
         $releaseDate = $_POST['releaseDate'];
         $registrationDeadline = $_POST['registrationDeadline'];
         $publicVote = $_POST['publicVote'];
         $judgeScore = $_POST['judgeScore'];
         $prizePool = $_POST['prizePool'];
-        $description = $_POST['description'];
-        $rules = $_POST['rules'];
+        $description = addslashes($_POST['description']);
+        $rules = addslashes($_POST['rules']);
         $evaluationDays = $_POST['evaluationDays'];
 
         if(isset($_FILES['compPic']['name']))

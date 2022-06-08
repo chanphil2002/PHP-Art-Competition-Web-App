@@ -116,15 +116,15 @@ ob_start();
 //Add data into variables
 if (isset($_POST['submit'])) {
     $organizerID = $_POST['organizerID'];
-    $compName = $_POST['compName'];
+    $compName = addslashes($_POST['compName']);
     $category = $_POST['category'];
     $releaseDate = $_POST['releaseDate'];
     $registrationDeadline = $_POST['registrationDeadline'];
     $publicVote = $_POST['publicVote'];
     $judgeScore = $_POST['judgeScore'];
     $prizePool = $_POST['prizePool'];
-    $description = $_POST['description'];
-    $rules = $_POST['rules'];
+    $description = addslashes($_POST['description']);
+    $rules = addslashes($_POST['rules']);
     $evaluationDays = $_POST['evaluationDays'];
 
     //Get photo, change file name & Add into specific folder

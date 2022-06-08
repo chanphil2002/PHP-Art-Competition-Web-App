@@ -7,7 +7,7 @@ if (!isset($_SESSION["organizer"])) {
 
 $organizerID = $_SESSION['organizer'];
 if (isset($_POST['submit2'])) {
-    $search = $_POST['search'];
+    $search = addslashes($_POST['search']);
     $filter = $_POST['filter_dropdown'];
 
     if ($filter == " ") {
@@ -43,7 +43,7 @@ if (isset($_POST['submit2'])) {
 
             <div class="col-12 col-competition-2">
                 <form action="../organizer/orgsearch2.php" method="POST" class="d-flex">
-                    <input class="form-control me-2 mr-sm-2 col-md-5 ml-5" type="search" name="search" value="<?php echo $search ?>">
+                    <input class="form-control me-2 mr-sm-2 col-md-5 ml-5" type="search" name="search" value="<?php echo stripslashes($search) ?>">
             </div>
             <div class="col-12 col-competition-3">
                 <div class="overflow-auto">

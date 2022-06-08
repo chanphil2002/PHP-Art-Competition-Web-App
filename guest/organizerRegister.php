@@ -87,7 +87,7 @@ if (isset($_POST['submit'])) {
 				</div>
 				<div class="form-row">
 					<br><br><label for="verify_doc">VERIFICATION DOCUMENT (.pdf) *</label><br>
-					<input type="file" name="verify_doc" id="verify_doc" accept=".pdf" required>
+					<input type="file" name="verify_doc" id="verify_doc" accept="application/pdf, image/*" required>
 					<br>
 					<br>
 					<br>

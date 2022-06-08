@@ -4,11 +4,11 @@
 
 if (isset($_POST['submit'])) {
 	$ic = $_POST['ic'];
-	$name = $_POST['name'];
+	$name = addslashes($_POST['name']);
 	$email = $_POST['email'];
 	$password = $_POST['password'];
 	$confirm_pass = $_POST['confirm_pass'];
-	$bio = $_POST['bio'];
+	$bio = addslashes($_POST['bio']);
 	$profile_picture = $_FILES['profile_picture']['name'];
 	$tmp_name = $_FILES['profile_picture']['tmp_name'];
 

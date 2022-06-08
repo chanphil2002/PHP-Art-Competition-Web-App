@@ -81,7 +81,7 @@ if (!isset($_SESSION["organizer"])) {
 if (isset($_POST["submit"])) {
     $organizerName = $_POST["organizerName"];
     $organizerEmail = $_POST["organizerEmail"];
-    $organizerDesc = $_POST["organizerDesc"];
+    $organizerDesc = addslashes($_POST["organizerDesc"]);
 
     if ($_FILES['organizerProfilePic']['name'] == "") {
         $update = "UPDATE organizer SET organizerName='$organizerName', organizerEmail='$organizerEmail', organizerDesc='$organizerDesc' WHERE organizerID = $organizerID";

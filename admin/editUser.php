@@ -109,7 +109,7 @@ if (!isset($_SESSION["admin"])){
 </html>
 <?php
 if (isset($_POST["update"])) {
-	$newUsername = $_POST['username'];
+	$newUsername = addslashes($_POST['username']);
 	$newDoB = $_POST["dob"];
 	$newGender = $_POST["gender"];
 	$newPhone = $_POST["phone"];
