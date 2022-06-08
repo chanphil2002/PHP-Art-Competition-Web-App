@@ -27,9 +27,9 @@
 
     if (isset($_POST['submit'])){
         $email = $_POST['email'];
-        $username = $_POST['username'];
+        $username = addslashes($_POST['username']);
         $phone = $_POST['phone'];
-        $title = $_POST['entryName'];
+        $title = addslashes($_POST['entryName']);
         $entry = $_FILES['entry']['name'];
 	    $tmp_name = $_FILES['entry']['tmp_name'];
         $date = date("Y-m-d");

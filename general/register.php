@@ -5,9 +5,9 @@
 
     if (isset($_POST["submit"])){
         $email = $_POST["userEmail"];
-        $username = $_POST["username"];
-        $pw = $_POST["password"];
-        $cpw = $_POST["cfmpassword"];
+        $username = addslashes($_POST["username"]);
+        $pw = addslashes($_POST["password"]);
+        $cpw = addslashes($_POST["cfmpassword"]);
         $phone = $_POST["phoneNum"];
         $dob = $_POST["dob"];
         $gender = $_POST["gender"];

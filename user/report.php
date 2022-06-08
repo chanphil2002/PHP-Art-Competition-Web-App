@@ -76,7 +76,7 @@
 <?php
     if (isset($_POST["submit"])){
         $type = "Entry";
-        $desc = $_POST["report"];
+        $desc = addslashes($_POST["report"]);
         $status = "unresolved";
         $user = $_SESSION["user"];
 

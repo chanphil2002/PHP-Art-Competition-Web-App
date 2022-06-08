@@ -6,7 +6,7 @@ session_start();
 if (isset($_POST["submit"])) {
     // Get email and password entered: 
     $id = $_POST["userEmail"];
-    $pw = $_POST["password"];
+    $pw = addslashes($_POST["password"]);
 
     $sql1 = "SELECT * FROM admin WHERE adminEmail = '$id' AND adminPassword = '$pw' LIMIT 1";
     $sql2 = "SELECT * FROM organizer WHERE organizerEmail = '$id' AND organizerPassword = '$pw' AND organizerStatus = 'approved' LIMIT 1";

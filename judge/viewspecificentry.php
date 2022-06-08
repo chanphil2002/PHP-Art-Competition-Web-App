@@ -124,7 +124,7 @@ if (isset($_POST['submit'])) {
         <div class="card mb-3">
             <div class="row g-0">
                 <div class="col-md-7">
-                    <img class="card-img-left" src="../materials/entries/<?php echo $entryFile; ?>" class="img-fluid rounded-start" alt="...">
+                    <img class="card-img-left" src="../materials/entries/<?php echo $entryFile ?>" class="img-fluid rounded-start" alt="..." style="height:auto; width:540px">
                 </div>
                 <div class="col-md-5">
                     <div class="card-body">
