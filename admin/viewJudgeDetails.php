@@ -77,7 +77,7 @@ if (!isset($_SESSION["admin"])){
 	if (isset($_POST["submit"])){
 		$newName = $_POST['name'];
 		$newEmail = $_POST['email'];
-		$newBio = $_POST["bio"];
+		$newBio = addslashes($_POST["bio"]);
 
 		//if no profile picture added
 		if($_FILES['profile_picture']['name'] == ""){
