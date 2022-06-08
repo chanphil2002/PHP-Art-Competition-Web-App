@@ -53,6 +53,8 @@ $res = mysqli_query($conn, $sql);
                 echo "<span style='display: inline-block; margin-left: 1em' class='badge rounded-pill position-absolute bg-dark end-0'> $status </span>";
               } else if ($status == 'Terminated') {
                 echo "<span style='display: inline-block; margin-left: 1em' class='badge rounded-pill position-absolute bg-danger end-0'> $status </span>";
+              } else if ($status == 'Rejected') {
+                echo "<span style='display: inline-block; margin-left: 1em' class='badge rounded-pill position-absolute bg-secondary end-0'> $status </span>";
               }
               ?>
               <img class="card-img-top lazy" src="../materials/compPic/<?php echo $compPic; ?>">

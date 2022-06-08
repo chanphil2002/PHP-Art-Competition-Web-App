@@ -90,6 +90,8 @@ while ($row1 = mysqli_fetch_assoc($res1)) {
                         echo "<span style='margin-left: 1em' class='badge rounded-pill bg-dark align-top end-0'> $status </span>";
                     } else if ($status == 'Terminated') {
                         echo "<span style='margin-left: 1em' class='badge rounded-pill bg-danger align-top end-0'> $status </span>";
+                    } else if ($status == 'Rejected') {
+                        echo "<span style='margin-left: 1em' class='badge rounded-pill bg-secondary align-top end-0'> $status </span>";
                     }
                     ?>
                     <!-- <span style="display: inline-block; margin-left: 1em" class="badge text-bg-success align-top even-larger-badge"><?php echo $status ?></span> -->
