@@ -6,7 +6,7 @@
     if (isset($_POST["submit"])){
         // Get email and password entered: 
         $id = $_POST["userEmail"];
-        $pw = $_POST["password"];
+        $pw = addslashes($_POST["password"]);
 
         $sql = "SELECT * FROM user WHERE userEmail = '$id' AND userPassword = '$pw' LIMIT 1";
         $result = mysqli_query($conn, $sql);

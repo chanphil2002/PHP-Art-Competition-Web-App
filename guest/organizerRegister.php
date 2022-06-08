@@ -5,10 +5,10 @@ include ("partials/header.php");
 
 if (isset($_POST['submit'])) {
 	$email = $_POST['orgEmail'];
-	$name = $_POST['name'];
-	$password = $_POST['password'];
-	$confirm_pass = $_POST['confirm_pass'];
-	$desc = $_POST['desc'];
+	$name = addslashes($_POST['name']);
+	$password = addslashes($_POST['password']);
+	$confirm_pass = addslashes($_POST['confirm_pass']);
+	$desc = addslashes($_POST['desc']);
 	$profile_picture = $_FILES['profile_picture']['name'];
 	$tmp_name = $_FILES['profile_picture']['tmp_name'];
 	$verify_doc = $_FILES['verify_doc']['name'];

@@ -101,7 +101,7 @@
 <?php 
 
 if (isset($_POST["submit"])){
-    $username = $_POST["username"];
+    $username = addslashes($_POST["username"]);
     $gender = $_POST["gender"];
     $dob = $_POST["dob"];
     $phone = $_POST["phone"];

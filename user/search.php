@@ -8,7 +8,7 @@ if (!isset($_SESSION["user"])){
 }
 
 if (isset($_POST['search'])) {
-  $search = $_POST['search'];
+  $search = addslashes($_POST['search']);
   $sql1 = "SELECT * FROM competition C INNER JOIN organizer O ON C.organizerID = O.organizerID WHERE (compName LIKE '%$search%' OR category LIKE '%$search%' OR organizerName LIKE '%$search%') AND (Status = 'Upcoming' OR Status = 'On-Going' OR Status = 'Past')";
   $res1 = mysqli_query($conn, $sql1);
 } else {
@@ -37,7 +37,7 @@ if (isset($_POST['search'])) {
 
       <div class="col-12 col-competition-2">
         <form action="search3.php" method="POST" class="d-flex">
-          <input class="form-control me-2 mr-sm-2 col-md-5 ml-5" type="search" name="search" value="<?php echo $search ?>">
+          <input class="form-control me-2 mr-sm-2 col-md-5 ml-5" type="search" name="search" value="<?php echo stripslashes($search) ?>">
       </div>
       <div class="col-12 col-competition-3">
         <div class="overflow-auto">
