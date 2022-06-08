@@ -353,7 +353,7 @@ while ($row1 = mysqli_fetch_assoc($res1)) {
 <?php
 ob_start();
 if (isset($_POST['submit'])) {
-    $announcement = $_POST['announcement'];
+    $announcement = addslashes($_POST['announcement']);
 
     $sql = "UPDATE competition SET
             announcement = '$announcement' WHERE compID = $compID";

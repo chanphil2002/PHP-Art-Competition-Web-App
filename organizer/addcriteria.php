@@ -43,8 +43,8 @@ if(isset($_GET['compID']))
     if(isset($_POST['submit']))
     {
         $compID = $_POST['compID'];
-        $criteria = $_POST['criteria'];
-        $description = $_POST['description'];
+        $criteria = addslashes($_POST['criteria']);
+        $description = addslashes($_POST['description']);
 
         $sql = "INSERT INTO comp_criteria SET
             compID = $compID,

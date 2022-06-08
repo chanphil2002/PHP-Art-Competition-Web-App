@@ -59,7 +59,7 @@ while ($res = mysqli_fetch_assoc($run)) {
 if (isset($_POST["submit"])) {
 
     $type = "Admin";
-    $desc = $_POST["feedback"];
+    $desc = addslashes($_POST["feedback"]);
     $status = "unresolved";
 
 

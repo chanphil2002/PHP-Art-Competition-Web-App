@@ -124,8 +124,8 @@ ob_start();
 
 if (isset($_POST['remove'])) {
     $compID = $_POST['compID'];
-    $criteria = $_POST['criteria'];
-    $description = $_POST['description'];
+    addslashes($criteria = $_POST['criteria']);
+    addslashes($description = $_POST['description']);
 
     $sql = "DELETE FROM comp_criteria WHERE compID = $compID AND criteria = '$criteria'";
 
