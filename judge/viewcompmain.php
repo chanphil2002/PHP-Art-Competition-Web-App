@@ -76,7 +76,21 @@ while ($row1 = mysqli_fetch_assoc($res1)) {
             <div class="col-9">
                 <div>
                     <h2 style="display: inline-block" style="margin-right: 2em;"><?php echo $compName ?></h2>
-                    <span style="display: inline-block; margin-left: 1em" class=" ml-2 badge text-bg-success align-top even-larger-badge"><?php echo $status ?></span>
+                    <?php
+                    if ($status == 'Pending') {
+                        echo "<span style='margin-left: 1em' class='badge rounded-pill bg-primary align-top end-0'> $status </span>";
+                    } else if ($status == 'Upcoming') {
+                        echo "<span style='margin-left: 1em' class='badge rounded-pill bg-warning align-top end-0'> $status </span>";
+                    } else if ($status == 'On-Going') {
+                        echo "<span style='margin-left: 1em' class='badge rounded-pill bg-success align-top end-0'>$status </span>";
+                    } else if ($status == 'Past') {
+                        echo "<span style='margin-left: 1em' class='badge rounded-pill bg-dark align-top end-0'> $status </span>";
+                    } else if ($status == 'Terminated') {
+                        echo "<span style='margin-left: 1em' class='badge rounded-pill bg-danger align-top end-0'> $status </span>";
+                    } else if ($status == 'Rejected') {
+                        echo "<span style='margin-left: 1em' class='badge rounded-pill bg-secondary align-top end-0'> $status </span>";
+                    }
+                    ?>
                 </div>
                 <h3 class="text-muted mb-4"><small class="text-muted">By <?php echo $organizerName ?></small>, <?php echo $category ?> Category</h3>
 

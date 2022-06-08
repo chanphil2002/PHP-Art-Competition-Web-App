@@ -93,8 +93,21 @@ if (isset($_POST['submit'])) {
                             <div class="col-md-4 margincon1">
                                 <div class="card border-1 grid-list">
                                     <a href="viewcompmain.php?compID=<?php echo $compID; ?>" class="stretched-link">
-                                        <span class="badge rounded-pill text-bg-success position-absolute top-0 end-0"><?php echo $status; ?></span>
-                                        <img class="card-img-top lazy" src="../materials/compPic/<?php echo $compPic; ?>">
+                                        <?php
+                                        if ($status == 'Pending') {
+                                            echo "<span style='display: inline-block; margin-left: 1em' class='badge rounded-pill position-absolute bg-primary end-0'> $status </span>";
+                                        } else if ($status == 'Upcoming') {
+                                            echo "<span style='display: inline-block; margin-left: 1em' class='badge rounded-pill position-absolute bg-warning end-0'> $status </span>";
+                                        } else if ($status == 'On-Going') {
+                                            echo "<span style='display: inline-block; margin-left: 1em' class='badge rounded-pill position-absolute bg-success end-0'>$status </span>";
+                                        } else if ($status == 'Past') {
+                                            echo "<span style='display: inline-block; margin-left: 1em' class='badge rounded-pill position-absolute bg-dark end-0'> $status </span>";
+                                        } else if ($status == 'Terminated') {
+                                            echo "<span style='display: inline-block; margin-left: 1em' class='badge rounded-pill position-absolute bg-danger end-0'> $status </span>";
+                                        } else if ($status == 'Rejected') {
+                                            echo "<span style='display: inline-block; margin-left: 1em' class='badge rounded-pill position-absolute bg-secondary end-0'> $status </span>";
+                                        }
+                                        ?> <img class="card-img-top lazy" src="../materials/compPic/<?php echo $compPic; ?>">
                                     </a>
                                     <div class="card-body description text-truncate text-color-2">
                                         <?php echo $registrationDeadline; ?> / <?php echo $category; ?>
