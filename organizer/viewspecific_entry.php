@@ -52,7 +52,7 @@ $count20 = mysqli_num_rows($res20);
             <a class="nav-link" aria-current="page" href="viewcomp_main.php?compID=<?php echo $compID; ?>">Main</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link active" href="viewspecific_entries.php?compID=<?php echo $compID; ?>">View Entries</a>
+            <a class="nav-link active" href="viewentries.php?compID=<?php echo $compID ?>">View Entries</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="viewcomp_rubric.php?compID=<?php echo $compID; ?>">Scoring Rubric</a>

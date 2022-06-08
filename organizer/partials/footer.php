@@ -10,8 +10,7 @@
     <div class="col-6 col-md">
       <h5 class="text-white">Feedbacks</h5>
       <ul class="list-unstyled text-small">
-        <li><a class="text-info" href="">View Feedback from User</a></li>
-        <li><a class="text-info" href="../organizer/feedback.php">Contact Admin</a></li>
+        <li><a class="text-info" href="../organizer/contactUs.php">Contact Admin</a></li>
       </ul>
     </div>
     <div class="col-6 col-md">

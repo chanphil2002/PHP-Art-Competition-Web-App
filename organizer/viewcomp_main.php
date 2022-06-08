@@ -7,12 +7,19 @@ if (isset($_GET['compID'])) {
     $sql = "SELECT C.*, O.* FROM competition C INNER JOIN organizer O ON C.organizerID = O.organizerID AND C.compID=$compID AND O.organizerID='$_SESSION[organizer]'";
     $sql1 = "SELECT COUNT(E.compID), SUM(E.vote) FROM entry E INNER JOIN competition C ON E.compID = C.compID 
     WHERE E.compID=$compID AND C.organizerID = '$_SESSION[organizer]'";
+    $sql2 = "SELECT E.entryID, E.entryFile, E.title, E.compID, E.userEmail, E.submitDate, E.vote, 
+    E.score, C.publicVote, C.judgeScore, 
+    ((E.vote / (SELECT SUM(vote) FROM entry WHERE compID = $compID)) * C.publicVote) AS 
+    votePercentage, (E.score * (C.judgeScore/100)) AS judgePercentage FROM entry E 
+    INNER JOIN competition C ON E.compID = C.compID WHERE C.compID = $compID";
     $res = mysqli_query($conn, $sql);
     $res1 = mysqli_query($conn, $sql1);
+    $res2 = mysqli_query($conn, $sql2);
 } else {
     // echo "mistake";
     header("Location: ../organizer/orghome.php");
 }
+
 while ($row = mysqli_fetch_assoc($res)) {
     $compID = $row['compID'];
     $compName = $row['compName'];
@@ -35,6 +42,26 @@ while ($row = mysqli_fetch_assoc($res)) {
 while ($row1 = mysqli_fetch_assoc($res1)) {
     $joinCount = $row1['COUNT(E.compID)'];
     $voteCount = $row1['SUM(E.vote)'];
+}
+$count = mysqli_num_rows($res2);
+if ($count > 0) {
+    while ($row1 = mysqli_fetch_assoc($res2)) {
+        $entryID = $row1['entryID'];
+        $entryFile = $row1['entryFile'];
+        $title = $row1['title'];
+        $compID = $row1['compID'];
+        $userEmail = $row1['userEmail'];
+        $submitDate = $row1['submitDate'];
+        $vote = $row1['vote'];
+        $score = $row1['score'];
+        $publicVote = $row1['publicVote'];
+        $judgeScore = $row1['judgeScore'];
+        $votePercentage = $row1['votePercentage'];
+        $judgePercentage = $row1['judgePercentage'];
+        $sql3 = "UPDATE entry SET totalScore = $votePercentage + 
+                $judgePercentage WHERE entryID = $entryID";
+        $res3 = mysqli_query($conn, $sql3);
+    }
 }
 ?>
 
@@ -170,7 +197,7 @@ while ($row1 = mysqli_fetch_assoc($res1)) {
                             }
                             ?>
 
-                            <a href="../organizer/entry.php?entryID=<?php echo $entryID; ?>&compID=<?php echo $compID; ?>"><img src="../materials/entries/<?php echo $entry; ?>" alt="<?php echo $title; ?>" style="width: 300px; max-height: 500px; object-fit:cover;"></a>
+                            <a href="../organizer/viewspecific_entry.php?entryID=<?php echo $entryID; ?>&compID=<?php echo $compID; ?>"><img src="../materials/entries/<?php echo $entry; ?>" alt="<?php echo $title; ?>" style="width: 300px; max-height: 500px; object-fit:cover;"></a>
                             <form action="" method="POST">
                                 <input type="hidden" value="<?php echo $entryID ?>">
                                 <button class="mt-3 btn btn-success btn-lg mx-auto px-5" name="announce_winner" type="submit">Announce Winner</button>
