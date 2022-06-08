@@ -79,7 +79,7 @@ while ($row = mysqli_fetch_assoc($res1)) {
                                     <h3>$description</h3>
                                     <form action='' method='POST'>
                                     <input type='hidden' name='feedbackID' value='$feedbackID'>
-                                    <button name='submit' type='submit' class='btn btn-primary'>Resolve</button>
+                                    <button name='resolve' type='submit' class='btn btn-primary'>Resolve</button>
                                     <form>
                                     </h3>
                                     </div>

@@ -209,15 +209,20 @@ while ($row1 = mysqli_fetch_assoc($res1)) {
                     while ($win = mysqli_fetch_assoc($run2)) {
                         $entry_winner = $win["entry_winner"];
                     }
-                    $sql3 = "SELECT * FROM entry WHERE entryID = '$entry_winner'";
-                    $run3 = mysqli_query($conn, $sql3);
-                    while ($win = mysqli_fetch_assoc($run3)) {
-                        $entryID = $win["entryID"];
-                        $entryFile = $win["entryFile"];
-                        $title = $win["title"];
+                    if ($entry_winner != 0) {
+                        $sql3 = "SELECT * FROM entry WHERE entryID = '$entry_winner'";
+                        $run3 = mysqli_query($conn, $sql3);
+                        while ($win = mysqli_fetch_assoc($run3)) {
+                            $entryID = $win["entryID"];
+                            $entryFile = $win["entryFile"];
+                            $title = $win["title"];
+                        }
+                    ?> <a href="../user/entry.php?entryID=<?php echo $entryID; ?>&compID=<?php echo $compID; ?>"><img src="../materials/entries/<?php echo $entryFile; ?>" alt="<?php echo $title; ?>" style="width: 300px; height: auto"></a>
+                    <?php } else {
+                        echo "<h2>Winner is yet to announce</h2>";
                     }
                     ?>
-                    <a href="../user/entry.php?entryID=<?php echo $entryID; ?>&compID=<?php echo $compID; ?>"><img src="../materials/entries/<?php echo $entryFile; ?>" alt="<?php echo $title; ?>" style="width: 300px; height: auto"></a>
+
                 <?php } ?>
             </div>
         </div>

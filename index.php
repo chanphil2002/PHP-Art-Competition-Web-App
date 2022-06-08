@@ -1,5 +1,5 @@
 <?php
-    include("header.php");
+include("header.php");
 ?>
 
 <!DOCTYPE html>
@@ -47,7 +47,7 @@
             ?>
 
                 <div class="carousel-item active" data-bs-interval="2000">
-                    <a href="compDetails.php?compID=<?php echo $id; ?>">
+                    <a href="guest/compDetails.php?compID=<?php echo $id; ?>">
                         <center><img src="materials/compPic/<?php echo $pic ?>" style="width:auto;height:360px;" class="" alt="..."></center>
                     </a>
                     <br><br><br><br><br><br>
@@ -56,7 +56,7 @@
                             <h5 style="color:black;display: inline-block"><?php echo $name ?> &nbsp;</h5>
                             <span class="badge rounded-pill position-absolute bg-danger" style="height:20px">Popular</span>
                         </div>
-                        <a class="align btn btn-outline-primary" href="compDetails.php?compID=<?php echo $id; ?>" role="button">View Details</a>
+                        <a class="align btn btn-outline-primary" href="guest/compDetails.php?compID=<?php echo $id; ?>" role="button">View Details</a>
                     </div>
                 </div>
 

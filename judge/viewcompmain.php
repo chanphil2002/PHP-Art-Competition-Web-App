@@ -9,8 +9,14 @@ if (isset($_GET['compID'])) {
     $compID = $_GET['compID'];
     $sql = "SELECT C.*, O.organizerName FROM competition C INNER JOIN organizer O ON C.organizerID= O.organizerID WHERE compID = '$compID'";
     $sql1 = "SELECT COUNT(compID), SUM(vote) FROM entry WHERE compID=$compID";
-    $res1 = mysqli_query($conn, $sql1);
+    $sql2 = "SELECT E.entryID, E.entryFile, E.title, E.compID, E.userEmail, E.submitDate, E.vote, 
+    E.score, C.publicVote, C.judgeScore, 
+    ((E.vote / (SELECT SUM(vote) FROM entry WHERE compID = $compID)) * C.publicVote) AS 
+    votePercentage, (E.score * (C.judgeScore/100)) AS judgePercentage FROM entry E 
+    INNER JOIN competition C ON E.compID = C.compID WHERE C.compID = $compID";
     $res = mysqli_query($conn, $sql);
+    $res1 = mysqli_query($conn, $sql1);
+    $res2 = mysqli_query($conn, $sql2);
 } else {
     header("Location: ../judge/judgehomepage.php");
 }
@@ -36,6 +42,26 @@ while ($row = mysqli_fetch_assoc($res)) {
 while ($row1 = mysqli_fetch_assoc($res1)) {
     $joinCount = $row1['COUNT(compID)'];
     $voteCount = $row1['SUM(vote)'];
+}
+$count = mysqli_num_rows($res2);
+if ($count > 0) {
+    while ($row1 = mysqli_fetch_assoc($res2)) {
+        $entryID = $row1['entryID'];
+        $entryFile = $row1['entryFile'];
+        $title = $row1['title'];
+        $compID = $row1['compID'];
+        $userEmail = $row1['userEmail'];
+        $submitDate = $row1['submitDate'];
+        $vote = $row1['vote'];
+        $score = $row1['score'];
+        $publicVote = $row1['publicVote'];
+        $judgeScore = $row1['judgeScore'];
+        $votePercentage = $row1['votePercentage'];
+        $judgePercentage = $row1['judgePercentage'];
+        $sql3 = "UPDATE entry SET totalScore = $votePercentage + 
+                $judgePercentage WHERE entryID = $entryID";
+        $res3 = mysqli_query($conn, $sql3);
+    }
 }
 ?>
 
@@ -157,17 +183,23 @@ while ($row1 = mysqli_fetch_assoc($res1)) {
                         if ($status == 'Past') {
                         ?>
                             <?php
-                            $sql2 = "SELECT * FROM entry WHERE compID = $compID ORDER BY totalScore DESC LIMIT 1";
+                            $sql2 = "SELECT entry_winner FROM competition WHERE compID = '$compID'";
                             $run2 = mysqli_query($conn, $sql2);
                             while ($win = mysqli_fetch_assoc($run2)) {
-                                $entryID = $win["entryID"];
-                                $entry = $win["entryFile"];
-                                $title = $win["title"];
+                                $entry_winner = $win["entry_winner"];
                             }
-                            ?>
-                            <a href="../organizer/entry.php?entryID=<?php echo $entryID; ?>&compID=<?php echo $compID; ?>"><img src="../materials/entries/<?php echo $entry; ?>" alt="<?php echo $title; ?>" style="width: 300px; height: auto"></a>
-                        <?php } else { ?>
-                            <h3 style="font-weight: bold;">Winner is yet to announce.</h3>
+                            if ($entry_winner != 0) {
+                                $sql3 = "SELECT * FROM entry WHERE entryID = '$entry_winner'";
+                                $run3 = mysqli_query($conn, $sql3);
+                                while ($win = mysqli_fetch_assoc($run3)) {
+                                    $entryID = $win["entryID"];
+                                    $entryFile = $win["entryFile"];
+                                    $title = $win["title"];
+                                }
+                            ?> <a href="../user/entry.php?entryID=<?php echo $entryID; ?>&compID=<?php echo $compID; ?>"><img src="../materials/entries/<?php echo $entryFile; ?>" alt="<?php echo $title; ?>" style="width: 300px; height: auto"></a> ?php>
+                            <?php } else {
+                                echo "<h2>Winner is yet to announce";
+                            } ?>
                         <?php } ?>
             </div>
         </div>

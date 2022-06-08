@@ -94,7 +94,7 @@ while ($row1 = mysqli_fetch_assoc($res1)) {
                                                     Judge's score: <?php echo $score; ?>/100
                                                 </div>
                                                 <div class="text-danger">
-                                                    Total Score: <?php echo $totalScore; ?>
+                                                    Total Score: <?php echo number_format((float)$totalScore, 2, '.', ''); ?>
                                                 </div>
                                             <?php } ?>
                                         </div>

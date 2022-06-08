@@ -95,8 +95,8 @@ while ($row = mysqli_fetch_assoc($res)) {
                                             <h3><?php echo $title; ?> </h3>
                                             <?php if ($status == "On-Going" || $status == "Past") { ?>
                                                 <div class="text-success">
-                                                    Vote: <?php echo number_format((float)$votePercentage, 2, '.', ''); ?>/ <?php echo $publicVote; ?><br>
-                                                    Judge's score: <?php echo number_format((float)$judgePercentage, 2, '.', ''); ?>/ <?php echo $judgeScore; ?>
+                                                    Vote: <?php echo number_format((float)$votePercentage, 2, '.', ''); ?>/ <?php echo number_format((float)$publicVote, 2, '.', ''); ?><br>
+                                                    Judge's score: <?php echo number_format((float)$judgePercentage, 2, '.', ''); ?>/ <?php echo number_format((float)$judgeScore, 2, '.', ''); ?>
                                                 </div>
                                                 <div class="text-danger">
                                                     Total Score:
