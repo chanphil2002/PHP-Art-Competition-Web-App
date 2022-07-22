@@ -90,7 +90,7 @@ $pastres = mysqli_query($conn, $paststatus);
                 </li>
                 &nbsp;&nbsp;&nbsp;
                 <li class="nav-item">
-                    <a class="btn btn-info" href="viewFeedback.php" role="button" title="View Users' Feedbacks"><i class="fa-solid fa-comment-dots"></i>&nbsp;Feedbacks</a>&nbsp;&nbsp;&nbsp;
+                    <a class="btn btn-info" href="viewFeedback2.php" role="button" title="View Users' Feedbacks"><i class="fa-solid fa-comment-dots"></i>&nbsp;Feedbacks</a>&nbsp;&nbsp;&nbsp;
                 </li>
                 <li class="nav-item">
                     <button type="button" class="btn btn-danger" role="button" data-bs-toggle="modal" data-bs-target="#logout">
